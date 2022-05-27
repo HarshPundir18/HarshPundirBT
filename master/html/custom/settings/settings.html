@@ -1,0 +1,113 @@
+<h3>Configurações SmartGAR</h3>
+
+
+
+<ul class="nav nav-tabs">
+    <li ng-class="{ active: isSet(1) }">
+        <a ng-click="setTab(1)">Clientes</a>
+    </li>
+    <li ng-class="{ active: isSet(2) }">
+        <a ng-click="setTab(2)">E-Gars</a>
+    </li>
+</ul>
+
+<div id="settings" class="tab-content bg-white clearfix">
+    <!-- tab client -->
+    <div ng-show="isSet(1)">
+        <form role="form" name="$ctrl.formClientSettings" ng-submit="$ctrl.submitFormClientSettings()" novalidate="" class="form-validate form-horizontal">
+            <div class="pad-top10"></div>
+            <div class="panel panel-default pad-top10">
+                <div class="panel-heading">
+                </div>
+
+                <div class="panel-body">
+                    <fieldset id="generalData">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        Envio comprovativo de e-Gar a clientes
+                                        <smg-help-icon help-text='Enviar e-mail comprovativo de criação de e-Gar, sempre que crie uma nova e-Gar em nome de um produtor.'>
+                                        </smg-help-icon>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <div class="checkbox c-checkbox mar-top0">
+                                            <label>
+                                                <input name="ckb-sendAutomaticRequestEmails" type="checkbox" 
+                                                    ng-model="$ctrl.clientSettings.sendAutomaticRequestEmails" 
+                                                    ng-checked="$ctrl.clientSettings.sendAutomaticRequestEmails">
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+      
+            <smg-form-actions on-back-click="$ctrl.onBackClick()" on-save-click="$ctrl.submitFormClientSettings()">
+            </smg-form-actions>
+        </form>
+    </div>
+
+
+    <!-- tab egar -->
+    <div ng-show="isSet(2)">
+        <form role="form" name="$ctrl.formEgarSettings" ng-submit="$ctrl.submitFormEgarSettings()" novalidate="" class="form-validate form-horizontal">
+            <div class="pad-top10"></div>
+            <div class="panel panel-default pad-top10">
+                <div class="panel-heading">
+                </div>
+
+                <div class="panel-body">
+                    <fieldset id="duplicationRules">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        Duplicar quantidade
+                                        <smg-help-icon help-text='Quando duplica uma e-Gar deve duplicar o campo "Quantidade".'>
+                                        </smg-help-icon>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <div class="checkbox c-checkbox mar-top0">
+                                            <label>
+                                                <input name="ckb-duplicateEgarQuantity" type="checkbox" 
+                                                    ng-model="$ctrl.clientSettings.duplicateEgarQuantity" 
+                                                    ng-checked="$ctrl.clientSettings.duplicateEgarQuantity">
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pad-top10">
+                                    <div class="col-sm-4">
+                                        Regras de criação e-GAR
+                                        <smg-help-icon help-text='TODO'>
+                                        </smg-help-icon>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <!-- <button type="button" class="mb-sm btn btn-primary" 
+                                            >
+                                            Primary
+                                        </button> -->
+                                        <span class="small text-info text-right edit-value" ng-click="$state.go('app.appSettingsEgarCreationRules')">Alterar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <smg-form-actions on-back-click="$ctrl.onBackClick()" on-save-click="$ctrl.submitFormEgarSettings()">
+            </smg-form-actions>
+        </form>
+    </div>
+
+
+</div>

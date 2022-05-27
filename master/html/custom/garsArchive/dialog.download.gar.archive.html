@@ -1,0 +1,38 @@
+
+<form role="form" name="vm.formValidate" ng-submit="vm.submitForm()" novalidate="" class="form-validate form-horizontal">
+
+<div class="panel">
+    <div class="panel-body">
+        <h3 class="">
+            Download de arquivo de e-Gars
+        </h3>
+    </div>
+
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12">
+                <p>
+                O pedido de download do arquivo de eGars será registado. Contactaremos no prazo máximo de 3 dias úteis. 
+                </p>
+            </div>
+            <div class="col-xs-12">
+                <p>Por favor confime o seu e-mail. </p>
+                <div>
+                    <input type="text" class="form-control" name="email" ng-model="vm.email" required="required" />
+                    <span ng-show="vm.validateInput('email', 'required')" class="text-danger">Obrigatório</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row text-right">
+    <div class="row">
+        <div class="col-md-12  text-right">
+            <!-- <button type="button" ng-click="vm.confirm('submit')" class="btn btn-primary mr">Confirmar</button> -->
+            <button type="submit" class="btn btn-primary mr">Confirmar</button>
+            <button type="button" ng-click="closeThisDialog()" class="btn btn-default mr">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+</form> 

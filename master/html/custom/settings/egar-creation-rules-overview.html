@@ -1,0 +1,98 @@
+<h3>Regras de criação e-GAR</h3>
+
+<div id="main">
+    <div class="panel panel-default">
+        <div class="panel-body mar-top20">
+            <div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <input name="accountEstablishment" 
+                            ng-model="vm.filters.accountEstablishment" 
+                            type="text" 
+                            class="form-control tableFilter" 
+                            placeholder="Estabelecimento" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input name="serviceArea" 
+                            ng-model="vm.filters.serviceArea" 
+                            type="text" 
+                            class="form-control tableFilter" 
+                            placeholder="Área de Serviço" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input name="tagGroup" 
+                            ng-model="vm.filters.tagGroup" 
+                            type="text" 
+                            class="form-control tableFilter" 
+                            placeholder="Grupo Etiquetas" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input name="destinEstablishment" 
+                            ng-model="vm.filters.destinEstablishment" 
+                            type="text" 
+                            class="form-control tableFilter" 
+                            placeholder="Destino" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input name="lerCode" 
+                            ng-model="vm.filters.lerCode" 
+                            type="text" 
+                            class="form-control tableFilter" 
+                            placeholder="Ler" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input name="operationCode" 
+                            ng-model="vm.filters.operationCode" 
+                            type="text" 
+                            class="form-control tableFilter" 
+                            placeholder="Operação" />
+                    </div>
+                </div>
+
+                <div class="row pad-top20">
+                    <div class="col-xs-12 col-md-offset-3 col-sm-2">
+                        <button title="Limpar filtros" 
+                                ng-click="vm.onClearFiltersClick()" 
+                                class="btn btn-default form-control">
+                            Limpar Filtros
+                        </button>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-2">
+                        <button id="btn-seach" 
+                                ng-focus="true"
+                                type="button" 
+                                title="Pesquisar"
+                                class="btn btn-labeled btn-info form-control text-bold" 
+                                ng-click="vm.onSearchClick()">
+                            <span class="white pad-right10">
+                                <i class="icon-magnifier"></i>
+                            </span>
+                            Pesquisar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a ng-click="$state.go('app.appSettingsEgarCreationRulesNew')" class="pull-right btn btn-success">
+                Criar Regra
+            </a>
+        </div>
+        
+        <div class="panel-body mar-top20">
+            <div class="pad-top10">
+                <table id="tbl-egarCreationRulesOverview" 
+                    class="row-border hover" 
+                    datatable="" 
+                    dt-columns="vm.dtColumns" 
+                    dt-options="vm.dtOptions"
+                    dt-instance="vm.dtInstance">
+                </table>
+            </div>        
+        </div>
+    </div>
+</div>

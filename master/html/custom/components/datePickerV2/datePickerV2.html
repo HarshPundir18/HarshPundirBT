@@ -1,0 +1,30 @@
+<label ng-if="vm.labelText" class="control-label">
+    {{vm.labelText}}
+</label>
+<label ng-if="!vm.labelText && !vm.hideLabelSpace" class="control-label">
+    &nbsp;
+</label>
+
+    <p class="input-group">
+        <input name="vm.dpTransportPeriodStartName" 
+            placeholder="{{vm.dpPlaceholder}}"
+            type="text" 
+            uib-datepicker-popup="yyyy-MM-dd" 
+            ng-change="vm.changed(vm.dpTransportPeriodStartName)" 
+            ng-model="vm.dpDate"
+            is-open="vm.opened" 
+            
+            datepicker-options="vm.dateOptions" 
+            close-text="Fechar",
+            current-text="Hoje",
+            clear-text="Limpar",
+            class="form-control ng-isolate-scope ng-touched" 
+            autocomplete="off"
+            ng-click="vm.open($event)">
+            
+        <span class="input-group-btn">
+            <button type="button" ng-click="vm.open($event)" class="btn btn-default">
+                <em class="fa fa-calendar"></em>
+            </button>
+        </span>
+    </p>

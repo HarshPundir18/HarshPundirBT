@@ -1,0 +1,88 @@
+<h3 class="ng-scope">
+    Central de Relatórios
+    <!-- <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's </small> -->
+</h3>
+
+<fieldset class="reports-hub-fieldset">
+    <legend>Geral</legend>
+    <ul class="reports-hub-list">
+        <li class="reports-hub-list-item">
+            <div class="reports-hub-list-name" ng-click="vm.goToGenericReport()">
+                <b>Relatório Geral</b>
+            </div>    
+            <div class="reports-hub-list-description pad-top5">
+                Neste relatório poderá aceder aos mesmos critérios de pesquisa que utilizava na anterior versão do menu "Relatórios".
+            </div>
+        </li>
+    </ul>
+</fieldset>
+
+<fieldset class="reports-hub-fieldset">
+    <legend>Produtor</legend>
+    <ul class="reports-hub-list">
+        <li class="reports-hub-list-item">
+            <div class="reports-hub-list-name">
+                <b>Relatório do Formulário B1 (MIRR)</b>
+            </div>    
+            <div class="reports-hub-list-description pad-top5">
+                EM CONSTRUÇÃO
+            </div>
+        </li>
+
+        <li class="reports-hub-list-item">
+            <div class="reports-hub-list-name">
+                <b>Relatóro do Formulário C2 (MIRR)</b>
+            </div>    
+            <div class="reports-hub-list-description pad-top5">
+                EM CONSTRUÇÃO
+            </div>
+        </li>
+    </ul>
+</fieldset>
+
+
+<fieldset class="reports-hub-fieldset">
+    <legend>Destinatário</legend>
+    <ul class="reports-hub-list">
+        <li class="reports-hub-list-item">
+            <div class="reports-hub-list-name">
+                <b>Resumo Quantidades Recebidas</b>
+            </div>    
+            <div class="reports-hub-list-description pad-top5">
+                Este relatório contém o agregado de quantidades produzidas por um produtor (NIF ou APA), recebidas nos seus estabelecimentos. 
+                Os dados são agrupados por LER, Operação e Destinatário, fazendo referência ao NIF do(s) transportador(es). 
+                Para este relatório são consideradas as e-GARs nos estados: <i>Corrigida</i>, <i>Correção Negada</i>, <i>Aceite</i> e <i>Concluída</i>.
+            </div>
+
+            <ul>
+                <li class="reports-hub-list-item-subitem  pad-top10 pointer" ng-click="vm.goToGeneralReceivedQuantitiesSummaryReport()">
+                    <i class="fa fa-chevron-right pad-top0 pad-right5 font10" aria-hidden="true"></i>e-GARs Tipo 1 (Produtor)
+                </li>
+                <li class="smg-disabled reports-hub-list-item-subitem pointer" ng-click="$state.go('app.rcdReceivedQuantitiesSummaryReport');">
+                    <i class="fa fa-chevron-right pad-top0 pad-right5 font10" aria-hidden="true"></i>e-GARs Tipo 2 (RCD's) ...em construção
+                </li>
+                <li class="smg-disabled reports-hub-list-item-subitem pointer" ng-click="$state.go('app.servicesReceivedQuantitiesSummaryReport')">
+                    <i class="fa fa-chevron-right pad-top0 pad-right5 font10" aria-hidden="true"></i>e-GARs Tipo 2 (Prestador de serviços) ...em construção
+                </li>
+                <li class="smg-disabled reports-hub-list-item-subitem pointer" ng-click="$state.go('app.ouaReceivedQuantitiesSummaryReport')">
+                    <i class="fa fa-chevron-right pad-top0 pad-right5 font10" aria-hidden="true"></i>e-GARs Tipo 2 (OAU's) ...em construção
+                </li>
+                <li class="smg-disabled reports-hub-list-item-subitem pointer" 
+                    ng-click="$state.go('app.exsituReceivedQuantitiesSummaryReport')"
+                    title="Em construção">
+                    <i class="fa fa-chevron-right pad-top0 pad-right5 font10" aria-hidden="true"></i>e-GARs Tipo 2 (Exsitu's) ...em construção
+                </li>
+            </ul>
+        </li>
+
+        <li class="reports-hub-list-item">
+            <div class="reports-hub-list-name">
+                <b>Relatóro do Formulário C1 (MIRR)</b>
+            </div>    
+            <div class="reports-hub-list-description pad-top5">
+                EM CONSTRUÇÃO
+            </div>
+        </li>
+    </ul>
+</fieldset>
+

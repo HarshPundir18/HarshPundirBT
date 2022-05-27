@@ -1,0 +1,72 @@
+<h3>Pontos de recolha</h3>
+<div id="pickupPointsList">
+	<div class="panel panel-default">
+		<div class="panel-body mar-top10">
+			<div class="row">
+				<div class="col-sm-offset-2 col-sm-2">
+					<input name="internalCode" 
+						ng-model="vm.filters.internalCode" 
+						type="text" 
+						class="form-control tableFilter" 
+						placeholder="Código interno" />
+				</div>
+				<div class="col-sm-2">
+					<input name="apaCode" 
+						ng-model="vm.filters.apaCode" 
+						type="text" 
+						class="form-control tableFilter" 
+						placeholder="Código APA" />
+				</div>
+				<div class="col-sm-2">
+					<input name="name" 
+						ng-model="vm.filters.name" 
+						type="text" 
+						class="form-control tableFilter" 
+						placeholder="Nome" />
+				</div>
+			</div>
+
+			<div class="row pad-top20">
+				<!-- <div class="col-sm-offset-5 col-sm-1 col-xs-12 clearFilter"> -->
+				<div class="col-xs-12 col-sm-offset-4 col-sm-1 min-w-">
+					<button title="Limpar filtros" 
+							ng-click="vm.onClearFiltersClick()" 
+							class="btn btn-default form-control">
+						Limpar Filtros
+					</button>
+				</div>
+
+				<div class="col-xs-12 col-sm-1">
+					<button id="btn-seach" 
+							ng-focus="true"
+							type="button" 
+							title="Pesquisar"
+							class="btn btn-labeled btn-info form-control text-bold" 
+							ng-click="vm.onSearchClick()">
+						<span class="white pad-right10">
+							<i class="icon-magnifier"></i>
+						</span>
+						Pesquisar
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+		</div>
+		
+		<div class="panel-body mar-top20">
+			<div>
+				<table id="tbl-pickupPoints" class="row-border hover" 
+					datatable="" 
+					dt-columns="vm.dtColumns" 
+					dt-options="vm.dtOptions"
+					dt-instance="vm.dtInstance">
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

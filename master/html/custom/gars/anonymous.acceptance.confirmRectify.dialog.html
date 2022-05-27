@@ -1,0 +1,60 @@
+<div class="ngdialog-message">
+
+<form role="form" name="$ctrl.formAnonymousConfirmRectify" ng-submit="$ctrl.submitFormAnonymousConfirmRectify()" novalidate="" class="form-validate form-horizontal">
+
+		<div class="panel">
+			<h3 class="mar-top0">
+        <!--Aceitar emissão 
+        <br>-->
+        <span class="consult-egar-number">
+          e-Gar Nº {{$ctrl.gar.Number}}
+        </span>
+        <span title="Ver PDF" class="pointer pad-left10" ng-click="$ctrl.getFile($ctrl.gar.FileUrl)">
+          <em class="fa fa-file-pdf-o"></em>
+        </span>
+      </h3>
+			
+      <!-- info text -->
+      <div class="row pad-top10">
+        <div class="col-sm-12">
+          <p>
+            Para confirmar a correção da e-Gar, por favor introduza a password de acesso APA / SILIAMB.
+          </p>
+        </div>
+      </div>
+
+      <!-- apa access -->
+      <div class="row pad-top10">
+        <div class="col-md-12">
+					<label class="control-label mar-bottom0">Password</label>
+					<input name="apaAccess"  
+							required
+							ng-model="$ctrl.apaAccess" 
+							type="password" 
+							class="form-control" />
+					<span ng-show="$ctrl.validateInput('apaAccess', 'required', 'formAnonymousConfirmRectify')" class="text-danger">Obrigatório</span>
+					<span ng-show="$ctrl.serverValidationErrors['ApaAccess']" class="text-danger">
+						{{$ctrl.serverValidationErrors['ApaAccess']}}
+					</span>
+					<span ng-show="$ctrl.serverApplicationErrors['ApaAccess']" class="text-danger">
+						{{$ctrl.serverApplicationErrors['ApaAccess']}}
+					</span>
+					<span ng-show="$ctrl.serverExternalErrors['ApaAccess']" class="text-danger">
+						{{$ctrl.serverExternalErrors['ApaAccess']}}
+					</span>
+				</div>
+      </div>
+
+		</div> 
+    <!--END PANEL-->
+
+		<div class="row pad-top10 text-right">
+			<div class="col-sm-12">
+				<button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">Cancelar</button>
+				<button type="submit" class="btn btn-success">Confirmar</button>
+			</div>
+		</div>
+
+</form>
+  
+</div>

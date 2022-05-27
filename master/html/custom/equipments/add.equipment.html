@@ -1,0 +1,177 @@
+<h3 class="ng-scope">
+	Criar Equipamento
+</h3>
+
+<form role="form" name="$ctrl.formValidate" ng-submit="$ctrl.submitForm()" novalidate="" class="form-validate form-horizontal">
+
+	<div class="row">
+    <div class="col-sm-6">
+      <i class="text-danger fa fa-asterisk"/> - Campos Obrigatórios
+    </div>
+
+		<div class="col-sm-6">
+      <div class="text-right">
+        <button type="button" class="btn btn-labeled btn-default" ng-click="$ctrl.cancel()">
+            <span class="btn-label">
+              <i class="fa fa-arrow-left"></i>
+            </span>
+            Voltar
+        </button>
+
+        <button type="submit" class="btn btn-labeled btn-success mar-right10">
+            <span class="btn-label">
+              <i class="fa fa-check"></i>
+            </span>
+            Gravar
+        </button>
+      </div>
+    </div> 
+	</div>
+
+	<div id="panelGeneralData" class="panel panel-default mar-top15">
+		<div ng-class="{'panel-heading-collapsed':panelGeneralData}" class="panel-heading">
+			<h4>
+				<em class="fa fa-building pad-right10"></em>1 - Dados Gerais  
+			</h4>
+			<paneltool tool-collapse="tool-collapse" class="pull-right">
+				<a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="panelGeneralData = !panelGeneralData" class="ng-scope">
+					<em ng-show="panelGeneralData" class="fa fa-plus ng-no-animation ng-hide"></em>                         
+					<em ng-show="!panelGeneralData" class="fa fa-minus ng-no-animation"></em>                       
+				</a>
+			</paneltool>
+		</div>
+
+		<div uib-collapse="panelGeneralData" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+			<div class="panel-body">
+			
+				<fieldset id="generalData">
+					<div class="form-group">
+						<div class="col-md-12">
+							<div class="row">				
+								<div class="col-md-6">
+									<label class="control-label">
+										Equipamento nome
+										<span class="pad-left5 text-danger">
+											<i class="fa fa-asterisk"/>
+										</span>
+									</label>
+									<input id="inp-Name" name="name" 
+											ng-model="$ctrl.name"
+											required=""
+											type="text" 
+											class="form-control"
+											placeholder="Ex: Nome da Equipamento" />
+									<span ng-show="$ctrl.validateInput('name', 'required')" class="text-danger">Obrigatório</span>
+									<span ng-show="$ctrl.serverValidationErrors['Name']" class="text-danger">
+										{{$ctrl.serverValidationErrors['Name']}}
+									</span>
+								</div>
+
+								<div class="col-md-6">
+									<label class="control-label">
+										ID externo
+									</label>
+									<input id="inp-externalId" name="externalId" 
+                                        ng-model="$ctrl.externalId" 
+                                        required=""
+                                        type="text" 
+                                        class="form-control"
+                                        placeholder="Eg: digite o ID externo" />
+									<span ng-show="$ctrl.validateInput('externalId', 'required')" class="text-danger">Obrigatório</span>
+									<span ng-show="$ctrl.serverValidationErrors['ExternalId']" class="text-danger">
+										{{$ctrl.serverValidationErrors['ExternalId']}}
+									</span>
+									<span ng-show="$ctrl.serverApplicationErrors['val_existent_externalId']" class="text-danger">
+										{{$ctrl.serverApplicationErrors['val_existent_externalId']}}
+									</span>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</fieldset>
+
+				<fieldset>
+					<div class="form-group">
+						<div class="col-md-12">
+							<div class="row">
+								
+								<div class="col-md-6">
+									<label class="control-label">Detalhes</label>
+									<textarea id="inp-detail" name="detail" ng-model="$ctrl.detail" type="text" class="form-control" placeholder="insira os dados do equipamento"/>
+									<span ng-show="$ctrl.serverValidationErrors['Detail']" class="text-danger">
+										{{$ctrl.serverValidationErrors['Detail']}}
+									</span>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</div>
+
+	<!-- action buttons -->
+	<div class="row">
+    <div class="col-sm-6">
+      <i class="text-danger fa fa-asterisk"/> - Campos Obrigatórios
+    </div>
+
+		<div class="col-sm-6">
+      <div class="text-right">
+        <button type="button" class="btn btn-labeled btn-default" ng-click="$ctrl.cancel()">
+            <span class="btn-label">
+              <i class="fa fa-arrow-left"></i>
+            </span>
+            Voltar
+        </button>
+
+        <button type="submit" class="btn btn-labeled btn-success mar-right10">
+            <span class="btn-label">
+              <i class="fa fa-check"></i>
+            </span>
+            Gravar
+        </button>
+      </div>
+    </div> 
+	</div>
+
+</form>
+
+
+<!-- Modal Template -->
+<script type="text/ng-template" id="modalDialogId">
+	<div class="ngdialog-message">
+		<div class="panel">
+			<h3>Configurar Acesso SILIAMB</h3>
+			<div class="row">
+				<fieldset>
+					<div class="form-group">
+						<div class="col-md-12">
+							<div class="row">
+								<label class="col-md-12 control-label">NIF</label>
+								<br>
+								<div class="col-md-12">
+									<input type="text" class="form-control" name="person1Name" ng-model="siliambUsername" />
+								</div>
+							</div>
+							<div class="row">
+								<label class="col-md-12 control-label">Password</label>
+								<div class="col-md-12">
+									<input type="password" class="form-control" name="person1Mobile" ng-model="siliambPassword" />
+									<input type="password" class="form-control" name="person1Mobile" ng-model="apaCode" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+
+
+		<button type="button" ng-show="!isValid" ng-click="validateAccess()" class="btn btn-primary mr">Validar</button>
+		<button type="button" ng-show="isValid" ng-click="saveAccess()" class="btn btn-primary mr">Guardar</button>
+		<button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">Cancel</button>
+	</div>
+</script>

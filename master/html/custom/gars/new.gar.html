@@ -1,0 +1,937 @@
+<h3>Emitir E-GAR</h3>
+
+<form id="newEgar" role="form" name="$ctrl.formValidate" ng-submit="$ctrl.submitForm()" novalidate="" class="form-validate form-horizontal">
+
+    <div class="row">
+        <div class="col-sm-6">
+            <i class="text-danger fa fa-asterisk" /> - Campos Obrigatórios
+        </div>
+        <div class="col-sm-6">
+            <div class="text-right">
+                <button type="button" class="btn btn-labeled btn-default" ng-click="$ctrl.cancel()">
+                    <span class="btn-label">
+                        <i class="fa fa-arrow-left"></i>
+                    </span>
+                    Voltar
+                </button>
+
+                <button type="submit" class="btn btn-labeled btn-success mar-right10">
+                    <span class="btn-label">
+                        <i class="fa fa-check"></i>
+                    </span>
+                    Emitir
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!--panelOrigin-->
+    <div id="panelOrigin" class="panel panel-default mar-top15">
+        <div ng-class="{'panel-heading-collapsed':panelOrigin}" class="panel-heading">
+            <h4>
+                <em class="fa fa-industry pad-right10"></em>1 - Produtor / Detentor
+            </h4>
+            <paneltool tool-collapse="tool-collapse" class="pull-right">
+                <a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="panelOrigin = !panelOrigin" class="ng-scope">
+                    <em ng-show="panelOrigin" class="fa fa-plus ng-no-animation ng-hide"></em>
+                    <em ng-show="!panelOrigin" class="fa fa-minus ng-no-animation"></em>
+                </a>
+            </paneltool>
+        </div>
+
+        <div uib-collapse="panelOrigin" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+            <div class="panel-body">
+                <!--remetente-->
+                <fieldset id="origin" class="pad-bottom30 mar-bottom30">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <!-- egar creation type -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <div class="radio c-radio c-radio-nofont">
+                                                <label>
+                                                    <input type="radio" 
+                                                        name="a"
+                                                        value="PRODUTOR_ESTABELECIMENTO" 
+                                                        ng-checked="$ctrl.selectedEgarCreateType === 'PRODUTOR_ESTABELECIMENTO'"
+                                                        ng-change="$ctrl.egarCreateTypeChanged(1)"
+                                                        ng-model="$ctrl.selectedEgarCreateType">
+                                                    <span></span>Produtor/Detentor
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="radio c-radio c-radio-nofont">
+                                                <label>
+                                                    <input type="radio" 
+                                                        name="a" 
+                                                        value="OLEOS_ALIMENTARES"
+                                                        ng-checked="$ctrl.selectedEgarCreateType === 'OLEOS_ALIMENTARES'"
+                                                        ng-change="$ctrl.egarCreateTypeChanged(2)"
+                                                        ng-model="$ctrl.selectedEgarCreateType">
+                                                    <span></span>Recolhedor OAU
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="radio c-radio c-radio-nofont">
+                                                <label>
+                                                    <input type="radio" 
+                                                        name="a" 
+                                                        value="OBRAS_RCD"
+                                                        ng-checked="$ctrl.selectedEgarCreateType === 'OBRAS_RCD'"
+                                                        ng-change="$ctrl.egarCreateTypeChanged(3)"
+                                                        ng-model="$ctrl.selectedEgarCreateType">
+                                                    <span></span>Obras RCD
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="radio c-radio c-radio-nofont">
+                                                <label>
+                                                    <input type="radio" 
+                                                        name="a" 
+                                                        value="VEICULOS_FIM_VIDA"
+                                                        ng-checked="$ctrl.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'"
+                                                        ng-change="$ctrl.egarCreateTypeChanged(4)"
+                                                        ng-model="$ctrl.selectedEgarCreateType">
+                                                    <span></span>Veículos em fim de vida
+                                                </label>
+                                            </div>
+                                        </div> 
+                                        <div class="col-sm-2">
+                                            <div class="radio c-radio c-radio-nofont">
+                                                <label>
+                                                    <input type="radio" 
+                                                        name="a" 
+                                                        value="EX_SITU"
+                                                        ng-checked="$ctrl.selectedEgarCreateType === 'EX_SITU'"
+                                                        ng-change="$ctrl.egarCreateTypeChanged(6)"
+                                                        ng-model="$ctrl.selectedEgarCreateType">
+                                                    <span></span>Ex Situ
+                                                </label>
+                                            </div>
+                                        </div>   
+                                        <div class="col-sm-2">
+                                            <div class="radio c-radio c-radio-nofont">
+                                                <label>
+                                                    <input type="radio" 
+                                                        name="a" 
+                                                        value="PRESTADOR_SERVICOS"
+                                                        ng-checked="$ctrl.selectedEgarCreateType === 'PRESTADOR_SERVICOS'"
+                                                        ng-change="$ctrl.egarCreateTypeChanged(5)"
+                                                        ng-model="$ctrl.selectedEgarCreateType">
+                                                    <span></span>Prestador de Serviços
+                                                </label>
+                                            </div>
+                                        </div>    
+                                    </div>
+                                </div>                                
+                            </div>
+
+                            <!--row search-->
+                            <div class="row mar-top20">
+                                <div class="col-sm-6">
+                                    <smg-select-establishment name="smgSelectEstablishmentOrigin" 
+                                        label-text="some label"
+                                        selection-model="$ctrl.selectedOrigin",
+                                        on-change="$ctrl.originSearchChangeV3(obj)">
+                                    </smg-select-establishment> 
+                                </div>                             
+                            </div>
+
+                            <!-- row info 1-->
+                            <div class="row pad-top10">
+                                <!--Vat-->
+                                <div class="col-sm-2" ng-if="$ctrl.selectedEgarCreateType === 'PRODUTOR_ESTABELECIMENTO'">
+                                    <label class="control-label">
+                                        NIF
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <br>
+                                    <input id="inp-vatOrigin" name="vatOrigin" 
+                                        ng-change="$ctrl.originDataChange()" 
+                                        ng-model="$ctrl.vatOrigin" 
+                                        ng-required="$ctrl.selectedEgarCreateType === 'PRODUTOR_ESTABELECIMENTO'" 
+                                        ng-pattern="/^[0-9]+$/"
+                                        type="text" class="form-control" placeholder="Ex: 123456789" />
+                                    <span ng-show="$ctrl.validateInput('vatOrigin', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="$ctrl.validateInput('vatOrigin', 'pattern')" class="text-danger">Formato inválido</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['vatOrigin']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['vatOrigin']}} {{$ctrl.serverApplicationErrors['vatOrigin']}}
+                                    </span>
+                                </div>
+
+                                <!--cod apa-->
+                                <div class="col-sm-2" ng-if="$ctrl.selectedEgarCreateType === 'PRODUTOR_ESTABELECIMENTO'">
+                                    <label class="control-label">
+                                        Código APA
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <input id="inp-codApaOrigin" 
+                                        name="codApaOrigin" 
+                                        ng-change="$ctrl.originDataChange()" 
+                                        ng-model="$ctrl.codApaOrigin" 
+                                        ng-required="$ctrl.selectedEgarCreateType === 'PRODUTOR_ESTABELECIMENTO'"
+                                        class="form-control" placeholder="Ex: 123456" />
+                                    <span ng-show="$ctrl.validateInput('codApaOrigin', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['codApaOrigin']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['codApaOrigin']}} {{$ctrl.serverApplicationErrors['codApaOrigin']}}
+                                    </span>
+                                </div>
+
+                                <div class="col-sm-4" ng-if="$ctrl.selectedEgarCreateType === 'OLEOS_ALIMENTARES'">
+                                    <label class="control-label">&nbsp;</label>
+                                    <smg-select-pickup-point name="{{$ctrl.selectPickupPointOua}}"
+                                        label-text="some label" 
+                                        pickup-point-type="$ctrl.pickupPointTypeOua"
+                                        selected-key="$ctrl.selectedPickupPointOuaUniqueId"
+                                        selection-model="$ctrl.selectedPickupPointOua" ,
+                                        on-change="$ctrl.onSelectedPickupPointChange(obj)">
+                                    </smg-select-pickup-point>
+                                </div>
+
+                                <div class="col-sm-4" ng-if="$ctrl.selectedEgarCreateType === 'EX_SITU'">
+                                    <label class="control-label">&nbsp;</label>
+                                    <smg-select-pickup-point 
+                                        name="selectedLocalOAU"
+                                        label-text="some label" 
+                                        pickup-point-type="$ctrl.pickupPointTypeExSitu"
+                                        selected-key="$ctrl.selectedPickupPointExSituUniqueId"
+                                        selection-model="$ctrl.selectedLocalOAU"
+                                        on-change="$ctrl.onSelectedPickupPointChange(obj)">
+                                    </smg-select-pickup-point>
+                                </div>
+
+                                <div class="col-sm-2" ng-if="$ctrl.selectedEgarCreateType === 'OLEOS_ALIMENTARES' || $ctrl.selectedEgarCreateType === 'EX_SITU'">
+                                    <label class="control-label">
+                                        Código local de recolha
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <br>
+                                    <input id="inp-localOAU" name="localOAU" 
+                                        ng-model="$ctrl.localOAU" 
+                                        ng-required="$ctrl.selectedEgarCreateType === 'OLEOS_ALIMENTARES' || $ctrl.selectedEgarCreateType === 'EX_SITU'"
+                                        type="text" 
+                                        class="form-control" 
+                                        placeholder="Ex: Abc123" />
+                                    <span ng-show="$ctrl.validateInput('localOAU', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['localOAU']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['localOAU']}} {{$ctrl.serverApplicationErrors['localOAU']}}
+                                    </span>
+                                </div>
+
+                                <div class="col-sm-2" ng-if="$ctrl.selectedEgarCreateType === 'OBRAS_RCD' || $ctrl.selectedEgarCreateType === 'PRESTADOR_SERVICOS' || $ctrl.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'">
+                                    <label class="control-label">
+                                        Nif
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <br>
+                                    <input id="inp-vatRCD" name="vatRCD" 
+                                        ng-model="$ctrl.vatRCD" 
+                                        ng-required="$ctrl.selectedEgarCreateType === 'OBRAS_RCD' || $ctrl.selectedEgarCreateType === 'PRESTADOR_SERVICOS' || $ctrl.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'"
+                                        ng-pattern="/^[0-9]+$/"
+                                        type="text" 
+                                        class="form-control" 
+                                        placeholder="Ex: 123456789" />
+                                    <span ng-show="$ctrl.validateInput('vatRCD', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="$ctrl.validateInput('vatRCD', 'pattern')" class="text-danger">Formato inválido</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['vatRCD']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['vatRCD']}} {{$ctrl.serverApplicationErrors['vatRCD']}}
+                                    </span>
+                                </div>
+
+                                <div class="col-sm-4" ng-if="$ctrl.selectedEgarCreateType === 'OBRAS_RCD' || $ctrl.selectedEgarCreateType === 'PRESTADOR_SERVICOS' || $ctrl.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'">
+                                    <label class="control-label">
+                                        Morada {{ $ctrl.selectedEgarCreateType === 'OBRAS_RCD' ? 'da Obra' : '' }}
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <br>
+                                    <input id="inp-addressRCD" name="addressRCD" 
+                                        ng-model="$ctrl.addressRCD" 
+                                        ng-required="$ctrl.selectedEgarCreateType === 'OBRAS_RCD' || $ctrl.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'"
+                                        type="text" 
+                                        class="form-control" 
+                                        placeholder="Ex: Rua do Ouro" />
+                                    <span ng-show="$ctrl.validateInput('addressRCD', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['addressRCD']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['addressRCD']}} {{$ctrl.serverApplicationErrors['addressRCD']}}
+                                    </span>
+                                </div>
+
+                                <div class="col-sm-2" ng-if="$ctrl.selectedEgarCreateType === 'OBRAS_RCD' || $ctrl.selectedEgarCreateType === 'PRESTADOR_SERVICOS' || $ctrl.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'">
+                                    <label class="control-label">
+                                        Localidade
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <br>
+                                    <input id="inp-localRCD" name="localRCD" 
+                                        ng-model="$ctrl.localRCD" 
+                                        ng-required="$ctrl.selectedEgarCreateType === 'OBRAS_RCD' || $ctrl.selectedEgarCreateType === 'PRESTADOR_SERVICOS' || $ctrl.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'"
+                                        type="text" 
+                                        class="form-control" 
+                                        placeholder="Ex: Lisboa" />
+                                    <span ng-show="$ctrl.validateInput('localRCD', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['localRCD']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['localRCD']}} {{$ctrl.serverApplicationErrors['localRCD']}}
+                                    </span>
+                                </div>
+                                
+                                <div class="col-sm-2" ng-if="$ctrl.selectedEgarCreateType === 'OBRAS_RCD' || $ctrl.selectedEgarCreateType === 'PRESTADOR_SERVICOS' || $ctrl.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'">
+                                    <label class="control-label">
+                                        Código Postal
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <br>
+                                    <input id="inp-postalCodeRCD" name="postalCodeRCD" 
+                                        ng-model="$ctrl.postalCodeRCD" 
+                                        ng-required="$ctrl.selectedEgarCreateType === 'OBRAS_RCD' || $ctrl.selectedEgarCreateType === 'PRESTADOR_SERVICOS' || $ctrl.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'"
+                                        type="text" 
+                                        class="form-control" 
+                                        placeholder="Ex: 1100-100" />
+                                    <span ng-show="$ctrl.validateInput('postalCodeRCD', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['postalCodeRCD']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['postalCodeRCD']}} {{$ctrl.serverApplicationErrors['postalCodeRCD']}}
+                                    </span>
+                                </div>
+
+                                <!--tipo produtor PI/OGR-->
+                                <div class="col-sm-2" ng-if="$ctrl.selectedEgarCreateType === 'PRODUTOR_ESTABELECIMENTO'">
+                                    <label class="control-label">
+                                        Tipo Produtor
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <select id="inp-selectedProducerType" name="selectedProducerType" 
+                                            required="" 
+                                            ng-model="$ctrl.selectedProducerType" 
+                                            class="form-control ng-pristine ng-valid ng-not-empty ng-touched">
+                                        <option ng-repeat="option in $ctrl.allProducerType" value="{{option.id}}">{{option.name}}</option>
+                                    </select>
+                                    <span ng-show="$ctrl.validateInput('selectedProducerType', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="$ctrl.validateInput('selectedProducerType', 'pattern')" class="text-danger">Formato inválido</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['selectedProducerType']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['selectedProducerType']}} {{$ctrl.serverApplicationErrors['selectedProducerType']}}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- row info 2 -->
+                            <div class="row pad-top10" ng-if="$ctrl.selectedEgarCreateType === 'PRODUTOR_ESTABELECIMENTO'">
+                                <!--Establishment Name-->
+                                <div class="col-sm-4">
+                                    <label class="control-label">
+                                        Estabelecimento
+                                    </label>
+                                    <input name="nameOrigin" ng-model="$ctrl.nameOrigin" type="text" class="form-control" />
+                                </div>
+
+                                <!--Establishment Addres-->
+                                <div class="col-sm-8">
+                                    <label class="control-label">Morada</label>
+                                    <input name="addressOrigin" ng-model="$ctrl.addressOrigin" type="text" class="form-control" />
+                                    <span ng-show="$ctrl.serverValidationErrors['addressOrigin']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['addressOrigin']}} {{$ctrl.serverApplicationErrors['addressOrigin']}}
+                                    </span>
+                                </div>
+
+                            </div>     
+                        </div>
+                    </div>
+                </fieldset>
+                <!--END remetente-->
+
+                <!--residuo Transportado-->
+                <fieldset id="residue">
+                    <legend>Residuo</legend>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <!--Quantity-->
+                                <div class="col-sm-2">
+                                    <label class="control-label">
+                                        Quantidade (Kg)
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <input id="inp-quantity" 
+                                        name="quantity" 
+                                        ng-model="$ctrl.quantity" 
+                                        required="" 
+                                        type="text" 
+                                        ng-pattern="/^[0-9]+(\.[0-9]{1,4})?$/"
+                                        class="form-control" 
+                                        placeholder="Ex: 100.25"/>
+                                    <span ng-show="$ctrl.validateInput('quantity', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="$ctrl.validateInput('quantity', 'pattern')" class="text-danger">Apenas números inteiros ou decimais separado por "." com o máximo de 4 casas decimais</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['quantity']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['quantity']}} {{$ctrl.serverApplicationErrors['quantity']}}
+                                    </span>
+                                </div>
+
+                                <!-- Product Codes -->
+                                <div ng-if="true" class="col-sm-3">
+                                    <label class="control-label">
+                                        Etiqueta
+                                    </label>
+                                    <smg-select-product-code 
+                                            name="smgSelectProductsName"
+                                            selection-model="$ctrl.selectedProductCode" 
+                                            on-change="$ctrl.onSelectedProductCodeChange(obj)">    
+                                    </smg-select-product-code>  
+                                </div>
+                                <!-- END Product Codes -->
+
+                            </div>
+
+                            <div class="row pad-top10">
+                                <!--Ler Code-->
+                                <div class="col-sm-4">
+                                    <label class="control-label">
+                                        Código LER
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                
+                                    <select id="inp-selectedLerCode" name="selectedLerCode" 
+                                        ng-change="$ctrl.lerCodeChange()" 
+                                        required="" 
+                                        placeholder-text-single="'Pesquisar por código descrição LER'"
+                                        no-results-text="'Não foram encontrados resultados'" 
+                                        chosen="" 
+                                        ng-options="address as address.value for address in $ctrl.lerCodes"
+                                        class="chosen-select input-md" ng-model="$ctrl.selectedLerCode">
+                                        <option></option>
+                                    </select>
+
+                                    <span ng-show="$ctrl.validateInput('selectedLerCode', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="$ctrl.validateInput('selectedLerCode', 'pattern')" class="text-danger">Formato inválido</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['selectedLerCode']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['selectedLerCode']}} {{$ctrl.serverApplicationErrors['selectedLerCode']}}
+                                    </span>
+                                </div>
+
+                                <!--Operation Code-->
+                                <div class="col-sm-4">
+                                    <label class="control-label">
+                                        Código Operação
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <select id="inp-selectedOperationCode" name="selectedOperationCode" 
+                                            required="" ng-change="$ctrl.operationCodeChange()" 
+                                            placeholder-text-single="'Pesquisar por código ou descrição da operação'"
+                                            no-results-text="'Não foram encontrados resultados'" 
+                                            chosen="" 
+                                            class="chosen-select input-md"
+                                            ng-options="address as address.value for address in $ctrl.operationCodes" 
+                                            ng-model="$ctrl.selectedOperationCode">
+                                        <option></option>
+                                    </select>
+                                    <span ng-show="$ctrl.validateInput('selectedOperationCode', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['selectedOperationCode']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['selectedOperationCode']}} {{$ctrl.serverApplicationErrors['selectedOperationCode']}}
+                                    </span>
+                                </div>
+
+                                <!--Group Code-->
+                                <!-- <div class="col-sm-2" ng-if="$ctrl.selectedEgarCreateType === 'PRODUTOR_ESTABELECIMENTO'"> -->
+                                <div class="col-sm-2"> 
+                                    <label class="control-label">
+                                        Código Grupo
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <select id="inp-groupCode" 
+                                        name="groupCode" 
+                                        ng-model="$ctrl.groupCode" 
+                                        ng-disabled="!$ctrl.showGroupCode" 
+                                        class="form-control ng-pristine ng-valid ng-not-empty ng-touched">
+                                        <option ng-repeat="option in $ctrl.allGroupCodes" 
+                                            value="{{option.key}}">
+                                            {{option.value}}
+                                        </option>
+                                    </select>
+                                    <span ng-show="$ctrl.validateInput('groupCode', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['groupCode']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['groupCode']}} {{$ctrl.serverApplicationErrors['groupCode']}}
+                                    </span>
+                                </div>
+
+                                <!-- Plate VFV -->
+                                <div class="col-sm-2" ng-if="$ctrl.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'">
+                                    <label class="control-label">
+                                        Matricula VFV
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label> 
+                                    <input id="inp-plateVFV"
+                                            name="plateVFV" 
+                                            ng-model="$ctrl.plateVFV"
+                                            ng-required="$ctrl.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'"
+                                            class="form-control" 
+                                            placeholder="Ex: AA-12-34" />
+                                    <span ng-show="$ctrl.validateInput('plateVFV', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['plateVFV']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['plateVFV']}} {{$ctrl.serverApplicationErrors['plateVFV']}}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!--Description-->
+                            <div class="row pad-top10">
+                                <div class="col-sm-12">
+                                    <label class="control-label">
+                                        Descrição
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <textarea id="txt-lerDescription" name="lerDescription" class="form-control no-resize" required ng-model="$ctrl.lerDescription"
+                                        ng-maxlength="200" rows="3">
+                                    </textarea>
+                                    <span ng-show="$ctrl.validateInput('lerDescription', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="$ctrl.validateInput('lerDescription', 'maxlength')" class="text-danger">Máximo de 200 caracteres</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['lerDescription']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['lerDescription']}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <!--END residuo Transportado-->
+
+                <fieldset id="residue-adr" ng-show="$ctrl.showAdr">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="checkbox c-checkbox">
+                                        <label class="control-label">
+                                            <input id="ckb-adr" 
+                                                type="checkbox" 
+                                                ng-click="$ctrl.clickAdr()"
+                                                ng-model="$ctrl.checkAdr"
+                                                ng-checked="$ctrl.checkAdr">
+                                            <span class="fa fa-check"></span>
+                                            Abrangido por ADR
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row pad-top10" ng-if="$ctrl.checkAdr">
+                                <div class="col-sm-6">
+                                    <label class="control-label">
+                                        Nº ONU
+                                    </label>
+                                    <smg-select-onu-number id="dd-selectOnuNumber"
+                                            selection-model="$ctrl.selectedOnuNumber" 
+                                            selected-key="$ctrl.setOnuNumber"
+                                            on-change="$ctrl.onSelectedOnuNumberChange(obj)">    
+                                    </smg-select-onu-number>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label class="control-label">
+                                        Grupo de embalagem
+                                    </label>
+                                    <smg-select-onu-number-package id="dd-selectOnuNumberPackage"
+                                            for-onu-number="$ctrl.selectedOnuNumber"
+                                            selection-model="$ctrl.selectedOnuNumberPackage" 
+                                            on-change="$ctrl.onSelectedOnuNumberPackageChange(obj)">    
+                                    </smg-select-onu-number-package>
+                                </div>
+                                
+                                <div class="col-sm-3">
+                                    <label class="control-label">
+                                        Volumes/embalagens
+                                    </label>
+                                    <!-- ng-pattern="/^[0-9]+$/" -->
+                                    <input id="inp-adrVolume" 
+                                        name="adrVolume" 
+                                        ng-model="$ctrl.adrVolume" 
+                                        ng-required="$ctrl.checkAdr"
+                                        type="text"
+                                        class="form-control" 
+                                        placeholder="Ex: 123" />
+                                    <span ng-show="$ctrl.serverValidationErrors['adrVolume']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['adrVolume']}} 
+                                        {{$ctrl.serverApplicationErrors['adrVolume']}}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="row pad-top10" ng-show="$ctrl.checkAdr">
+                                <div class="col-sm-6">
+                                    <label class="control-label">
+                                        Observações I
+                                    </label>
+                                    <textarea id="txt-adrObsI" name="adrObsI" class="form-control no-resize"
+                                        ng-model="$ctrl.adrObsI"
+                                        ng-maxlength="100" 
+                                        rows="3">
+                                    </textarea>
+                                    <span ng-show="$ctrl.validateInput('adrObsI', 'maxlength')" class="text-danger">Máximo de 100 caracteres</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['adrObsI']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['adrObsI']}}
+                                        {{$ctrl.serverApplicationErrors['adrObsI']}}
+                                    </span>
+                                </div>
+                                
+                                <div class="col-sm-6">
+                                    <label class="control-label">
+                                        Observações II
+                                    </label>
+                                    <textarea id="txt-adrObsII" name="adrObsII" class="form-control no-resize" 
+                                        ng-model="$ctrl.adrObsII"
+                                        ng-maxlength="100" 
+                                        rows="3">
+                                    </textarea>
+                                    <span ng-show="$ctrl.validateInput('adrObsII', 'maxlength')" class="text-danger">Máximo de 100 caracteres</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['adrObsII']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['adrObsII']}}
+                                        {{$ctrl.serverApplicationErrors['adrObsII']}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+
+            </div>
+        </div>
+    </div>
+    <!--END panelOrigin-->
+
+
+    <!--panelTransporters-->
+    <div id="panelTransporters" class="panel panel-default">
+        <div ng-class="{'panel-heading-collapsed':panelTransporters}" class="panel-heading">
+            <h4>
+                <em class="fa fa-truck pad-right10"></em>2 - Transportadores</h4>
+            <paneltool tool-collapse="tool-collapse" class="pull-right">
+                <a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="panelTransporters = !panelTransporters" class="ng-scope">
+                    <em ng-show="panelTransporters" class="fa fa-plus ng-no-animation ng-hide"></em>
+                    <em ng-show="!panelTransporters" class="fa fa-minus ng-no-animation"></em>
+                </a>
+            </paneltool>
+        </div>
+
+        <div uib-collapse="panelTransporters" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+            <div class="panel-body">
+                <!--transportador-->
+                <fieldset id="transporters">
+                    <div ng-repeat="transporter in $ctrl.transportersArray">
+                        <div class="row">
+                            <div class="col-sm-1">
+                            </div>
+                            <div class="col-sm-11">
+                                <div class="checkbox c-checkbox">
+                                    <label>
+                                        <input id="ckb-transporter-origin" 
+                                            type="checkbox" 
+                                            ng-disabled="!$ctrl.vatOrigin && !$ctrl.vatRCD" 
+                                            ng-click="$ctrl.clickTransporterOrigin($index)"
+                                            ng-checked="$ctrl.checkTransporterOrigin">
+                                        <span class="fa fa-check"></span>
+                                        Produtor
+                                    </label>
+                                    <label>
+                                        <input id="ckb-transporter-destin" 
+                                            type="checkbox" 
+                                            ng-disabled="!$ctrl.vatDestin" 
+                                            ng-click="$ctrl.clickTransporterDestin($index)"
+                                            ng-checked="$ctrl.checkTransporterDestin">
+                                        <span class="fa fa-check"></span>
+                                        Destinatário
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!--nif-->
+                            <label class="col-sm-1 control-label pad-top37">
+                                NIF
+                                <span class="pad-left5 text-danger">
+                                    <i class="fa fa-asterisk" />
+                                </span>
+                            </label>
+                            <div class="col-sm-2 pad-top30">
+                                <input id="inp-vatTransporter{{transporter.index}}" 
+                                    name="vatTransporter{{transporter.index}}" 
+                                    ng-model="transporter.vat"
+                                    required="" 
+                                    type="text" 
+                                    class="form-control" 
+                                    placeholder="Ex: 123456789"/>
+                                <span ng-show="$ctrl.validateInput('vatTransporter{{transporter.index}}', 'required')" class="text-danger">Obrigatório</span>
+                                <span ng-show="$ctrl.serverValidationErrors['vatTransporter{{transporter.index}}']" class="text-danger">
+                                    {{$ctrl.serverValidationErrors['vatTransporter'+transporter.index]}}
+                                </span>
+                                <span ng-show="$ctrl.serverApplicationErrors['vatTransporter{{transporter.index}}']" class="text-danger">
+                                    {{$ctrl.serverApplicationErrors['vatTransporter'+transporter.index]}}
+                                </span>
+                            </div>
+
+                            <!--plate-->
+                            <label class="col-sm-1 control-label pad-top37">
+                                Matricula
+                                <span class="pad-left5 text-danger">
+                                    <i class="fa fa-asterisk" />
+                                </span>
+                            </label>
+                            <div class="col-sm-2 pad-top30">
+                                <input id="inp-plateTransporter{{transporter.index}}" 
+                                    name="plateTransporter{{transporter.index}}" 
+                                    ng-model="transporter.plate"
+                                    class="form-control" 
+                                    placeholder="Ex: AA-11-22" 
+                                    required="" />
+                                    <span ng-show="$ctrl.validateInput('plateTransporter{{transporter.index}}', 'required')" class="text-danger">Obrigatório</span> 
+
+                            </div>
+
+                            <!--transport date-->
+                            <label class="col-sm-1 control-label pad-top37">
+                                Data
+                                <span class="pad-left5 text-danger">
+                                    <i class="fa fa-asterisk" />
+                                </span>
+                            </label>
+                            <div ng-controller="datepickerController as dp" class="ng-scope col-sm-2 pad-top30">
+                                <input id="inp-dateTransporter{{transporter.index}}" 
+                                    name="dateTransporter{{transporter.index}}" 
+                                    placeholder="Ex: 2016-01-01"
+                                    type="text" 
+                                    uib-datepicker-popup="yyyy-MM-dd" 
+                                    ng-change="dp.changed(transporter.index)" 
+                                    ng-model="dp.date"
+                                    is-open="dp.opened" 
+                                    max-date="'31-12-2100'" 
+                                    uib-datepicker-options="dp.dateOptions" 
+                                    ng-required="true"
+                                    close-text="Fechar",
+                                    current-text="Hoje",
+                                    clear-text="Limpar",
+                                    class="form-control ng-isolate-scope ng-touched" 
+                                    required="" 
+                                    autocomplete="off"
+                                    ng-click="dp.open($event)">
+                                <span ng-show="$ctrl.validateInput('dateTransporter{{transporter.index}}', 'required')" class="text-danger">Obrigatório</span>
+                                <span ng-show="$ctrl.serverValidationErrors['dateTransporter{{transporter.index}}']" class="text-danger">
+                                    {{$ctrl.serverValidationErrors['dateTransporter'+transporter.index]}} {{$ctrl.serverApplicationErrors['dateTransporter'+transporter.index]}}
+                                </span>
+                            </div>
+
+                            <!--transport hour-->
+                            <label class="col-sm-1 control-label pad-top37">
+                                Hora
+                                <span class="pad-left5 text-danger">
+                                    <i class="fa fa-asterisk" />
+                                </span>
+                            </label>
+                            <div ng-controller="timepickerController as tp">
+                                <div id="inp-hourTransporter{{transporter.index}}" uib-timepicker="uib-timepicker" ng-model="tp.mytime" ng-change="tp.changed(transporter.index)"
+                                    hour-step="tp.hstep" minute-step="tp.mstep" show-meridian="tp.ismeridian">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="panel-default text-right">
+                            <button type="button" class="btn btn-labeled btn-danger" ng-show="transporter.index > 0" ng-click="$ctrl.removeTransporter(transporter)">
+                                -
+                            </button>
+
+                            <button type="button" class="btn btn-labeled btn-info" ng-click="$ctrl.addTransporter(transporter)">
+                                +
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+                <!--transportador-->
+
+
+            </div>
+        </div>
+    </div>
+    <!--END panelTransporters-->
+
+
+    <!--panelDestin-->
+    <div id="panelDestin" class="panel panel-default">
+        <div ng-class="{'panel-heading-collapsed':panelDestin}" class="panel-heading">
+            <h4>
+                <em class="fa fa-recycle pad-right10"></em>3 - Destinatário</h4>
+            <paneltool tool-collapse="tool-collapse" class="pull-right">
+                <a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="panelDestin = !panelDestin" class="ng-scope">
+                    <em ng-show="panelDestin" class="fa fa-plus ng-no-animation ng-hide"></em>
+                    <em ng-show="!panelDestin" class="fa fa-minus ng-no-animation"></em>
+                </a>
+            </paneltool>
+        </div>
+
+        <div uib-collapse="panelDestin" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+            <div class="panel-body">
+                <fieldset id="destin">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <!--row search-->
+                            <div class="row">
+                            <!-- 
+                                <div class="col-sm-6">
+                                    <ui-select name="selectedDestin" 
+                                                ng-model="$ctrl.selectedDestin" 
+                                                theme="bootstrap" 
+                                                ng-change="$ctrl.destinSearchChangeV2()">
+                                        <ui-select-match placeholder="Pesquisar Nif, Apa ou Nome do estabelecimento">
+                                            <span ng-bind-html="$select.selected.DisplayName"></span>                                          
+                                        </ui-select-match>
+                                        <ui-select-choices repeat="establishment in $ctrl.chosen | propsFilter: {DisplayName: $select.search}">                                               
+                                            <i ng-if="establishment.Type === 1" class="fa fa-home"></i>
+                                            <i ng-if="establishment.Type === 2 && establishment.HasApaAccess" class="fa fa-star gold"></i>
+                                            <i ng-if="establishment.Type === 2 && !establishment.HasApaAccess" class="fa fa-star silver"></i>
+                                            <span ng-bind-html="establishment.DisplayName"></span>
+                                        </ui-select-choices>
+                                        <ui-select-no-choice>
+                                            Não foram encontrados resultados
+                                        </ui-select-no-choice>
+                                    </ui-select>
+                                </div> 
+                            -->
+
+                                <div class="col-sm-6">
+                                    <smg-select-establishment name="smgSelectEstablishmentDestin" 
+                                        label-text="some label"
+                                        selection-model="$ctrl.selectedDestin",
+                                        on-change="$ctrl.destinSearchChangeV3(obj)">
+                                    </smg-select-establishment> 
+                                </div>
+                            </div>
+
+                            <div class="row pad-top10">
+                                <!--nif-->
+                                <div class="col-sm-2">
+                                    <label class="control-label">
+                                        NIF
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <input id="inp-vatDestin" name="vatDestin" ng-change="$ctrl.destinDataChange()" ng-model="$ctrl.vatDestin" required="" ng-pattern="/^[0-9]+$/"
+                                        type="text" class="form-control" placeholder="Ex: 123456789" />
+                                    <span ng-show="$ctrl.validateInput('vatDestin', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="$ctrl.validateInput('vatDestin', 'pattern')" class="text-danger">Formato inválido</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['vatDestin']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['vatDestin']}} {{$ctrl.serverApplicationErrors['vatDestin']}}
+                                    </span>
+                                </div>
+
+                                <!--cod apa-->
+                                <div class="col-sm-2">
+                                    <label class="control-label">
+                                        Código APA
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <input id="inp-codApaDestin" name="codApaDestin" ng-change="$ctrl.destinDataChange()" ng-model="$ctrl.codApaDestin" required=""
+                                        class="form-control" placeholder="Ex: 123456" />
+                                    <span ng-show="$ctrl.validateInput('codApaDestin', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['codApaDestin']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['codApaDestin']}} {{$ctrl.serverApplicationErrors['codApaDestin']}}
+                                    </span>
+                                </div>
+
+                                <!--num pgl-->
+                                <div class="col-sm-2">
+                                    <label class="control-label">
+                                        Número PGL
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <input id="inp-numPgl" ng-disabled="!$ctrl.showPglNumber" name="numPgl" ng-model="$ctrl.numPgl" type="text" class="form-control"
+                                    />
+                                    <span ng-show="$ctrl.serverValidationErrors['numPgl']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['numPgl']}} {{$ctrl.serverApplicationErrors['numPgl']}}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="row pad-top10">
+                                <div class="col-sm-4">
+                                    <label class="control-label">
+                                        Estabelecimento
+                                    </label>
+                                    <input name="nameDestin" ng-model="$ctrl.nameDestin" type="text" class="form-control" />
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label class="control-label">
+                                        Morada
+                                    </label>
+                                    <input name="addressDestin" ng-model="$ctrl.addressDestin" type="text" class="form-control" />
+                                    <span ng-show="$ctrl.serverValidationErrors['addressDestin']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['addressDestin']}} {{$ctrl.serverApplicationErrors['addressDestin']}}
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <!--END panelDestin-->
+
+    <div class="row">
+        <div class="col-sm-6">
+            <i class="text-danger fa fa-asterisk" /> - Campos Obrigatórios
+        </div>
+
+        <div class="col-sm-6">
+            <div class="text-right">
+                <button type="button" class="btn btn-labeled btn-default" ng-click="$ctrl.cancel()">
+                    <span class="btn-label">
+                        <i class="fa fa-arrow-left"></i>
+                    </span>
+                    Voltar
+                </button>
+                <button type="submit" class="btn btn-labeled btn-success mar-right10">
+                    <span class="btn-label">
+                        <i class="fa fa-check"></i>
+                    </span>
+                    Emitir
+                </button>
+            </div>
+        </div>
+    </div>
+
+</form>

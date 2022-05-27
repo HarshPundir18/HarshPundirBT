@@ -1,0 +1,155 @@
+<!-- START Top Navbar-->
+<nav class="navbar topnavbar" role="navigation">
+	<!-- START navbar header-->
+	<div class="navbar-header">
+		<a class="navbar-brand" href="#/">
+			<div class="brand-logo">
+				<img class="img-responsive" src="app/img/logo.png" alt="App Logo" />
+			</div>
+			<div class="brand-logo-collapsed">
+				<img class="img-responsive" src="app/img/logo-single.png" alt="App Logo" />
+			</div>
+		</a>
+	</div>
+	<!-- END navbar header-->
+	<!-- START Nav wrapper-->
+	<div class="nav-wrapper">
+		<!-- START Left navbar-->
+		<ul class="nav navbar-nav">
+			<li>
+				<!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+				<a class="hidden-xs" href="" trigger-resize=""
+					ng-click="app.layout.isCollapsed = !app.layout.isCollapsed" ng-if="!app.layout.isCollapsedText">
+					<em class="fa fa-navicon"></em>
+				</a>
+				<!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
+				<a class="visible-xs sidebar-toggle" href="" ng-click="app.asideToggled = !app.asideToggled">
+					<em class="fa fa-navicon"></em>
+				</a>
+			</li>
+
+			<!-- START Alert menu-->
+			<!-- <li ng-controller="userNotificationController as unc" class="dropdown dropdown-list" uib-dropdown="">
+				<a uib-dropdown-toggle="" title="{{unc.lblNewNotifications}}">
+					<em class="fa fa-bell-o"></em>
+					<div ng-show="unc.unreadNotifications > 0" class="label label-danger">
+						{{unc.unreadNotifications}}
+					</div>
+				</a>
+				<ul class="dropdown-menu">
+					<li>
+						<div class="list-group">
+							<a class="list-group-item" ng-href="/#/app/user/notifications">
+								<div class="media-box">
+								<div class="pull-left">
+									<em class="fa fa-envelope fa-2x text-warning"></em>
+								</div>
+								<div class="media-box-body clearfix">
+									<p class="m0">{{unc.lblNotifications}}</p>
+									<p class="m0 text-muted">
+									<small>{{unc.lblNewNotifications}}</small>
+									</p>
+								</div>
+								</div>
+							</a> 
+		
+							<a class="list-group-item" ng-href="{{$state.href(item.sref, item.params)}}">
+								<div class="media-box">
+									<div class="pull-left">
+										<em class="fa fa-tasks fa-2x text-success"></em>
+									</div>
+									<div class="media-box-body clearfix">
+										<p class="m0">Geração de Documentos {{ 'topbar.search.PLACEHOLDER' | translate
+											}}</p>
+										<p class="m0 text-muted">
+											<small>1234 pending task</small>
+										</p>
+									</div>
+								</div>
+							</a> 
+						
+						</div>
+					</li>
+				</ul>
+			</li> -->
+			<!-- END Alert menu-->
+
+
+			<li id="generatedDocuments" uib-dropdown=""  
+				is-open="gdc.generatedDocumentsOpen" 
+				ng-controller="generatedDocumentsController as gdc" 
+				class="dropdown dropdown-list" >
+
+				<a uib-dropdown-toggle="" title="Geração de documentos">
+					<em class="fa fa-folder-open "></em>
+					<div ng-show="gdc.newDocuments > 0" class="label label-danger">
+						{{gdc.newDocuments}}
+					</div>
+				</a>
+				<ul class="dropdown-menu">
+					<li>
+						<div class="list-group">
+							<!-- <a class="list-group-item" ng-href="{{$state.href(item.sref, item.params)}}"> -->
+							<a class="list-group-item" ng-click="$state.go('app.generatedDocumentsExSituDeclarationsList')" href="">
+								<div class="media-box">
+									<div class="pull-left">
+										<em class="fa fa-tasks fa-1point5 pad-top10"></em>
+									</div>
+									<div class="media-box-body clearfix">
+										<p class="m0">Declarações Quantidades (ex-situ)</p>
+										<p class="m0 text-muted">
+											<small>{{gdc.availableDocuments}}</small>
+										</p>
+									</div>
+								</div>
+							</a>
+							<a class="list-group-item" ng-click="$state.go('app.generatedDocumentsAsyncReportList')" href="">
+								<div class="media-box">
+									<div class="pull-left">
+										<em class="fa fa-book fa-1point5"></em>
+									</div>
+									<div class="media-box-body clearfix">
+										<p class="m0">Relatórios</p>
+										<p class="m0 text-muted">
+											<small>{{gdc.availableDocuments}}</small>
+										</p>
+									</div>
+								</div>
+							</a>
+						</div>
+					</li>
+				</ul>
+			</li>
+
+		</ul>
+		<!-- END Left navbar-->
+
+		<!-- START Right Navbar-->
+		<ul class="nav navbar-nav navbar-right pad-right10">
+			<li ng-controller="userNotificationController as uc">
+				<a href="" title="Área de Utilizador" ng-click="uc.toggleUserBlock()">
+					<em class="icon-user"></em>
+					<span class="pad-left5">{{uc.loggedUserEmail}}</span>
+				</a>
+			</li>
+
+			<li>
+				<a ng-click="logOutUser()" title="Terminar Sessão">
+					<em class="fa fa-power-off"></em>
+				</a>
+			</li>
+		</ul>
+		<!-- END Right Navbar-->
+	</div>
+	<!-- END Nav wrapper-->
+	<!-- START Search form-->
+	<form class="navbar-form" role="search" action="search.html">
+		<div class="form-group has-feedback">
+			<input class="form-control" type="text" placeholder="{{ 'topbar.search.PLACEHOLDER' | translate }}" />
+			<div class="fa fa-times form-control-feedback" search-dismiss="search-dismiss"></div>
+		</div>
+		<button class="hidden btn btn-default" type="submit">Submit</button>
+	</form>
+	<!-- END Search form-->
+</nav>
+<!-- END Top Navbar-->

@@ -1,0 +1,316 @@
+<!-- START panel-->
+
+<h3 class="ng-scope">Nova Companhia
+<!--<small>Standard and custom elements for any form</small>-->
+</h3>
+
+
+<div class="panel panel-default">
+   <div class="panel-body">
+      <form role="form" name="$ctrl.formValidate" ng-submit="$ctrl.submitForm()" novalidate="" class="form-validate form-horizontal">
+         <fieldset>
+            <legend>Cliente</legend>
+            <div class="form-group">
+               <div class="col-sm-12">
+                  <div class="row">
+                        <label class="col-md-1 control-label">Name</label>
+                        <div class="col-md-11">
+                              
+                        </div>
+                  </div>
+                  <div class="row">
+                     <label class="col-md-1 control-label">BI / CC:</label>
+                     <div class="col-md-2">
+                        <input id="inp-cc" name="cc" ng-pattern="/^[0-9]+$/" ng-model="$ctrl.cc" type="text" class="form-control" 
+                                 placeholder="Ex: +3519615235658"/>
+                        <!--<span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>-->
+                        <span ng-show="$ctrl.validateInput('cc', 'pattern')" class="text-danger">Formato inválido</span>
+                        <span ng-show="$ctrl.serverValidationErrors['City']" class="text-danger">
+                           {{$ctrl.serverValidationErrors['Cc']}}
+                        </span>
+                     </div>
+
+                     <label class="col-md-1 control-label">NIF:<span class="text-danger">*</span></label>
+                     <div class="col-md-2">
+                        <input id="inp-vat" name="vat" ng-model="$ctrl.vat" required="" ng-pattern="/^[0-9]+$/" type="text" class="form-control" placeholder="Ex: 123456789"/>
+                        <span ng-show="$ctrl.validateInput('vat', 'required')" class="text-danger">Obrigatório</span>
+                        <span ng-show="$ctrl.validateInput('vat', 'pattern')" class="text-danger">Formato inválido</span>
+                        <span ng-show="$ctrl.serverValidationErrors['Vat']" class="text-danger">
+                           {{$ctrl.serverValidationErrors['Vat']}}
+                        </span>
+                     </div>
+
+
+                     <label class="col-sm-1 control-label">CAE Primário:<span class="text-danger">*</span></label>
+                     <div class="col-sm-2">
+                        <input  id="inp-primaryCae" name="primaryCae" ng-model="$ctrl.primaryCae" 
+                                 required="" class="form-control" placeholder="Ex: 123456"/>
+                        <span ng-show="$ctrl.validateInput('primaryCae', 'required')" class="text-danger">Obrigatório</span>
+                        <span ng-show="$ctrl.serverValidationErrors['PrimaryCae']" class="text-danger">
+                           {{$ctrl.serverValidationErrors['PrimaryCae']}}
+                        </span>
+                     </div>
+                
+                     <label class="col-sm-1 control-label">CAE Secundário:</label>
+                     <div class="col-sm-2">
+                        <input  id="inp-secondaryCae" name="secondaryCae" ng-model="$ctrl.secondaryCae" 
+                                 class="form-control" placeholder="Ex: 123456"/>
+      
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </fieldset>
+
+         <fieldset>
+            <legend>Sede</legend>
+            <div class="form-group">
+               <div class="col-sm-12">
+                  <div class="row">
+                     <label class="col-sm-1 control-label">Nome:<span class="text-danger">*</span></label>
+                     <div class="col-sm-8">
+                        <input id="inp-name" name="name" ng-model="$ctrl.name" required="" type="text" class="form-control" 
+                                 placeholder="Ex: Empresa ABCD Lda." />
+                        <span ng-show="$ctrl.validateInput('name', 'required')" class="text-danger">Obrigatório</span>
+                     </div>
+                     <span ng-show="$ctrl.serverValidationErrors['Name']" class="text-danger">
+                        {{$ctrl.serverValidationErrors['Name']}}
+                     </span>
+
+                     <label class="col-sm-1 control-label">Id APA:<span class="text-danger">*</span></label>
+                     <div class="col-sm-2">
+                        <input id="inp-apa" name="apa" ng-model="$ctrl.apa" required="" type="text" class="form-control" 
+                              placeholder="Ex: 12345"/>
+                        <span ng-show="$ctrl.validateInput('apa', 'required')" class="text-danger">Obrigatório</span>
+                        <span ng-show="$ctrl.serverValidationErrors['Apa']" class="text-danger">
+                           {{$ctrl.serverValidationErrors['Apa']}}
+                        </span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </fieldset>
+
+         <fieldset>
+            <div class="form-group">
+               <div class="col-sm-12">
+                  <div class="row">
+                     <label class="col-md-1 control-label">Morada:<span class="text-danger">*</span></label>
+                     <div class="col-md-11">
+                        <input id="inp-address" name="address" ng-model="$ctrl.address" required="" type="text" class="form-control" 
+                           placeholder="Ex: Rua Abcd, nº 123" />
+                        <span ng-show="$ctrl.validateInput('address', 'required')" class="text-danger">Obrigatório</span>   
+                        <span ng-show="$ctrl.serverValidationErrors['Address']" class="text-danger">
+                           {{$ctrl.serverValidationErrors['Address']}}
+                        </span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </fieldset>
+
+         <fieldset>
+            <div class="form-group">
+               <div class="col-sm-12">
+                  <div class="row">
+                     <label class="col-md-1 control-label">Código Postal:<span class="text-danger">*</span></label>
+                     <div class="col-md-2">
+                        <input id="inp-postalCode" name="postalCode" ng-model="$ctrl.postalCode" required="" type="text" class="form-control" 
+                           placeholder="Ex: 4400-000"/>
+                        <span ng-show="$ctrl.validateInput('postalCode', 'required')" class="text-danger">Obrigatório</span>
+                        <span ng-show="$ctrl.serverValidationErrors['PostalCode']" class="text-danger">
+                           {{$ctrl.serverValidationErrors['PostalCode']}}
+                        </span>
+                     </div>
+
+
+                     <label class="col-md-1 control-label">Localidade: <span class="text-danger">*</span></label>
+                     <div class="col-md-2">
+                        <input id="inp-local" name="local" ng-model="$ctrl.local" type="text"required="" class="form-control" 
+                              placeholder="Cedofeita"/>
+                        <span ng-show="$ctrl.validateInput('local', 'required')" class="text-danger">Obrigatório</span>
+                        <span ng-show="$ctrl.serverValidationErrors['Local']" class="text-danger">
+                           {{$ctrl.serverValidationErrors['Local']}}
+                        </span>
+                     </div>
+
+                     <label class="col-md-1 control-label">Cidade: <span class="text-danger">*</span></label>
+                     <div class="col-md-2">
+                        <input id="inp-city" name="city" ng-model="$ctrl.city" type="text" required="" class="form-control" 
+                           placeholder="Porto"/>
+                        <span ng-show="$ctrl.validateInput('city', 'required')" class="text-danger">Obrigatório</span>
+                        <span ng-show="$ctrl.serverValidationErrors['City']" class="text-danger">
+                           {{$ctrl.serverValidationErrors['City']}}
+                        </span>
+                     </div>
+
+                     <label class="col-md-1 control-label">País:<span class="text-danger">*</span> </label>
+                     <div class="col-md-2">
+                        <input id="inp-country" name="country" ng-model="$ctrl.country" type="text" required="" class="form-control" 
+                           placeholder=""/>
+                        <span ng-show="$ctrl.validateInput('country', 'required')" class="text-danger">Obrigatório</span>
+                        <span ng-show="$ctrl.serverValidationErrors['Country']" class="text-danger">
+                           {{$ctrl.serverValidationErrors['Country']}}
+                        </span>
+                     </div>
+
+                  </div>
+               </div>
+            </div>
+         </fieldset>
+
+
+         <fieldset>
+            <div class="form-group">
+               <div class="col-sm-12">
+                  <div class="row">
+                     <label class="col-md-1 control-label">Início Act:<span class="text-danger">*</span></label>
+                     <div ng-controller="datepickerController as dp" class="ng-scope col-md-2">
+                        <input id="inp-inicioAct" placeholder="Ex: 2016-01-01" type="text" name="startDate"
+                              uib-datepicker-popup="yyyy-MM-dd" ng-model="dp.dt" is-open="dp.opened" max-date="'31-12-2100'" 
+                              uib-datepicker-options="dp.dateOptions" ng-required="true" close-text="Close" 
+                              class="form-control ng-isolate-scope ng-touched" required="" style="" ng-click="dp.open($event)">
+                        <span ng-show="$ctrl.validateInput('startDate', 'required')" class="text-danger">Obrigatório</span>
+                        <span ng-show="$ctrl.serverValidationErrors['StartDate']" class="text-danger">
+                           {{$ctrl.serverValidationErrors['StartDate']}}
+                        </span>
+                     </div>
+
+                     <label class="col-sm-1 control-label">Tlm:<span class="text-danger">*</span></label>
+                     <div class="col-sm-2">
+                        <input id="inp-mobile" name="mobile" required="" ng-model="$ctrl.mobile" type="text" class="form-control" 
+                                 placeholder="Ex: +3519615235658"/>
+                        <span ng-show="$ctrl.validateInput('mobile', 'required')" class="text-danger">Obrigatório</span>
+                        <span ng-show="$ctrl.serverValidationErrors['Mobile']" class="text-danger">
+                           {{$ctrl.serverValidationErrors['Mobile']}}
+                        </span>
+                     </div>
+
+                     <label class="col-sm-1 control-label">Email:<span class="text-danger">*</span></label>
+                     <div class="col-sm-2">
+                        <input id="inp-email" name="email" required="" ng-model="$ctrl.email" type="email" class="form-control" 
+                                 placeholder="Ex: empresaABCD@email.com"/>
+                        <span ng-show="$ctrl.validateInput('email', 'required')" class="text-danger">Obrigatório</span>
+                        <span ng-show="$ctrl.validateInput('email', 'email')" class="text-danger">Formato inválido</span>
+                        <span ng-show="$ctrl.serverValidationErrors['Email']" class="text-danger">
+                           {{$ctrl.serverValidationErrors['Email']}}
+                        </span>
+                     </div>
+
+                     <label class="col-sm-1 control-label">Site:</label>
+                     <div class="col-sm-2">
+                        <input type="text" class="form-control" ng-model="$ctrl.site" placeholder="Ex: www.empresaACDB.com"/>
+                        <span ng-show="$ctrl.serverValidationErrors['Site']" class="text-danger">
+                           {{$ctrl.serverValidationErrors['Site']}}
+                        </span>
+                     </div>
+                    
+                  </div>
+               </div>
+            </div>
+         </fieldset>
+
+         <fieldset>
+            <legend>Pessoas de Contacto</legend>
+            <div class="form-group">
+
+               <label class="col-sm-1 control-label">Nome:</label>
+               <div class="col-sm-3">
+                  <input type="text" class="form-control" name="person1Name" ng-model="$ctrl.person1Name" 
+                        placeholder=""/>
+               </div>
+               <span ng-show="$ctrl.serverValidationErrors['Person1Name']" class="text-danger">
+                  {{$ctrl.serverValidationErrors['Person1Name']}}
+               </span>
+
+               <label class="col-sm-1 control-label">Tlm:</label>
+               <div class="col-sm-3">
+                  <input type="text" class="form-control" name="person1Mobile" ng-model="$ctrl.person1Mobile" 
+                        placeholder="Ex: www.empresaACDB.com"/>
+               </div>
+               <span ng-show="$ctrl.serverValidationErrors['Person1Mobile']" class="text-danger">
+                  {{$ctrl.serverValidationErrors['Person1Mobile']}}
+               </span>
+
+               <label class="col-sm-1 control-label">Email:</label>
+               <div class="col-sm-3">
+                  <input id="inp-person1Email" name="person1Email" ng-model="$ctrl.person1Email" type="email" class="form-control" 
+                                 placeholder="Ex: empresaABCD@email.com"/>
+                  <span ng-show="$ctrl.validateInput('person1Email', 'email')" class="text-danger">Formato inválido</span>
+                  <span ng-show="$ctrl.serverValidationErrors['Person1Email']" class="text-danger">
+                     {{$ctrl.serverValidationErrors['Person1Email']}}
+                  </span>
+               </div>
+            </div>
+         </fieldset>
+
+         <fieldset>
+            <div class="form-group">    
+               <label class="col-sm-1 control-label">Nome:</label>
+               <div class="col-sm-3">
+                  <input type="text" class="form-control" name="person2Name" ng-model="$ctrl.person2Name" 
+                        placeholder=""/>
+               </div>
+               <span ng-show="$ctrl.serverValidationErrors['Person2Name']" class="text-danger">
+                  {{$ctrl.serverValidationErrors['Person2Name']}}
+               </span>
+
+               <label class="col-sm-1 control-label">Tlm:</label>
+               <div class="col-sm-3">
+                  <input type="text" class="form-control" name="person2Mobile" ng-model="$ctrl.person2Mobile" 
+                        placeholder="Ex: www.empresaACDB.com"/>
+               </div>
+               <span ng-show="$ctrl.serverValidationErrors['Person2Mobile']" class="text-danger">
+                  {{$ctrl.serverValidationErrors['Person2Mobile']}}
+               </span>
+
+               <label class="col-sm-1 control-label">Email:</label>
+               <div class="col-sm-3">
+                  <input id="inp-person2Email" name="person2Email" ng-model="$ctrl.person2Email" type="email" class="form-control" 
+                           placeholder="Ex: empresaABCD@email.com"/>
+                  <span ng-show="$ctrl.validateInput('person2Email', 'email')" class="text-danger">Formato inválido</span>
+                  <span ng-show="$ctrl.serverValidationErrors['Person2Email']" class="text-danger">
+                     {{$ctrl.serverValidationErrors['Person1Email']}}
+                  </span>
+               </div>
+            </div>
+         </fieldset>
+
+         <fieldset>
+            <div class="form-group">
+               <label class="col-sm-1 control-label">Observações: </label>
+               <div class="col-sm-11">
+                  <textarea id="txt-obs" name="obs" ng-model="obs" ng-maxlength="500" rows="5" class="form-control no-resize"></textarea>
+                  <span ng-show="$ctrl.validateInput('obs', 'maxlength')" class="text-danger">Máximo de 500 caracteres</span>
+               </div>
+               <span ng-show="$ctrl.serverValidationErrors['Obs']" class="text-danger">
+                  {{$ctrl.serverValidationErrors['Obs']}}
+               </span>
+            </div>
+         </fieldset>
+
+         <fieldset>
+            <div class="form-group">
+               <label class="col-sm-12"><span class="text-danger">*</span> Campos obrigatórios</label>
+            </div>
+         </fieldset>
+
+
+         <div class="panel-footer text-right">
+            <button type="button" class="btn btn-labeled btn-danger" ng-click="$ctrl.cancel()">
+               <span class="btn-label">
+                  <i class="fa fa-times"></i>
+               </span>
+               Cancelar
+            </button>
+            <button type="submit" class="btn btn-labeled btn-success">
+               <span class="btn-label">
+                  <i class="fa fa-check"></i>
+               </span>
+               Gravar
+            </button>
+         </div>
+      </form>
+   </div>
+</div>
+<!-- END panel-->

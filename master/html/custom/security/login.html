@@ -1,0 +1,92 @@
+<div class="block-center mt-xl wd-xl">
+   <!-- START panel-->
+   <div class="panel panel-dark panel-flat">
+      <div class="panel-heading text-center">
+        <a href="#">
+            <img src="app/img/logo.png" alt="Image" class="block-center img-rounded" />
+         </a>
+      </div>
+      <div class="panel-body">
+         <p class="text-center pv">Inicie sessão para continuar</p>
+         <form role="form" ng-submit="$ctrl.login()" name="$ctrl.loginForm" novalidate="" class="form-validate mb-lg">
+            <div class="form-group has-feedback">
+               <input id="exampleInputEmail1" 
+                    type="email" 
+                    name="account_email" 
+                    placeholder="E-mail" 
+                    autocomplete="on" 
+                    ng-model="$ctrl.account.email" 
+                    required="" 
+                    class="form-control"/>
+               <span class="fa fa-envelope form-control-feedback text-muted"></span>
+               <span ng-show="$ctrl.loginForm.account_email.$dirty && $ctrl.loginForm.account_email.$error.required" class="text-danger">     
+                  Obrigatório
+               </span>
+            </div>
+            
+            
+            <div class="form-group has-feedback">
+               <input id="exampleInputPassword1" type="password" name="account_password" placeholder="Password" 
+                  ng-model="$ctrl.account.password" required="" class="form-control" />
+               <span class="fa fa-lock form-control-feedback text-muted"></span>
+               <span ng-show="$ctrl.loginForm.account_password.$dirty && $ctrl.loginForm.account_password.$error.required" class="text-danger">
+                  Obrigatório
+               </span>
+            </div>
+
+            <div class="form-group has-feedback">
+               <input id="inp-clientCode" 
+                    type="text"
+                    name="account_clientCode" 
+                    ng-model="$ctrl.account.clientCode"
+                    placeholder="Código Cliente"
+                    required="" 
+                    autocomplete="on"  
+                    class="form-control" />
+
+               <span class="fa fa-bank form-control-feedback text-muted"></span>
+               <span ng-show="$ctrl.loginForm.account_clientCode.$dirty && $ctrl.loginForm.account_clientCode.$error.required" class="text-danger">
+                  Obrigatório
+               </span>
+            </div>
+
+
+            <div class="clearfix">
+               <div class="checkbox c-checkbox pull-left mt0">
+                  <label>
+                     <input type="checkbox" value="" name="account_remember" ng-model="$ctrl.account.remember" />
+                     <span class="fa fa-check"></span>Lembrar-me</label>
+               </div>
+               <div class="pull-right"><a ui-sref="page.recover" class="text-muted">Esqueceu a password?</a>
+               </div>
+            </div>
+            <button type="submit" class="btn btn-block btn-primary mt-lg">Iniciar Sessão</button>
+         </form>
+         <div ng-show="$ctrl.authMsg" class="alert alert-danger text-center">
+            <span>{{$ctrl.authMsg}}</span>     
+            <br>
+            <span>{{$ctrl.authMsg2}}</span>     
+        </div>
+         <div class="text-center">
+            <p>
+                <a target="_blank"  href="https://drive.google.com/open?id=15vKOJQ8RTbjyea0kpDzTZNUi7F2G8FE4">Termos & Condições</a>
+            </p>
+            <p>
+                <a target="_blank"  href="https://drive.google.com/open?id=15u_JFHzvQPZoEI2l4kRZ1ctWnkzHman9">Política de Privacidade</a>
+            </p>
+            <p>
+                Qualquer dúvida contacte-nos através de <a href="mailto:info@smartgar.com" target="_top">info@smartgar.com</a>
+            </p>
+         </div>
+      </div>
+   </div>
+   <!-- END panel-->
+   <div class="p-lg text-center">
+      <span>&copy;</span>
+      <span ng-bind="app.year"></span>
+      <span>-</span>
+      <span ng-bind="app.name"></span>
+      <br/>
+      <span ng-bind="app.description"></span>
+   </div>
+</div>

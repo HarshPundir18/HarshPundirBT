@@ -1,0 +1,37 @@
+<h3>
+    Relatórios assíncronos
+    <small class="pad-top5">A geração de relatórios assíncronos pode demorar alguns minutos, dependendo do número de dados extraídos.</small>
+</h3>
+
+<smg-alert 
+    type="vm.SMG_ALERT_TYPE.WARNING"
+    head="NOTA" 
+    content='{{vm.note}}'>
+</smg-alert>
+
+<div id="main">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        </div>
+
+        <div class="panel-body mar-top20">
+            <div>
+                <table id="tbl-batchItems" class="row-border hover" 
+                    datatable="" 
+                    dt-columns="vm.dtColumns"
+                    dt-options="vm.dtOptions" 
+                    dt-instance="vm.dtInstance">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+    </div>
+    <div class="col-sm-6">
+        <smg-form-actions on-back-click="$state.go('app.dashboard')">
+        </smg-form-actions>
+    </div>
+</div>

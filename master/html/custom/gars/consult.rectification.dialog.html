@@ -1,0 +1,135 @@
+<div class="ngdialog-message">
+		<div class="panel">
+			<h3 class="mar-top0">
+				<span class="consult-egar-number">
+          e-Gar Nº {{$ctrl.gar.Number}}
+        </span>
+        <span title="Ver PDF" class="pointer pad-left10" ng-click="$ctrl.getFile($ctrl.gar.FileUrl)">
+          <em class="fa fa-file-pdf-o"></em>
+        </span>
+			</h3>
+			
+			<div class="row pad-top10" ng-show="closeDate">
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Data da Correção / Fecho: </label>
+					<span class="control-label-text pad-left10">
+					{{$ctrl.closeDate}}
+					</span>
+				</div>
+			</div>
+
+			<div class="row pad-top10" ng-show="$ctrl.newQuantity">
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Quantidade</label>
+					<div class="control-label-text pad-top0">
+					{{$ctrl.quantity}} Kg
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Quantidade Corrigida</label>
+					<div class="control-label-text pad-top0">
+					{{$ctrl.newQuantity}} Kg
+					</div>
+				</div>
+			</div>
+			
+			<div class="row pad-top10" ng-show="$ctrl.newLerCode">
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Código LER</label>
+					<div class="control-label-text pad-top0">
+					{{$ctrl.lerCode}}
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Código LER Corrigido</label>
+					<div class="control-label-text pad-top0">
+					{{$ctrl.newLerCode}}
+					</div>
+				</div>
+			</div>
+
+			<div class="row pad-top10" ng-show="$ctrl.newOperationCode">
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Código Operação</label>
+					<div class="control-label-text pad-top0">
+					{{$ctrl.operationCode}}
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Código Operação Corrigido</label>
+					<div class="control-label-text pad-top0">
+					{{$ctrl.newOperationCode}}
+					</div>
+				</div>
+			</div>
+
+			<div class="row pad-top10" ng-show="$ctrl.newGroupCode">
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Código Grupo</label>
+					<div class="control-label-text pad-top0">
+					{{$ctrl.groupCode}}
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Código Grupo Corrigido</label>
+					<div class="control-label-text pad-top0">
+					{{$ctrl.newGroupCode}}
+					</div>
+				</div>
+			</div>
+
+			<div class="row pad-top10" ng-show="$ctrl.newPglNumber">
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Número PGL</label>
+					<div class="control-label-text pad-top0">
+					{{$ctrl.pglNumber}}
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Número PGL Corrigido</label>
+					<div class="control-label-text pad-top0">
+					{{$ctrl.newPglNumber}}
+					</div>
+				</div>
+			</div>
+
+			<div class="row pad-top20" ng-show="$ctrl.destinComment">
+				<div class="col-md-12">
+					<label class="control-label mar-bottom0">Cometário do destinatário</label>
+				<div class="control-label-text pad-top0">
+					{{$ctrl.destinComment}}
+				</div>
+				</div>
+			</div>
+
+			<div class="row pad-top10" ng-show="$ctrl.isRejecting">
+				<div class="col-md-12">
+					<label class="control-label mar-bottom0">Comentário de rejeição</label>
+          <div class="ng-scope">
+            <textarea id="txt-rejectRectificationComment" name="rejectRectificationComment"
+									class="form-control no-resize"
+									required
+									ng-model="$ctrl.rejectRectificationComment" 
+									ng-maxlength="200" rows="2">
+            </textarea>
+
+            <span ng-show="$ctrl.validateInput('rejectRectificationComment', 'required')" class="text-danger">Obrigatório</span>
+            <span ng-show="$ctrl.validateInput('rejectRectificationComment', 'maxlength')" class="text-danger">Máximo de 255 caracteres</span>
+            <span ng-show="$ctrl.serverValidationErrors['OriginComment']" class="text-danger">
+              {{$ctrl.serverValidationErrors['OriginComment']}}
+            </span>
+            
+          </div>
+				</div>
+			</div>
+
+		</div> <!--END PANEL-->
+
+		<div class="row pad-top10 text-right">
+			<div class="col-sm-12">
+				<button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">Cancelar</button>
+				<button type="button" ng-click="$ctrl.rejectRectification()" class="btn btn-danger">Rejeitar</button>
+				<button type="button" ng-click="$ctrl.acceptRectification()" ng-disabled="$ctrl.isRejecting" class="btn btn-success">Aceitar</button>
+			</div>
+		</div>
+</div>

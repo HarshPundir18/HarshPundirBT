@@ -1,0 +1,21 @@
+<div class="select-ler" name="{{vm.name}}">
+
+    <ui-select ng-model="vm.selectionModel" 
+        ng-disabled="vm.isDisabled"
+        theme="bootstrap"
+        spinner-enabled="true"
+        ng-change="vm.onSelectGroupChange($select)">
+
+    <ui-select-match allow-clear="true" placeholder="Pesquisar..." class="select-selection">
+        {{$select.selected.value}}
+    </ui-select-match>
+
+    <ui-select-choices repeat="group in vm.groups">
+        {{group.value}}              
+    </ui-select-choices>
+
+    <ui-select-no-choice>
+        Não foram encontrados resultados
+    </ui-select-no-choice>
+    </ui-select>
+</div>

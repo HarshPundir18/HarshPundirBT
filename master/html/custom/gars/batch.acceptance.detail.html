@@ -1,0 +1,67 @@
+<h3>
+    Lote de aceitação de e-GARs
+</h3>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <smg-form-actions on-back-click="$state.go('app.batchAcceptanceList')">
+        </smg-form-actions>
+    </div>
+</div>
+
+<div class="panel panel-default mar-top10">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-sm-12">
+                <h4 class="control-label">
+                    ID: 
+                    <span class="pad-left10 text-normal">{{vm.batch.UniqueId}}</span>
+                </h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h4 class="control-label">
+                    Nº de items:
+                    <span class="pad-left10 text-normal">{{vm.batch.TotalNumberOfItems}}</span>
+                </h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h4 class="control-label">
+                    Data de criação: 
+                    <span class="pad-left10 text-normal">{{vm.batch.DisplayDateTime}}</span>
+                </h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h4 class="control-label">
+                    Estado
+                    <span class="pad-left10 text-normal">{{vm.getBatchStatus(vm.batch.Status)}}</span>
+                </h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body mar-top20">
+        <div> 
+            <table id="tbl-batchItems" class="row-border hover" 
+                datatable="" 
+                dt-columns="vm.dtColumns" 
+                dt-options="vm.dtOptions"
+                dt-instance="vm.dtInstance">
+			</table>
+        </div> 
+    </div>  
+</div>
+
+
+<div class="row mar-top10">
+    <div class="col-sm-12">
+        <smg-form-actions on-back-click="$state.go('app.batchAcceptanceList')">
+        </smg-form-actions>
+    </div>
+</div>

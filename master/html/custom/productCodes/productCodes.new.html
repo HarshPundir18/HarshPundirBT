@@ -1,0 +1,215 @@
+<h3>{{vm.title}}</h3>
+
+
+<form id="newProduct" role="form" name="vm.formValidate" ng-submit="vm.submitForm()" novalidate="" class="form-validate form-horizontal">
+    <div class="row">
+        <div class="col-sm-6">
+            <i class="text-danger fa fa-asterisk"/> - Campos Obrigatórios
+        </div>
+        <div class="col-sm-6">
+            <div class="text-right">
+                <button type="button" class="btn btn-labeled btn-default" ng-click="vm.cancel()">
+                    <span class="btn-label">
+                        <i class="fa fa-arrow-left"></i>
+                    </span>
+                    Voltar
+                </button>
+
+                <button type="submit" class="btn btn-labeled btn-success mar-right10">
+                    <span class="btn-label">
+                        <i class="fa fa-check"></i>
+                    </span>
+                    Gravar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="panelProduct" class="panel panel-default mar-top15">
+        <div class="panel-heading">
+            <h4>Etiqueta</h4>
+        </div>
+
+        <div class="panel-body">
+            <fieldset>
+                <div class="form-group col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label class="control-label">
+                                Codigo Interno
+                                <span class="pad-left5 text-danger">
+                                    <i class="fa fa-asterisk"/>
+                                </span>
+                                <smg-help-icon help-text='Código ou número usado na empresa para referenciar um produto, obra, rota, sub-resíduo, etc.'>
+                                </smg-help-icon>
+                            </label>
+                            <br>
+                            <input id="inp-internalCode" 
+                                name="internalCode" 
+                                ng-model="vm.data.InternalCode" 
+                                required=""
+                                autocomplete="off" 
+                                ng-pattern="/^[a-zA-ZçÇ\d-_]+$/"
+                                ng-maxlength="50"
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Ex: PRD-1234567" />
+                            <span ng-show="vm.validateInput('internalCode', 'required')" class="text-danger">Obrigatório</span>
+                            <span ng-show="vm.validateInput('internalCode', 'pattern')" class="text-danger">Formato inválido</span>
+                            <span ng-show="vm.validateInput('internalCode', 'maxlength')" class="text-danger">Máximo de 50 caracteres</span>
+                            <span ng-show="vm.serverValidationErrors['InternalCode']" class="text-danger">
+                                {{vm.serverValidationErrors['InternalCode']}}
+                            </span>
+                            <span ng-show="vm.serverApplicationErrors['InternalCode']" class="text-danger">
+                                {{vm.serverApplicationErrors['InternalCode']}}
+                            </span>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label class="control-label">
+                                Designação
+                                <span class="pad-left5 text-danger">
+                                    <i class="fa fa-asterisk"/>
+                                </span>
+                            </label>
+                            <br>
+                            <input id="inp-description" 
+                                name="description" 
+                                ng-model="vm.data.Description" 
+                                required=""
+                                autocomplete="off" 
+                                ng-maxlength="255"
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Ex: Vidro laminado" />
+                            <span ng-show="vm.validateInput('description', 'required')" class="text-danger">Obrigatório</span>
+                            <span ng-show="vm.validateInput('description', 'pattern')" class="text-danger">Formato inválido</span>
+                            <span ng-show="vm.validateInput('description', 'maxlength')" class="text-danger">Máximo de 255 caracteres</span>
+                            <span ng-show="vm.serverValidationErrors['Description']" class="text-danger">
+                                {{vm.serverValidationErrors['Description']}}
+                            </span>
+                            <span ng-show="vm.serverApplicationErrors['Description']" class="text-danger">
+                                {{vm.serverApplicationErrors['Description']}}
+                            </span>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label class="control-label">
+                                Grupo
+                            </label>
+                            <smg-select-product-group
+                                ui-if="vm.refresh"
+                                name="{{vm.selectProductGroupName}}"
+                                selection-model="vm.selectedProductGroup"
+                                on-change="vm.onSelectedProductGroupChange(obj)">
+                            </smg-select-product-group>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>    
+
+            <fieldset>
+                <div class="form-group col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-2 package-weight">
+                            <div class="checkbox c-checkbox pad-top2">
+                                <label class="control-label pad-left0 pad-top5">
+                                    Tem embalagem?
+                                </label>
+                                <label class="control-label pad-top5">
+                                    <input id="ckb-hasPackage" 
+                                        name="ckb-hasPackage"
+                                        type="checkbox" 
+                                        ng-click="vm.onHasPackageClick()"
+                                        ng-model="vm.hasPackage"
+                                        ng-checked="vm.data.hasPackage">
+                                    <span class="fa fa-check mar-left0"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 package-weight-definition">
+                            <div ng-if="vm.hasPackage">
+                                <span>1 embalagem</span> 
+                                <span>=</span> 
+                                <input id="inp-packageWeight" 
+                                    name="packageWeight" 
+                                    ng-model="vm.data.PackageWeight" 
+                                    autocomplete="off" 
+                                    ng-maxlength="255"
+                                    ng-pattern="/^[0-9]+(\.[0-9]{1,4})?$/"
+                                    type="text" 
+                                    class="form-control package-weight-definition-value" 
+                                    placeholder="Ex.: 100" />
+                                <span>Kg</span> 
+                            </div>
+                            <span ng-if="vm.data.hasPackage && vm.validateInput('packageWeight', 'pattern')" class="text-danger">
+                                Apenas números inteiros ou decimais separado por "." com o máximo de 4 casas decimais
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <div class="form-group col-sm-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="checkbox c-checkbox">
+                                <label class="control-label">
+                                    <input id="ckb-isExSitu" 
+                                        name="ckb-isExSitu"
+                                        type="checkbox" 
+                                        ng-click="vm.clickIsExSitu()"
+                                        ng-model="vm.data.IsExSitu"
+                                        ng-checked="vm.data.IsExSitu">
+                                    <span class="fa fa-check"></span>
+                                    Produto "Ex-Situ"
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <div class="form-group col-sm-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="control-label">Observações</label>
+                            <textarea id="txt-obs" name="obs" ng-model="vm.data.Obs" ng-maxlength="500" rows="4" class="form-control no-resize"></textarea>
+                            <span ng-show="vm.validateInput('obs', 'maxlength')" class="text-danger">Máximo de 500 caracteres</span>
+                            <span ng-show="vm.serverValidationErrors['Obs']" class="text-danger">
+                                {{vm.serverValidationErrors['Obs']}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-6">
+            <i class="text-danger fa fa-asterisk"/> - Campos Obrigatórios
+        </div>
+        <div class="col-sm-6">
+            <div class="text-right">
+                <button type="button" class="btn btn-labeled btn-default" ng-click="vm.cancel()">
+                    <span class="btn-label">
+                        <i class="fa fa-arrow-left"></i>
+                    </span>
+                    Voltar
+                </button>
+
+                <button type="submit" class="btn btn-labeled btn-success mar-right10">
+                    <span class="btn-label">
+                        <i class="fa fa-check"></i>
+                    </span>
+                    Gravar
+                </button>
+            </div>
+        </div>
+    </div>
+
+</form> 

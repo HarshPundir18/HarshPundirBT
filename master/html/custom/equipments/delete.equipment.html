@@ -1,0 +1,22 @@
+<div class="ngdialog-message">
+    <div class="panel">
+      <h3>Remover Equipamento</h3>
+      <div class="row">
+        <div class="col-md-12">
+          <p>
+            Confimar a remoção do Equipamento <strong> {{vm.equipment.ExternalId}} </strong> - <strong>{{vm.equipment.Name}}</strong> ?
+          </p>
+          <p>
+            Esta operação não poderá ser revertida!
+          </p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-12  text-right">
+        <button type="button" ng-click="closeThisDialog('delete')" class="btn btn-primary mr">Confirmar</button>
+        <button type="button" ng-click="closeThisDialog(false)" class="btn btn-default mr">Cancelar</button>
+      </div>
+    </div>
+  </div>

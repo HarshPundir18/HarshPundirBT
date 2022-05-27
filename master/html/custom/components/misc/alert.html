@@ -1,0 +1,9 @@
+<div ng-init="vm.hide=false" ng-hide="vm.hide" class="animate-me alert alert-dismissible show" ng-class="vm.alertType"> 
+    <div>
+        <strong>{{vm.head}}</strong>
+        <button type="button" class="close" ng-click="vm.hide=!vm.hide">&times;</button>
+    </div>
+
+    <div ng-bind-html='vm.content'>  
+    </div>
+</div>

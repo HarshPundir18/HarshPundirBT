@@ -1,0 +1,31 @@
+<span class="no-border dropdown dropdown-list pad-left10 " uib-dropdown="">
+    <i class="fa fa-info-circle bt-help pad-r" uib-dropdown-toggle=""></i>
+    <!-- START Dropdown menu-->
+    <ul class="help-icon-text dropdown-menu mar-top5">
+        <li class="">
+            <!-- START list group-->
+            <div class="list-group arrow_box">
+                <a class="list-group-item">
+                    <div class="media-box">
+                        <div class="media-box-body clearfix">
+                            <div ng-if="!$ctrl.isHtml">
+                                <em class="fa fa-info-circle bt-help pad-r mr" uib-dropdown-toggle="" />
+                                {{$ctrl.helpTitle}}
+                                <!-- <em class="fa fa-times" uib-dropdown-toggle="" /> -->
+
+                            </div>
+
+                            <p ng-if="!$ctrl.isHtml" class="m0">
+                                {{$ctrl.helpText}}
+                            </p>
+
+
+                            <div ng-if="$ctrl.isHtml" ng-bind-html="$ctrl.helpText"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- END list group-->
+        </li>
+    </ul>
+</span>

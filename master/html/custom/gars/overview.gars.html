@@ -1,0 +1,274 @@
+<h3 ng-if="$ctrl.isGarsList">
+    Lista de e-GARs
+    <!-- <small>Standard and custom elements for any form</small> -->
+</h3>
+
+<h3 ng-if="$ctrl.isGarslegalDeadlinesList">
+    Prazos legais
+    <small class="pad-top5" ng-if="$stateParams.type == $ctrl.SMG_LEGAL_DEADLINES_TYPES.OriginToAuthorize">
+        A lista apresenta as e-GARs a aguardar autorização por parte do produtor e que estão a 5 dias de expirar o prazo. 
+        Pode também consultar as e-GARs cujo prazo legal expirou.
+    </small>
+
+    <small class="pad-top5" ng-if="$stateParams.type == $ctrl.SMG_LEGAL_DEADLINES_TYPES.DestinToActOnNewEgar">
+        A lista apresenta as e-GARs a aguardar uma ação por parte do destinatário e que estão a 5 dias de expirar o prazo. 
+        Pode também consultar as e-GARs cujo prazo legal expirou.
+    </small>
+
+    <small class="pad-top5" ng-if="$stateParams.type == $ctrl.SMG_LEGAL_DEADLINES_TYPES.OriginToReplyRectification">
+        A lista apresenta as e-GARs a aguardar aceitação da correção por parte do produtor e que estão a 5 dias de expirar o prazo.
+        Pode também consultar as e-GARs cujo prazo legal expirou.
+    </small>
+
+    <small class="pad-top5" ng-if="$stateParams.type == $ctrl.SMG_LEGAL_DEADLINES_TYPES.AsOrigin">
+        A lista apresenta as e-GARs em que o(s) seu(s) estabelecimento intervém como Produtor/Detentor, a 5 dias de expirar o prazo.
+    </small>
+
+    <small class="pad-top5" ng-if="$stateParams.type == $ctrl.SMG_LEGAL_DEADLINES_TYPES.AsDestin">
+        A lista apresenta as e-GARs em que o(s) seu(s) estabelecimento intervém como Destinatário, a 5 dias de expirar o prazo.
+    </small>
+</h3>
+
+
+
+<div id="garsList" ng-controller="dataTableController as table1">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div ng-if="true" class="form-group">
+                <!-- filters eGAR List -->
+                <div class="col-sm-12" ng-if="table1.isGarsList">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label class="control-label">
+                                Número
+                            </label>
+                            <input name="egarNumber" 
+                                ng-model="table1.egarNumber" 
+                                type="text"
+                                class="form-control tableFilter" 
+                                placeholder="ex: PT2018123456" />
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="control-label">
+                                Produtor / Detentor
+                            </label>
+                            <input name="origin" 
+                                ng-model="table1.origin" 
+                                type="text" 
+                                class="form-control tableFilter" 
+                                placeholder="Nome ou NIF" />
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="control-label">
+                                Destinatário
+                            </label>
+                            <input name="destin" 
+                                ng-model="table1.destin" 
+                                type="text" 
+                                class="form-control tableFilter" 
+                                placeholder="Nome ou NIF" />
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="control-label">
+                                Código Ler
+                            </label>
+                            <input name="lerCode" 
+                                ng-model="table1.lerCode" 
+                                type="text" 
+                                class="form-control tableFilter"/>
+                        </div>
+                    </div>
+
+                    <div class="row pad-top15">
+                        <div class="col-sm-3">
+                            <label class="control-label">
+                                Tipo de Interveniente
+                            </label>
+                            <select name="intervinientType" 
+                                class="form-control ng-pristine ng-valid ng-not-empty ng-touched tableFilter" 
+                                ng-options="option.value for option in table1.intervinientTypeOptions track by option.key"
+                                ng-model="table1.selectedIntervinientType">
+                            </select>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="control-label">
+                                Estado
+                                <i class="fa fa-info-circle bt-help" ng-click="table1.showHelpStatusFilter()"></i>
+                            </label>
+                            <select name="intervinientType" 
+                                class="form-control ng-pristine ng-valid ng-not-empty ng-touched tableFilter" 
+                                ng-options="option.value for option in table1.egarStatusOptions track by option.key"
+                                ng-model="table1.selectedEgarStatus">
+                            </select>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="control-label">
+                                Autorizada
+                            </label>
+                            <select name="intervinientType" 
+                                class="form-control ng-pristine ng-valid ng-not-empty ng-touched tableFilter" 
+                                ng-options="option.value for option in table1.waittingAuthorizationOptions track by option.key"
+                                ng-model="table1.selectedWaittingAuthorization">
+                            </select>
+                        </div>
+
+                        <div ng-if="true" class="col-sm-3">
+                            <label class="control-label">
+                                Associada à etiqueta
+                            </label>
+                            <smg-select-product-code 
+                                    label-text="asdasdasdad" 
+                                    selection-model="table1.selectedProductCode"
+                                    on-change="table1.onSelectedProductCodeChange(obj)">    
+                            </smg-select-product-code>  
+                        </div>
+                    </div>
+                </div>
+
+                <!-- filters eGAR LegalDeadlines List -->
+                <div class="col-sm-12" ng-if="table1.isGarslegalDeadlinesList">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label class="control-label">
+                                Número
+                            </label>
+                            <input name="egarNumber" 
+                                ng-model="table1.egarNumber" 
+                                type="text"
+                                class="form-control tableFilter" 
+                                placeholder="ex: PT2018123456" />
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="control-label">
+                                Produtor / Detentor
+                            </label>
+                            <smg-select-establishment name="smgSelectEstablishmentOrigin" 
+                                label-text="Produtor / Detentor"
+                                selection-model="table1.selectedOrigin",
+                                on-change="table1.onSelectedOriginChange(obj)">
+                            </smg-select-establishment> 
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="control-label">
+                                Destinatário
+                            </label>
+                            <smg-select-establishment name="smgSelectEstablishmentDestin" 
+                                label-text="Destinatário"
+                                selection-model="table1.selectedDestin",
+                                on-change="table1.onSelectedDestinChange(obj)">
+                            </smg-select-establishment> 
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="control-label">
+                                &nbsp;
+                            </label>
+                            <div class="checkbox c-checkbox">
+                                <label class="control-label">
+                                    <input id="ckb-includeExpired" 
+                                        type="checkbox" 
+                                        ng-click="table1.onIncludeExpiredClick()"
+                                        ng-model="table1.includeExpired"
+                                        ng-checked="table1.includeExpired">
+                                    <span class="fa fa-check"></span>
+                                    Incluir expiradas
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--buttons-->
+                <div class="row pad-top15">
+                    <div class="col-xs-12 col-md-offset-3 col-sm-2">
+                        <label class="control-label">
+                            &nbsp;
+                        </label>
+                        <button title="Limpar filtros" 
+                                ng-click="table1.clearFilters()" 
+                                class="btn btn-default form-control">
+                            Limpar Filtros
+                        </button>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-2">
+                        <label class="control-label">
+                            &nbsp;
+                        </label>
+                        <button id="btn-seach" 
+                                ng-focus="true"
+                                type="button" 
+                                title="Pesquisar"
+                                class="btn btn-labeled btn-info form-control text-bold" 
+                                ng-click="table1.searchClicked()">
+                            <span class="white pad-right10">
+                                <i class="icon-magnifier"></i>
+                            </span>
+                            Pesquisar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <!--Table-->
+        <div class="panel-body">
+            <div class="row">
+                <div id="div-results" class="col-sm-12">
+                    <table id="table0" class="row-border hover pad-top30 col-sm-12" datatable="" dt-instance="table1.dtInstance" dt-columns="table1.dtColumns"
+                        dt-options="table1.dtOptions">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script id="diag-helpStatus" type="text/ng-template">
+	<div class="ngdialog-message">
+		<div class="panel">
+			<h3>
+                <!-- <i class="fa fa-question-circle bt-help"></i> -->
+                <i class="fa fa-info-circle bt-help"></i>
+                Pesquisa por estado de e-GAR</h3>
+			<div class="row">
+				<div class="col-md-12">
+                    <h4>Aberta</h4>
+					<p>
+                        A sua eGar está <strong>Aberta</strong> quando ainda são necessárias ações por parte dos intervenientes:
+                        <ul>
+                            <li>se a e-Gar está <strong>Emitida</strong> e precisa de autorização por parte do produtor;</li>
+                            <li>se a e-Gar está <strong>Corrigida</strong> e precisa de aceitação da correção por parte do produtor;</li>
+                            <li>se a e-Gar está com a <strong>Correção Negada</strong> e precisa de retificação por parte do destinatário.</li>
+                        </ul>
+                    </p>
+                    
+                    <h4>Fechada</h4>
+					<p>
+                        A sua eGar está <strong>Fechada</strong> quando já não são permitidas ações por parte dos intervenientes:
+                        <ul>
+                            <li>quando a eGar foi <strong>Aceite pelo destinatário</strong>;</li>
+                            <li>quando a eGar foi <strong>Rejeitada pelo destinatário</strong>;</li>
+                            <li>quando a eGar tem uma <strong>Correção aceite pelo produtor</strong>.</li>
+                        </ul>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12  text-right">
+				<button type="button" ng-click="closeThisDialog('button')" class="btn btn-default mr">Comprendi</button>
+			</div>
+		</div>
+	</div>
+</script>

@@ -1,0 +1,128 @@
+<h3>{{vm.title}}</h3>
+
+
+<form id="createVehicle" role="form" name="vm.formValidate" ng-submit="vm.submitForm()" novalidate="" class="form-validate form-horizontal">
+    <div class="row">
+        <div class="col-sm-6">
+            <i class="text-danger fa fa-asterisk" /> - Campos Obrigatórios
+        </div>
+        <div class="col-sm-6">
+            <smg-form-actions on-back-click="vm.cancel()" on-save-click="vm.submitForm()">
+            </smg-form-actions>
+        </div>
+    </div>
+
+    <div id="panelProduct" class="panel panel-default mar-top15">
+        <div class="panel-heading">
+            <h4>Veículo</h4>
+        </div>
+
+        <div class="panel-body">
+            <fieldset>
+                <div class="form-group col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label class="control-label">
+                                Matrícula
+                                <span class="pad-left5 text-danger">
+                                    <i class="fa fa-asterisk"/>
+                                </span>
+                            </label>
+                            <br>
+                            <input id="inp-registration" 
+                                name="registration" 
+                                ng-model="vm.data.Registration" 
+                                required=""
+                                autocomplete="off" 
+                                ng-pattern="/^[a-zA-ZçÇ\d-_]+$/"
+                                ng-maxlength="50"
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Ex: AA-11-22" />
+                            <span ng-show="vm.validateInput('registration', 'required')" class="text-danger">Obrigatório</span>
+                            <span ng-show="vm.validateInput('registration', 'pattern')" class="text-danger">Formato inválido</span>
+                            <span ng-show="vm.validateInput('registration', 'maxlength')" class="text-danger">Máximo de 50 caracteres</span>
+                            <span ng-show="vm.serverValidationErrors['Registration']" class="text-danger">
+                                {{vm.serverValidationErrors['Registration']}}
+                            </span>
+                            <span ng-show="vm.serverApplicationErrors['Registration']" class="text-danger">
+                                {{vm.serverApplicationErrors['Registration']}}
+                            </span>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label class="control-label">
+                                Descrição
+                                <span class="pad-left5 text-danger">
+                                    <i class="fa fa-asterisk"/>
+                                </span>
+                            </label>
+
+                            <input id="inp-description" 
+                                name="description" 
+                                ng-model="vm.data.Description" 
+                                required=""
+                                autocomplete="off" 
+                                ng-maxlength="255"
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Ex: Citroen Jumper longa" />
+                            <span ng-show="vm.validateInput('description', 'required')" class="text-danger">Obrigatório</span>
+                            <span ng-show="vm.validateInput('description', 'pattern')" class="text-danger">Formato inválido</span>
+                            <span ng-show="vm.validateInput('description', 'maxlength')" class="text-danger">Máximo de 255 caracteres</span>
+                            <span ng-show="vm.serverValidationErrors['Description']" class="text-danger">
+                                {{vm.serverValidationErrors['Description']}}
+                            </span>
+                            <span ng-show="vm.serverApplicationErrors['Description']" class="text-danger">
+                                {{vm.serverApplicationErrors['Description']}}
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </fieldset>    
+
+            <fieldset>
+                <div class="form-group col-sm-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="control-label">Observações</label>
+                            <textarea id="txt-obs" name="obs" ng-model="vm.data.Obs" ng-maxlength="500" rows="4" class="form-control no-resize"></textarea>
+                            <span ng-show="vm.validateInput('obs', 'maxlength')" class="text-danger">Máximo de 500 caracteres</span>
+                            <span ng-show="vm.serverValidationErrors['Obs']" class="text-danger">
+                                {{vm.serverValidationErrors['Obs']}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <i class="text-danger fa fa-asterisk" /> - Campos Obrigatórios
+        </div>
+        <div class="col-sm-6">
+            <smg-form-actions on-back-click="vm.cancel()" on-save-click="vm.submitForm()">
+            </smg-form-actions>
+        </div>
+    </div>
+</form> 
+
+<div ng-if="vm.isEdit" id="vehicleUsers" class="panel panel-default mar-top20">
+    <div class="panel-heading">
+        <h4>Utilizadores associados ao Veículo</h4>
+    </div>
+        
+    <div class="panel-body mar-top20">
+        <div>
+            <table id="tbl-vehicleUsers" class="row-border hover" 
+                datatable="" 
+                dt-columns="vm.dtColumns" 
+                dt-options="vm.dtOptions"
+                dt-instance="vm.dtInstance">
+            </table>
+        </div>
+    </div>
+</div>

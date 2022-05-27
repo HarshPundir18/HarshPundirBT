@@ -1,0 +1,453 @@
+<h3 class="ng-scope">
+    Relatório Geral
+</h3>
+
+<div id="reports">
+
+    <div id='reportFilters'>
+
+        <smg-alert 
+            type="vm.SMG_ALERT_TYPE.WARNING"
+            head="NOTA" 
+            content='{{vm.note}}'>
+        </smg-alert>
+
+    <!-- 
+        <smg-alert type="vm.SMG_ALERT_TYPE.INFO" head="NOTA" content='{{vm.note2}}'>
+        </smg-alert> 
+    -->
+
+
+        <div class="panel panel-default">
+                <div class="panel-body">
+                    <form name="vm.dummyForm" ng-submit="vm.createReport()" novalidate="" class="form-validate form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="row">                             
+                                    <div class="col-sm-offset-1 col-sm-4">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="control-label">
+                                                    Estabelecimento
+                                                    <smg-required />
+                                                </label>
+                                                <smg-select-establishment name="selectedAccountEstablishments" 
+                                                    class="tabfilter"
+                                                    label-text="some label"
+                                                    selection-model="vm.selectedAccountEstablishment",
+                                                    type="vm.SMG_ESTABLISHMENT_TYPES.ACCOUNT">
+                                                </smg-select-establishment> 
+                                                <span ng-show="vm.mustSelectAccountEstablishmentError && !vm.selectedAccountEstablishment" class="text-danger">
+                                                    Por favor selecione o estabelecimento.
+                                                </span>
+                                            </div>
+                                            <div class="col-sm-12" ng-if="vm.selectedAccountEstablishment">
+                                                <label class="text-bold pad-top10">
+                                                    Incluir e-GARs como
+                                                </label>
+                                                <div class="checkbox c-checkbox pad-top0">            
+                                                    <label class="mar-right10">
+                                                        <input id="ckb-transporter-origin" 
+                                                            type="checkbox"  
+                                                            ng-model="vm.asOrigin"
+                                                            ng-checked="vm.asOrigin"
+                                                            title="Incluir e-GARs como Produtor">
+                                                        <span class="fa fa-check"></span>
+                                                        Produtor
+                                                        <smg-help-icon 
+                                                            style="margin-left: 9px;"
+                                                            help-text='Em e-GARs de "perfil especial de produtor", este é referenciado pelo NIF. Poderão ser apresentadas e-GARs em que o estabelecimento selecionado não intervém!'>
+                                                        </smg-help-icon>
+                                                    </label>
+                                                    <label class="mar-left2 mar-right10">
+                                                        <input id="ckb-transporter-destin" 
+                                                            type="checkbox"
+                                                            ng-model="vm.asDestin" 
+                                                            ng-checked="vm.asDestin"
+                                                            title="Incluir e-GARs como Destinatário">
+                                                        <span class="fa fa-check"></span>
+                                                        Destinatário
+                                                    </label>
+        
+                                                    <label class="mar-left2" 
+                                                        title="NOTA: Como o transportador é referenciado pelo NIF, poderão ser apresentadas e-GARs em que o estabelecimento selecionado não intervém!">
+                                                        <input id="ckb-transporter-destin" 
+                                                            type="checkbox"
+                                                            ng-model="vm.asTransporter" 
+                                                            ng-checked="vm.asTransporter">
+                                                        <span class="fa fa-check"></span>
+                                                        Transportador
+                                                    </label>
+                                                    <smg-help-icon 
+                                                        style="margin-left: 9px;"
+                                                        help-text='O transportador é referenciado pelo NIF, poderão ser apresentadas e-GARs em que o estabelecimento selecionado não intervém!'>
+                                                    </smg-help-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+
+                                    <!--Transport period-->
+                                    <div class="report-dates col-sm-6">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label class="control-label">
+                                                    Data de Transporte
+                                                </label>
+                                                <smg-date-picker-v2 dp-name="startDate"
+                                                    dp-placeholder="Data início"
+                                                    dp-date="vm.startDate">
+                                                </smg-date-picker-v2>
+                                            </div>
+
+                                            <div class="col-sm-4">
+                                                <smg-date-picker-v2 dp-name="transportEndDate"
+                                                    dp-placeholder="Data fim"
+                                                    dp-date="vm.endDate">
+                                                </smg-date-picker-v2>                                      
+                                            </div>
+
+                                            <div class="col-sm-4">
+                                                <label class="control-label">
+                                                    Mês de fecho
+                                                </label>
+                                                <smg-select-month name='closeDate' selection-model='vm.closeDate' on-change='vm.onCloseDateChange(obj)'>
+                                                </smg-select-month>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                <span ng-if="vm.mustSelectDate" class="text-danger">
+                                                    Por favor selecione "Data de Transporte" ou "Mês de fecho".
+                                                </span>
+                                                <span ng-if="vm.mustSelectDateIntervalError" class="text-danger">
+                                                    Por favor selecione um período (Max. 1 ano).
+                                                </span>
+                                                <span ng-if="vm.maxDateIntervalError" class="text-danger">
+                                                    O período de pesquisa máximo é 1 ano.
+                                                </span>
+                                                <span ng-if="vm.mustSelectHigherEndDateError" class="text-danger">
+                                                    A data de início deve ser igual ou inferior à data de fim.
+                                                </span>  
+                                                <span ng-if="vm.serverValidationErrors['MustBeValidTransportPeriod']" class="text-danger">
+                                                    O período de transporte máximo de 1 ano. <br>
+                                                    Por favor selecione "Data de Transporte" ou "Mês de fecho".
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row pad-top10">
+                                    <div class="col-sm-offset-1  col-sm-4">
+                                        <label class="control-label">
+                                            Cliente/Fornecedor
+                                        </label>
+                                        <smg-select-establishment name="selectedClientEstablishment" 
+                                            class="tabfilter"
+                                            label-text="some label"
+                                            selection-model="vm.selectedClientEstablishment",
+                                            on-change="vm.selectedClientEstablishmentOnChange(obj)">
+                                        </smg-select-establishment> 
+                                    </div>   
+                                    <div class=" col-sm-2">
+                                        <label class="control-label">
+                                            Utilizador
+                                        </label>
+                                        <smg-select-user
+                                            name="selectedUser"
+                                            class="tabfilter"
+                                            required=""
+                                            selection-model="vm.selectedUser"
+                                            on-change="vm.onSelectedUserChange(obj)">    
+                                        </smg-select-user>
+                                    </div> 
+
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Tipo de e-Gar
+                                        </label>
+                                        <smg-select name="selectEgarType"
+                                            class="tabfilter"
+                                            label-text='' 
+                                            can-load-more='false'
+                                            selected-item='vm.selectedEgarType'
+                                            items ="vm.egarTypes">
+                                        </smg-select>
+                                    </div>
+     
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Ponto de Retoma/Recolha
+                                        </label>
+                                        <smg-select-pickup-point name="selectedPickupPoint"
+                                            class="tabfilter"
+                                            label-text="some label" 
+                                            pickup-point-type="vm.SMG_CONST_PICKUP_POINTS.ALL"
+                                            selection-model="vm.selectedPickupPoint" ,
+                                            on-change="vm.selectedPickupPointOnChange(obj)">
+                                        </smg-select-pickup-point>
+                                    </div>
+                                </div>
+
+
+                                <div class="row pad-top10">
+                                    <div class="col-sm-offset-1 col-sm-4">
+                                        <label class="control-label">
+                                            Código Ler
+                                        </label>
+                                        <smg-select-ler class="tabfilter" selection-model="vm.selectedLer" >
+                                        </smg-select-ler> 
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <label class="control-label">
+                                            Código Operação
+                                        </label>
+                                        <smg-select-operation class="tabfilter" selection-model="vm.selectedOperation">    
+                                        </smg-select-operation> 
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Associado à etiqueta
+                                        </label>
+                                        <smg-select-product-code 
+                                            class="tabfilter"
+                                            selection-model="vm.selectedProductCode" 
+                                            on-change="vm.onSelectedProductCodeChange(obj)">
+                                        </smg-select-product-code>
+                                    </div>
+                                    
+                                </div>                      
+
+                                <!--Action Buttons-->
+                                <div class="row  mar-top20">
+                                    <div class="col-sm-offset-4 col-xs-12 col-sm-1">
+                                        <button title="Limpar filtros" 
+                                                ng-click="vm.onClearClick()" 
+                                                class="btn btn-default form-control">
+                                            Limpar
+                                        </button>
+                                    </div>
+            
+                                     <div class="col-xs-12 col-sm-1">
+                                        <div uib-dropdown="" is-open="vm.listIsOpen" class="btn-group dropdown dropdown-list">
+                                            <button type="button" uib-dropdown-toggle="" class="btn btn-info text-bold">
+                                                Relatório
+                                                <span ng-if="!vm.listIsOpen" class="fa fa-caret-down mar-left5"></span>
+                                                <span ng-if="vm.listIsOpen" class="fa fa-caret-up mar-left5"></span>
+                                            </button> 
+                                            <!-- START Dropdown menu-->
+                                            <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                                                <div class="list-group">
+                                                    <a class="list-group-item" ng-click="vm.onSearchClick()">
+                                                        <div class="media-box">
+                                                            <div class="pull-left">
+                                                                <em class="fa fa-table fa-2x"></em>
+                                                            </div>
+                                                            <div class="media-box-body clearfix pad-top5">
+                                                                <p class="m0">Gerar</p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+        
+                                                    <a class="list-group-item"  ng-click="vm.onExportReportClick('xlsx')">
+                                                        <div class="media-box">
+                                                            <div class="pull-left">
+                                                                <em class="fa fa-file-excel-o fa-2x text-success"></em>
+                                                            </div>
+                                                            <div class="media-box-body clearfix pad-top5">
+                                                                <p class="m0">Exportar (.xlsx)</p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+
+                                                    <a class="list-group-item"  ng-click="vm.onExportReportClick('csv')">
+                                                        <div class="media-box">
+                                                            <div class="pull-left">
+                                                                <em class="fa fa-file-excel-o fa-2x text-success"></em>
+                                                            </div>
+                                                            <div class="media-box-body clearfix pad-top5">
+                                                                <p class="m0">Exportar (.csv)</p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+<!-- 
+                                                    <a class="list-group-item"  ng-click="vm.onExportReportClick('xls')">
+                                                        <div class="media-box">
+                                                            <div class="pull-left">
+                                                                <em class="fa fa-file-excel-o fa-2x text-success"></em>
+                                                            </div>
+                                                            <div class="media-box-body clearfix pad-top5">
+                                                                <p class="m0">Exportar (.xls)</p>
+                                                            </div>
+                                                        </div>
+                                                    </a> -->
+                                                </div>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+        </div>
+    
+    </div>
+
+   
+    <div id="panelResults" class="panel panel-default mar-top15" ng-if="vm.showResults">
+        <div ng-class="{'panel-heading-collapsed':panelResults}" class="panel-heading">
+            <h4>
+                <em class="pad-right10"></em>Resultados
+            </h4>
+        </div>
+
+        <div uib-collapse="panelResults" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+            <div class="panel-body">
+                <fieldset id="results">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="row" ng-if="vm.totalCount == 0">
+                                Não foram encontrados resultados
+                            </div>
+
+                            <div class="report" ng-if="vm.totalCount > 0">
+                                <!-- header -->
+                                <div class="row pad-top20 report__header">
+                                    <div class="col-md-1 text-center">E-Gar</div>
+                                    <div class="col-md-2 text-center">Estado</div>
+                                    <div class="col-md-2 text-center">Remetente</div>
+                                    <div class="col-md-2 text-center">Destinatário</div>
+                                    <div class="col-md-2 text-center">Resíduo Original</div>
+                                    <div class="col-md-2 text-center">Transportadores</div>
+                                </div>
+
+                                <div class="row pad-top10 pad-bottom10 report__line" ng-repeat="item in vm.reportResults">
+                                    <!-- num -->
+                                    <div class="col-md-1">
+                                        {{item.NumeroGuia}}
+                                        <br>
+                                        <div class="small pad-left10">
+                                            Código: {{item.CodigoGuia}}
+                                        </div>
+                                    </div>
+
+                                    <!-- status -->
+                                    <div class="col-md-2">
+                                        {{item.Estado}}
+                                    </div>
+
+                                    <!-- origin -->
+                                    <div class="col-md-2">
+                                        {{item.Remetente.Nome}}
+                                        <br>
+                                        <div class="small pad-left10">
+                                            APA: {{item.Remetente.CodApa}}
+                                        </div>
+                                        <div class="small pad-left10">
+                                            NIF: {{item.Remetente.Nif}}
+                                        </div>
+                                    </div>
+
+                                    <!-- destin -->
+                                    <div class="col-md-2">
+                                        {{item.Destinatario.Nome}}
+                                        <br>
+                                        <div class="small pad-left10">
+                                            APA: {{item.Destinatario.CodApa}}
+                                        </div>
+                                        <div class="small pad-left10">
+                                            NIF: {{item.Destinatario.Nif}}
+                                        </div>
+                                    </div>
+
+                                    <!-- residue -->
+                                    <div class="col-md-3">
+                                        {{item.ResiduoTransportado.DescricaoResiduo}}
+                                        <br>
+                                        <div ng-if="item.HasRectifiedQuantity" class="small pad-left20">
+                                            <del style="padding-right: 3px">Qtd: {{item.ResiduoTransportado.Quantidade}} (Kg)</del>
+                                            <i class="fa fa-long-arrow-right" ></i>
+                                            <span style="padding-left: 3px">Qtd: {{item.ResiduoTransportadoCorrigido.QuantidadeCorrigido}} (Kg)</span>
+                                        </div>
+                                        <div ng-if="!item.HasRectifiedQuantity" class="small pad-left20">
+                                            Qtd: {{item.ResiduoTransportado.Quantidade}} (Kg)                                                     
+                                        </div>
+
+                                        <div ng-if="item.HasRectifiedLerCode" class="small pad-left20">
+                                            <del style="padding-right: 3px">LER: {{item.ResiduoTransportado.CodigoResiduoLer}} </del>
+                                            <i class="fa fa-long-arrow-right" style="padding-left: 3px"></i>
+                                            <span style="padding-left: 3px">LER: {{item.ResiduoTransportadoCorrigido.CodigoResiduoLerCorrigido}}</span>
+                                        </div>
+                                        <div ng-if="!item.HasRectifiedLerCode" class="small pad-left20">
+                                            LER: {{item.ResiduoTransportado.CodigoResiduoLer}} 
+                                        </div>
+
+                                        <div ng-if="item.HasRectifiedOperationCode" class="small pad-left20">
+                                            <del style="padding-right: 3px">Op: {{item.ResiduoTransportado.CodigoOperacao}}</del>
+                                            <i class="fa fa-long-arrow-right" style="padding-left: 3px"></i>
+                                            <span style="padding-left: 3px">Op: {{item.ResiduoTransportadoCorrigido.CodigoOperacaoCorrigido}}</span>
+                                        </div>
+                                        <div ng-if="!item.HasRectifiedOperationCode" class="small pad-left20">
+                                            Op: {{item.ResiduoTransportado.CodigoOperacao}}
+                                        </div>
+                                    </div>
+
+                                    <!-- transporters -->
+                                    <div class="col-md-2">
+                                        <div class="row" ng-repeat="transporter in item.Transportadores">
+                                            <div class="col-12">
+                                                {{transporter.Nome}}
+                                                <br>
+                                                <div class="small pad-left10">
+                                                    NIF: {{transporter.Nif}}
+                                                </div>
+                                                <div class="small pad-left10">
+                                                    Matríula: {{transporter.Matricula}}
+                                                </div>
+                                                <div class="small pad-left10">
+                                                    Início: {{transporter.DataHoraInicioTransporte}}
+                                                </div>
+                                                <div class="small pad-left10">
+                                                    Válido: {{transporter.Nif}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row mar-top20">
+                                    <div class="load-more col-sm-offset-3 col-sm-5">
+                                        <button id="btn-seach" 
+                                            ng-disabled="vm.reportResults.length >= vm.totalCount"
+                                            title="Carregar mais"
+                                            class="btn btn-labeled btn-info form-control text-bold" 
+                                            ng-click="vm.onLoadMoreClick()">
+                                            Carregar mais...
+                                        </button>
+                                        <small>{{vm.reportResults.length}} de {{vm.totalCount}}</small>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+    <!--bottom actions-->
+    <div class="row">
+        <div class="col-xs-6">
+        </div>
+        <div class="col-xs-6">
+            <smg-form-actions on-back-click="vm.onBackClick()">
+            </smg-form-actions>
+        </div>
+    </div>
+</div>

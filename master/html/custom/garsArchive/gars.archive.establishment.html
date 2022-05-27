@@ -1,0 +1,54 @@
+<h3>
+    Arquivo e-Gars de {{vm.year}} {{vm.establishment.Name}}
+</h3>
+
+
+<div class="gar-archive">
+    <div class="row">
+        <div class="col-sm-6">
+        </div>
+        <div class="col-sm-6">
+            <div class="text-right">
+                <button type="button" class="btn btn-labeled btn-default" ng-click="$state.go('app.egarArchive', {year: vm.year})">
+                    <span class="btn-label">
+                        <i class="fa fa-arrow-left"></i>
+                    </span>
+                    Voltar
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default mar-top20">
+        <div class="panel-heading">
+        </div>
+
+        <div class="panel-body mar-top20">
+            <div class="row">
+                <div class="col-sm-12"> 
+                    <table id="tbl-establishmentsGarArchive" 
+                        class="row-border hover" 
+                        datatable="" 
+                        dt-columns="vm.dtColumns" 
+                        dt-options="vm.dtOptions"
+                        dt-instance="vm.dtInstance">
+                    </table>
+                </div>
+            </div> 
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-6">
+        </div>
+        <div class="col-sm-6">
+            <div class="text-right">
+                <button type="button" class="btn btn-labeled btn-default" ng-click="$state.go('app.egarArchive', {year: vm.year})">
+                    <span class="btn-label">
+                        <i class="fa fa-arrow-left"></i>
+                    </span>
+                    Voltar
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,278 @@
+<h3>
+    Lista de e-GARs
+</h3>
+
+<div id="main">
+
+    <div id="garsListFilters">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+
+                    <div class="row">
+                        <div class="col-sm-offset-1 col-sm-2">
+                            <label class="control-label">
+                                Número
+                            </label>
+                            <input name="egarNumber" 
+                                ng-model="vm.egarNumber" 
+                                type="text"
+                                class="form-control tableFilter" 
+                                placeholder="ex: PT2018123456" />
+                            
+                            <span ng-show="vm.validateInput('egarNumber', 'pattern')" class="text-danger">Formato inválido</span>
+                            <span ng-show="vm.serverValidationErrors['EgarNumber']" class="text-danger">
+                                {{vm.serverValidationErrors['EgarNumber']}}
+                            </span>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label class="control-label">
+                                Data entre
+                            </label>
+                            <smg-date-picker-v2 dp-name="startDate"
+                                dp-placeholder="Data início"
+                                dp-date="vm.startDate">
+                            </smg-date-picker-v2>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">
+                                &nbsp;
+                            </label>
+                            <smg-date-picker-v2 dp-name="endDate"
+                                dp-placeholder="Data fim"
+                                dp-date="vm.endDate">
+                            </smg-date-picker-v2>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label class="control-label">
+                                Estado
+                                <!-- <i class="fa fa-info-circle bt-help" ng-click="vm.showHelpStatusFilter()"></i> -->
+                            </label>
+                            <smg-select name="selectStatus"
+                                class="tabfilter"
+                                label-text='' 
+                                can-load-more='false'
+                                on-change-func='vm.onSelectedStatusChange(obj)'
+                                on-search-func='vm.onSelectedStatusSearch(obj)'
+                                on-load-more-func='vm.onSelectedStatusLoadMore(obj)'
+                                selected-item='vm.selectedStatus'
+                                items ="vm.egarStatusOptions">
+                            </smg-select>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label class="control-label">
+                                Associada à etiqueta
+                            </label>
+                            <smg-select-product-code 
+                                    name = 'productFilter'
+                                    class="tabfilter"
+                                    selection-model="vm.selectedProductCode"
+                                    on-change="vm.onSelectedProductCodeChange(obj)">    
+                            </smg-select-product-code>
+                        </div>
+                        
+                    </div>
+
+                    <div class="row pad-top10">
+                        <div class="col-sm-offset-1 col-sm-2">
+                            <label class="control-label">
+                                Estabelecimento
+                            </label>
+                            <smg-select-establishment name="smgAccountEstablishment" 
+                                class="tabfilter"
+                                selection-model="vm.selectedAccountEstablishment"
+                                type="vm.SMG_ESTABLISHMENT_TYPES.ACCOUNT">
+                            </smg-select-establishment>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label class="control-label">
+                                Código Ler
+                            </label>
+                            <smg-select-ler class="tabfilter" selection-model="vm.selectedLer" >
+                            </smg-select-ler> 
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label class="control-label">
+                                Operação
+                            </label>
+                            <smg-select-operation class="tabfilter" selection-model="vm.selectedOperation">    
+                            </smg-select-operation> 
+                        </div>
+                    </div>
+
+                    <div class="row pad-top10">
+                        <div class="col-sm-offset-1 col-sm-2">
+                            <label class="control-label">
+                                Cliente/Fornecedor
+                            </label>
+                            <smg-select-establishment name="smgSelectedClientEstablishment" 
+                                class="tabfilter"
+                                selection-model="vm.selectedClientEstablishment"
+                                on-change="vm.onSelectedClientEstablishmentChange(obj)"
+                                allow-free-text="true"
+                                type="vm.SMG_ESTABLISHMENT_TYPES.CLIENT">
+                            </smg-select-establishment>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label class="control-label">
+                                NIF
+                            </label>
+                            <input name="clientEstablishmentVat" 
+                                ng-model="vm.clientEstablishmentVat" 
+                                type="text" 
+                                class="form-control tableFilter" 
+                                placeholder="NIF" />        
+                            
+                            <span ng-show="vm.validateInput('clientEstablishmentVat', 'pattern')" class="text-danger">Formato inválido</span>
+                            <span ng-show="vm.serverValidationErrors['ClientEstablishmentVat']" class="text-danger">
+                                {{vm.serverValidationErrors['ClientEstablishmentVat']}}
+                            </span> 
+                        </div>
+
+                        <div class="col-sm-2">
+                            <smg-input-text name="clientEstablishmentApaCodeV2"
+                                placeholder="myplaceholder"
+                                label-text="APA"
+                                model="vm.clientEstablishmentApaCode" 
+                                is-required="true"
+                                show-clear-input="true">
+                            </smg-input-text>
+                            <span ng-show="vm.validateInput('clientEstablishmentApaCode', 'pattern')" class="text-danger">Formato inválido</span>
+                            <span ng-show="vm.serverValidationErrors['ClientEstablishmentApaCode']" class="text-danger">
+                                {{vm.serverValidationErrors['ClientEstablishmentApaCode']}}
+                            </span> 
+                        </div>
+                    </div>
+
+                    <!--buttons-->
+                    <div class="row mar-top20">
+                        <div class="col-sm-offset-4 col-xs-12 col-sm-1">
+                            <button title="Limpar filtros" 
+                                    ng-click="vm.clearFilters()" 
+                                    class="btn btn-default form-control">
+                                Limpar
+                            </button>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-1">
+                            <button id="btn-seach" 
+                                    ng-focus="true"
+                                    type="button" 
+                                    title="Pesquisar"
+                                    class="btn btn-labeled btn-info form-control text-bold" 
+                                    ng-click="vm.onSearchClick()">
+            
+                                Pesquisar
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <ul class="nav nav-tabs">
+        <li ng-class="{ active: vm.isSet(vm.SMG_INTERVENIENT_TYPES.Unknown) }">
+            <a ng-click="vm.setTab(vm.SMG_INTERVENIENT_TYPES.Unknown)">Todos</a>
+        </li>
+        <li ng-class="{ active: vm.isSet(vm.SMG_INTERVENIENT_TYPES.Origin) }">
+            <a ng-click="vm.setTab(vm.SMG_INTERVENIENT_TYPES.Origin)">Produtor</a>
+        </li>
+        <li ng-class="{ active: vm.isSet(vm.SMG_INTERVENIENT_TYPES.Destin) }">
+            <a ng-click="vm.setTab(vm.SMG_INTERVENIENT_TYPES.Destin)">Destinatário</a>
+        </li>
+        <li ng-class="{ active: vm.isSet(vm.SMG_INTERVENIENT_TYPES.Transporter) }">
+            <a ng-click="vm.setTab(vm.SMG_INTERVENIENT_TYPES.Transporter)">Transportador</a>
+        </li>
+        <li style="float: right">
+            <button type="button" ng-click="vm.onEgarListDefinitionsClick()" class="btn btn-default" title="Definições da lista">
+                <em class="fa fa-cog"></em>
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content bg-white clearfix" ng-if="vm.isSet(vm.SMG_INTERVENIENT_TYPES.Unknown)">
+        <table class="row-border hover pad-top10 col-sm-12"
+            datatable 
+            dt-instance="vm.dtTableAll"
+            dt-columns="vm.dtColumns" 
+            dt-options="vm.dtOptions">
+        </table>
+    </div>
+
+    <div class="tab-content bg-white clearfix" ng-if="vm.isSet(vm.SMG_INTERVENIENT_TYPES.Origin)">
+        <table class="row-border hover pad-top10 col-sm-12"
+            datatable 
+            dt-instance="vm.dtTableOrigin"
+            dt-columns="vm.dtColumns" 
+            dt-options="vm.dtOptions">
+        </table>
+    </div>
+     
+    <div class="tab-content bg-white clearfix" ng-if="vm.isSet(vm.SMG_INTERVENIENT_TYPES.Destin)">
+        <table class="row-border hover pad-top10 col-sm-12"
+            datatable 
+            dt-instance="vm.dtTableDestin"
+            dt-columns="vm.dtColumns" 
+            dt-options="vm.dtOptions">
+        </table>
+    </div>
+
+    <div class="tab-content bg-white clearfix" ng-if="vm.isSet(vm.SMG_INTERVENIENT_TYPES.Transporter)">
+        <table  class="row-border hover pad-top10 col-sm-12"
+            datatable
+            dt-instance="vm.dtTableTransporter" 
+            dt-columns="vm.dtColumns"
+            dt-options="vm.dtOptions">
+        </table>
+    </div>
+
+</div>
+
+<script id="diag-helpStatus" type="text/ng-template">
+	<div class="ngdialog-message">
+		<div class="panel">
+			<h3>
+                <!-- <i class="fa fa-question-circle bt-help"></i> -->
+                <i class="fa fa-info-circle bt-help"></i>
+                Pesquisa por estado de e-GAR</h3>
+			<div class="row">
+				<div class="col-md-12">
+                    <h4>Aberta</h4>
+					<p>
+                        A sua eGar está <strong>Aberta</strong> quando ainda são necessárias ações por parte dos intervenientes:
+                        <ul>
+                            <li>se a e-Gar está <strong>Emitida</strong> e precisa de autorização por parte do produtor;</li>
+                            <li>se a e-Gar está <strong>Corrigida</strong> e precisa de aceitação da correção por parte do produtor;</li>
+                            <li>se a e-Gar está com a <strong>Correção Negada</strong> e precisa de retificação por parte do destinatário.</li>
+                        </ul>
+                    </p>
+                    
+                    <h4>Fechada</h4>
+					<p>
+                        A sua eGar está <strong>Fechada</strong> quando já não são permitidas ações por parte dos intervenientes:
+                        <ul>
+                            <li>quando a eGar foi <strong>Aceite pelo destinatário</strong>;</li>
+                            <li>quando a eGar foi <strong>Rejeitada pelo destinatário</strong>;</li>
+                            <li>quando a eGar tem uma <strong>Correção aceite pelo produtor</strong>.</li>
+                        </ul>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12  text-right">
+				<button type="button" ng-click="closeThisDialog('button')" class="btn btn-default mr">Comprendi</button>
+			</div>
+		</div>
+	</div>
+</script>

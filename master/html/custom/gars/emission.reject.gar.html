@@ -1,0 +1,46 @@
+<div class="ngdialog-message">
+
+<form role="form" name="$ctrl.formAcceptEmissionValidate" ng-submit="$ctrl.submitFormAcceptEmission()" novalidate="" class="form-validate form-horizontal">
+
+		<div class="panel">
+			<h3>
+        Rejeitar E-Gar Nº 
+        <span class="consult-egar-number">
+          {{$ctrl.gar.Number}}
+        </span>
+        <span title="Ver PDF" ng-click="$ctrl.getFile($ctrl.gar.FileUrl)">
+          <em class="fa fa-file-pdf-o"></em>
+        </span>
+      </h3>
+			
+			<div class="row pad-top10">
+				<div class="col-md-12">
+					<label class="control-label mar-bottom0">Comentário</label>
+          <div class="ng-scope">
+            <textarea id="txt-comment" name="comment"
+                          class="form-control no-resize"
+                          required
+                          ng-model="$ctrl.comment" 
+                          ng-maxlength="200" rows="2">
+            </textarea>
+            <span ng-show="$ctrl.validateInput('comment', 'required')" class="text-danger">Obrigatório</span>
+            <span ng-show="$ctrl.validateInput('comment', 'maxlength')" class="text-danger">Máximo de 200 caracteres</span>
+            <span ng-show="$ctrl.serverValidationErrors['comment']" class="text-danger">
+              {{$ctrl.serverValidationErrors['comment']}}
+            </span>
+            
+          </div>
+				</div>
+			</div>
+		</div> <!--END PANEL-->
+
+		<div class="row pad-top10 text-right">
+			<div class="col-sm-12">
+				<button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">Cancelar</button>
+				<button type="submit" class="btn btn-danger">Rejeitar</button>
+			</div>
+		</div>
+
+</form>
+  
+</div>

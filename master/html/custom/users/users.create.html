@@ -1,0 +1,180 @@
+<h3 class="ng-scope">
+  Criar Utilizador
+</h3>
+
+<form role="form" name="$ctrl.formValidate" ng-submit="$ctrl.submitForm()" novalidate="" class="form-validate form-horizontal">
+
+  <!--top actions-->
+  <div class="row">
+    <div class="col-sm-6">
+      <i class="text-danger fa fa-asterisk" /> - Campos Obrigatórios
+    </div>
+
+    <div class="col-sm-6">
+      <div class="text-right">
+        <button type="button" class="btn btn-labeled btn-default" ng-click="$state.go('app.usersOverview')">
+                <span class="btn-label">
+                  <i class="fa fa-arrow-left"></i>
+                </span>
+                Voltar
+            </button>
+
+        <button type="submit" class="btn btn-labeled btn-success mar-right10">
+                <span class="btn-label">
+                  <i class="fa fa-check"></i>
+                </span>
+                Gravar
+            </button>
+      </div>
+    </div>
+  </div>
+
+
+	<div id="panelGeneralData" class="panel panel-default mar-top15">
+    <div ng-class="{'panel-heading-collapsed':panelGeneralData}" class="panel-heading">
+      <h4>
+        <em class="fa fa-user pad-right10"></em>1 - Dados de Login  
+      </h4>
+    </div>
+
+    <div uib-collapse="panelGeneralData" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+      <div class="panel-body">
+      
+        <fieldset id="generalData">
+          <div class="form-group">
+            <div class="col-md-12">
+              <div class="row">				
+
+                <div class="col-md-2">
+                  <label class="control-label">
+                    Nome de Utilizador
+                    <span class="pad-left5 text-danger">
+                      <i class="fa fa-asterisk"/>
+                    </span>
+                  </label>
+                  <input id="inp-username" name="username" 
+                          ng-model="$ctrl.username" 
+                          required="" 
+                          type="text"
+                          class="form-control"
+                          placeholder="Ex: JoseSilva" />
+                  <span ng-show="$ctrl.validateInput('username', 'required')" class="text-danger">Obrigatório</span>
+                  <span ng-show="$ctrl.serverValidationErrors['Username']" class="text-danger">
+                    {{$ctrl.serverValidationErrors['Username']}}
+                  </span>
+                </div>
+              
+                <div class="col-md-2">
+                  <label class="control-label">
+                    e-Mail
+                    <span class="pad-left5 text-danger">
+                      <i class="fa fa-asterisk"/>
+                    </span>
+                  </label>
+                  <input id="inp-email" name="email" 
+                          required=""
+                          ng-model="$ctrl.email" 
+                          class="form-control" 
+                          placeholder="Ex: josesilva@email.com" />
+                  <span ng-show="$ctrl.validateInput('email', 'required')" class="text-danger">Obrigatório</span>
+                  <span ng-show="$ctrl.serverValidationErrors['Email']" class="text-danger">
+                    {{$ctrl.serverValidationErrors['Email']}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+      <fieldset>
+        <div class="form-group">
+          <div class="col-md-12">
+            <div class="row">				
+
+              <div class="col-md-2">
+                <label class="control-label">
+                  Password
+                  <span class="pad-left5 text-danger">
+                    <i class="fa fa-asterisk"/>
+                  </span>
+                </label>
+                <input id="inp-password" name="password" type="password" 
+                        ng-model="$ctrl.password" 
+                        required="" 
+                        type="text"
+                        class="form-control" />
+                <span ng-show="$ctrl.validateInput('password', 'required')" class="text-danger">Obrigatório</span>
+                <span ng-show="$ctrl.serverValidationErrors['Password']" class="text-danger">
+                  {{$ctrl.serverValidationErrors['Password']}}
+                </span>
+              </div>
+            
+              <div class="col-md-2">
+                <label class="control-label">
+                  Confirmar Password
+                  <span class="pad-left5 text-danger">
+                    <i class="fa fa-asterisk"/>
+                  </span>
+                </label>
+                <input id="inp-confirmPassword" name="confirmPassword" type="password"
+                        required=""
+                        ng-model="$ctrl.confirmPassword" 
+                        class="form-control" />
+                <span ng-show="$ctrl.validateInput('confirmPassword', 'required')" class="text-danger">Obrigatório</span>
+                <span ng-show="$ctrl.serverValidationErrors['ConfirmPassword']" class="text-danger">
+                  {{$ctrl.serverValidationErrors['ConfirmPassword']}}
+                </span>
+              </div>
+            </div>
+
+              <div class="row mar-top15">
+                <div class="col-sm-2">
+                    <label class="control-label">
+                        Veículo
+                    </label>
+
+                    <smg-select-vehicle
+                        name="smgSelectVehicle"
+                        class="tabfilter"
+                        required=""
+                        select-model="$ctrl.selectedVehicle"
+                        select-model-key="$ctrl.selectedVehicleKey"
+                        on-change="$ctrl.selectedVehicleOnChange(obj)">    
+                    </smg-select-vehicle>
+                </div> 
+              </div>
+
+          </div>
+        </div>
+      </fieldset>
+
+      </div>
+    </div>
+  </div>
+
+  <!--bottom actions-->
+  <div class="row">
+      <div class="col-sm-6">
+        <i class="text-danger fa fa-asterisk" /> - Campos Obrigatórios
+      </div>
+  
+      <div class="col-sm-6">
+        <div class="text-right">
+          <button type="button" class="btn btn-labeled btn-default" ng-click="$state.go('app.usersOverview')">
+                  <span class="btn-label">
+                    <i class="fa fa-arrow-left"></i>
+                  </span>
+                  Voltar
+              </button>
+  
+          <button type="submit" class="btn btn-labeled btn-success mar-right10">
+                  <span class="btn-label">
+                    <i class="fa fa-check"></i>
+                  </span>
+                  Gravar
+              </button>
+        </div>
+      </div>
+    </div>
+
+</form>

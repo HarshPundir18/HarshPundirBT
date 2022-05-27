@@ -1,0 +1,16 @@
+  
+.animate-me.ng-hide-add {
+    opacity: 1.0;
+    display: block !important;
+    transition: opacity 0.3s;
+}
+  
+.animate-me.ng-hide-add-active { 
+    opacity: 0;
+}
+
+
+.btn-group.dropdown.dropdown-list.z0 {
+    z-index: 0;
+}
+

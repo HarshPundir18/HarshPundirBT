@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-sm-6">
+        <span ng-if="$ctrl.showMandatoryFieldsMessage">
+            <i class="text-danger fa fa-asterisk" /> - Campos Obrigatórios
+        </span>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="text-right">
+            <button ng-if="$ctrl.showBackButton" type="button" class="btn btn-labeled btn-default" ng-click="$ctrl.onBackActionClick()">
+                <span class="btn-label">
+                    <i class="fa fa-arrow-left"></i>
+                </span>
+                {{$ctrl.backButtonText}}
+            </button>
+
+            <button ng-if="$ctrl.showSaveButton" type="button" class="btn btn-labeled btn-success" ng-click="$ctrl.onSaveActionClick()">
+                <span class="btn-label">
+                    <i class="fa fa-check"></i>
+                </span>
+                {{$ctrl.saveButtonText}}
+            </button>
+        </div>
+    </div>
+</div>

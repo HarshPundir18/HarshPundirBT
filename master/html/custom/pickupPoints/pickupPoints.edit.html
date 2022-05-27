@@ -1,0 +1,184 @@
+<h3 class="ng-scope">
+    Editar ponto de recolha - {{$ctrl.pickupPoint.Description}}
+</h3>
+
+
+<form role="form" name="$ctrl.formValidate" ng-submit="$ctrl.submitForm()" novalidate="" class="form-validate form-horizontal">
+    
+    <!--action buttons-->
+    <div class="row">
+        <div class="col-sm-6">
+            <i class="text-danger fa fa-asterisk" /> - Campos Obrigatórios
+        </div>
+
+        <div class="col-sm-6">
+            <div class="text-right">
+                <button type="button" class="btn btn-labeled btn-default" ng-click="$ctrl.cancel()">
+                    <span class="btn-label">
+                        <i class="fa fa-arrow-left"></i>
+                    </span>
+                    Voltar
+                </button>
+
+                <button type="submit" class="btn btn-labeled btn-success">
+                    <span class="btn-label">
+                        <i class="fa fa-check"></i>
+                    </span>
+                    Gravar
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="panelGeneralData" class="panel panel-default mar-top15">
+        <div ng-class="{'panel-heading-collapsed':panelGeneralData}" class="panel-heading">
+            <h4>
+                <em class="fa fa-building pad-right10"></em>1 - Dados Gerais
+            </h4>
+            <paneltool tool-collapse="tool-collapse" class="pull-right">
+                <a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="panelGeneralData = !panelGeneralData" class="ng-scope">
+                    <em ng-show="panelGeneralData" class="fa fa-plus ng-no-animation ng-hide"></em>
+                    <em ng-show="!panelGeneralData" class="fa fa-minus ng-no-animation"></em>
+                </a>
+            </paneltool>
+        </div>
+
+        <div uib-collapse="panelGeneralData" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+            <div class="panel-body">
+                <fieldset id="generalData">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label class="control-label">Descrição</label>
+                                    <br>
+                                    <span class="control-label-text">{{$ctrl.pickupPoint.Description}}</span>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label class="control-label">NIF</label>
+                                    <br>
+                                    <input id="inp-pickupPointVat" name="pickupPointVat" ng-model="$ctrl.pickupPoint.PickupPointVat" class="form-control" placeholder="Ex: 123456" />
+                                    <span ng-show="$ctrl.serverValidationErrors['PickupPointVat']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['PickupPointVat']}}
+                                    </span>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label class="control-label">CAE Primário</label>
+                                    <input id="inp-primaryCae" name="primaryCae" ng-model="$ctrl.pickupPoint.Cae1" class="form-control" placeholder="Ex: 123456" />
+                                    <span ng-show="$ctrl.serverValidationErrors['PrimaryCae']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['PrimaryCae']}}
+                                    </span>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label class="control-label">CAE Secundário</label>
+                                    <input id="inp-secondaryCae" name="secondaryCae" ng-model="$ctrl.pickupPoint.Cae2" class="form-control" placeholder="Ex: 123456" />
+                                    <span ng-show="$ctrl.serverValidationErrors['SecondaryCae']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['SecondaryCae']}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label class="control-label">Morada</label>
+                                    <br>
+                                    <span class="control-label-text">{{$ctrl.pickupPoint.Address}} {{$ctrl.pickupPoint.PostalCode}} {{$ctrl.pickupPoint.Local}}</span>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label class="control-label">Código APA</label>
+                                    <br>
+                                    <span class="control-label-text">{{$ctrl.pickupPoint.ApaCode}}</span>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label class="control-label">Código Interno</label>
+                                    <br>
+                                    <span class="control-label-text">{{$ctrl.pickupPoint.InternalCode}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="row">
+
+                                <div class="col-sm-2">
+                                    <label class="control-label">Tlf</label>
+                                    <input id="inp-phone" name="phone" ng-model="$ctrl.pickupPoint.Phone" type="text" class="form-control" placeholder="Ex: +351 229786856"
+                                    />
+                                    <span ng-show="$ctrl.serverValidationErrors['Phone']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['Phone']}}
+                                    </span>
+                                </div>
+
+
+                                <div class="col-sm-2">
+                                    <label class="control-label">Tlm</label>
+                                    <input id="inp-mobile" name="mobile" ng-model="$ctrl.pickupPoint.Mobile" type="text" class="form-control" placeholder="Ex: 9615235658" />
+                                    <span ng-show="$ctrl.serverValidationErrors['Mobile']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['Mobile']}}
+                                    </span>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label class="control-label">Fax</label>
+                                    <input id="inp-fax" name="fax" ng-model="$ctrl.pickupPoint.Fax" type="text" class="form-control" placeholder="Ex: 22123456789" />
+                                    <span ng-show="$ctrl.serverValidationErrors['Fax']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['Fax']}}
+                                    </span>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label class="control-label">Email</label>
+                                    <input id="inp-email" name="email" ng-model="$ctrl.pickupPoint.Email" type="email" class="form-control" placeholder="Ex: empresaABCD@email.com" />
+                                    <span ng-show="$ctrl.validateInput('email', 'email')" class="text-danger">Formato inválido</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['Email']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['Email']}}
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+    <!--action buttons-->
+    <div class="row">
+        <div class="col-sm-6">
+            <i class="text-danger fa fa-asterisk" /> - Campos Obrigatórios
+        </div>
+
+        <div class="col-sm-6">
+            <div class="text-right">
+                <button type="button" class="btn btn-labeled btn-default" ng-click="$ctrl.cancel()">
+                    <span class="btn-label">
+                        <i class="fa fa-arrow-left"></i>
+                    </span>
+                    Voltar
+                </button>
+
+                <button type="submit" class="btn btn-labeled btn-success">
+                    <span class="btn-label">
+                        <i class="fa fa-check"></i>
+                    </span>
+                    Gravar
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

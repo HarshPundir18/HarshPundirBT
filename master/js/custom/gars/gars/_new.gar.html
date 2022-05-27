@@ -1,0 +1,566 @@
+
+<h3>Emitir E-GAR</h3>
+
+<form role="form" name="$ctrl.formValidate" ng-submit="$ctrl.submitForm()" novalidate="" class="form-validate form-horizontal">
+  
+  <div class="row">
+    <div class="col-sm-6">
+      <i class="text-danger fa fa-asterisk"/> - Campos Obrigatórios
+    </div>
+
+    <div class="col-sm-6">
+      <div class="text-right">
+        <button type="submit" class="btn btn-labeled btn-success mar-right10">
+            <span class="btn-label">
+              <i class="fa fa-check"></i>
+            </span>
+            Emitir
+        </button>
+        <button type="button" class="btn btn-labeled btn-default" ng-click="$ctrl.cancel()">
+            <span class="btn-label">
+              <i class="fa fa-times"></i>
+            </span>
+            Cancelar
+        </button>
+    </div>
+    </div> 
+  </div>
+
+
+  <!--panelOrigin-->
+  <div id="panelOrigin" class="panel panel-default mar-top15">
+    <div ng-class="{'panel-heading-collapsed':panelOrigin}" class="panel-heading">
+      <h4>
+        <em class="fa fa-bank pad-right10"></em>1 - Produtor / Detentor  
+      </h4>
+      <paneltool tool-collapse="tool-collapse" class="pull-right">
+        <a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="panelOrigin = !panelOrigin" class="ng-scope">
+          <em ng-show="panelOrigin" class="fa fa-plus ng-no-animation ng-hide"></em>                         
+          <em ng-show="!panelOrigin" class="fa fa-minus ng-no-animation"></em>                       
+        </a></paneltool>
+    </div>
+
+    <div uib-collapse="panelOrigin" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+      <div class="panel-body">
+        <!--remetente-->      
+        <fieldset id="origin">
+          <div class="form-group">
+            <div class="col-sm-12">
+              <!--pesquisar-->
+              <div class="row">
+                <div class="col-sm-6">
+                  <select id="inp-selectedOrigin" name="selectedOrigin"
+                          placeholder-text-single ="'Pesquisar'"
+                          no-results-text = "'Não foram encontrados resultados'"
+                          chosen="" 
+                          ng-change="$ctrl.originSearchChange()"
+                          ng-options="address as address.DisplayText for address in $ctrl.chosen" 
+                          class="chosen-select input-md"
+                          ng-model="$ctrl.selectedOrigin">
+                    <option><option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row pad-top10">
+                <!--Vat-->
+                <div class="col-sm-2">
+                  <label class="control-label">
+                    NIF
+                    <span class="pad-left5 text-danger">
+                      <i class="fa fa-asterisk"/>
+                    </span>
+                  </label>
+                  <br>
+                  <input id="inp-vatOrigin" name="vatOrigin" 
+                      ng-change="$ctrl.originDataChange()"
+                      ng-model="$ctrl.vatOrigin" required="" 
+                      ng-pattern="/^[0-9]+$/" type="text" 
+                      class="form-control" placeholder="Ex: 123456789"/>
+                  <span ng-show="$ctrl.validateInput('vatOrigin', 'required')" class="text-danger">Obrigatório</span>
+                  <span ng-show="$ctrl.validateInput('vatOrigin', 'pattern')" class="text-danger">Formato inválido</span>
+                  <span ng-show="$ctrl.serverValidationErrors['vatOrigin']" class="text-danger">
+                    {{$ctrl.serverValidationErrors['vatOrigin']}}
+                    {{$ctrl.serverApplicationErrors['vatOrigin']}}
+                  </span>
+                </div>
+
+                <!--cod apa-->
+                <div class="col-sm-2">
+                  <label class="control-label">
+                    Código APA
+                    <span class="pad-left5 text-danger">
+                      <i class="fa fa-asterisk"/>
+                    </span>
+                  </label>
+                  <input id="inp-codApaOrigin" name="codApaOrigin" 
+                      ng-change="$ctrl.originDataChange()"
+                      ng-model="$ctrl.codApaOrigin"  required="" 
+                      class="form-control" placeholder="Ex: 123456"/>
+                  <span ng-show="$ctrl.validateInput('codApaOrigin', 'required')" class="text-danger">Obrigatório</span>
+                  <span ng-show="$ctrl.serverValidationErrors['codApaOrigin']" class="text-danger">
+                    {{$ctrl.serverValidationErrors['codApaOrigin']}}
+                    {{$ctrl.serverApplicationErrors['codApaOrigin']}}
+                  </span>
+                </div>
+
+                <!--tipo produtor PI/OGR-->
+                <div class="col-sm-2">
+                  <label class="control-label">
+                    Tipo Produtor
+                    <span class="pad-left5 text-danger">
+                      <i class="fa fa-asterisk"/>
+                    </span>
+                  </label>
+                  <select id="inp-selectedProducerType" name="selectedProducerType" 
+                      required="" 
+                      ng-model="$ctrl.selectedProducerType" 
+                      class="form-control ng-pristine ng-valid ng-not-empty ng-touched">
+                    <option ng-repeat="option in $ctrl.allProducerType" value="{{option.id}}">{{option.name}}</option>
+                  </select>
+                  <span ng-show="$ctrl.validateInput('selectedProducerType', 'required')" class="text-danger">Obrigatório</span>
+                  <span ng-show="$ctrl.validateInput('selectedProducerType', 'pattern')" class="text-danger">Formato inválido</span>
+                  <span ng-show="$ctrl.serverValidationErrors['selectedProducerType']" class="text-danger">
+                    {{$ctrl.serverValidationErrors['selectedProducerType']}}
+                    {{$ctrl.serverApplicationErrors['selectedProducerType']}}
+                  </span>
+                </div>
+              </div>
+
+              <div class="row pad-top10">
+                <!--Establishment Name-->
+                <div class="col-sm-4">
+                  <label class="control-label">
+                    Estabelecimento
+                    <span class="pad-left5 text-danger">
+                      <i class="fa fa-asterisk"/>
+                    </span>
+                  </label>
+                  <input name="nameOrigin"  
+                          required
+                          ng-model="$ctrl.nameOrigin" 
+                          type="text" 
+                          class="form-control" />
+                  <span ng-show="$ctrl.validateInput('nameOrigin', 'required')" class="text-danger">Obrigatório</span>
+                  <span ng-show="$ctrl.serverValidationErrors['nameOrigin']" class="text-danger">
+                    {{$ctrl.serverValidationErrors['nameOrigin']}}
+                    {{$ctrl.serverApplicationErrors['nameOrigin']}}
+                  </span>
+                </div>
+
+                <!--Establishment Addres-->
+                <div class="col-sm-8">
+                  <label class="control-label">Morada</label>
+                  <input name="addressOrigin"  
+                          ng-model="$ctrl.addressOrigin" 
+                          type="text" 
+                          class="form-control" />
+                  <span ng-show="$ctrl.serverValidationErrors['addressOrigin']" class="text-danger">
+                    {{$ctrl.serverValidationErrors['addressOrigin']}}
+                    {{$ctrl.serverApplicationErrors['addressOrigin']}}
+                  </span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <!--END remetente-->
+      
+        <!--residuo Transportado-->
+        <fieldset id="residue">
+          <legend>Residuo</legend>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <div class="row">
+                <!--Quantity-->
+                <div class="col-sm-2">
+                  <label class="control-label">
+                    Quantidade (Kg)
+                    <span class="pad-left5 text-danger">
+                      <i class="fa fa-asterisk"/>
+                    </span>
+                  </label>
+                  <input id="inp-quantity" name="quantity" ng-model="$ctrl.quantity" required="" type="text" class="form-control" placeholder="Ex: 10"/>
+                  <span ng-show="$ctrl.validateInput('quantity', 'required')" class="text-danger">Obrigatório</span>
+                  <span ng-show="$ctrl.serverValidationErrors['quantity']" class="text-danger">
+                    {{$ctrl.serverValidationErrors['quantity']}}
+                    {{$ctrl.serverApplicationErrors['quantity']}}
+                  </span>
+                </div>
+
+                <!--Ler Code-->
+                <div class="col-sm-4">
+                  <label class="control-label">
+                    Código LER
+                    <span class="pad-left5 text-danger">
+                      <i class="fa fa-asterisk"/>
+                    </span>
+                  </label>
+                  <select id="inp-selectedLerCode" name="selectedLerCode" 
+                          ng-change="$ctrl.lerCodeChange()"
+                          required="" 
+                          placeholder-text-single ="'Pesquisar'"
+                          no-results-text = "'Não foram encontrados resultados'"
+                          chosen="" 
+                          ng-options="address as address.value for address in $ctrl.lerCodes" 
+                          class="chosen-select input-md"
+                          ng-model="$ctrl.selectedLerCode">
+                    <option></option>                  
+                  </select>
+                  <span ng-show="$ctrl.validateInput('selectedLerCode', 'required')" class="text-danger">Obrigatório</span>
+                  <span ng-show="$ctrl.validateInput('selectedLerCode', 'pattern')" class="text-danger">Formato inválido</span>
+                  <span ng-show="$ctrl.serverValidationErrors['selectedLerCode']" class="text-danger">
+                    {{$ctrl.serverValidationErrors['selectedLerCode']}}
+                    {{$ctrl.serverApplicationErrors['selectedLerCode']}}
+                  </span>
+                </div>
+
+                <!--Operation Code-->
+                <div class="col-sm-4">
+                  <label class="control-label">
+                    Código Operação
+                    <span class="pad-left5 text-danger">
+                      <i class="fa fa-asterisk"/>
+                    </span>
+                  </label>
+                  <select id="inp-selectedOperationCode" name="selectedOperationCode"
+                          required="" 
+                          placeholder-text-single ="'Pesquisar'"
+                          no-results-text = "'Não foram encontrados resultados'"
+                          chosen="" 
+                          class="chosen-select input-md"
+                          ng-options="address as address.value for address in $ctrl.operationCodes" 
+                          ng-model="$ctrl.selectedOperationCode">
+                    <option></option>
+                  </select>
+                  <span ng-show="$ctrl.validateInput('selectedOperationCode', 'required')" class="text-danger">Obrigatório</span>
+                  <span ng-show="$ctrl.serverValidationErrors['selectedOperationCode']" class="text-danger">
+                    {{$ctrl.serverValidationErrors['selectedOperationCode']}}
+                    {{$ctrl.serverApplicationErrors['selectedOperationCode']}}
+                  </span>
+                </div>
+
+                <!--Group Code-->
+                <div class="col-sm-2">
+                  <label class="control-label">
+                    Código Grupo
+                    <span class="pad-left5 text-danger">
+                      <i class="fa fa-asterisk"/>  
+                    </span>
+                  </label>
+                  <input id="inp-groupCode" name="groupCode" 
+                        ng-disabled="!$ctrl.showGroupCode"
+                        ng-model="$ctrl.groupCode" 
+                        type="text" class="form-control" placeholder="Ex: B50"/>
+                  <span ng-show="$ctrl.serverValidationErrors['groupCode']" class="text-danger">
+                    {{$ctrl.serverValidationErrors['groupCode']}}
+                    {{$ctrl.serverApplicationErrors['groupCode']}}
+                  </span>
+                </div>
+              </div>
+
+              <!--Description-->
+              <div class="row pad-top10">
+                <div class="col-sm-12">
+                  <label class="control-label">
+                    Descrição
+                    <span class="pad-left5 text-danger">
+                      <i class="fa fa-asterisk"/>
+                    </span>
+                  </label>
+                  <textarea id="txt-lerDescription" name="lerDescription"
+                          class="form-control no-resize"
+                          required
+                          ng-model="$ctrl.lerDescription" 
+                          ng-maxlength="200" rows="3">
+                  </textarea>
+                  <span ng-show="$ctrl.validateInput('lerDescription', 'required')" class="text-danger">Obrigatório</span>
+                  <span ng-show="$ctrl.validateInput('lerDescription', 'maxlength')" class="text-danger">Máximo de 200 caracteres</span>
+                  <span ng-show="$ctrl.serverValidationErrors['lerDescription']" class="text-danger">
+                    {{$ctrl.serverValidationErrors['lerDescription']}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>   
+        <!--END residuo Transportado-->
+      </div>
+    </div>
+  </div>
+  <!--END panelOrigin-->
+
+
+  <!--panelTransporters-->
+  <div id="panelTransporters" class="panel panel-default">
+    <div ng-class="{'panel-heading-collapsed':panelTransporters}" class="panel-heading">
+      <h4><em class="fa fa-truck pad-right10"></em>2 - Transportadores</h4>
+      <paneltool tool-collapse="tool-collapse" class="pull-right">
+        <a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="panelTransporters = !panelTransporters" class="ng-scope">
+          <em ng-show="panelTransporters" class="fa fa-plus ng-no-animation ng-hide"></em>                         
+          <em ng-show="!panelTransporters" class="fa fa-minus ng-no-animation"></em>                       
+        </a></paneltool>
+    </div>
+
+    <div uib-collapse="panelTransporters" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+      <div class="panel-body">
+        <!--transportador-->
+        <fieldset id="transporters">
+          <div ng-repeat="transporter in $ctrl.transportersArray">
+            <div class="row">
+              <!--nif-->
+              <label class="col-sm-1 control-label pad-top37">
+                NIF
+                <span class="pad-left5 text-danger">
+                  <i class="fa fa-asterisk"/>
+                </span>
+              </label>
+              <div class="col-sm-2 pad-top30">
+                <input id="inp-vatTransporter{{transporter.index}}" name="vatTransporter{{transporter.index}}" ng-model="transporter.vat" required="" ng-pattern="/^[0-9]+$/" type="text" class="form-control" placeholder="Ex: 123456789"/>
+                <span ng-show="$ctrl.validateInput('vatTransporter{{transporter.index}}', 'required')" class="text-danger">Obrigatório</span>
+                <span ng-show="$ctrl.validateInput('vatTransporter{{transporter.index}}', 'pattern')" class="text-danger">Formato inválido</span>
+                <span ng-show="$ctrl.serverValidationErrors['vatTransporter{{transporter.index}}']" class="text-danger">
+                  {{$ctrl.serverValidationErrors['vatTransporter'+transporter.index]}}
+                  {{$ctrl.serverApplicationErrors['vatTransporter'+transporter.index]}}
+                </span>
+              </div>
+
+              <!--plate-->
+              <label class="col-sm-1 control-label pad-top37">
+                Matricula
+              </label>
+              <div class="col-sm-2 pad-top30">
+                <input  id="inp-plateTransporter{{transporter.index}}" name="plateTransporter{{transporter.index}}" ng-model="transporter.plate" class="form-control" placeholder="Ex: AA-11-22"/>
+              </div>
+
+              <!--transport date-->
+              <label class="col-sm-1 control-label pad-top37">
+                Data
+                <span class="pad-left5 text-danger">
+                  <i class="fa fa-asterisk"/>
+                </span>
+              </label>
+              <div ng-controller="datepickerController as dp" class="ng-scope col-sm-2 pad-top30">
+                <input id="inp-dateTransporter{{transporter.index}}" 
+                      name="dateTransporter{{transporter.index}}" 
+                      placeholder="Ex: 2016-01-01" 
+                      type="text" 
+                      uib-datepicker-popup="yyyy-MM-dd" 
+                      ng-change="dp.changed(transporter.index)"
+                      ng-model="dp.date" 
+                      is-open="dp.opened" 
+                      max-date="'31-12-2100'" 
+                      uib-datepicker-options="dp.dateOptions" 
+                      ng-required="true" 
+                      close-text="Close" 
+                      class="form-control ng-isolate-scope ng-touched" 
+                      required="" 
+                      ng-click="dp.open($event)">
+                <span ng-show="$ctrl.validateInput('dateTransporter{{transporter.index}}', 'required')" class="text-danger">Obrigatório</span>
+                <span ng-show="$ctrl.serverValidationErrors['dateTransporter{{transporter.index}}']" class="text-danger">
+                  {{$ctrl.serverValidationErrors['dateTransporter'+transporter.index]}}
+                  {{$ctrl.serverApplicationErrors['dateTransporter'+transporter.index]}}
+                </span>
+              </div>
+
+              <!--transport hour-->
+              <label class="col-sm-1 control-label pad-top37">
+                Hora
+                <span class="pad-left5 text-danger">
+                  <i class="fa fa-asterisk"/>
+                </span>
+              </label>
+              <div ng-controller="timepickerController as tp">
+                <div id="inp-hourTransporter{{transporter.index}}" 
+                    uib-timepicker="uib-timepicker" 
+                    ng-model="tp.mytime" 
+                    ng-change="tp.changed(transporter.index)" 
+                    hour-step="tp.hstep" 
+                    minute-step="tp.mstep" 
+                    show-meridian="tp.ismeridian">
+                </div>
+              </div>
+
+            </div>
+
+            <div class="panel-default text-right">
+              <button type="button" class="btn btn-labeled btn-danger" ng-show="transporter.index > 0" ng-click="$ctrl.removeTransporter(transporter)">
+                -
+              </button>
+              
+              <button type="button" class="btn btn-labeled btn-info" ng-click="$ctrl.addTransporter(transporter)">
+                +
+              </button>
+            </div>
+          </div>
+        </fieldset>
+        <!--transportador-->
+
+
+      </div>
+    </div>
+  </div>
+  <!--END panelTransporters-->
+
+
+  <!--panelDestin-->
+  <div id="panelDestin" class="panel panel-default">
+    <div ng-class="{'panel-heading-collapsed':panelDestin}" class="panel-heading">
+      <h4><em class="fa fa-industry pad-right10"></em>3 - Destinatário</h4>
+      <paneltool tool-collapse="tool-collapse" class="pull-right">
+        <a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="panelDestin = !panelDestin" class="ng-scope">
+          <em ng-show="panelDestin" class="fa fa-plus ng-no-animation ng-hide"></em>                         
+          <em ng-show="!panelDestin" class="fa fa-minus ng-no-animation"></em>                       
+        </a></paneltool>
+    </div>
+
+    <div uib-collapse="panelDestin" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+      <div class="panel-body">
+        <fieldset id="destin">
+          <div class="form-group">
+            <div class="col-sm-12">
+              <!--search-->
+              <div class="row">
+                <div class="col-sm-6">
+                  <select id="inp-selectedDestin" name="selectedDestin"
+                          placeholder-text-single ="'Pesquisar'"
+                          no-results-text = "'Não foram encontrados resultados'"
+                          chosen="" 
+                          ng-change="$ctrl.destinSearchChange()"
+                          ng-options="address as address.DisplayText for address in $ctrl.chosen"
+                          class="chosen-select input-md"
+                          ng-model="$ctrl.selectedDestin">
+                    <option><option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row pad-top10">
+                <!--nif-->         
+                <div class="col-sm-2">
+                  <label class="control-label">
+                    NIF
+                    <span class="pad-left5 text-danger">
+                      <i class="fa fa-asterisk"/>
+                      </span>
+                    </label>
+                  <input id="inp-vatDestin" name="vatDestin" 
+                      ng-change="$ctrl.destinDataChange()"
+                      ng-model="$ctrl.vatDestin" required="" 
+                      ng-pattern="/^[0-9]+$/" type="text" class="form-control" placeholder="Ex: 123456789"/>
+                  <span ng-show="$ctrl.validateInput('vatDestin', 'required')" class="text-danger">Obrigatório</span>
+                  <span ng-show="$ctrl.validateInput('vatDestin', 'pattern')" class="text-danger">Formato inválido</span>
+                  <span ng-show="$ctrl.serverValidationErrors['vatDestin']" class="text-danger">
+                    {{$ctrl.serverValidationErrors['vatDestin']}}
+                    {{$ctrl.serverApplicationErrors['vatDestin']}}
+                  </span>
+                </div>
+
+                <!--cod apa-->
+                <div class="col-sm-2">
+                  <label class="control-label">
+                    Código APA
+                    <span class="pad-left5 text-danger">
+                      <i class="fa fa-asterisk"/>
+                    </span>
+                  </label>
+                  <input  id="inp-codApaDestin" name="codApaDestin" 
+                      ng-change="$ctrl.destinDataChange()"
+                      ng-model="$ctrl.codApaDestin"  required="" 
+                      class="form-control" placeholder="Ex: 123456"/>
+                  <span ng-show="$ctrl.validateInput('codApaDestin', 'required')" class="text-danger">Obrigatório</span>
+                  <span ng-show="$ctrl.serverValidationErrors['codApaDestin']" class="text-danger">
+                    {{$ctrl.serverValidationErrors['codApaDestin']}}
+                    {{$ctrl.serverApplicationErrors['codApaDestin']}}
+                  </span>
+                </div>
+
+                <!--num pgl-->
+                <div class="col-sm-2">
+                  <label class="control-label">
+                    Número PGL
+                    <span class="pad-left5 text-danger">
+                      <i class="fa fa-asterisk"/>
+                    </span>
+                  </label>
+                  <input id="inp-numPgl" 
+                      ng-disabled="!$ctrl.showPglNumber"
+                      name="numPgl" 
+                      ng-model="$ctrl.numPgl" 
+                      type="text" class="form-control" />
+                  <span ng-show="$ctrl.serverValidationErrors['numPgl']" class="text-danger">
+                    {{$ctrl.serverValidationErrors['numPgl']}}
+                    {{$ctrl.serverApplicationErrors['numPgl']}}
+                  </span>
+                </div>
+              </div>
+
+              <div class="row pad-top10">
+                <div class="col-sm-4">
+                  <label class="control-label">
+                    Estabelecimento
+                    <span class="pad-left5 text-danger">
+                      <i class="fa fa-asterisk"/>
+                    </span>
+                  </label>
+                  <input name="nameDestin"  
+                          required
+                          ng-model="$ctrl.nameDestin" 
+                          type="text" 
+                          class="form-control" />
+                  <span ng-show="$ctrl.validateInput('nameDestin', 'required')" class="text-danger">Obrigatório</span>
+                  <span ng-show="$ctrl.serverValidationErrors['nameDestin']" class="text-danger">
+                    {{$ctrl.serverValidationErrors['nameDestin']}}
+                    {{$ctrl.serverApplicationErrors['nameDestin']}}
+                  </span>
+                </div>
+
+                <div class="col-sm-8">
+                  <label class="control-label">
+                    Morada
+                  </label>
+                  <input name="addressDestin"  
+                          ng-model="$ctrl.addressDestin" 
+                          type="text" 
+                          class="form-control" />
+                  <span ng-show="$ctrl.serverValidationErrors['addressDestin']" class="text-danger">
+                    {{$ctrl.serverValidationErrors['addressDestin']}}
+                    {{$ctrl.serverApplicationErrors['addressDestin']}}
+                  </span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+  <!--END panelDestin-->
+
+  <div class="row">
+    <div class="col-sm-6">
+      <i class="text-danger fa fa-asterisk"/> - Campos Obrigatórios
+    </div>
+
+    <div class="col-sm-6">
+      <div class="text-right">
+        <button type="submit" class="btn btn-labeled btn-success mar-right10">
+            <span class="btn-label">
+              <i class="fa fa-check"></i>
+            </span>
+            Emitir
+        </button>
+
+        <button type="button" class="btn btn-labeled btn-default" ng-click="$ctrl.cancel()">
+            <span class="btn-label">
+              <i class="fa fa-times"></i>
+            </span>
+            Cancelar
+        </button>
+    </div>
+    </div> 
+  </div>
+
+</form>

@@ -1,0 +1,98 @@
+<div class="ngdialog-message">
+		<div class="panel">
+			<h3>Correção de E-Gar - <span class="consult-egar-number">{{garNumber}}</span></h3>
+			
+			<div class="row pad-top10" ng-show="closeDate">
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Data da Correção / Fecho: </label>
+					<span class="control-label-text pad-left10">
+					{{closeDate}}
+					</span>
+				</div>
+			</div>
+
+			<div class="row pad-top10" ng-show="newQuantity">
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Quantidade</label>
+					<div class="control-label-text pad-top0">
+					{{quantity}} Kg
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Quantidade Corrigida</label>
+					<div class="control-label-text pad-top0">
+					{{newQuantity}} Kg
+					</div>
+				</div>
+			</div>
+			
+			<div class="row pad-top10" ng-show="newLerCode">
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Código LER</label>
+					<div class="control-label-text pad-top0">
+					{{lerCode}}
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Código LER Corrigido</label>
+					<div class="control-label-text pad-top0">
+					{{newLerCode}}
+					</div>
+				</div>
+			</div>
+
+			<div class="row pad-top10" ng-show="newOperationCode">
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Código Operação</label>
+					<div class="control-label-text pad-top0">
+					{{operationCode}}
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Código Operação Corrigido</label>
+					<div class="control-label-text pad-top0">
+					{{newOperationCode}}
+					</div>
+				</div>
+			</div>
+
+			<div class="row pad-top10" ng-show="newGroupCode">
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Código Grupo</label>
+					<div class="control-label-text pad-top0">
+					{{groupCode}}
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Código Grupo Corrigido</label>
+					<div class="control-label-text pad-top0">
+					{{newGroupCode}}
+					</div>
+				</div>
+			</div>
+
+			<div class="row pad-top10" ng-show="newPglNumber">
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Número PGL</label>
+					<div class="control-label-text pad-top0">
+					{{pglNumber}}
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Número PGL Corrigido</label>
+					<div class="control-label-text pad-top0">
+					{{newPglNumber}}
+					</div>
+				</div>
+			</div>
+
+		</div> <!--END PANEL-->
+
+		<div class="row pad-top10 text-right">
+			<div class="col-sm-12">
+				<button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">Cancelar</button>
+				<button type="button" ng-click="rejectRectification()" class="btn btn-danger">Rejeitar</button>
+				<button type="button" ng-click="acceptRectification()" class="btn btn-success">Aceitar</button>
+			</div>
+		</div>
+</div>

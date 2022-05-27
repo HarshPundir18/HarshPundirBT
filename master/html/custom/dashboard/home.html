@@ -1,0 +1,285 @@
+<h3>
+    {{$ctrl.lblDashboard}}
+</h3>
+
+<div id="main">
+    <!--configure default-->
+    <div class="panel panel-default" ng-if="$ctrl.configureDefaultEstablishment">
+        <div class="panel-heading">
+            <h3>
+                Bem vindo ao SMARTGAR!
+            </h3>
+        </div>
+
+        <div class="panel-body">
+            <div class="row pad-top10">
+                <p class="pad-left10 text-center pad-bottom20" style="font-size:20px">
+                    Para iniciar a utilização do SMARTGAR, necessita de ter o seu estabelecimento configurado, por favor proceda a esta operação.
+                </p>
+                <p class="pad-left10 text-center">
+                    <span class="monster btn btn-success" ng-click="$ctrl.configure()">
+                        Configurar
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!--configure default-->
+
+
+    <div ng-if="!$ctrl.configureDefaultEstablishment">
+
+        <!-- pack egar warnings -->
+        <div class="row smg__alert smg__alert-warning mar-left0 mar-right0" ng-if="$ctrl.isPack && $ctrl.shouldShowWarning">
+                <div class="col-sm-11">
+                    <p class="pad-left10 smg__packEgar-warning-message" ng-if="$ctrl.packIsExpiring">
+                        A sua subscrição termina em {{$ctrl.remainingDays}} {{$ctrl.remainingDays == 1 ? 'dia' : 'dias'}}.
+                    </p>
+                    <p class="pad-left10 smg__packEgar-warning-message" ng-if="$ctrl.packIsEnding">
+                        O seu pack de e-Gars apenas tem disponível {{$ctrl.packRemain}} {{$ctrl.packRemain == 1 ? 'e-Gar' : 'e-Gars'}}.
+                    </p>
+                    <p class="pad-left10 smg__packEgar-warning-message" >
+                        Por favor efectue a renovação para continuar com acesso à plataforma SmartGAR. 
+                        Caso necessite de ajuda contacte-nos através do nosso site <a target="blank" href="https://www.smartgar.com">www.smartgar.com</a> ou 
+                        por email <a href="mailto:info@smartgar.com">info@smartgar.com</a>
+                    </p>
+                </div>
+                <div class="col-sm-1">
+                        <em class="fa fa-exclamation-triangle fa-3x pad-top10"></em>
+                </div>
+
+        </div>
+
+        <!-- pack egar -->
+        <div class="row pad-bottom30" ng-if="$ctrl.isPack">
+            <div class="col-lg-3 col-md-6 pointer" ng-click="">
+                <div class="panel widget">
+                    <div class="row row-table">
+                        <div class="col-xs-4 text-center pv-lg">
+                            <em class="fa fa-archive fa-3x"></em>
+                        </div>
+                        <div class="col-xs-8 pv-lg">
+                            <div class="h3 mt0">Pack: {{$ctrl.packLimit}} E-Gars</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 pointer" ng-click="">
+                <div class="panel widget">
+                    <div class="row row-table">
+                        <div class="col-xs-4 text-center pv-lg">
+                            <em class="icon-layers fa-3x"></em>
+                        </div>
+                        <div class="col-xs-8 pv-lg">
+                            <div class="h3 mt0">Usadas: {{$ctrl.packIssued}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 pointer" ng-click="">
+                <div class="panel widget">
+                    <div class="row row-table">
+                        <div class="col-xs-4 text-center pv-lg">
+                            <em class="icon-layers fa-3x"></em>
+                        </div>
+                        <div class="col-xs-8 pv-lg">
+                            <div class="h3 mt0">Por emitir: {{$ctrl.packRemain}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 pointer" ng-click="">
+                <div class="panel widget">
+                    <div class="row row-table">
+                        <div class="col-xs-4 text-center pv-lg">
+                            <em class="icon-layers fa-3x"></em>
+                        </div>
+                        <div class="col-xs-8 pv-lg">
+                            <div class="h3 mt0">Validade: {{$ctrl.packExpiresOn}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- START new egars widget-->
+            <div class="col-lg-3 col-md-6 pointer" ng-click="$ctrl.new()" title="Emitir e-GAR">
+                <div class="panel widget bg-green-light shadow-all-around">
+                    <div class="row row-table">
+                        <div class="col-xs-12 text-center pv-lg">
+                            <div class="h2 mt0">Emitir e-GAR</div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END new egars widget-->
+
+            <!-- START warehouse widget-->
+            <div class="col-lg-3 col-md-6 pointer" ng-click="$ctrl.goToMassVolumes()" title="{{$ctrl.lblWarehouseStockQuantity}}">
+                <div class="panel widget bg-green">
+                    <div class="row row-table">
+                        <div class="col-xs-4 text-center bg-green-dark pv-lg">
+                            <em class="fa fa-cubes fa-3x"></em>
+                        </div>
+                        <div class="col-xs-8 pv-lg">
+                            <!-- <div class="h2 mt0">{{$ctrl.lblWarehouseStockQuantityCount}} Kg</div> -->
+                            <div class="h2 mt0">-</div>
+                            <div class="text-uppercase">{{$ctrl.lblWarehouseStockQuantity}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END warehouse widget-->
+
+            <!-- START notifications widget-->
+            <div class="col-lg-3 col-md-6 pointer" ng-click="$ctrl.goToNotifications()" title="{{$ctrl.lblNotifications}}">
+                <div class="panel widget bg-green">
+                    <div class="row row-table">
+                        <div class="col-xs-4 text-center bg-green-dark pv-lg">
+                            <em class="icon-bell fa-3x"></em>
+                        </div>
+                        <div class="col-xs-8 pv-lg">
+                            <div class="h2 mt0">{{$ctrl.newNotificationsCount}}</div>
+                            <div class="text-uppercase">{{$ctrl.lblNotifications}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END notifications widget-->
+
+            <!-- START date widget-->
+            <div class="col-lg-3 col-md-6">
+                <div class="panel widget">
+                    <div class="row row-table">
+                        <div class="col-xs-4 text-center bg-green pv-lg">
+                            <!-- See formats: https://docs.angularjs.org/api/ng/filter/date-->
+                            <!--<now format="MMMM" class="text-sm"></now>-->
+                            <span>{{$ctrl.month}}</span>
+                            <br/>
+                            <now format="d" class="h2 mt0"></now>
+                        </div>
+                        <div class="col-xs-8 pv-lg">
+                            <!--<now format="EEEE" class="text-uppercase"></now>-->
+                            <span class="text-uppercase">{{$ctrl.dayOfWeek}}</span>
+                            <br/>
+                            <now format="h:mm" class="h2 mt0"></now>
+                            <!--<now format="a" class="text-muted text-sm"></now>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END date widget -->
+        </div>
+
+        <div class="row">
+            <!-- START total egars widget-->
+            <div class="col-lg-3 col-md-6 pointer " ng-click="$ctrl.goToEgarsOverview()">
+                <div class="panel widget bg-purple">
+                    <div class="row row-table">
+                        <div class="col-xs-4 text-center bg-purple-dark pv-lg">
+                            <em class="icon-layers fa-3x"></em>
+                        </div>
+                        <div class="col-xs-8 pv-lg">
+                            <!-- <div class="h2 mt0">{{$ctrl.totalEgarsCount}}</div> -->
+                            <div class="h2 mt0">-</div>
+                            <div class="text-uppercase">{{$ctrl.lblTotalEgars}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END total egars widget-->
+
+            <!-- START open egars widget-->
+            <div class="col-lg-3 col-md-6 pointer" ng-click="$ctrl.goToEgarsOverview($ctrl.SMG_EGAR_STATUS.Open)">
+                <div class="panel widget bg-primary">
+                    <div class="row row-table">
+                        <div class="col-xs-4 text-center bg-primary-dark pv-lg">
+                            <em class="fa fa fa-file-o fa-3x"></em>
+                        </div>
+                        <div class="col-xs-8 pv-lg">
+                            <div class="h2 mt0">{{$ctrl.openEgarsCount}}</div>
+                            <div class="text-uppercase">{{$ctrl.lblOpenEgars}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END open egars widget-->
+
+            <!-- START egars waitting for authorization widget-->
+            <div class="col-lg-3 col-md-6 pointer" ng-click="$ctrl.goToEgarsOverview()">
+                <div class="panel widget bg-warning">
+                    <div class="row row-table">
+                        <div class="col-xs-4 text-center bg-warning-dark pv-lg">
+                            <em class="fa fa-clipboard fa-3x"></em>
+                        </div>
+                        <div class="col-xs-8 pv-lg">
+                            <div class="h2 mt0">{{$ctrl.waitingAuthorizationEgarsCount}}</div>
+                            <div class="text-uppercase">{{$ctrl.lblWaitingAuthorizationEgars}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END notifications widget-->
+
+            <!-- START egars closed widget-->
+            <div class="col-lg-3 col-md-6 pointer" ng-click="$ctrl.goToEgarsOverview()">
+                <div class="panel widget bg-success">
+                    <div class="row row-table">
+                        <div class="col-xs-4 text-center bg-success-dark pv-lg">
+                            <em class="fa fa-file-text-o  fa-3x"></em>
+                        </div>
+                        <div class="col-xs-8 pv-lg">
+                            <!-- <div class="h2 mt0">{{$ctrl.finishedEgarCount}}</div> -->
+                            <div class="h2 mt0">-</div>
+                            <div class="text-uppercase">{{$ctrl.lblFinishedEgars}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END egars closed widget-->
+        </div>
+        
+    <div class="row">
+        <div class="col-lg-3">
+            <div id="legalDeadlines-v2" class="panel panel-primary font16">
+                <div class="panel-heading">
+                    <span>Prazos Legais</span>
+                </div>
+                <div class="panel-body">
+                    <div>
+                    <p>e-GARs a 5 dias de expirar o prazo legal</p>
+                        <div class="list-group mb0 pad-top10">
+                            <a class="list-group-item" 
+                                ui-sref="app.expiringEgarList({
+                                    eGarExpiringType: $ctrl.SMG_LEGAL_DEADLINES_TYPES.AsOrigin
+                                })">
+                                <em class="fa fa-fw fa-industry mr"></em>
+                                <span class="label label-purple pull-right">{{$ctrl.asOrigin}}</span>
+                                Produtor/Detentor
+                            </a>
+                        </div>
+        
+                        <div class="list-group mb0 pad-top10">
+                            <a class="list-group-item" 
+                                ui-sref="app.expiringEgarList({
+                                    eGarExpiringType: $ctrl.SMG_LEGAL_DEADLINES_TYPES.AsDestin
+                                })">
+                                <em class="fa fa-fw fa-recycle mr"></em>
+                                <span class="label label-purple pull-right">{{$ctrl.asDestin}}</span>
+                                Destinatário
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+</div>

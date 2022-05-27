@@ -1,0 +1,80 @@
+<div class="ngdialog-message">
+
+<form role="form" name="$ctrl.formAnonymousReject" ng-submit="$ctrl.submitFormAnonymousReject()" novalidate="" class="form-validate form-horizontal">
+
+		<div class="panel">
+			<h3 class="mar-top0">
+        <!--Rejeitar emissão
+        <br>-->
+        <span class="consult-egar-number">
+          e-Gar Nº {{$ctrl.gar.Number}}
+        </span>
+        <span title="Ver PDF" class="pointer pad-left10" ng-click="$ctrl.getFile($ctrl.gar.FileUrl)">
+          <em class="fa fa-file-pdf-o"></em>
+        </span>
+      </h3>
+			
+      <div class="row pad-top10">
+        <div class="col-sm-12">
+          <p>
+            Para rejeitar a emissão da e-Gar, por favor insira um comentário e introduza a password de acesso APA / SILIAMB.
+          </p>
+        </div>
+      </div>
+
+      <!-- comment -->
+			<div class="row pad-top10">
+				<div class="col-md-12">
+					<label class="control-label mar-bottom0">Comentário</label>
+          <div class="ng-scope">
+            <textarea id="txt-comment" name="comment"
+                          class="form-control no-resize"
+                          required
+                          ng-model="$ctrl.comment" 
+                          ng-maxlength="200" rows="2">
+            </textarea>
+            <span ng-show="$ctrl.validateInput('comment', 'required', 'formAnonymousReject')" class="text-danger">Obrigatório</span>
+            <span ng-show="$ctrl.validateInput('comment', 'maxlength', 'formAnonymousReject')" class="text-danger">Máximo de 200 caracteres</span>
+            <span ng-show="$ctrl.serverValidationErrors['comment']" class="text-danger">
+              {{$ctrl.serverValidationErrors['comment']}}
+            </span>
+            
+          </div>
+				</div>
+			</div>
+
+      <!-- apa access -->
+      <div class="row pad-top10">
+        <div class="col-md-12">
+					<label class="control-label mar-bottom0">Password</label>
+					<input name="apaAccess"  
+							required
+							ng-model="$ctrl.apaAccess" 
+							type="password" 
+							class="form-control" />
+					<span ng-show="$ctrl.validateInput('apaAccess', 'required', 'formAnonymousReject')" class="text-danger">Obrigatório</span>
+					<span ng-show="$ctrl.serverValidationErrors['ApaAccess']" class="text-danger">
+						{{$ctrl.serverValidationErrors['ApaAccess']}}
+					</span>
+					<span ng-show="$ctrl.serverApplicationErrors['ApaAccess']" class="text-danger">
+						{{$ctrl.serverApplicationErrors['ApaAccess']}}
+					</span>
+					<span ng-show="$ctrl.serverExternalErrors['ApaAccess']" class="text-danger">
+						{{$ctrl.serverExternalErrors['ApaAccess']}}
+					</span>
+				</div>
+      </div>
+
+		</div> 
+    <!--END PANEL-->
+
+		<div class="row pad-top10 text-right">
+			<div class="col-sm-12">
+				<button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">Cancelar</button>
+				<button type="submit" class="btn btn-danger">Rejeitar</button>
+			</div>
+		</div>
+
+</form>
+  
+</div>

@@ -1,0 +1,34 @@
+<div class="abs-center wd-xl">
+   <!-- START panel-->
+   <div class="text-center">
+      <div class="text-lg mb-lg">500</div>
+      <p class="lead m0">Ocurreu um erro inesperado.</p>     
+      <div class="pad-top20">
+        <p>Por favor clique em voltar para tentar de novo a operação.</p>
+        <button type="button" class="btn btn-labeled btn-default" ng-click="$ctrl.back()">
+          <span class="btn-label">
+            <i class="fa fa-caret-left"></i>
+          </span>
+          Voltar
+        </button>
+      </div>
+      <div class="pad-top20">
+        <p>No caso do erro continuar a ocorrer, por favor contacte os nossos serviços de suporte.</p>
+        <button type="button" class="btn btn-labeled btn-info" ng-click="$ctrl.support()">
+          <span class="btn-label">
+            <i class="fa fa-support"></i>
+          </span>
+          Suporte
+        </button>
+      </div>
+   </div>
+
+   <div class="p-lg text-center">
+      <span>&copy;</span>
+      <span ng-bind="app.year"></span>
+      <span>-</span>
+      <span ng-bind="app.name"></span>
+      <br/>
+      <span ng-bind="app.description"></span>
+   </div>
+</div>

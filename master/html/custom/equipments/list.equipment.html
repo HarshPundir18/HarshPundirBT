@@ -1,0 +1,99 @@
+<h3>Os meus Equipamento</h3>
+
+<div id="main">
+  <div class="panel panel-default">
+    <div class="panel-body mar-top10">
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-3">
+          <input
+            name="Id"
+            ng-model="vm.filters.Id"
+            type="text"
+            class="form-control tableFilter"
+            placeholder="External Id"
+          />
+        </div>
+        <div class="col-sm-3">
+          <input
+            name="equipments"
+            ng-model="vm.filters.equipments"
+            type="text"
+            class="form-control tableFilter"
+            placeholder="equipments"
+          />
+        </div>
+        <div class="col-sm-3"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <a ng-href="/#/app/equipments/new" class="pull-right btn btn-success">
+        Criar Equipamento
+      </a>
+    </div>
+
+    <div class="panel-body mar-top20">
+      <!-- <div ng-controller="equipmentsTableController as table1"> -->
+      <div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">equipments</th>
+              <th scope="col">detail</th>
+              <th scope="col">latitude</th>
+              <th scope="col">longitude</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="equipment in vm.equipments | filter:{ ExternalId:vm.filters.Id, Name: vm.filters.equipments }">
+              <td>{{equipment.ExternalId}}</td>
+              <td>{{equipment.Name}}</td>
+              <td>{{equipment.Detail}}</td>
+              <td>{{equipment.DeliveryLatitude}}</td>
+              <td>{{equipment.DeliveryLongitude}}</td>
+              <td class="action-buttons">
+                <span title="Editar" ng-click="vm.editActionClick(equipment.Id)">
+                  <em class="fa fa-pencil"></em>
+                </span>
+                <span title="Remover" ng-click="vm.deleteActionClick(equipment)">
+                  <em class="fa fa-times"></em>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Templates -->
+<script id="diag-equipmentDelete" type="text/ng-template">
+  <div class="ngdialog-message">
+  	<div class="panel">
+  		<h3>Remover Equipamento</h3>
+  		<div class="row">
+  			<div class="col-md-12">
+  				<p>
+  					Confimar a remoção do Equipamento <strong> {{vm.equipment.ExternalId}} </strong> - <strong>{{vm.equipment.Name}}</strong> ?
+  				</p>
+  				<p>
+  					Esta operação não poderá ser revertida!
+  				</p>
+  			</div>
+  		</div>
+  	</div>
+
+  	<div class="row">
+  		<div class="col-md-12  text-right">
+  			<button type="button" ng-click="confirm(confirmValue)" class="btn btn-primary mr">Confirmar</button>
+  			<button type="button" ng-click="closeThisDialog('button')" class="btn btn-default mr">Cancelar</button>
+  		</div>
+  	</div>
+  </div>
+</script>

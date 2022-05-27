@@ -1,0 +1,10 @@
+.mass-volumes--header {
+    font-weight: bold;
+    font-size: $font-size-large;
+}
+
+.mass-volumes--row {
+    padding-top: $padding-small-vertical;
+    padding-bottom: $padding-small-vertical;
+    border-bottom: $legend-border-color 1px solid;
+}

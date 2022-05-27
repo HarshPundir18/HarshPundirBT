@@ -1,0 +1,12 @@
+<label ng-if="vm.labelText" class="control-label">
+    {{vm.labelText}}
+</label>
+<label ng-if="!vm.labelText && !vm.hideLabelSpace" class="control-label">
+    &nbsp;
+</label>
+
+<div class="">
+    <div uib-timepicker="uib-timepicker" ng-model="vm.model" ng-change="vm.changed()"
+        hour-step="vm.hstep" minute-step="vm.mstep" show-meridian="vm.ismeridian">
+    </div>
+</div>

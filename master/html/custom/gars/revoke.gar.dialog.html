@@ -1,0 +1,43 @@
+<div class="ngdialog-message">
+    <form role="form" name="$ctrl.formValidate" ng-submit="$ctrl.submitRevokeForm()" novalidate="" class="form-validate form-horizontal">
+
+		<div class="panel">
+			<h3>Anular e-GAR</h3>
+			<div class="row">
+				<div class="col-md-12">
+					<p>
+						Confimar a operação de Aular a E-GAR <strong>{{$ctrl.gar.Number}}</strong> ?
+					</p>
+					<p>
+						Esta operação não poderá ser revertida!
+					</p>
+				</div>
+            </div>
+            
+            <div class="row pad-top10">
+                <div class="col-md-12">
+                    <label class="control-label mar-bottom0">Comentário</label>
+                    <textarea id="txt-revokeObs" name="revokeObs"
+                                class="form-control no-resize"
+                                required
+                                ng-model="$ctrl.revokeObs" 
+                                ng-maxlength="200" rows="2">
+                    </textarea>
+                    <span ng-show="$ctrl.validateInput('revokeObs', 'required', 'formAnonymousReject')" class="text-danger">Obrigatório</span>
+                    <span ng-show="$ctrl.validateInput('revokeObs', 'maxlength', 'formAnonymousReject')" class="text-danger">Máximo de 200 caracteres</span>
+                    <span ng-show="$ctrl.serverValidationErrors['Obs']" class="text-danger">
+                        {{$ctrl.serverValidationErrors['Obs']}}
+                    </span>
+                </div>
+            </div>
+
+		</div>
+
+		<div class="row pad-top10 text-right">
+            <div class="col-sm-12">
+                <button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">Cancelar</button>
+                <button type="submit" class="btn btn-success">Anular</button>
+            </div>
+        </div>
+    </form>
+</div>

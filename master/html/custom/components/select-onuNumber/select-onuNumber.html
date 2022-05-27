@@ -1,0 +1,32 @@
+<ui-select ng-model="vm.selectionModel" 
+    theme="bootstrap"
+    spinner-enabled="true"
+    ng-change="vm.onOnuNumberChange($select)">
+
+    <ui-select-match allow-clear="true" placeholder="Pesquisar código ou descrição...">
+        {{$select.selected.description}}
+    </ui-select-match>
+
+    <ui-select-choices 
+        refresh="fetch($select)" 
+        refresh-delay="300" 
+        repeat="item in items">
+
+        {{item.description}}
+        <div ng-if="$index == $select.items.length-1">
+            <button 
+                ng-if="!vm.hideLoadingMore" 
+                class="btn btn-xs btn-info" 
+                style="width: 100%; margin-top: 5px;" 
+                ng-click="fetch($select, $event);"
+                ng-disabled="vm.checkIfLoading">
+                Carregar mais...
+            </button>                 
+        </div>
+    </ui-select-choices>
+
+    <ui-select-no-choice>
+        Não foram encontrados resultados
+    </ui-select-no-choice>
+
+</ui-select>

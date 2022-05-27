@@ -1,0 +1,83 @@
+<div class="ngdialog-message">
+
+    <h3>
+        Definições da lista
+    </h3>
+
+    <div class="pad-top20"></div>
+    
+    <fieldset>
+        <legend>1 - Tab selecionado por omissão</legend>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="radio c-radio c-radio-nofont">
+                        <label>
+                            <input type="radio" 
+                                name="a"
+                                value="{{vm.SMG_INTERVENIENT_TYPES.Origin}}" 
+                                ng-checked="vm.listDefinition.defaultTab == vm.SMG_INTERVENIENT_TYPES.Origin"
+                                ng-change="vm.onDefaultTabChange(vm.SMG_INTERVENIENT_TYPES.Origin)"
+                                ng-model="vm.listDefinition.defaultTab">
+                            <span></span>Produtor
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="col-sm-12">
+                    <div class="radio c-radio c-radio-nofont">
+                        <label>
+                            <input type="radio" 
+                                name="a"
+                                value="{{vm.SMG_INTERVENIENT_TYPES.Destin}}" 
+                                ng-checked="vm.listDefinition.defaultTab == vm.SMG_INTERVENIENT_TYPES.Destin"
+                                ng-change="vm.onDefaultTabChange(vm.SMG_INTERVENIENT_TYPES.Destin)"
+                                ng-model="vm.listDefinition.defaultTab">
+                            <span></span>Destinatário
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="radio c-radio c-radio-nofont">
+                        <label>
+                            <input type="radio" 
+                                name="a"
+                                value="{{vm.SMG_INTERVENIENT_TYPES.Transporter}}" 
+                                ng-checked="vm.listDefinition.defaultTab == vm.SMG_INTERVENIENT_TYPES.Transporter"
+                                ng-change="vm.onDefaultTabChange(vm.SMG_INTERVENIENT_TYPES.Transporter)"
+                                ng-model="vm.listDefinition.defaultTab">
+                            <span></span>Transportador
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset> 
+
+
+    <fieldset>
+        <legend>2 - Número de items por pagina</legend>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-4">
+                        <smg-select name="selectedPageSize"     
+                            label-text='Selecionar' 
+                            can-load-more='false'
+                            selected-item='vm.selectedPageSize'
+                            items ="vm.numberOfItemsPerPage">
+                        </smg-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="row pad-top10 text-right">
+        <div class="col-sm-12">
+          <button type="button" ng-click="closeThisDialog('cancel')" class="btn btn-default">Cancelar</button>
+          <button type="button" ng-click="vm.saveListDefinitions()" class="btn btn-success">Gravar</button>
+        </div>
+      </div>
+</div>

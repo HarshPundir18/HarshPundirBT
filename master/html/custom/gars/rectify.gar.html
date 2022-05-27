@@ -1,0 +1,528 @@
+<div id="main">
+    <h3 class="ng-scope">Fechar / Corrigir E-GAR</h3>
+
+    <form role="form" name="$ctrl.formValidate" ng-submit="$ctrl.submitForm()" novalidate="" class="form-validate form-horizontal">
+
+        <div class="row">
+            <div class="col-sm-6">
+                <i class="text-danger fa fa-asterisk" /> - Campos Obrigatórios
+            </div>
+
+            <div class="col-sm-6">
+                <div class="text-right">
+                    <button type="button" class="btn btn-labeled btn-default" ng-click="$ctrl.cancel()">
+                        <span class="btn-label">
+                            <i class="fa fa-arrow-left"></i>
+                        </span>
+                        Voltar
+                    </button>
+                    <button type="submit" class="btn btn-labeled btn-success mar-right10">
+                        <span class="btn-label">
+                            <i class="fa fa-check"></i>
+                        </span>
+                        Gravar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!--panelApa-->
+        <div id="panelApa" class="panel panel-default mar-top15">
+            <div ng-class="{'panel-heading-collapsed':panelApa}" class="panel-heading">
+                <h4>
+                    <em class="fa fa-file-text pad-right10"></em>
+                    Dados APA <small>({{$ctrl.originName}} Intervêm como {{$ctrl.intervinientType}})</small>
+                </h4>
+                <paneltool tool-collapse="tool-collapse" class="pull-right">
+                    <a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="panelApa = !panelApa"
+                        class="ng-scope">
+                        <em ng-show="panelApa" class="fa fa-plus ng-no-animation ng-hide"></em>
+                        <em ng-show="!panelApa" class="fa fa-minus ng-no-animation"></em>
+                    </a>
+                </paneltool>
+            </div>
+
+            <div uib-collapse="panelApa" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+                <div class="panel-body">
+                    <!--EGar-->
+                    <fieldset id="apa">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <!--Number-->
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Número</label>
+                                        <div class="">{{$ctrl.number}}</div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Código Verificação</label>
+                                        <div class="">{{$ctrl.verificationCode}}</div>
+                                    </div>
+
+                                    <!--Status-->
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Estado</label>
+                                        <br>
+                                        <div class="">{{$ctrl.status}} (<small>Em: {{$ctrl.statusDate}}</small>)</div>
+                                    </div>
+
+                                    <!--Authorized-->
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Autorizada</label>
+                                        <div class="">{{$ctrl.waitingAuthorization}}</div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <!--END panelApa-->
+
+        <!--panelOrigin-->
+        <div id="panelOrigin" class="panel panel-default mar-top15">
+            <div ng-class="{'panel-heading-collapsed':panelOrigin}" class="panel-heading">
+                <h4>
+                    <em class="fa fa-bank pad-right10"></em>1 - Produtor / Detentor
+                </h4>
+                <paneltool tool-collapse="tool-collapse" class="pull-right">
+                    <a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="panelOrigin = !panelOrigin"
+                        class="ng-scope">
+                        <em ng-show="panelOrigin" class="fa fa-plus ng-no-animation ng-hide"></em>
+                        <em ng-show="!panelOrigin" class="fa fa-minus ng-no-animation"></em>
+                    </a>
+                </paneltool>
+            </div>
+
+            <div uib-collapse="panelOrigin" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+                <div class="panel-body">
+                    <!--remetente-->
+                    <fieldset id="origin">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="row pad-top10">
+                                    <!--Vat-->
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            NIF
+                                        </label>
+                                        <div class="">{{$ctrl.vatOrigin}}</div>
+                                    </div>
+
+                                    <!--cod apa-->
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Código APA
+                                        </label>
+                                        <div class="">{{$ctrl.codApaOrigin}}</div>
+                                    </div>
+
+                                    <!--tipo produtor PI/OGR-->
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Tipo Produtor
+                                        </label>
+                                        <div class="">{{$ctrl.selectedProducerType}}</div>
+                                    </div>
+                                </div>
+
+                                <div class="row pad-top10">
+                                    <!--Establishment Name-->
+                                    <div class="col-sm-4">
+                                        <label class="control-label">
+                                            Estabelecimento
+                                        </label>
+                                        <div class="">{{$ctrl.nameOrigin}}</div>
+                                    </div>
+
+                                    <!--Establishment Addres-->
+                                    <div class="col-sm-8">
+                                        <label class="control-label">Morada</label>
+                                        <div class="">{{$ctrl.addressOrigin}}</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <!--END remetente-->
+
+                    <!--residuo Transportado-->
+                    <fieldset id="residue">
+                        <legend>Residuo</legend>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <!--Quantity-->
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Quantidade (Kg)</label>
+                                        <div class="">{{$ctrl.quantity}} Kg</div>
+                                    </div>
+
+                                    <div ng-if="true" class="col-sm-3">
+                                        <label class="control-label">Etiqueta</label>
+                                        <div class="">{{$ctrl.productLabel ? $ctrl.productLabel : '-'}}</div>
+                                    </div>
+                                </div>
+
+                                <div class="row pad-top10">
+                                    <!--Ler Code-->
+                                    <div class="col-sm-4">
+                                        <label class="control-label">Código LER</label>
+                                        <div class="">{{$ctrl.selectedLerCode.value}}</div>
+                                    </div>
+
+                                    <!--Operation Code-->
+                                    <div class="col-sm-4">
+                                        <label class="control-label">Código Operação</label>
+                                        <div class="">{{$ctrl.selectedOperationCode.value}}</div>
+                                    </div>
+
+                                    <!--Group Code-->
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Código Grupo</label>
+                                        <div class="">
+                                            {{$ctrl.groupCodeDescription ? $ctrl.groupCodeDescription : '-'}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Description-->
+                                <div class="row pad-top10">
+                                    <div class="col-sm-12">
+                                        <label class="control-label">Descrição</label>
+                                        <div class="">{{$ctrl.lerDescription}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <!--END residuo Transportado-->
+                </div>
+            </div>
+        </div>
+        <!--END panelOrigin-->
+
+        <!--panelTransporters-->
+        <div id="panelTransporters" class="panel panel-default mar-top15">
+            <div ng-class="{'panel-heading-collapsed':panelTransporters}" class="panel-heading">
+                <h4><em class="fa fa-truck pad-right10"></em>2 - Transportadores</h4>
+                <paneltool tool-collapse="tool-collapse" class="pull-right">
+                    <a href="#" panel-collapse="" uib-tooltip="Encolher Painel"
+                        ng-click="panelTransporters = !panelTransporters" class="ng-scope">
+                        <em ng-show="panelTransporters" class="fa fa-plus ng-no-animation ng-hide"></em>
+                        <em ng-show="!panelTransporters" class="fa fa-minus ng-no-animation"></em>
+                    </a></paneltool>
+            </div>
+
+            <div uib-collapse="panelTransporters" class="panel-wrapper in collapse" aria-expanded="true"
+                aria-hidden="false">
+                <div class="panel-body">
+                    <!--transportador-->
+                    <div ng-repeat="transporter in $ctrl.transportersArray">
+                        <fieldset class="mar-bottom0">
+                            <div class="row">
+                                <!--nif-->
+                                <label class="col-sm-1 control-label">NIF:</label>
+                                <div class="col-sm-1">
+                                    <span class="control-label-text">{{transporter.Nif}}</span>
+                                </div>
+
+                                <!--plate-->
+                                <label class="col-sm-1 control-label">Matricula:</label>
+                                <div class="col-sm-1">
+                                    <span class="control-label-text">{{transporter.Matricula}}</span>
+                                </div>
+
+                                <!--transport date-->
+                                <label class="col-sm-2 control-label">Data de Transporte:</label>
+                                <div class="col-sm-2">
+                                    <span class="control-label-text">{{transporter.FormatedDataHoraInicio}}</span>
+                                </div>
+
+                                <!--transport hour-->
+                                <label class="col-sm-1 control-label">Válido até:</label>
+                                <div class="col-sm-2">
+                                    <span class="control-label-text">{{transporter.FormatedDataValidade}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <!--transportador-->
+                </div>
+            </div>
+
+        </div>
+        <!--END panelTransporters-->
+
+
+        <!--panelDestin-->
+        <div id="panelDestin" class="panel panel-default mar-top15">
+            <div ng-class="{'panel-heading-collapsed':panelDestin}" class="panel-heading">
+                <h4><em class="fa fa-industry pad-right10"></em>3 - Destinatário</h4>
+                <paneltool tool-collapse="tool-collapse" class="pull-right">
+                    <a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="panelDestin = !panelDestin"
+                        class="ng-scope">
+                        <em ng-show="panelDestin" class="fa fa-plus ng-no-animation ng-hide"></em>
+                        <em ng-show="!panelDestin" class="fa fa-minus ng-no-animation"></em>
+                    </a>
+                </paneltool>
+            </div>
+
+            <div uib-collapse="panelDestin" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+                <div class="panel-body">
+
+                    <fieldset id="destin">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="row pad-top10">
+                                    <!--nif-->
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            NIF
+                                        </label>
+                                        <div class="">{{$ctrl.vatDestin}}</div>
+                                    </div>
+
+                                    <!--cod apa-->
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Código APA
+                                        </label>
+                                        <div class="">{{$ctrl.codApaDestin}}</div>
+                                    </div>
+
+                                    <!--num pgl-->
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Número PGL
+                                            <span class="pad-left5 text-danger">
+                                                <i class="fa fa-asterisk" />
+                                            </span>
+                                        </label>
+                                        <input id="inp-numPgl" ng-disabled="!$ctrl.showPglNumber" name="numPgl"
+                                            ng-model="$ctrl.numPgl" type="text" class="form-control" />
+                                        <span ng-show="$ctrl.serverValidationErrors['numPgl']" class="text-danger">
+                                            {{$ctrl.serverValidationErrors['numPgl']}}
+                                            {{$ctrl.serverApplicationErrors['numPgl']}}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="row pad-top10">
+                                    <div class="col-sm-4">
+                                        <label class="control-label">
+                                            Estabelecimento
+                                        </label>
+                                        <div class="">{{$ctrl.nameDestin}}</div>
+                                    </div>
+
+                                    <div class="col-sm-8">
+                                        <label class="control-label">
+                                            Morada
+                                        </label>
+                                        <div class="">{{$ctrl.addressDestin}}</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset id="destinRectification">
+                        <legend>Fecho / Correção</legend>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+
+                                <div class="row">
+                                    <!--Quantity-->
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Quantidade (Kg)
+                                            <span class="pad-left5 text-danger">
+                                                <i class="fa fa-asterisk" />
+                                            </span>
+                                        </label>
+                                        <input id="inp-quantity" name="quantity" ng-model="$ctrl.quantity" required=""
+                                            type="text" class="form-control" placeholder="Ex: 10" />
+                                        <span ng-show="$ctrl.validateInput('quantity', 'required')"
+                                            class="text-danger">Obrigatório</span>
+                                        <span ng-show="$ctrl.serverValidationErrors['quantity']" class="text-danger">
+                                            {{$ctrl.serverValidationErrors['quantity']}}
+                                            {{$ctrl.serverApplicationErrors['quantity']}}
+                                        </span>
+                                    </div>
+
+                                    <!--Ler Code-->
+                                    <div class="col-sm-4">
+                                        <label class="control-label">
+                                            Código LER
+                                            <span class="pad-left5 text-danger">
+                                                <i class="fa fa-asterisk" />
+                                            </span>
+                                        </label>
+                                        <select id="inp-selectedLerCode" name="selectedLerCode"
+                                            ng-change="$ctrl.lerCodeChange()" required=""
+                                            placeholder-text-single="'Pesquisar'"
+                                            no-results-text="'Não foram encontrados resultados'" chosen=""
+                                            class="chosen-select input-md"
+                                            ng-options="address as address.value for address in $ctrl.lerCodes"
+                                            ng-model="$ctrl.selectedLerCode">
+                                            <option></option>
+                                        </select>
+                                        <span ng-show="$ctrl.validateInput('selectedLerCode', 'required')"
+                                            class="text-danger">Obrigatório</span>
+                                        <span ng-show="$ctrl.validateInput('selectedLerCode', 'pattern')"
+                                            class="text-danger">Formato inválido</span>
+                                        <span ng-show="$ctrl.serverValidationErrors['selectedLerCode']"
+                                            class="text-danger">
+                                            {{$ctrl.serverValidationErrors['selectedLerCode']}}
+                                            {{$ctrl.serverApplicationErrors['selectedLerCode']}}
+                                        </span>
+                                    </div>
+
+                                    <!--Operation Code-->
+                                    <div class="col-sm-4">
+                                        <label class="control-label">
+                                            Código Operação
+                                            <span class="pad-left5 text-danger">
+                                                <i class="fa fa-asterisk" />
+                                            </span>
+                                        </label>
+                                        <select id="inp-selectedOperationCode" name="selectedOperationCode" required=""
+                                            placeholder-text-single="'Pesquisar'"
+                                            no-results-text="'Não foram encontrados resultados'" chosen=""
+                                            class="chosen-select input-md"
+                                            ng-options="address as address.value for address in $ctrl.operationCodes"
+                                            ng-model="$ctrl.selectedOperationCode">
+                                            <option></option>
+                                        </select>
+                                        <span ng-show="$ctrl.validateInput('selectedOperationCode', 'required')"
+                                            class="text-danger">Obrigatório</span>
+                                        <span ng-show="$ctrl.serverValidationErrors['selectedOperationCode']"
+                                            class="text-danger">
+                                            {{$ctrl.serverValidationErrors['selectedOperationCode']}}
+                                            {{$ctrl.serverApplicationErrors['selectedOperationCode']}}
+                                        </span>
+                                    </div>
+
+                                    <!--Group Code-->
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Código Grupo
+                                            <span class="pad-left5 text-danger">
+                                                <i class="fa fa-asterisk" />
+                                            </span>
+                                        </label>
+                                        <select id="inp-groupCode" name="groupCode" ng-model="$ctrl.groupCode"
+                                            ng-disabled="!$ctrl.showGroupCode"
+                                            class="form-control ng-pristine ng-valid ng-not-empty ng-touched">
+                                            <option ng-repeat="option in $ctrl.allGroupCodes" value="{{option.key}}">
+                                                {{option.value}}</option>
+                                        </select>
+                                        <span ng-show="$ctrl.serverValidationErrors['groupCode']" class="text-danger">
+                                            {{$ctrl.serverValidationErrors['groupCode']}}
+                                            {{$ctrl.serverApplicationErrors['groupCode']}}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!--rectification fields-->
+                                <div class="row pad-top20">
+                                    <!--CLOSE DATE-->
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Data Fecho
+                                            <span class="text-danger">
+                                                <i class="fa fa-asterisk" />
+                                            </span>
+                                        </label>
+                                        <div ng-controller="datepickerController as dp" class="ng-scope">
+                                            <input id="inp-endDate" name="endDate" placeholder="Ex: 2016-01-01"
+                                                type="text" uib-datepicker-popup="yyyy-MM-dd" ng-model="endDate"
+                                                is-open="dp.opened" max-date="'31-12-2100'"
+                                                uib-datepicker-options="dp.dateOptions" ng-required="true"
+                                                close-text="Fechar" class="form-control ng-isolate-scope ng-touched"
+                                                required="" ng-click="dp.open($event)">
+                                            <span ng-show="$ctrl.validateInput('endDate', 'required')"
+                                                class="text-danger">Obrigatório</span>
+                                            <span ng-show="$ctrl.serverValidationErrors['endDate']" class="text-danger">
+                                                {{$ctrl.serverValidationErrors['endDate']}}
+                                                {{$ctrl.serverApplicationErrors['endDate']}}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <!--Destin Comment-->
+                                    <div class="col-sm-5">
+                                        <label class="control-label">
+                                            Comentário Destinatário -
+                                            <span class="pad-left10 text-normal">{{$ctrl.nameDestin}}</span>
+                                            <span class="text-danger">
+                                                <i class="fa fa-asterisk" />
+                                            </span>
+                                        </label>
+
+                                        <textarea id="txt-comment" name="comment" class="form-control no-resize"
+                                            required ng-model="$ctrl.comment" ng-maxlength="200" rows="2">
+                  </textarea>
+                                        <span ng-show="$ctrl.validateInput('comment', 'required')"
+                                            class="text-danger">Obrigatório</span>
+                                        <span ng-show="$ctrl.validateInput('comment', 'maxlength')"
+                                            class="text-danger">Máximo de 200 caracteres</span>
+                                        <span ng-show="$ctrl.serverValidationErrors['comment']" class="text-danger">
+                                            {{$ctrl.serverValidationErrors['comment']}}
+                                        </span>
+                                    </div>
+
+                                    <!--Origin Comment-->
+                                    <div class="col-sm-5" ng-show="$ctrl.commentOrigin">
+                                        <label class="control-label">
+                                            Comentário Produtor / Detentor -
+                                            <span class="pad-left10 text-normal">{{$ctrl.nameOrigin}}</span>
+                                        </label>
+                                        <div class="control-label-text">
+                                            {{$ctrl.commentOrigin}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <!--END panelDestin-->
+
+        <div class="row mar-top15">
+            <div class="col-sm-6">
+                <i class="text-danger fa fa-asterisk" /> - Campos Obrigatórios
+            </div>
+
+            <div class="col-sm-6">
+                <div class="text-right">
+                    <button type="button" class="btn btn-labeled btn-default" ng-click="$ctrl.cancel()">
+                        <span class="btn-label">
+                            <i class="fa fa-arrow-left"></i>
+                        </span>
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-labeled btn-success mar-right10">
+                        <span class="btn-label">
+                            <i class="fa fa-check"></i>
+                        </span>
+                        Gravar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+</div>

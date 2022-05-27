@@ -1,0 +1,100 @@
+<div class="ngdialog-message">
+
+<form role="form" name="$ctrl.formAnonymousAccept" ng-submit="$ctrl.submitFormAnonymousAccept()" novalidate="" class="form-validate form-horizontal">
+
+		<div class="panel">
+			<h3 class="mar-top0">
+        <!--Aceitar emissão 
+        <br>-->
+        <span class="consult-egar-number">
+          e-Gar Nº {{$ctrl.gar.Number}}
+        </span>
+        <span title="Ver PDF" class="pointer pad-left10" ng-click="$ctrl.getFile($ctrl.gar.FileUrl)">
+          <em class="fa fa-file-pdf-o"></em>
+        </span>
+      </h3>
+			
+      <!-- info text -->
+      <div class="row pad-top10">
+        <div class="col-sm-12">
+          <p>
+            Para aceitar a emissão da e-Gar, por favor confirme a data de fecho e introduza a password de acesso APA / SILIAMB.
+          </p>
+        </div>
+      </div>
+
+      <!-- close date -->
+			<div class="row pad-top10">
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Data de Fecho / Aceitação</label>
+          <div ng-controller="datepickerController as dp" class="ng-scope">
+            <div class="input-group">
+              <input id="inp-endDate" 
+                    name="endDate" 
+                    placeholder="Ex: 2016-01-01" 
+                    type="text" 
+                    uib-datepicker-popup="yyyy-MM-dd" 
+                    ng-change="dp.changed(transporter.index)"
+                    ng-model="endDate"
+                    is-open="dp.opened" 
+                    max-date="'31-12-2100'" 
+                    uib-datepicker-options="dp.dateOptions" 
+                    ng-required="true" 
+                    close-text="Close" 
+                    class="form-control ng-isolate-scope ng-touched" 
+                    required="" 
+                    ng-click="dp.open($event)">
+              <span class="input-group-btn">
+                <button type="button" ng-click="dp.open($event)" class="btn btn-default">
+                  <em class="fa fa-calendar"></em>
+                </button>
+              </span>
+            </div>
+            <span ng-show="$ctrl.validateInput('endDate', 'required', 'formAnonymousAccept')" class="text-danger">Obrigatório</span>
+            <span ng-show="$ctrl.serverValidationErrors['EndDate']" class="text-danger">
+              {{$ctrl.serverValidationErrors['EndDate']}}
+              {{$ctrl.serverApplicationErrors['EndDate']}}
+            </span>
+            <span ng-show="$ctrl.serverExternalErrors['EndDate']" class="text-danger">
+              {{$ctrl.serverExternalErrors['EndDate']}}
+            </span>
+            
+          </div>
+				</div>
+			</div>
+
+      <!-- apa access -->
+      <div class="row pad-top10">
+        <div class="col-md-12">
+					<label class="control-label mar-bottom0">Password</label>
+					<input name="apaAccess"  
+							required
+							ng-model="$ctrl.apaAccess" 
+							type="password" 
+							class="form-control" />
+					<span ng-show="$ctrl.validateInput('apaAccess', 'required', 'formAnonymousAccept')" class="text-danger">Obrigatório</span>
+					<span ng-show="$ctrl.serverValidationErrors['ApaAccess']" class="text-danger">
+						{{$ctrl.serverValidationErrors['ApaAccess']}}
+					</span>
+					<span ng-show="$ctrl.serverApplicationErrors['ApaAccess']" class="text-danger">
+						{{$ctrl.serverApplicationErrors['ApaAccess']}}
+					</span>
+					<span ng-show="$ctrl.serverExternalErrors['ApaAccess']" class="text-danger">
+						{{$ctrl.serverExternalErrors['ApaAccess']}}
+					</span>
+				</div>
+      </div>
+
+		</div> 
+    <!--END PANEL-->
+
+		<div class="row pad-top10 text-right">
+			<div class="col-sm-12">
+				<button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">Cancelar</button>
+				<button type="submit" class="btn btn-success">Aceitar</button>
+			</div>
+		</div>
+
+</form>
+  
+</div>

@@ -1,0 +1,103 @@
+<h3>Lista de E-GARs</h3>
+
+
+
+<div class="panel panel-default">
+  <!--<div class="panel-heading">
+  </div>-->
+
+  <div ng-controller="dataTableController as table1" class="panel-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <button title="Tipo de interveniente Remetente" ng-click="table1.clearFilters()" class="btn btn-info">
+          Limpar Filtros
+        </button>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="text-right">
+          <a ng-href="/#/app/gars/new" class="pull-right btn btn-success">
+            Criar EGar
+          </a>
+        </div>
+      </div> 
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <table id="table0" class="row-border hover pad-top30 col-sm-12" 
+            datatable="" 
+            dt-instance="table1.dtInstance"  
+            dt-columns="table1.dtColumns" 
+            dt-options="table1.dtOptions">
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal Templates -->
+<script id="diag-garDelete" type="text/ng-template">
+	<div class="ngdialog-message">
+		<div class="panel">
+			<h3>Apagar E-GAR</h3>
+			<div class="row">
+				<div class="col-md-12">
+					<p>
+						Confimar a operação de apagar a E-GAR <strong>{{gar.Number}}</strong> ?
+					</p>
+					<p>
+						Esta operação não poderá ser revertida!
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12  text-right">
+				<button type="button" ng-click="confirm(confirmValue)" class="btn btn-primary mr">Confirmar</button>
+				<button type="button" ng-click="closeThisDialog('button')" class="btn btn-default mr">Cancelar</button>
+			</div>
+		</div>
+	</div>
+</script>
+
+
+<!--
+      <br/>
+      <a ng-mouseover="showPopover=true;" ng-mouseleave="showPopover=false;" class="popover-trigger">
+        Link 
+        <div class="popover" ng-show="showPopover">
+          <span>{{ popover.title }}</span>
+          {{ popover.message }}
+        </div>
+      </a>
+
+      <br/>
+      <br/>
+      <br/>
+
+      <a ng-mouseover="showPopover=true;" ng-mouseleave="showPopover=false;" class="popover-trigger">
+        Link 
+        <div class="popover" ng-show="showPopover">
+          <span>{{ popover.title }}</span>
+          {{ popover.message }}
+        </div>
+      </a>
+
+      <br/>
+      <br/>
+      <br/>
+
+      
+      <a ng-mouseover="showPopoverObject.ex1=true;" ng-mouseleave="showPopoverObject.ex1=false;" class="popover-trigger">
+        Link 
+        <div class="popover" ng-show="showPopoverObject.ex1">
+          <span>{{ popover.title }}</span>
+          {{ popover.message }}
+        </div>
+      </a>
+ -->
+
+

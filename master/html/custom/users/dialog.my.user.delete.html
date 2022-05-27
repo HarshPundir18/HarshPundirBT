@@ -1,0 +1,56 @@
+
+<div id="leaveSmartgar" class="ngdialog-message">
+    <div class="panel">
+        <div class="panel-body">
+            <h3 class="mar-top0">
+                <div class="row">
+                    <div class="col-xs-1">
+                        <em class="fa fa-exclamation-triangle fa-2x"></em>
+                    </div>
+                    <div class="col-xs-11 mar-top10">
+                        Utilização SmartGAR
+                    </div>
+                </div>
+            </h3>
+        </div>
+
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12">
+                    <p>
+                        Confirma a que pretende deixar de usar o SmartGAR?
+                    </p>
+                    <p>
+                        Ao confirmar deixará de ter acesso ao SmartGar e todas as suas funcionalidades!
+                    </p>
+                    <p>
+                        Esta acção é final e não pode ser revertida!
+                    </p>
+                </div>             
+            </div>
+            <div ng-if="showErrorMessage" class="row">
+                <div class="col-xs-12 text-center text-danger">
+                    Não foi possível efectuar a operação.
+                    <br>
+                    Se o problema persistir, por favor contacte o suporte.
+                </div> 
+            </div>
+        </div>
+    </div>
+    <div class="row text-right">
+            <div class="col-xs-12">
+                <button type="button" ng-click="closeThisDialog('cancel')" class="btn  btn-labeled btn-success mar-right10">
+                    <span class="btn-label">
+                        <i class="fa fa-check"></i>
+                    </span>
+                    Quero continuar a usar SmartGAR
+                </button>
+                <button type="button" ng-click="closeThisDialog('submit')" class="btn btn-labeled btn-danger mar-right10">
+                    <span class="btn-label">
+                        <i class="fa fa-exclamation-triangle"></i>
+                    </span>
+                    Quero deixar de usar SmartGAR
+                </button>
+            </div>
+    </div>
+</div>

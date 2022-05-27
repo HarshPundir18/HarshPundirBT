@@ -1,0 +1,493 @@
+<h3 class="ng-scope">
+    Relatórios
+</h3>
+
+<div id="reports">
+    <div class="row">
+        <div class="col-xs-6">
+        </div>
+        <div class="col-xs-6">
+            <smg-form-actions on-back-click="$state.go('app.dashboard')">
+            </smg-form-actions>
+        </div>
+    </div>
+
+
+    <div id="panelGeneralData" class="panel panel-default mar-top15">
+        <div ng-class="{'panel-heading-collapsed':panelGeneralData}" class="panel-heading">
+            <h4>
+                <em class="pad-right10"></em>Filtros
+                <span class="pull-right">
+                    <button type="button" ng-click="$ctrl.clearFilters()" class="btn btn-labeled btn-info mar-right10">
+                        <span class="btn-label">
+                            <i class="fa fa-times"></i>
+                        </span>
+                        Limpar
+                    </button>
+
+                    <button type="button" ng-click="$ctrl.createReport()" class="btn btn-labeled btn-success mar-right10">
+                        <span class="btn-label">
+                            <i class="fa fa-check"></i>
+                        </span>
+                        Gerar
+                    </button>
+                </span>
+            </h4>
+        </div>
+
+        <div uib-collapse="panelGeneralData" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+            <div class="panel-body">
+                <form name="$ctrl.dummyForm">
+                    <fieldset id="account">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <!-- <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Estabelecimento
+                                        </label>
+                                        <select name="selectedAccountEstablishments" class="form-control ng-pristine ng-valid ng-not-empty ng-touched"
+                                            ng-options="option.Name for option in $ctrl.allowedAccountEstablishments track by option.UniqueId"
+                                            ng-model="$ctrl.selectedAccountEstablishments">
+                                        </select>
+                                    </div> -->
+
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Estabelecimento
+                                        </label>
+                                        <smg-select-establishment name="selectedAccountEstablishments" 
+                                            class="tabfilter"
+                                            label-text="some label"
+                                            selection-model="$ctrl.selectedAccountEstablishment",
+                                            type="$ctrl.SMG_ESTABLISHMENT_TYPES.ACCOUNT"
+                                            on-change="$ctrl.selectedAccountEstablishmentOnChange(obj)">
+                                        </smg-select-establishment> 
+                                        <span ng-show="$ctrl.accountEstablishmentsNotSelectedError" class="text-danger">
+                                            Por favor selecione um Estabelecimento.
+                                        </span>
+                                    </div>   
+
+                                    <!-- <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Utilizador
+                                        </label>
+                                        <select name="selectedUser" class="form-control ng-pristine ng-valid ng-not-empty ng-touched"
+                                            ng-options="option.Name for option in $ctrl.users track by option.UniqueId"
+                                            ng-model="$ctrl.selectedUser">
+                                        </select>
+                                    </div> -->
+
+
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Utilizador
+                                        </label>
+                                        <smg-select-user
+                                            name="selectedUser"
+                                            class="tabfilter"
+                                            required=""
+                                            selection-model="$ctrl.selectedUser"
+                                            on-change="$ctrl.onSelectedUserChange(obj)">    
+                                        </smg-select-user>
+                                    </div> 
+
+                                    <!-- <div class="col-sm-2" ng-if="!$ctrl.datePickerFiltersFlag">
+                                        <label class="control-label">
+                                            Período de Transporte
+                                        </label>
+                                        <span class="text-muted">(últimos 12 meses)</span> 
+                                        <select name="selectedPeriod" class="form-control ng-pristine ng-valid ng-not-empty ng-touched"
+                                            ng-options="option.value for option in $ctrl.periods track by option.key"
+                                            ng-model="$ctrl.selectedPeriod">
+                                        </select>
+                                    </div> -->
+
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Tipo de e-Gar
+                                        </label>
+                                        <select name="egarType" class="form-control ng-pristine ng-valid ng-not-empty ng-touched"
+                                            ng-options="option.value for option in $ctrl.egarTypes track by option.key"
+                                            ng-model="$ctrl.selectedEgarType">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset id="dates">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <!--Transport period-->
+                                    <div class="col-sm-2">
+                                        <smg-date-picker-v2 dp-name="transportStartDate"
+                                            dp-placeholder="Início"
+                                            label-text="Período de transporte entre"
+                                            dp-date="$ctrl.transportStartDate">
+                                        </smg-date-picker-v2>
+                                        <span ng-show="$ctrl.transportDateMoreThan90Error" class="text-danger">
+                                            O período de transporte máximo de 90 dias.
+                                        </span>
+                                        <span ng-show="$ctrl.transportStartDateMustBeSelectedError" class="text-danger">
+                                            Por favor selecione uma data.
+                                        </span>
+                                        <span ng-show="$ctrl.serverValidationErrors['MustBeValidTransportPeriod']" class="text-danger">
+                                            O período de transporte máximo de 90 dias. <br>
+                                            Por favor selecione um período válido.
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <smg-date-picker-v2 dp-name="transportEndDate"
+                                            dp-placeholder="Fim"
+                                            dp-date="$ctrl.transportEndDate">
+                                        </smg-date-picker-v2>      
+                                        <span ng-show="$ctrl.transportEndDateMustBeSelectedError" class="text-danger">
+                                            Por favor selecione uma data.
+                                        </span>                                  
+                                    </div>
+
+                                    <!--Closed period-->
+                                    <div class="col-sm-2">
+                                        <smg-date-picker-v2 dp-name="closedStartDate"
+                                            dp-placeholder="Início"
+                                            label-text="Período de fecho entre"
+                                            dp-date="$ctrl.closedStartDate">
+                                        </smg-date-picker-v2>
+                                        <span ng-show="$ctrl.closedDateMoreThan90Error" class="text-danger">
+                                            O período de fecho máximo de 90 dias.
+                                        </span>
+                                        <span ng-show="$ctrl.closedStartDateMustBeSelectedError" class="text-danger">
+                                            Por favor selecione uma data.
+                                        </span>
+                                        <span ng-show="$ctrl.serverValidationErrors['MustBeValidClosePeriod']" class="text-danger">
+                                            O período de fecho máximo de 90 dias. <br>
+                                            Por favor selecione um período válido.
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <smg-date-picker-v2 dp-name="closedEndDate"
+                                            dp-placeholder="Fim"
+                                            dp-date="$ctrl.closedEndDate">
+                                        </smg-date-picker-v2>   
+                                        <span ng-show="$ctrl.closedEndDateMustBeSelectedError" class="text-danger">
+                                            Por favor selecione uma data.
+                                        </span>                                     
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <span ng-show="$ctrl.chooseDatePeriodError || 
+                                                    $ctrl.serverValidationErrors['MustHaveAtLeastOnePeriodDefined']" 
+                                            class="text-danger">
+                                            Para efectuar a pesquisa deverá selecionar pelo menos um período. (Período de Transporte ou Período de Fecho)
+                                            não superior a 90 dias.
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset id="residue">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <!-- <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Código APA
+                                        </label>
+                                        <select name="selectedClient" class="form-control ng-pristine ng-valid ng-not-empty ng-touched"
+                                            ng-options="option.DiplayName for option in $ctrl.clients track by option.UniqueId"
+                                            ng-model="$ctrl.selectedClient">
+                                        </select>
+                                    </div> -->
+
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Código APA
+                                        </label>
+                                        <smg-select-establishment name="selectedClientEstablishment" 
+                                            class="tabfilter"
+                                            label-text="some label"
+                                            selection-model="$ctrl.selectedClientEstablishment",
+                                            on-change="$ctrl.selectedClientEstablishmentOnChange(obj)">
+                                        </smg-select-establishment> 
+                                    </div>   
+
+
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Nif
+                                        </label>
+                                        <input id="inp-vat" name="vat" ng-model="$ctrl.vat" ng-pattern="/^[0-9]{9}$/"
+                                            type="text" class="form-control" placeholder="Ex: 123456789" />
+                                        <span ng-show="$ctrl.invalidVat" class="text-danger">Formato inválido</span>
+                                    </div>
+
+                                    <!-- <div class="col-sm-2">
+                                        <label class="control-label">Ponto de Retoma/Recolha</label>
+                                        <ui-select name="selectedPickupPoint" ng-disabled="!$ctrl.pickupPoints || $ctrl.pickupPoints.length === 0"
+                                            ng-model="$ctrl.selectedPickupPoint" theme="bootstrap" ng-keyup="$ctrl.selectedPickupPointKeyUp($select.search)">
+                                            <ui-select-match allow-clear="true" placeholder="Pesquisar Código ou Nome">
+                                                <span ng-bind-html="$select.selected.DisplayName"></span>
+                                            </ui-select-match>
+                                            <ui-select-choices repeat="pickupPoint in $ctrl.pickupPoints | propsFilter: {DisplayName: $select.search}">
+                                                <span ng-bind-html="pickupPoint.DisplayName"></span>
+                                            </ui-select-choices>
+                                            <ui-select-no-choice>
+                                                <br>
+                                                Não foram encontrados resultados
+                                            </ui-select-no-choice>
+                                        </ui-select>
+                                    </div> -->
+
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Ponto de Retoma/Recolha
+                                        </label>
+                                        <smg-select-pickup-point name="selectedPickupPoint"
+                                            label-text="some label" 
+                                            pickup-point-type="$ctrl.pickupPointTypeAll"
+                                            selection-model="$ctrl.selectedPickupPoint" ,
+                                            on-change="$ctrl.selectedPickupPointOnChange(obj)">
+                                        </smg-select-pickup-point>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Código Ler
+                                        </label>
+                                        <select id="inp-selectedLerCode" name="selectedLerCode" ng-change="$ctrl.lerCodeChange()"
+                                            placeholder-text-single="'Pesquisar'" no-results-text="'Não foram encontrados resultados'"
+                                            chosen="" class="chosen-select input-md" ng-options="option.value for option in $ctrl.lerCodes track by option.key"
+                                            ng-model="$ctrl.selectedLerCode">
+                                            <option></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Código Operação
+                                        </label>
+                                        <select id="inp-selectedOperationCode" name="selectedOperationCode" ng-change="$ctrl.operationCodeChange()"
+                                            placeholder-text-single="'Pesquisar'" no-results-text="'Não foram encontrados resultados'"
+                                            chosen="" class="chosen-select input-md" ng-options="option.value for option in $ctrl.operationCodes track by option.key"
+                                            ng-model="$ctrl.selectedOperationCode">
+                                        </select>
+                                    </div>
+
+                                    <div class="col-sm-2" ng-if="true">
+                                        <label class="control-label">
+                                            Associado à etiqueta
+                                        </label>
+                                        <smg-select-product-code selection-model="$ctrl.selectedProductCode" on-change="$ctrl.onSelectedProductCodeChange(obj)">
+                                        </smg-select-product-code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- <fieldset id="description" ng-if="!$ctrl.datePickerFiltersFlag">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <label class="control-label">
+                                            Contendo na descrição as palavras
+                                        </label>
+                                        <input id="txt-lerDescription" name="lerDescription" class="form-control no-resize"
+                                            ng-model="$ctrl.lerDescription">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset> -->
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="panelResults" class="panel panel-default mar-top15" ng-if="$ctrl.showResults">
+        <div ng-class="{'panel-heading-collapsed':panelResults}" class="panel-heading">
+            <h4>
+                <em class="pad-right10"></em>Resultados
+                <ul class="pull-right list-style-none" ng-if="$ctrl.reportResults.length > 0">
+                    <li class="dropdown dropdown-list" uib-dropdown="">
+                        <button type="button" class="btn btn-labeled btn-success mar-right10" uib-dropdown-toggle=""
+                            title="Exportar">
+                            <span class="btn-label">
+                                <a title="" class="white">
+                                    <i class="fa fa-cloud-download"></i>
+                                </a>
+                            </span>
+                            Exportar
+                        </button>
+                        <!-- START Dropdown menu-->
+                        <ul class="dropdown-menu">
+                            <li>
+                                <!-- START list group-->
+                                <div class="list-group">
+                                    <a class="list-group-item">
+                                        <div class="media-box" hreef="" ng-click="$ctrl.downloadFile('xlsx')">
+                                            <div class="pull-left">
+                                                <em class="fa fa-file-excel-o fa-2x text-success"></em>
+                                            </div>
+                                            <div class="media-box-body clearfix">
+                                                <p class="m0">Excel (.xlsx)</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="list-group-item">
+                                        <div class="media-box" hreef="" ng-click="$ctrl.downloadFile('xls')">
+                                            <div class="pull-left">
+                                                <em class="fa fa-file-excel-o fa-2x text-success"></em>
+                                            </div>
+                                            <div class="media-box-body clearfix">
+                                                <p class="m0">Excel (.xls)</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!-- END list group-->
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </h4>
+        </div>
+
+        <div uib-collapse="panelResults" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+            <div class="panel-body">
+                <fieldset id="results">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="row" ng-if="$ctrl.reportResults.length <= 0">
+                                Não foram encontrados resultados
+                            </div>
+
+                            <div class="report" ng-if="$ctrl.reportResults.length > 0">
+                                <!-- header -->
+                                <div class="row pad-top20 report__header">
+                                    <div class="col-md-1 text-center">E-Gar</div>
+                                    <div class="col-md-2 text-center">Estado</div>
+                                    <div class="col-md-2 text-center">Remetente</div>
+                                    <div class="col-md-2 text-center">Destinatário</div>
+                                    <div class="col-md-2 text-center">Resíduo Original</div>
+                                    <div class="col-md-2 text-center">Transportadores</div>
+                                </div>
+
+                                <div class="row pad-top10 pad-bottom10 report__line" ng-repeat="item in $ctrl.reportResults">
+                                    <!-- num -->
+                                    <div class="col-md-1">
+                                        {{item.NumeroGuia}}
+                                        <br>
+                                        <div class="small pad-left10">
+                                            Código: {{item.CodigoGuia}}
+                                        </div>
+                                    </div>
+
+                                    <!-- status -->
+                                    <div class="col-md-2">
+                                        {{item.Estado}}
+                                    </div>
+
+                                    <!-- origin -->
+                                    <div class="col-md-2">
+                                        {{item.Remetente.Nome}}
+                                        <br>
+                                        <div class="small pad-left10">
+                                            APA: {{item.Remetente.CodApa}}
+                                        </div>
+                                        <div class="small pad-left10">
+                                            NIF: {{item.Remetente.Nif}}
+                                        </div>
+                                    </div>
+
+                                    <!-- destin -->
+                                    <div class="col-md-2">
+                                        {{item.Destinatario.Nome}}
+                                        <br>
+                                        <div class="small pad-left10">
+                                            APA: {{item.Destinatario.CodApa}}
+                                        </div>
+                                        <div class="small pad-left10">
+                                            NIF: {{item.Destinatario.Nif}}
+                                        </div>
+                                    </div>
+
+                                    <!-- residue -->
+                                    <div class="col-md-3">
+                                        {{item.ResiduoTransportado.DescricaoResiduo}}
+                                        <br>
+                                        <div ng-if="item.HasRectifiedQuantity" class="small pad-left20">
+                                            <del style="padding-right: 3px">Qtd: {{item.ResiduoTransportado.Quantidade}} (Kg)</del>
+                                            <i class="fa fa-long-arrow-right" ></i>
+                                            <span style="padding-left: 3px">Qtd: {{item.FinalQuantity}} (Kg)</span>
+                                        </div>
+                                        <div ng-if="!item.HasRectifiedQuantity" class="small pad-left20">
+                                            Qtd: {{item.ResiduoTransportado.Quantidade}} (Kg)                                                     
+                                        </div>
+
+                                        <div ng-if="item.HasRectifiedLerCode" class="small pad-left20">
+                                            <del style="padding-right: 3px">LER: {{item.ResiduoTransportado.CodigoResiduoLer}} </del>
+                                            <i class="fa fa-long-arrow-right" style="padding-left: 3px"></i>
+                                            <span style="padding-left: 3px">LER: {{item.FinalLerCode}}</span>
+                                        </div>
+                                        <div ng-if="!item.HasRectifiedLerCode" class="small pad-left20">
+                                            LER: {{item.ResiduoTransportado.CodigoResiduoLer}} 
+                                        </div>
+
+                                        <div ng-if="item.HasRectifiedOperationCode" class="small pad-left20">
+                                            <del style="padding-right: 3px">Op: {{item.ResiduoTransportado.CodigoOperacao}}</del>
+                                            <i class="fa fa-long-arrow-right" style="padding-left: 3px"></i>
+                                            <span style="padding-left: 3px">Op: {{item.FinalOperationCode}}</span>
+                                        </div>
+                                        <div ng-if="!item.HasRectifiedOperationCode" class="small pad-left20">
+                                            Op: {{item.ResiduoTransportado.CodigoOperacao}}
+                                        </div>
+                                    </div>
+
+                                    <!-- transporters -->
+                                    <div class="col-md-2">
+                                        <div class="row" ng-repeat="transporter in item.Transportadores">
+                                            <div class="col-12">
+                                                {{transporter.Nome}}
+                                                <br>
+                                                <div class="small pad-left10">
+                                                    NIF: {{transporter.Nif}}
+                                                </div>
+                                                <div class="small pad-left10">
+                                                    Matríula: {{transporter.Matricula}}
+                                                </div>
+                                                <div class="small pad-left10">
+                                                    Início: {{transporter.DataHoraInicioTransporte}}
+                                                </div>
+                                                <div class="small pad-left10">
+                                                    Válido: {{transporter.Nif}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+    <!--bottom actions-->
+    <div class="row">
+        <div class="col-xs-6">
+        </div>
+        <div class="col-xs-6">
+            <smg-form-actions on-back-click="$state.go('app.dashboard')">
+            </smg-form-actions>
+        </div>
+    </div>
+</div>

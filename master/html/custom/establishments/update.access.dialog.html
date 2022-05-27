@@ -1,0 +1,58 @@
+<div id="configureAccess" class="ngdialog-message">
+  <div class="panel">
+    <h3>Configurar Acesso SILIAMB</h3>
+    <div class="row"  ng-show="$ctrl.invalidAccess">
+      <div class="col-md-12">     
+        <div class="alert alert-warning">
+          <i class="fa fa-info"></i>
+          <span class="pad-left10"> O acesso é inválido, certifique que introduziu a password correcta!</span>
+          <i class="pull-right fa fa-times" ng-click="$ctrl.invalidAccess = false"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="row"  ng-show="$ctrl.cannotRemoveAccess">
+      <div class="col-md-12">     
+        <div class="alert alert-warning">
+          <i class="fa fa-info"></i>
+          <span class="pad-left10"> O acesso deste estabelecimento não pode ser removido!</span>
+          <i class="pull-right fa fa-times" ng-click="$ctrl.cannotRemoveAccess = false"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <fieldset>
+        <div class="form-group">
+          <div class="col-md-12">
+            <div class="row">
+              <label class="col-md-12 control-label">NIF - {{$ctrl.establishment.Name}} </label>
+              <br>
+              <div class="col-md-12">
+                <label class="form-control">
+                      {{$ctrl.establishment.Vat}}
+                    </label>
+              </div>
+            </div>
+            <div class="row pad-top10">
+              <label class="col-md-12 control-label">Password</label>
+              <div class="col-md-12">
+                <input name="inp-apaAccess" type="password" class="form-control" ng-model="$ctrl.apaAccess" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12  text-right">
+        <button type="button" 
+          ng-show="!$ctrl.establishment.IsDefault && $ctrl.establishment.HasApaAccessConfigured" 
+          ng-click="$ctrl.removeAccess()" class="btn btn-warning pull-left">Remover Acesso</button>
+        <button type="button" ng-click="closeThisDialog('cancel')" class="btn btn-default">Cancelar</button>
+        <button type="button" ng-click="$ctrl.saveAccess()" class="btn btn-success">Gravar</button>
+      </div>
+    </div>
+  </div>
+</div>

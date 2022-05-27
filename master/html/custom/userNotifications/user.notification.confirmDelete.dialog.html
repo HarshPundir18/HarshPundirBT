@@ -1,0 +1,23 @@
+
+<div class="ngdialog-message">
+  <div class="panel">
+    <h3>Apagar Notificação</h3>
+    <div class="row">
+      <div class="col-md-12">
+        <p>
+          Confimar o apagar da notificação?
+        </p>
+        <p>
+          Esta operação não poderá ser revertida!
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12  text-right">
+      <button type="button" ng-click="confirm(undc.userNotificationId)" class="btn btn-primary mr">Confirmar</button>
+      <button type="button" ng-click="closeThisDialog('button')" class="btn btn-default mr">Cancelar</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+<div class="ngdialog-message">
+
+<form role="form" name="$ctrl.formAcceptEmissionValidate" ng-submit="$ctrl.submitFormAcceptEmission()" novalidate="" class="form-validate form-horizontal">
+
+		<div class="panel">
+			<h3>
+        Fechar E-Gar Nº 
+        <span class="consult-egar-number">
+          {{$ctrl.gar.Number}}
+        </span>
+        <span title="Ver PDF" ng-click="$ctrl.getFile($ctrl.gar.FileUrl)">
+          <em class="fa fa-file-pdf-o"></em>
+        </span>
+      </h3>
+			
+			<!-- <div class="row pad-top10">
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Data de Fecho / Aceitação</label>
+					<div ng-controller="datepickerController as dp" class="ng-scope">
+						<div class="input-group">
+						<input id="inp-endDate" 
+								name="endDate" 
+								placeholder="Ex: 2016-01-01" 
+								type="text" 
+								uib-datepicker-popup="yyyy-MM-dd" 
+								ng-change="dp.changed(transporter.index)"
+								ng-model="dp.date" 
+								is-open="dp.opened" 
+								max-date="'31-12-2100'" 
+								uib-datepicker-options="dp.dateOptions" 
+								ng-required="true" 
+								close-text="Close" 
+								class="form-control ng-isolate-scope ng-touched" 
+								required="" 
+								ng-click="dp.open($event)">
+						<span class="input-group-btn">
+							<button type="button" ng-click="dp.open($event)" class="btn btn-default">
+							<em class="fa fa-calendar"></em>
+							</button>
+						</span>
+						</div>
+						<span ng-show="$ctrl.validateInput('endDate', 'required')" class="text-danger">Obrigatório</span>
+						<span ng-show="$ctrl.serverValidationErrors['EndDate']" class="text-danger">
+						{{$ctrl.serverValidationErrors['EndDate']}}
+						{{$ctrl.serverApplicationErrors['EndDate']}}
+						</span>
+						<span ng-show="$ctrl.serverExternalErrors['EndDate']" class="text-danger">
+						{{$ctrl.serverExternalErrors['EndDate']}}
+						</span>
+						
+					</div>
+				</div>
+			</div> -->
+
+
+      	<div class="row">
+			<div class="col-sm-6">
+				<label class="control-label mar-bottom0">Data de Fecho / Aceitação</label>
+				<smg-date-picker-v2 dp-name="datePicker"
+					dp-placeholder="Data"
+					dp-date="$ctrl.date"
+					ng-required="true"
+					class="pad-top5">
+				</smg-date-picker-v2>
+				<span ng-if="$ctrl.dateErrorMessage" class="text-danger error-message">
+					{{$ctrl.dateErrorMessage}}
+				</span>
+			</div>
+			<div class="col-sm-6">
+				<smg-time-picker-v2 tp-name="timePicker"
+					tp-placeholder="Hora"
+					model="$ctrl.time"
+					hide-label-space='true'>
+				</smg-time-picker-v2>
+				<span ng-if="$ctrl.timeErrorMessage" class="text-danger error-message">
+					{{$ctrl.timeErrorMessage}}
+				</span>
+			</div>
+      	</div>
+
+
+		</div> <!--END PANEL-->
+
+		<div class="row pad-top10 text-right">
+			<div class="col-sm-12">
+				<button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">Cancelar</button>
+				<button type="submit" class="btn btn-success">Aceitar</button>
+			</div>
+		</div>
+
+</form>
+  
+</div>

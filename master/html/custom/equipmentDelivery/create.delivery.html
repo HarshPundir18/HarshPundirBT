@@ -1,0 +1,258 @@
+<h3 class="ng-scope">Criar entrega de equipamentos</h3>
+
+<form
+  role="form"
+  name="$ctrl.formValidate"
+  ng-submit="$ctrl.submitForm()"
+  novalidate=""
+  class="form-validate form-horizontal"
+>
+  <div class="row">
+    <div class="col-sm-6">
+      <i class="text-danger fa fa-asterisk" /> - Campos Obrigatórios
+    </div>
+
+    <div class="col-sm-6">
+      <div class="text-right">
+        <button
+          type="button"
+          class="btn btn-labeled btn-default"
+          ng-click="$ctrl.cancel()"
+        >
+          <span class="btn-label">
+            <i class="fa fa-arrow-left"></i>
+          </span>
+          Voltar
+        </button>
+
+        <button type="submit" class="btn btn-labeled btn-success mar-right10">
+          <span class="btn-label">
+            <i class="fa fa-check"></i>
+          </span>
+          Gravar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="panelGeneralData" class="panel panel-default mar-top15">
+    <div
+      ng-class="{'panel-heading-collapsed':panelGeneralData}"
+      class="panel-heading"
+    >
+      <h4><em class="fa fa-building pad-right10"></em>1 - Dados Gerais</h4>
+      <paneltool tool-collapse="tool-collapse" class="pull-right">
+        <a
+          href="#"
+          panel-collapse=""
+          uib-tooltip="Encolher Painel"
+          ng-click="panelGeneralData = !panelGeneralData"
+          class="ng-scope"
+        >
+          <em
+            ng-show="panelGeneralData"
+            class="fa fa-plus ng-no-animation ng-hide"
+          ></em>
+          <em
+            ng-show="!panelGeneralData"
+            class="fa fa-minus ng-no-animation"
+          ></em>
+        </a>
+      </paneltool>
+    </div>
+
+    <div
+      uib-collapse="panelGeneralData"
+      class="panel-wrapper in collapse"
+      aria-expanded="true"
+      aria-hidden="false"
+    >
+      <div class="panel-body">
+        <fieldset id="generalData">
+          <div class="form-group">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-sm-6">
+                  <label class="control-label">
+                    Selecione Estabelecimento :
+                    <span class="pad-left5 text-danger">
+                      <i class="fa fa-asterisk" />
+                    </span>
+                  </label>
+                  <smg-select-establishment
+                    name="searchedEstablishment"
+                    label-text="Selecione Estabelecimento"
+                    selection-model="$ctrl.selectedOrigin"
+                    ,
+                    selected-key="$ctrl.selectedOriginKey"
+                  >
+                  </smg-select-establishment>
+                </div>
+
+                <div class="col-sm-6">
+                  <label class="control-label">
+                    Select Equipments :
+                    <span class="pad-left5 text-danger">
+                      <i class="fa fa-asterisk" />
+                    </span>
+                  </label>
+                  <ui-select multiple ng-model="$ctrl.equipmentsIds">
+                    <ui-select-match placeholder="Select equipments...">
+                      {{$item.ExternalId}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="equipment in $ctrl.equipment">
+                      <div
+                        class="whirl ringed"
+                        ng-show="!$ctrl.equipment"
+                      ></div>
+                      <div ng-bind-html="equipment.ExternalId"></div>
+                      <small> Name: {{equipment.Name}} </small>
+                    </ui-select-choices>
+                    <ui-select-no-choice>
+                      Não foram encontrados resultados
+                    </ui-select-no-choice>
+                  </ui-select>
+                  <span
+                    style="position: relative; left: 40.5em; top: -2em"
+                    class="caret"
+                  ></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <div class="form-group">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-2">
+                  <label class="control-label"
+                    >Delivery Longitude :
+                    <span class="pad-left5 text-danger">
+                      <i class="fa fa-asterisk" />
+                    </span>
+                  </label>
+                  <input
+                    id="inp-longitude"
+                    name="longitude"
+                    ng-model="$ctrl.longitude"
+                    required=""
+                    type="text"
+                    class="form-control"
+                    placeholder="Eg: 27.5824"
+                  />
+                  <span
+                    ng-show="$ctrl.validateInput('longitude', 'required')"
+                    class="text-danger"
+                    >Obrigatório</span
+                  >
+                  <span
+                    ng-show="$ctrl.serverValidationErrors['Longitude']"
+                    class="text-danger"
+                  >
+                    {{$ctrl.serverValidationErrors['Longitude']}}
+                  </span>
+                </div>
+
+                <div class="col-md-2">
+                  <label class="control-label"
+                    >Delivery Latitude :
+                    <span class="pad-left5 text-danger">
+                      <i class="fa fa-asterisk" />
+                    </span>
+                  </label>
+                  <input
+                    id="inp-latitude"
+                    name="latitude"
+                    ng-model="$ctrl.latitude"
+                    required=""
+                    type="text"
+                    class="form-control"
+                    placeholder="Eg: 4.2587"
+                  />
+                  <span
+                    ng-show="$ctrl.validateInput('latitude', 'required')"
+                    class="text-danger"
+                    >Obrigatório</span
+                  >
+                  <span
+                    ng-show="$ctrl.serverValidationErrors['Latitude']"
+                    class="text-danger"
+                  >
+                    {{$ctrl.serverValidationErrors['Latitude']}}
+                  </span>
+                </div>
+                <div class="col-md-2">
+                  <label class="control-label">Número do documento : </label>
+                  <input
+                    id="inp-documentNumber"
+                    name="documentNumber"
+                    ng-model="$ctrl.documentNumber"
+                    required=""
+                    type="text"
+                    class="form-control"
+                    placeholder="Ex: 12345"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label class="control-label">Notes :</label>
+                  <textarea
+                    id="inp-notes"
+                    name="notes"
+                    ng-model="$ctrl.notes"
+                    type="text"
+                    class="form-control"
+                    placeholder="enter equipment delivery note"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+
+  <!-- action buttons -->
+  <div class="row">
+    <div class="col-sm-6">
+      <i class="text-danger fa fa-asterisk" /> - Campos Obrigatórios
+    </div>
+
+    <div class="col-sm-6">
+      <div class="text-right">
+        <button
+          type="button"
+          class="btn btn-labeled btn-default"
+          ng-click="$ctrl.cancel()"
+        >
+          <span class="btn-label">
+            <i class="fa fa-arrow-left"></i>
+          </span>
+          Voltar
+        </button>
+
+        <button type="submit" class="btn btn-labeled btn-success mar-right10">
+          <span class="btn-label">
+            <i class="fa fa-check"></i>
+          </span>
+          Gravar
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+  <!-- Map to select address -->
+
+  <div style="height: 65vh; margin: 0%; margin-bottom: 20px">
+    <input
+      autocomplete="off"
+      id="search"
+      type="text"
+      placeholder="Search delivery address"
+      style="position: absolute; z-index: 2"
+    />
+    <div id="map" style="width: 100%; height: 100%"></div>
+  </div>

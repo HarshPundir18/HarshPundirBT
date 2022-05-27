@@ -1,0 +1,122 @@
+<h3>Importação manual e-Gar</h3>
+
+<form role="form" name="$ctrl.formValidate" ng-submit="$ctrl.submitForm()" novalidate="" class="form-validate form-horizontal">
+  
+  <!--Actions Top-->
+
+
+  <!--panel-->
+  <div class="panel panel-default mar-top15">
+    <div class="panel-heading">
+      <h4>
+        <em class="fa fa-file pad-right10"></em>Dados e-Gar 
+      </h4>
+    </div>
+  
+    <div class="panel-wrapper in collapse">
+      <div class="panel-body">
+  
+        <fieldset id="origin">
+          <div class="form-group">
+            <div class="col-sm-12">
+
+              <!--establishments-->
+              <div class="row pad-top10">
+                <!--tipo produtor PI/OGR-->
+                <div class="col-sm-6">
+                    <label class="control-label">
+                      Selecione o seu estabelecimento
+                      <span class="pad-left5 text-danger">
+                        <i class="fa fa-asterisk"/>
+                      </span>
+                    </label>
+
+                    <select name="selectedEstablishment"
+                        ng-required="true"
+                        class="form-control ng-pristine ng-valid ng-not-empty ng-touched"
+                        ng-options="option.Name for option in $ctrl.allowedEstablishments track by option.UniqueId"
+                        ng-model="$ctrl.selectedOption">
+                    </select>
+
+                    <span ng-show="$ctrl.validateInput('selectedEstablishment', 'required')" class="text-danger">Obrigatório</span>
+                    <span ng-show="$ctrl.serverValidationErrors['SelectedEstablishment']" class="text-danger">
+                      {{$ctrl.serverValidationErrors['SelectedEstablishment']}}
+                    </span>
+                  </div>
+              </div>
+
+
+              <div class="row pad-top10">
+                <!--eGar number-->
+                <div class="col-sm-3">
+                  <label class="control-label">
+                    Número e-GAR
+                    <span class="pad-left5 text-danger">
+                      <i class="fa fa-asterisk"/>
+                    </span>
+                  </label>
+                  <br>
+                  <input name="number" ng-model="$ctrl.number" class="form-control"
+                        required="" type="text" placeholder="Ex: PT20171234567890"/>
+                  <span ng-show="$ctrl.validateInput('number', 'required')" class="text-danger">Obrigatório</span>
+                  <span ng-show="$ctrl.serverValidationErrors['Number']" class="text-danger">
+                    {{$ctrl.serverValidationErrors['Number']}}
+                    {{$ctrl.serverApplicationErrors['Number']}}
+                  </span>
+                </div>
+
+                <!--verification code-->
+                <div class="col-sm-3">
+                  <label class="control-label">
+                    Código de Verificação
+                    <span class="pad-left5 text-danger">
+                      <i class="fa fa-asterisk"/>
+                    </span>
+                  </label>
+                  <br>
+                  <input name="verificationCode" ng-model="$ctrl.verificationCode" class="form-control"
+                        required="" placeholder="Ex: 12a0b345cc67d8ef"/>
+                  <span ng-show="$ctrl.validateInput('verificationCode', 'required')" class="text-danger">Obrigatório</span>
+                  <span ng-show="$ctrl.serverValidationErrors['VerificationCode']" class="text-danger">
+                    {{$ctrl.serverValidationErrors['VerificationCode']}}
+                    {{$ctrl.serverApplicationErrors['VerificationCode']}}
+                  </span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </fieldset>
+
+      </div>
+    </div>
+  </div>
+  <!--END panel-->
+
+
+  <!--Actions Bottom-->
+  <div class="row">
+    <div class="col-sm-6">
+      <i class="text-danger fa fa-asterisk"/> - Campos Obrigatórios
+    </div>
+
+    <div class="col-sm-6">
+      <div class="text-right">
+        <button type="button" class="btn btn-labeled btn-default" ng-click="$ctrl.cancel()">
+            <span class="btn-label">
+              <i class="fa fa-arrow-left"></i>
+            </span>
+            Voltar
+        </button>
+
+        <button type="submit" class="btn btn-labeled btn-success mar-right10">
+            <span class="btn-label">
+              <i class="fa fa-check"></i>
+            </span>
+            Importar
+        </button>
+      </div>
+    </div> 
+
+  </div>
+</form> 

@@ -1,0 +1,83 @@
+<h3 class="ng-scope">
+    Editar Utilizador
+</h3>
+
+<form role="form" name="$ctrl.formValidate" ng-submit="$ctrl.submitForm()" novalidate=""
+    class="form-validate form-horizontal">
+
+
+    <div id="panelGeneralData" class="panel panel-default mar-top15">
+        <div ng-class="{'panel-heading-collapsed':panelGeneralData}" class="panel-heading">
+            <h4>
+                <em class="fa fa-user pad-right10"></em>1 - Dados de Login
+            </h4>
+        </div>
+
+        <div uib-collapse="panelGeneralData" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+            <div class="panel-body">
+
+                <fieldset id="generalData">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="row">
+
+                                <div class="col-md-2">
+                                    <label class="control-label">
+                                        Nome de Utilizador
+                                    </label>
+                                    <div>
+                                        <span class="control-label-text">{{$ctrl.user.UserLoginName}}</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label class="control-label">
+                                        e-Mail
+                                    </label>
+                                    <div>
+                                        <span class="control-label-text">{{$ctrl.user.Email}}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mar-top15">
+                                <div class="col-md-2">
+                                    <label class="control-label">
+                                        Perfil
+                                    </label>
+                                    <select id="inp-selectRole" name="selectRole"
+                                            required="true" 
+                                            ng-model="$ctrl.selectedRole" 
+                                            class="form-control ng-pristine ng-valid ng-not-empty ng-touched"
+                                            ng-change="$ctrl.onSelectedRoleChange()">
+                                        <option ng-repeat="option in $ctrl.roles track by option.UniqueId" value="{{option.UniqueId}}">{{option.Name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mar-top15">
+                                <div class="col-sm-2">
+                                    <label class="control-label">
+                                        Veículo
+                                    </label>
+
+                                    <smg-select-vehicle
+                                        name="smgSelectVehicle"
+                                        class="tabfilter"
+                                        required=""
+                                        select-model="$ctrl.selectedVehicle"
+                                        select-model-key="$ctrl.selectedVehicleKey"
+                                        on-change="$ctrl.selectedVehicleOnChange(obj)">    
+                                    </smg-select-vehicle>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+    <smg-form-actions on-back-click="$state.go('app.usersOverview')" on-save-click="$ctrl.submitForm()">
+    </smg-form-actions>
+</form>

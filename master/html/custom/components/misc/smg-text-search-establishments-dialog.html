@@ -1,0 +1,22 @@
+
+
+<div class="ngdialog-message">
+    <h3>
+        {{vm.header}}
+    </h3>
+ <div class="row pad-top10">
+    <div class="col-sm-12">
+        <smg-select-establishment name="{{vm.inpName}}" 
+            selection-model="vm.selectedItem",
+            on-change="vm.onSelectedItemChange(obj)">
+        </smg-select-establishment> 
+    </div>
+ </div>
+
+ <div class="row mar-top20">
+    <div class="col-sm-12 text-right">
+        <button type="button" ng-click="closeThisDialog(false)" class="btn btn-default">Cancelar</button>
+        <button type="button" ng-click="closeThisDialog(vm.selectedItem)" class="btn btn-info mar-left10">Guardar</button>
+    </div>
+ </div>
+</div>

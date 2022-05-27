@@ -1,0 +1,78 @@
+<div class="row">
+    <div class="col-sm-4">
+        <label>Introduzir Linha de ficheiro PlanVis.csv</label>
+        <input name="lerCode" 
+            ng-model="vm.planVisitLine" 
+            type="text" 
+            class="form-control" 
+            placeholder='Ex: "XC","20200110","43","SH5",1,"00000212",1,"P"' />
+    </div>
+</div>
+
+<div class="row pad-top10">
+    <div class="col-sm-1">
+        <button id="btn-seach"
+                ng-disabled="vm.disableSearch" 
+                ng-focus="true"
+                type="button" 
+                title="Ver dados"
+                class="btn btn-labeled btn-info form-control text-bold" 
+                ng-click="vm.onClick()">
+            Ver dados
+        </button>
+    </div>
+    <div ng-if="vm.egar" class="col-sm-1">
+        <button id="btn-create"
+                ng-disabled="vm.disableCreate" 
+                type="button" 
+                title="Gerar E-GAR"
+                class="btn btn-labeled btn-info form-control text-bold" 
+                ng-click="vm.onCreateClick()">
+            Gerar eGar
+        </button>
+    </div>
+</div>
+
+<div ng-repeat="error in vm.errors track by $index" class="pad-top10" ng-if="vm.errors.length > 0">
+    <p>{{error.Field}}</p>
+</div>
+
+
+<div class="pad-top10" ng-if="vm.egar">
+
+    <h3 ng-if="vm.createdEgar">
+        <a href="{{vm.createdEgar.Url}}" target="_blank">{{vm.createdEgar.Number}}</a>
+    </h3>
+
+    <h3>Tipo E-GAR</h3>
+    <p><span> {{vm.egar.EgarType}} </span>
+    
+    <h3>Produtor:</h3>
+    <p> Nome: <span>{{vm.egar.Origin.Name}}</span></p>
+    <p> NIF: <span>{{vm.egar.Origin.Vat}}</span></p>
+    <p> APA: <span>{{vm.egar.Origin.ApaCode}}</span></p>
+    <p> Tipo: <span>{{vm.egar.Origin.ProducerType}}</span></p>
+    <p> ExSitu: <span>{{vm.egar.Origin.LocalOAU}}</span></p>
+
+    <h3>Destinatário</h3>
+    <p> Nome: <span>{{vm.egar.Destin.Name}}</span></p>
+    <p> NIF: <span>{{vm.egar.Destin.Vat}}</span></p>
+    <p> APA: <span>{{vm.egar.Destin.CodApa}}</span></p>
+
+    <h3>Residuo</h3>
+    <p> LER: <span>{{vm.egar.Residue.LerCode}}</span></p>
+    <p> Grupo: <span>{{vm.egar.Residue.GroupCode}}</span></p>
+    <p> Operacao: <span>{{vm.egar.Residue.OperationCode}}</span></p>
+    <p> Descricao: <span>{{vm.egar.Residue.Description}}</span></p>
+
+    <p ng-if="vm.egar.Residue.DangerMaterial"> Onu: <span>{{vm.egar.Residue.DangerMaterial.OnuNumber}}</span></p>
+    <p ng-if="vm.egar.Residue.DangerMaterial"> Embalagem: <span>{{vm.egar.Residue.DangerMaterial.PackageGroup}}</span></p>
+    <p ng-if="vm.egar.Residue.DangerMaterial"> Volume: <span>{{vm.egar.Residue.DangerMaterial.Volume}}</span></p>
+
+    <h3>Transportador</h3>
+    <div ng-repeat="t in vm.egar.Transporters track by $index" class="pad-top10">
+        <p>NIF: {{t.Vat}}</p>
+        <p>Matricula: {{t.Plate}}</p>
+        <p>Data: {{t.Date}}</p>
+    </div>
+</div>

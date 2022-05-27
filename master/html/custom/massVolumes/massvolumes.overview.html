@@ -1,0 +1,99 @@
+<h3>
+    {{vm.translate('page-header-massvolumes')}} {{vm.year}}
+    <div class="vertical-spacer-small"></div>
+    <small>
+		Proxima atualização em 	{{vm.nextUpdate | date}}
+	</small>
+</h3>
+
+<div id="massVolumes">
+    <div class="row">
+        <div class="col-sm-6">
+        </div>
+        <div class="col-sm-6">
+            <div class="text-right">
+                <button type="button" class="btn btn-labeled btn-default" ng-click="$state.go('app.dashboard')">
+                    <span class="btn-label">
+                        <i class="fa fa-arrow-left"></i>
+                    </span>
+                    Voltar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div ng-repeat="massVolumesRow in vm.massVolumes track by $index" ng-if="vm.showResults">
+        <div class="row">
+            <div ng-repeat="item in massVolumesRow track by $index">
+                <div id="estab_{{$index}}" class="col-sm-6">
+                    <div class="panel panel-default mar-top15">
+                        <div class="panel-heading">
+                            <h3>
+                                {{item.GroupName}} ({{item.GroupKey}})
+                                <smg-help-icon ng-if="item.AggregatedByVat" help-text='Resíduos registados em e-Gars que não obrigam o produtor a ter código APA (Obras RCD, Óleos Alimentares Usados, Ex-Situ, Veículos em Fim de Vida e Prestadores de serviços).'>
+                                </smg-help-icon>
+                            </h3>
+                        </div>
+                        <div class="panel-body mass-volumes--wrapper">
+                            <div class="row mass-volumes--header">
+                                <div class="col-sm-3">
+                                    Código Ler
+                                </div>
+                                <div class="col-sm-3">
+                                    Entradas
+                                </div>
+                                <div class="col-sm-3">
+                                    Saídas
+                                </div>
+                                <div class="col-sm-3">
+                                    Diferença
+                                </div>
+                            </div>
+                            <div class="vertical-spacer-small"></div>
+                            <div class="row mass-volumes--row" ng-repeat="mv in item.MassVolumes track by $index">
+                                <div class="col-sm-3">
+                                    {{mv.LerCode}}
+                                </div>
+                                <div class="col-sm-3">
+                                    {{mv.VolumeIn | number : 3 }} Kg
+                                </div>
+                                <div class="col-sm-3">
+                                    {{mv.VolumeOut | number : 3}} Kg
+                                </div>
+                                <div class="col-sm-3">
+                                    {{mv.VolumeIn - mv.VolumeOut | number : 3}} Kg
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-if="vm.showNoResults">
+        <div class="col-sm-12">
+            <div class="panel panel-default mar-top15">
+                <div class="panel-body">
+                    Não existem registos para o ano {{vm.year}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+        </div>
+        <div class="col-sm-6">
+            <div class="text-right">
+                <button type="button" class="btn btn-labeled btn-default" ng-click="$state.go('app.dashboard')">
+                    <span class="btn-label">
+                        <i class="fa fa-arrow-left"></i>
+                    </span>
+                    Voltar
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div> 

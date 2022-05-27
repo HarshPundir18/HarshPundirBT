@@ -1,0 +1,33 @@
+<h3>
+    Arquivo e-Gars de {{vm.year}}
+</h3>   
+
+
+<div class="gar-archive">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            
+        </div>
+         
+        <div class="panel-body mar-top20">
+            <div ng-repeat="r in vm.allRows">
+                <div class="row"> 
+                    <div ng-repeat="establishment in r.establishments track by establishment.UniqueId">
+                        <div class="col-sm-2 text-center pv-lg gar-archive--folder" ng-click="vm.goToArchive(establishment.UniqueId)">
+                            <em class="fa fa-folder-o fa-9x" title="Abrir pasta" 
+                                ng-click="$state.go('app.egarArchiveEstablishment', {year: vm.year, establishmentId: establishment.UniqueId})"></em>
+                            <em class="fa fa-download fa-2x" title="Download" ng-click="vm.downloadArchive(establishment)"></em>                    
+                            <div>
+                                <strong>{{establishment.Name}}</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+

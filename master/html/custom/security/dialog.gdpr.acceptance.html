@@ -1,0 +1,73 @@
+
+
+<div id="gdprAcceptanceDialog" class="ngdialog-message">
+    <form name="gdprAcceptance" ng-submit="$ctrl.submitForm()" >
+            <div class="panel">
+                <div class="panel-body">
+                    <h3 class="mar-top0">
+                        <div class="row">
+                            <div class="col-xs-1">
+                                <em class="fa fa-lock fa-2x"></em>
+                            </div>
+                            <div class="col-xs-11 mar-top10">
+                                Regulamento Geral de Proteção de Dados Pessoais
+                            </div>
+                        </div>
+                    </h3>
+                </div>
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p>
+                            Caro Utilizador,
+                            </p>                          
+                            <p>
+                            A partir de 25 de Maio de 2018 vai entrar em vigor um novo Regulamento Geral de Proteção de Dados Pessoais que obriga a uma alteração no processo de tratamento de dados pessoais pelas empresas.
+                            </p>
+                            <p>
+                            Nesse sentido, para que possamos continuar a fornecer-lhe informação atualizada sobre os nossos serviços, campanhas e preços, assim como convites para eventos, ações de formação, respostas a questionários, necessitamos que confirme o seu interesse e vontade nesses contactos.
+                            </p>
+                            <p>
+                            Solicitamos-lhe, por isso, que valide os seus dados pessoais na sua área de utilizador e confirme que poderemos utilizar os mesmos para os fins descritos.
+                            </p>
+                            <p>
+                                Consulte os nossos
+                                <a target="_blank"  href="https://drive.google.com/open?id=15vKOJQ8RTbjyea0kpDzTZNUi7F2G8FE4">Termos e Condições de Utilização</a>
+                            </p>
+                            <p>
+                                Consulte a nossa 
+                                <a target="_blank"  href="https://drive.google.com/open?id=15u_JFHzvQPZoEI2l4kRZ1ctWnkzHman9">Política de Privacidade</a>
+                            </p>
+                            <p>
+                                Qualquer dúvida contacte-nos através de info@smartgar.com
+                            </p>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="checkbox c-checkbox">
+                                <label>
+                                    <input name="ckb-transporter-destin" type="checkbox" 
+                                        ng-click="$ctrl.onAllEgarClicked()"
+                                        ng-model="$ctrl.termAndConditions" 
+                                        ng-checked="$ctrl.termAndConditions">
+                                    <span class="fa fa-check"></span> 
+                                    Li e aceito os termos e condições
+                                </label>
+                            </div>
+                        </div>   
+                        <div ng-if="$ctrl.showErrorMessage" class="col-xs-12 text-center text-danger">
+                            Não foi possível efectuar a operação.
+                            <br>
+                            Se o problema persistir, por favor contacte o suporte.
+                        </div>                   
+                    </div>
+                </div>
+            </div>
+            <div class="row text-right">
+                <div class="col-xs-12">
+                    <button type="button" ng-click="$ctrl.cancelClick()" disabled="disabled" class="btn btn-default mar-right10">Cancelar</button>
+                    <button type="submit" ng-disabled="!$ctrl.termAndConditions" class="btn btn-success">Enviar</button>
+                </div>
+            </div>
+    </form>
+</div>

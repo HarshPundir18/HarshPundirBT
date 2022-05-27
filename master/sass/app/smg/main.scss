@@ -1,0 +1,322 @@
+.ui-select-container{
+    & .glyphicon {
+        padding-top: 5px;
+        color: $gray-dark;
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: 10px;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        display: inline-block;
+        font-family: 'Glyphicons Halflings';
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+      }
+}
+
+
+.ui-select-bootstrap > .ui-select-choices, .ui-select-bootstrap > .ui-select-no-choice {
+    max-height: 400px !important;
+}
+
+.ngdialog-message-header {
+    & .ngdialog-message-header-icon{
+        margin-right: 10px;
+    }
+
+    & .ngdialog-message-header-title{
+        font-size: 20px;
+    }
+}
+
+.vertical-spacer-small {
+    padding-top:  $padding-small-vertical;
+}
+
+.vertical-spacer-large {
+    padding-top:  $padding-large-vertical;
+}
+
+
+.edit-value{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.underline{
+    text-decoration: underline;
+}
+
+.control-label-text{
+    display: inline-block;
+    
+}
+
+.smg-message-warning{
+    // background-color: #ffe6b3;
+    // border-color: #de8c00; // #ffbb33;
+    // color: #de8c00;
+
+    color: #fff;
+    background-color: #ff902b;
+    border-color: #cfdbe2;
+}
+
+.smg-message-info{
+    color: #fff;
+    background-color: #23b7e5;
+    border-color: #cfdbe2;
+}
+
+
+.smg-message-error{
+    color: #fff;
+    background-color: #f05050;
+    border-color: #cfdbe2;
+}
+
+.smg-message-primary{
+    color: #fff;
+    background-color: #5d9cec;
+    border-color: #cfdbe2;
+}
+
+.smg-message-success{
+    color: #fff;
+    background-color: #27c24c;
+    border-color: #cfdbe2;
+}
+
+
+.smg-message-warning button.close, 
+.smg-message-info button.close,
+.smg-message-primary button.close,
+.smg-message-success button.close,
+.smg-message-error button.close {
+    color: black;
+}
+
+
+.vertical-border-green {
+    border-left: 6px solid green;
+    height: 100%;
+  }
+
+.clearFilter{
+    padding-left: 0 !important;
+}
+
+.searchFilter{
+    padding-left: 0 !important;
+}
+
+.tabfilter .ui-select-placeholder{
+    color: #909FA7 !important;
+    
+}
+
+.ui-select-bootstrap > .ui-select-choices, .ui-select-bootstrap > .ui-select-no-choice{
+    min-width: 300px;
+}
+
+.action-buttons {
+    // text-align: right !important;
+    // padding-right: 10px !important;
+}
+
+.action-buttons{
+	// margin:0px !important;
+	// padding:0px !important;
+}
+
+.action-buttons span{
+	//margin-left: 8px;
+	//margin-right: 8px;
+	cursor: pointer;
+    font-size: 16px;
+    padding-right: 10px;
+}
+
+.action-buttons-aggregate{
+        cursor: pointer;
+        font-size: 10px;
+        padding: 0 !important;
+    & span{
+        margin: 0px;
+        //margin-right: 8px;
+        
+    }
+	
+}
+
+.aqua{
+    background-color:red;
+}
+
+
+.ngdialog-message h3 {
+    margin-top: 0 !important;
+}
+
+.ngdialog-message fieldset legend {
+    font-size: 18px;
+}
+
+smg-required .fa.fa-asterisk {
+    font-size: 10px;
+    color: red;
+}
+
+
+.load-more{
+    text-align: center;
+}
+
+smg-help-icon {
+    cursor: pointer;
+}
+
+
+progress {
+  border: 0;
+  background: #eee;
+  border-radius: 100px;
+}
+
+progress::-moz-progress-bar {
+  border-radius: 100px;
+  background: linear-gradient(to right, rgba(33, 177, 89, .1), rgba(33, 177, 89, 1));
+}
+
+progress::-webkit-progress-bar {
+  background: #eee;
+  border-radius: 100px;
+}
+
+progress::-webkit-progress-value {
+  border-radius: 100px;
+  background: linear-gradient(to right, rgba(33, 177, 89, .1), rgba(33, 177, 89, 1));
+}
+
+.highlight{
+    font-size: 1.5em;
+    // color: blue;
+    text-shadow: 0px 0px 25px yellow;
+}
+
+.table-colum-list{
+    font-size: 12px;
+}
+
+
+/*ui-select allow-free-text*/
+.select2 > .select2-choice.ui-select-match {
+    /* Because of the inclusion of Bootstrap */
+    height: 29px;
+}
+
+.selectize-control > .selectize-dropdown {
+    top: 36px;
+}
+/* Some additional styling to demonstrate that append-to-body helps achieve the proper z-index layering. */
+.select-box {
+  background: #fff;
+  position: relative;
+  z-index: 1;
+}
+.alert-info.positioned {
+  margin-top: 1em;
+  position: relative;
+  z-index: 10000; /* The select2 dropdown has a z-index of 9999 */
+}
+/*ui-select allow-free-text*/
+
+.fa-1point5{
+    font-size: 1.5em !important;
+}
+
+
+
+
+.smg-content-area {
+    border: 1px solid black;
+    margin-top: 10px;
+    padding: 10px;
+  }
+  
+  .smg-fade-show-hide {
+    transition: all linear 0.5s;
+  }
+  .smg-fade-show-hide.ng-hide {
+    opacity: 0;
+  }
+
+
+  //overrido stuff from ngdialog to keep the page position after closing the ngdialog popup
+  .ngdialog-open {
+    height: auto !important;
+    overflow: inherit !important;
+  }
+
+
+  smg-help-icon{
+    font-style: italic;
+  }
+
+  .help-icon-text {
+    border: 0;
+  }
+
+  .arrow_box {
+	position: relative;
+	background: #88b7d5;
+	border: 3px solid #c2e1f5;
+}
+.arrow_box:after, .arrow_box:before {
+	bottom: 100%;
+	left: 7%;
+	border: solid transparent;
+	content: "";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(136, 183, 213, 0);
+	border-bottom-color: #fff;
+	border-width: 10px;
+	margin-left: -10px;
+}
+.arrow_box:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-bottom-color: #c2e1f5;
+	border-width: 13px;
+	margin-left: -13px;
+}
+
+span.error-message{
+    display: block;
+}
+
+.no-bullets{
+    list-style-type: none
+}
+
+.font16{
+    font-size: 16px !important;
+}
+
+
+.font10{
+    font-size: 10px !important;
+}
+
+.smg-disabled {
+    pointer-events:none; //This makes it not clickable
+    opacity:0.6;         //This grays it out to look disabled
+}

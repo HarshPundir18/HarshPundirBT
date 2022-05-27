@@ -1,0 +1,36 @@
+<div class="smg-select">
+    <ui-select ng-model="vm.selectedItem" 
+        theme="bootstrap"
+        spinner-enabled="true"
+        ng-change="vm.onSelectChange($select)">
+
+
+        <ui-select-match allow-clear="true" placeholder="{{vm.placeholder}}">
+            {{$select.selected.value}} 
+        </ui-select-match>
+
+        <ui-select-choices  
+            refresh="vm.onSearch($select)" 
+            refresh-delay="300" 
+            repeat="item in vm.items">
+
+            <span title="{{item.value}}">{{item.value}}</span>
+            <div ng-if="$index == $select.items.length-1">
+                <button 
+                    ng-if="vm.canLoadMore" 
+                    class="btn btn-xs btn-info select-product-load-more" 
+                    style="width: 100%; margin-top: 5px;" 
+                    ng-click="vm.onLoadMoreClick($select, $event);"
+                    ng-disabled="vm.isLoading">
+                    Carregar mais...
+                </button>                 
+            </div>
+        </ui-select-choices>
+
+        <ui-select-no-choice>
+            Não foram encontrados resultados
+        </ui-select-no-choice>
+
+    </ui-select>
+
+</div>

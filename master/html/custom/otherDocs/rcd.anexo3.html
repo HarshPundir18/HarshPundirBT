@@ -1,0 +1,467 @@
+<h3>Emitir Certificado RCD</h3>
+
+<form id="cenas" role="form" name="$ctrl.formValidate" ng-submit="$ctrl.submitForm()" novalidate="" class="form-validate form-horizontal">
+
+    <!--actions-->
+    <div class="row mar-bottom15">
+        <div class="col-sm-6">
+            <i class="text-danger fa fa-asterisk" /> - Campos Obrigatórios
+        </div>
+        <div class="col-sm-6">
+            <div class="text-right">
+                <button type="button" class="btn btn-labeled btn-default" ng-click="$state.go('app.dashboard')">
+                    <span class="btn-label">
+                        <i class="fa fa-arrow-left"></i>
+                    </span>
+                    Voltar
+                </button>
+
+                <button type="submit" class="btn btn-labeled btn-info mar-right10">
+                    <span class="btn-label">
+                        <i class="icon-magnifier"></i>
+                    </span>
+                    Pesquisar Resíduos
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!--step 1-->
+    <div id="panelDestin" class="panel panel-default">
+        <div class="panel-heading" ng-class="{'panel-heading-collapsed': $ctrl.panelDestin}">
+            <h4>
+                <em class="pad-right10"></em>
+                1 - Emissor do certificado & Período
+            </h4>
+            <paneltool tool-collapse="tool-collapse" class="pull-right">
+                <a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="$ctrl.panelDestin = !$ctrl.panelDestin" class="ng-scope">
+                    <em ng-show="$ctrl.panelDestin" class="fa fa-plus ng-no-animation ng-hide"></em>
+                    <em ng-show="!$ctrl.panelDestin" class="fa fa-minus ng-no-animation"></em>
+                </a>
+            </paneltool>
+        </div>
+
+        <div uib-collapse="panelDestin" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+            <div class="panel-body pad-bottom0">
+                <fieldset class="">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label class="control-label">
+                                    Estabelecimento emissor
+                                    <span class="pad-left5 text-danger">
+                                        <i class="fa fa-asterisk" />
+                                    </span>
+                                </label>
+                                <smg-select-establishment name="selectDocumentEmiter"
+                                    label-text="some label" 
+                                    type="$ctrl.SMG_ESTABLISHMENT_TYPES.ACCOUNT"
+                                    selection-model="$ctrl.selectedDestin" ,
+                                    selected-key="$ctrl.selectedDestinKey"
+                                    on-change="$ctrl.onDestinChange(obj)">
+                                </smg-select-establishment>
+                            </div>
+                            
+                            <div class="col-sm-2">
+                                <smg-select-period selected-period-key="$ctrl.periodKey"
+                                    on-change="$ctrl.onPeriodChange(selected)"
+                                    label-text="Período de conclusão das eGars">
+                                </smg-select-period>
+                            </div>
+                        </div>
+
+                        <div ng-if="$ctrl.selectedDestin">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label class="control-label">
+                                        Nif
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <input name="destinVat" type="text" required="" ng-model="$ctrl.destinVat" class="form-control" />
+                                    <span ng-show="$ctrl.validateInput('destinVat', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['DestinVat'] || $ctrl.serverApplicationErrors['DestinVat']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['DestinVat']}} 
+                                        {{$ctrl.serverApplicationErrors['DestinVat']}}
+                                    </span>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="control-label">
+                                        Denominação
+                                    </label>
+                                    <input name="destiinName" type="text" ng-model="$ctrl.destinName" class="form-control" />
+                                    <span ng-show="$ctrl.serverValidationErrors['DestinName'] || $ctrl.serverApplicationErrors['DestinName']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['DestinName']}} 
+                                        {{$ctrl.serverApplicationErrors['DestinName']}}
+                                    </span>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="control-label">
+                                        Sede social
+                                    </label>
+                                    <input name="destinAddress" type="text" ng-model="$ctrl.destinAddress" class="form-control" />
+                                    <span ng-show="$ctrl.serverValidationErrors['DestinAddress'] || $ctrl.serverApplicationErrors['DestinAddress']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['DestinAddress']}} 
+                                        {{$ctrl.serverApplicationErrors['DestinAddress']}}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="row mar-top10">
+                                <div class="col-sm-2">
+                                    <label class="control-label">
+                                        APA
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <input name="destinApa" type="text" required="" ng-model="$ctrl.destinApa" class="form-control" />
+                                    <span ng-show="$ctrl.validateInput('destinApa', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['DestinApa'] || $ctrl.serverApplicationErrors['DestinApa']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['DestinApa']}} 
+                                        {{$ctrl.serverApplicationErrors['DestinApa']}}
+                                    </span>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label class="control-label">
+                                        Nº licença ambiental
+                                    </label>
+                                    <input name="destinLicense" type="text" ng-model="$ctrl.destinLicense" class="form-control" />
+                                    <span ng-show="$ctrl.serverValidationErrors['DestinLicense'] || $ctrl.serverApplicationErrors['DestinLicense']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['DestinLicense']}} 
+                                        {{$ctrl.serverApplicationErrors['DestinLicense']}}
+                                    </span>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label class="control-label">
+                                        Telefone
+                                    </label>
+                                    <input type="text" ng-model="$ctrl.destinPhone" class="form-control" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <label class="control-label">
+                                        Fax
+                                    </label>
+                                    <input type="text" ng-model="$ctrl.destinFax" class="form-control" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <label class="control-label">
+                                        E-Mail
+                                    </label>
+                                    <input type="text" ng-model="$ctrl.destinEmail" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+    <!--step 2-->
+    <div id="panelOrigin" class="panel panel-default">
+        <div class="panel-heading" ng-class="{'panel-heading-collapsed': $ctrl.panelOrigin}">
+            <h4>
+                <em class="pad-right10"></em>
+                2 - Produtor / Detentor
+            </h4>
+            <paneltool tool-collapse="tool-collapse" class="pull-right">
+                <a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="$ctrl.panelOrigin = !$ctrl.panelOrigin" class="ng-scope">
+                    <em ng-show="$ctrl.panelOrigin" class="fa fa-plus ng-no-animation ng-hide"></em>
+                    <em ng-show="!$ctrl.panelOrigin" class="fa fa-minus ng-no-animation"></em>
+                </a>
+            </paneltool>
+        </div>
+
+        <div uib-collapse="panelOrigin" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+            <div class="panel-body pad-bottom0">
+                <fieldset class="">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <smg-select-establishment name="selectDocumentReceiver"
+                                    label-text="Produtor/Detentor" 
+                                    selection-model="$ctrl.selectedOrigin" ,
+                                    selected-key="$ctrl.selectedOriginKey"
+                                    on-change="$ctrl.onOriginChange(obj)">
+                                </smg-select-establishment>
+                            </div>
+                        </div>
+
+                        <div id="selectedOriginData" ng-if="$ctrl.selectedOrigin">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label class="control-label">
+                                        Nif
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <input name="originVat" type="text" required="" ng-model="$ctrl.originVat" class="form-control" />
+                                    <span ng-show="$ctrl.validateInput('originVat', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="$ctrl.serverValidationErrors['OriginVat'] || $ctrl.serverApplicationErrors['OriginVat']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['OriginVat']}}
+                                        {{$ctrl.serverApplicationErrors['OriginVat']}}
+                                    </span>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="control-label">
+                                        Denominação
+                                    </label>
+                                    <input name="originName" type="text" ng-model="$ctrl.originName" class="form-control" />
+                                    <span ng-show="$ctrl.serverValidationErrors['OriginName'] || $ctrl.serverApplicationErrors['OriginName']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['OriginName']}}
+                                        {{$ctrl.serverApplicationErrors['OriginName']}}
+                                    </span>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="control-label">
+                                        Sede social
+                                    </label>
+                                    <input name="originAddress" type="text" ng-model="$ctrl.originAddress" class="form-control" />
+                                    <span ng-show="$ctrl.serverValidationErrors['OriginAddress'] || $ctrl.serverApplicationErrors['OriginAddress']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['OriginAddress']}} 
+                                        {{$ctrl.serverApplicationErrors['OriginAddress']}}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="row mar-top10">
+                                <div class="col-sm-2">
+                                    <label class="control-label">
+                                        Alvará ou título de registo do InCI
+                                    </label>
+                                    <input name="originLicense" type="text" ng-model="$ctrl.originLicense" class="form-control" />
+                                </div>
+                                <div class="col-sm-2" ng-if="false">
+                                    <label class="control-label">
+                                        Identificação da obra
+                                    </label>
+                                    <input name="originObra" type="text" ng-model="$ctrl.originObra" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+    <!--step 3-->
+    <div id="panelTransporter" class="panel panel-default">
+        <div class="panel-heading" ng-class="{'panel-heading-collapsed': $ctrl.panelTransporter}">
+            <h4>
+                <em class="pad-right10"></em>
+                3 - Transportador
+            </h4>
+            <paneltool tool-collapse="tool-collapse" class="pull-right">
+                <a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="panelTransporter = !$ctrl.panelTransporter" class="ng-scope">
+                    <em ng-show="$ctrl.panelTransporter" class="fa fa-plus ng-no-animation ng-hide"></em>
+                    <em ng-show="!$ctrl.panelTransporter" class="fa fa-minus ng-no-animation"></em>
+                </a>
+            </paneltool>
+        </div>
+
+        <div uib-collapse="panelTransporter" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+            <div class="panel-body pad-bottom0">
+                <fieldset class="">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-11">
+                                <div class="checkbox c-checkbox">
+                                    <label>
+                                        <input name="ckb-transporter-destin" type="checkbox" 
+                                            ng-disabled="!$ctrl.selectedOrigin" 
+                                            ng-click="$ctrl.clickTransporterOrigin()"
+                                            ng-checked="$ctrl.checkTransporterOrigin">
+                                        <span class="fa fa-check"></span>
+                                        Produtor
+                                    </label>
+                                    <label>
+                                        <input name="ckb-transporter-destin" type="checkbox" 
+                                            ng-disabled="!$ctrl.selectedDestin" 
+                                            ng-click="$ctrl.clickTransporterDestin()"
+                                            ng-checked="$ctrl.checkTransporterDestin">
+                                        <span class="fa fa-check"></span>
+                                        Destinatário
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label class="control-label">
+                                    Nif
+                                    <span class="pad-left5 text-danger">
+                                        <i class="fa fa-asterisk" />
+                                    </span>
+                                </label>
+                                <input name="transporterVat" type="text" required="" ng-model="$ctrl.transporterVat" class="form-control" />
+                                <span ng-show="$ctrl.validateInput('transporterVat', 'required')" class="text-danger">Obrigatório</span>
+                                <span ng-show="$ctrl.serverValidationErrors['TransporterVat'] || $ctrl.serverApplicationErrors['TransporterVat']" class="text-danger">
+                                    {{$ctrl.serverValidationErrors['TransporterVat']}} {{$ctrl.serverApplicationErrors['TransporterVat']}}
+                                </span>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">
+                                    Denominação
+                                </label>
+                                <input name="transporterName" type="text" required="" ng-model="$ctrl.transporterName" class="form-control" />
+                                <span ng-show="$ctrl.validateInput('transporterName', 'required')" class="text-danger">Obrigatório</span>
+                                <span ng-show="$ctrl.serverValidationErrors['TransporterName'] || $ctrl.serverApplicationErrors['TransporterName']" class="text-danger">
+                                    {{$ctrl.serverValidationErrors['TransporterName']}} {{$ctrl.serverApplicationErrors['TransporterName']}}
+                                </span>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">
+                                    Sede social
+                                </label>
+                                <input name="transporterAddress" type="text" ng-model="$ctrl.transporterAddress" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="panelResults" class="panel panel-default mar-top15" ng-if="$ctrl.submitted">
+        <div ng-class="{'panel-heading-collapsed':panelResults}" class="panel-heading">
+            <h4>
+                <em class="pad-right10"></em>Resultados
+                <ul class="pull-right list-style-none" ng-if="$ctrl.eGars.length > 0">
+                    <li class="dropdown dropdown-list" uib-dropdown="">
+                        <button type="button" class="btn btn-labeled btn-success mar-right10" uib-dropdown-toggle="" title="Gerar Anexo III">
+                            <span class="btn-label">
+                                <a title="" class="white">
+                                    <i class="fa fa-cloud-download"></i>
+                                </a>
+                            </span>
+                            Gerar
+                        </button>
+                        <!-- START Dropdown menu-->
+                        <ul class="dropdown-menu">
+                            <li>
+                                <!-- START list group-->
+                                <div class="list-group">
+                                    <a class="list-group-item">
+                                        <div class="media-box" hreef="" ng-click="$ctrl.downloadFile('docx')">
+                                            <div class="pull-left">
+                                                <em class="fa fa-file-word-o fa-2x text-info"></em>
+                                            </div>
+                                            <div class="media-box-body clearfix">
+                                                <p class="m0">Word (.docx)</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!-- END list group-->
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </h4>
+        </div>
+
+        <div uib-collapse="panelResults" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+            <div class="panel-body pad-bottom0">
+                <fieldset id="results">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="row pad-left10" ng-if="$ctrl.eGars.length <= 0">
+                                Não foram encontrados resultados
+                            </div>
+                            <div class="report text-center" ng-if="$ctrl.eGars.length > 0">
+                                <!-- header -->
+                                <div class="row pad-top20 report__header">
+                                    <div class="col-sm-2">E-Gar</div>
+                                    <div class="col-sm-2">Estado</div>
+                                    <div class="col-sm-1">LER</div>
+                                    <div class="col-sm-5">Descrição</div>
+                                    <div class="col-sm-1">Quantidade</div>
+                                    <div class="col-sm-1">
+                                        <div class="checkbox c-checkbox">
+                                            <label>
+                                                <input name="ckb-transporter-destin" type="checkbox" 
+                                                    ng-click="$ctrl.onAllEgarClicked()"
+                                                    ng-model="$ctrl.allChecked" 
+                                                    ng-checked="$ctrl.allChecked">
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row pad-top10 pad-bottom10 report__line" ng-repeat="item in $ctrl.eGars">
+                                    <!-- num -->
+                                    <div class="col-sm-2">
+                                        {{item.NumeroGuia}}
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        {{item.Estado}}
+                                    </div>
+
+                                    <!--codigo ler-->
+                                    <div class="col-sm-1">
+                                        {{item.ResiduoTransportado.CodigoResiduoLer}}
+                                    </div>
+
+                                    <!-- description -->
+                                    <div class="col-sm-5">
+                                        {{item.ResiduoTransportado.DescricaoResiduo}}
+                                    </div>
+
+                                    <div class="col-sm-1">
+                                        {{item.ResiduoTransportado.Quantidade}} Kg
+                                    </div>
+
+                                    <!-- transporters -->
+                                    <div class="col-sm-1">
+                                        <div class="checkbox c-checkbox">
+                                            <label>
+                                                <input name="ckb-transporter-destin" type="checkbox" 
+                                                    ng-click="$ctrl.onEgarClicked(item)"
+                                                    ng-model="item.Checked" 
+                                                    ng-checked="item.Checked">
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+
+    <!--actions-->
+    <div class="row mar-bottom15">
+        <div class="col-sm-6">
+            <i class="text-danger fa fa-asterisk" /> - Campos Obrigatórios
+        </div>
+        <div class="col-sm-6">
+            <div class="text-right">
+                <button type="button" class="btn btn-labeled btn-default" ng-click="$state.go('app.dashboard')">
+                    <span class="btn-label">
+                        <i class="fa fa-arrow-left"></i>
+                    </span>
+                    Voltar
+                </button>
+
+                <button type="submit" class="btn btn-labeled btn-info mar-right10">
+                    <span class="btn-label">
+                        <i class="icon-magnifier"></i>
+                    </span>
+                    Pesquisar Resíduos
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

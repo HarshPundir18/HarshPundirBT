@@ -1,0 +1,357 @@
+<h3 ng-if="!vm.isEdit && !vm.isDuplicate">Criar regra de criação e-GAR</h3>
+<h3 ng-if="vm.isEdit">Editar regra de criação e-GAR</h3>
+<h3 ng-if="vm.isDuplicate">Duplicar regra de criação e-GAR</h3>
+
+
+<form id="newGarCreationRule" role="form" name="vm.newGarCreationRuleForm" ng-submit="vm.submitForm()" novalidate="" class="form-validate form-horizontal">
+    <smg-form-actions on-back-click="vm.onBackClick()" on-save-click="vm.submitForm()">
+    </smg-form-actions>
+    
+    <div id="panelEgarCreationRule" class="panel panel-default mar-top15">
+        <div ng-class="{'panel-heading-collapsed':panelEgarCreationRule}" class="panel-heading">
+            <h4>
+                <em class="fa fa-lock pad-right10"></em>Regra de criação e-GAR
+            </h4>
+            <paneltool tool-collapse="tool-collapse" class="pull-right">
+                <a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="panelEgarCreationRule = !panelEgarCreationRule" class="ng-scope">
+                    <em ng-show="panelEgarCreationRule" class="fa fa-plus ng-no-animation ng-hide"></em>                         
+                    <em ng-show="!panelEgarCreationRule" class="fa fa-minus ng-no-animation"></em>                       
+                </a>
+            </paneltool>
+        </div>
+
+        <div uib-collapse="panelEgarCreationRule" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+            <div class="panel-body">
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label class="control-label">
+                                        Estabelecimento
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk"/>
+                                        </span>
+                                    </label>
+                                    <smg-select-establishment 
+                                        name="{{vm.smgSelectAccountEstablishment}}"
+                                        label-text="some label"
+                                        type="vm.SMG_ESTABLISHMENT_TYPES.ACCOUNT"
+                                        selection-model="vm.selectedAccountEstablishment",
+                                        selected-key="vm.selectedAccountEstablishmentKey"
+                                        on-change="vm.onAccountEstablishmentChange(obj)">
+                                    </smg-select-establishment> 
+                                    <span ng-show="vm.validateInput('{{vm.smgSelectAccountEstablishment}}', 'required')" 
+                                        class="text-danger">Obrigatório</span>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label class="control-label">
+                                        Área de Serviço
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk"/>
+                                        </span>
+                                    </label>
+                                    <smg-select-service-area
+                                        name="{{vm.smgSelectServiceArea}}"
+                                        required=""
+                                        selection-model="vm.selectedServiceArea" 
+                                        selected-key="vm.selectedServiceAreaKey"
+                                        on-change="vm.onSelectedServiceAreaChange(obj)">    
+                                    </smg-select-service-area> 
+                                    <span ng-show="vm.validateInput('{{vm.smgSelectServiceArea}}', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="vm.serverValidationErrors['ServiceArea']" class="text-danger">
+                                        {{vm.serverValidationErrors['ServiceArea']}}
+                                    </span>
+                                </div>
+
+                                <div ng-if="vm.selectedServiceArea != null" class="col-sm-1 pad-top7">
+                                    <label class="control-label">
+                                        Assignada a
+                                    </label>
+                                    <div>
+                                        <span class="control-label-text">{{vm.selectedServiceArea.assignedToUser}}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row pad-top10">
+                                <div class="col-sm-4">
+                                    <label class="control-label">
+                                        Destinatário
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk"/>
+                                        </span>
+                                    </label>
+                                    <smg-select-establishment 
+                                        name="{{vm.smgSelectDestinEstablishment}}"
+                                        label-text="some label"
+                                        selection-model="vm.selectedDestinEstablishment",
+                                        selected-key="vm.selectedDestinEstablishmentKey"
+                                        on-change="vm.onDestinEstablishmentChange(obj)">
+                                    </smg-select-establishment> 
+                                    <span ng-show="vm.validateInput('{{vm.smgSelectDestinEstablishment}}', 'required')" class="text-danger">Obrigatório</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label class="control-label">
+                                            Grupo de etiquetas
+                                        </label>
+                                        <smg-select-product-group
+                                            name="{{vm.smgSelectProductGroup}}"
+                                            selection-model="vm.selectedProductGroup"
+                                            selected-key="vm.selectedProductGroupKey"
+                                            on-change="vm.onSelectedProductGroupChange(obj)">
+                                        </smg-select-product-group>
+                                        <span ng-show="vm.validateInput('{{vm.smgSelectProductGroup}}', 'required')" class="text-danger">Obrigatório</span>
+                                    </div>
+                                    <!-- 
+                                    <div class="col-sm-3">
+                                        <label class="control-label">
+                                            Etiqueta
+                                        </label>
+                                        <smg-select-product-code 
+                                                name="{{vm.smgSelectProductCode}}"
+                                                selection-model="vm.selectedProductCode" 
+                                                on-change="vm.onSelectedProductCodeChange(obj)">    
+                                        </smg-select-product-code> 
+                                        <span ng-show="vm.validateInput('{{vm.smgSelectProductCode}}', 'required')" class="text-danger">Obrigatório</span>
+                                        <span ng-show="vm.serverValidationErrors['ProductCode']" class="text-danger">
+                                            {{vm.serverValidationErrors['ProductCode']}}
+                                        </span>
+                                    </div> 
+                                    -->
+                                </div>
+    
+                                <div class="row">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label class="control-label">
+                                        Tipo de e-GAR
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk"/>
+                                        </span>
+                                    </label>
+                                    <select id="inp-egarType" 
+                                        required=""
+                                        name="egarType" 
+                                        ng-model="vm.selectedEgarType" 
+                                        class="form-control ng-pristine ng-valid ng-not-empty ng-touched">
+                                        <option ng-repeat="option in vm.egarTypes" 
+                                            value="{{option.key}}">
+                                            {{option.value}}
+                                        </option>
+                                    </select>
+                                    <span ng-show="vm.validateInput('egarType', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="vm.serverValidationErrors['EgarType']" class="text-danger">
+                                        {{$ctrl.serverValidationErrors['EgarType']}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label class="control-label">
+                                        LER 1
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk"/>
+                                        </span>
+                                    </label>
+                                    <smg-select-ler
+                                        name="{{vm.smgSelectLer1}}"
+                                        required=""
+                                        selection-model="vm.selectedLer1" 
+                                        selected-key="vm.selectedLer1Key"
+                                        on-change="vm.onSelectedLer1Change(obj)">    
+                                    </smg-select-ler> 
+                                    <span ng-show="vm.validateInput('{{vm.smgSelectLer1}}', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="vm.serverValidationErrors['Ler1']" class="text-danger">
+                                        {{vm.serverValidationErrors['Ler1']}}
+                                    </span>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label class="control-label">
+                                        Grupo LER 1
+                                        <span ng-if="vm.goup1IsMandatory" class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk"/>
+                                        </span>
+                                    </label>
+                                    <smg-select-group
+                                        name="{{vm.smgSelectGroup1}}"
+                                        is-disabled="!vm.goup1IsMandatory"
+                                        ng-required="vm.goup1IsMandatory"
+                                        selection-model="vm.selectedGroup1" 
+                                        selected-key="vm.selectedGroup1Key"
+                                        on-change="vm.onSelectedGroup1Change(obj)">    
+                                    </smg-select-group> 
+                                    <span ng-show="vm.goup1IsMandatory && vm.validateInput('{{vm.smgSelectGroup1}}', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="vm.serverValidationErrors['Group1']" class="text-danger">
+                                        {{vm.serverValidationErrors['Group1']}}
+                                    </span>
+                                </div>
+                            </div>
+  
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label class="control-label">
+                                        LER 2
+                                        <smg-help-icon help-text='Este LER é aplicado quando o establecimento configurado na regra é produtor de resíduos de origem animal!'>
+                                    </smg-help-icon>
+                                    </label>
+                                    <smg-select-ler
+                                        name="{{vm.smgSelectLer2}}"
+                                        selection-model="vm.selectedLer2" 
+                                        selected-key="vm.selectedLer2Key"
+                                        on-change="vm.onSelectedLer2Change(obj)">    
+                                    </smg-select-ler> 
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label class="control-label">
+                                        Grupo LER 2
+                                        <span ng-if="vm.goup2IsMandatory" class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk"/>
+                                        </span>
+                                    </label>
+                                    <smg-select-group
+                                        name="{{vm.smgSelectGroup2}}"
+                                        is-disabled="!vm.goup2IsMandatory"
+                                        ng-required="vm.goup2IsMandatory"
+                                        selection-model="vm.selectedGroup2" 
+                                        selected-key="vm.selectedGroup2Key"
+                                        on-change="vm.onSelectedGroup2Change(obj)">    
+                                    </smg-select-group> 
+                                    <span ng-show="vm.goup2IsMandatory && vm.validateInput('{{vm.smgSelectGroup2}}', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="vm.serverValidationErrors['Group2']" class="text-danger">
+                                        {{vm.serverValidationErrors['Group2']}}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label class="control-label">
+                                        Operação
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk"/>
+                                        </span>
+                                    </label>
+                                    <smg-select-operation
+                                        name="{{vm.smgSelectOperation}}"
+                                        required=""
+                                        selection-model="vm.selectedOperation" 
+                                        selected-key="vm.selectedOperationKey" 
+                                        on-change="vm.onSelectedOperationChange(obj)">    
+                                    </smg-select-operation> 
+                                    <span ng-show="vm.validateInput('{{vm.smgSelectOperation}}', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="vm.serverValidationErrors['Operation']" class="text-danger">
+                                        {{vm.serverValidationErrors['Operation']}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset> 
+
+                
+            
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="checkbox c-checkbox">
+                                        <label class="control-label">
+                                            <input id="ckb-adr" 
+                                                type="checkbox" 
+                                                ng-click="vm.onIsAdrClick()"
+                                                ng-model="vm.isAdr"
+                                                ng-checked="vm.isAdr">
+                                            <span class="fa fa-check"></span>
+                                            Abrangido por ADR
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div ng-if="vm.isAdr" class="row pad-top10">
+                                <div class="col-sm-6">
+                                    <label class="control-label">
+                                        Nº ONU
+                                    </label>
+                                    <smg-select-onu-number id="selectOnuNumber"
+                                            name="{{vm.smgSelectOnuNumber}}"
+                                            ng-required="vm.isAdr"
+                                            selection-model="vm.onuNumber" 
+                                            selected-key="vm.selectedOnuNumber"
+                                            on-change="vm.onSelectedOnuNumberChange(obj)">    
+                                    </smg-select-onu-number>
+                                    <span ng-show="vm.isAdr && vm.validateInput('{{vm.smgSelectOnuNumber}}', 'required')" class="text-danger">Obrigatório</span>
+                                </div>
+                        
+                                <div class="col-sm-3">
+                                    <label class="control-label">
+                                        Grupo de embalagem
+                                    </label>
+                                    <smg-select-onu-number-package id="selectOnuNumberPackage"
+                                            name="{{vm.smgSelectOnuNumberPackage}}"
+                                            ng-required="vm.isAdr"
+                                            for-onu-number="vm.onuNumber"
+                                            selection-model="vm.onuNumberPackage" 
+                                            on-change="vm.onSelectedOnuNumberPackageChange(obj)">    
+                                    </smg-select-onu-number-package>
+                                    <span ng-show="vm.isAdr && vm.validateInput('{{vm.smgSelectOnuNumberPackage}}', 'required')" class="text-danger">Obrigatório</span>
+                                </div>
+                            </div>
+
+                            <div ng-if="vm.isAdr" class="row pad-top10">
+                                <div class="col-sm-6">
+                                    <label class="control-label">
+                                        Observações I
+                                    </label>
+                                    <textarea id="txt-adrObsI" 
+                                        name="adrObsI" 
+                                        class="form-control no-resize"
+                                        ng-model="vm.obsI"
+                                        ng-maxlength="100" 
+                                        rows="3">
+                                    </textarea>
+                                    <!-- <span ng-show="vm.isAdr && vm.validateInput('adrObsI', 'required')" class="text-danger">Obrigatório</span> -->
+                                    <span ng-show="vm.validateInput('adrObsI', 'maxlength')" class="text-danger">Máximo de 100 caracteres</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>  
+        </div>
+    </div>
+
+    <smg-form-actions on-back-click="vm.onBackClick()" on-save-click="vm.submitForm()">
+    </smg-form-actions>
+
+</form> 

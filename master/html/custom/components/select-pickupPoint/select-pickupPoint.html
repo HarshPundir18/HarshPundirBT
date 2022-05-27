@@ -1,0 +1,34 @@
+<div class="select-pickup-point">
+        <ui-select ng-model="vm.selectionModel" 
+            theme="bootstrap"
+            spinner-enabled="true"
+            ng-change="vm.onSelectChange($select)">
+    
+            <ui-select-match allow-clear="true" placeholder="Pesquisar ponto de recolha...">
+                {{$select.selected.displayName}}
+            </ui-select-match>
+    
+            <ui-select-choices 
+                refresh="vm.fetch($select)" 
+                refresh-delay="300" 
+                repeat="item in vm.items track by $index">
+    
+                {{item.displayName}}
+                <div ng-if="$index == $select.items.length-1">
+                    <button 
+                        ng-if="!vm.hideLoadingMore" 
+                        class="btn btn-xs btn-info select-load-more" 
+                        style="width: 100%; margin-top: 5px;" 
+                        ng-click="vm.fetch($select, $event);"
+                        ng-disabled="vm.isLoading">
+                        Carregar mais...
+                    </button>                 
+                </div>
+            </ui-select-choices>
+    
+            <ui-select-no-choice>
+                Não foram encontrados resultados
+            </ui-select-no-choice>
+    
+        </ui-select>
+    </div>

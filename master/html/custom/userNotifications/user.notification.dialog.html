@@ -1,0 +1,36 @@
+<div class="ngdialog-message">
+  <div class="panel">
+    <h3>
+      Notificação
+    </h3>
+    
+    <div class="row pad-top10">
+      <div class="col-md-12">
+      </div>
+      <div class="col-md-12">
+        <label class="control-label mar-bottom0">De</label>
+        <p>
+          {{undc.userNotification.Sender}}
+        </p>         
+      </div>
+      <div class="col-md-12">
+        <label class="control-label mar-bottom0">Assunto</label>
+        <p>
+          {{undc.userNotification.Title}}
+        </p>         
+      </div>
+      <div class="col-md-12">
+        <label class="control-label mar-bottom0">Conteúdo</label>
+        <p>
+          {{undc.userNotification.Content}}
+        </p>         
+      </div>
+    </div>
+  </div> <!--END PANEL-->
+
+  <div class="row pad-top10 text-right">
+    <div class="col-sm-12">
+      <button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">Fechar</button>
+    </div>
+  </div> 
+</div>

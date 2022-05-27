@@ -1,0 +1,166 @@
+<form role="form" name="$ctrl.formValidate" ng-submit="$ctrl.submitForm()" 
+    novalidate="" class="form-validate form-horizontal">
+  
+<!--contact-->
+<div class="row">
+  <div class="col-md-3">
+  </div>
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-3 text-center"  title="e-Mail">
+        <span><i class="fa fa-envelope"/>&nbsp info@smartgar.com</span>
+      </div>
+      <div class="col-md-6 text-center"  title="Skype">
+        <span><i class="fa fa-skype"/>&nbsp Info Smartgar | info@smartgar.com</span>
+      </div>
+      <div class="col-md-3 text-center" title="Telefone">
+        <span><i class="fa fa-phone"/>&nbsp (+351) 961792794</span>
+      </div>
+    </div>  
+  </div>
+  <div class="col-md-3">
+  </div>
+</div>
+
+<div class="row pad-bottom20">
+  <div class="col-md-3">
+  </div>
+
+  <div class="col-md-6">
+    <h3 class="text-center">{{$ctrl.title}}</h3>
+    <p class="text-center">
+      {{$ctrl.description}}
+    </p>
+    <div class="row pad-top20">
+      <div class="col-md-12">
+        <div id="panelOrigin" class="panel panel-dark panel-flat mar-top10 mar-bottom10">
+        <div class="panel-heading text-center">
+          <div class="logo">
+              SMART<span class="gar">GAR</span>
+          </div>
+          </div>
+          <div class="panel-body">
+            <!--name-->
+            <label class="control-label">
+              Nome
+              <span class="pad-left5 text-danger">
+                <i class="fa fa-asterisk"/>
+              </span>
+            </label>  
+            <input id="inp-name" name="name" 
+              ng-model="$ctrl.name" 
+              required="" 
+              type="text" 
+              class="form-control" placeholder="Ex: Salvador Sobral"/>
+            <span ng-show="$ctrl.validateInput('name', 'required')" class="text-danger">
+              Por favor indique-nos o seu nome
+            </span>
+            <span ng-show="$ctrl.serverValidationErrors['Name']" class="text-danger">
+              {{$ctrl.serverValidationErrors['Name']}}
+            </span> 
+            <br>
+
+            <!--name-->
+            <label class="control-label pad-top10">
+              Empresa
+            </label>  
+            <input id="inp-company" name="company" 
+              ng-model="$ctrl.company" 
+              required="" 
+              type="text" 
+              class="form-control" placeholder="Ex: Eurovisão"/>
+            <br>
+
+            <!--email-->
+            <label class="control-label pad-top10">
+              Email
+              <span class="pad-left5 text-danger">
+                <i class="fa fa-asterisk"/>
+              </span>
+            </label>       
+            <input id="inp-email" name="email" 
+              ng-model="$ctrl.email" 
+              required="" 
+              type="text" 
+              class="form-control" placeholder="Ex: salvador.sobral@gmail.com"/>
+            <span ng-show="$ctrl.validateInput('email', 'required')" class="text-danger">
+              Por favor indique-nos o seu e-mail
+            </span>
+            <span ng-show="$ctrl.serverValidationErrors['Email']" class="text-danger">
+              {{$ctrl.serverValidationErrors['Email']}}
+            </span> 
+            <br>
+
+            <!--mobile-->
+            <label class="control-label pad-top10">
+              Contacto telefónico
+              <span class="pad-left5 text-danger">
+                <i class="fa fa-asterisk"/>
+              </span>
+            </label>     
+            <input id="inp-mobile" name="mobile" 
+              ng-model="$ctrl.mobile" 
+              required="" 
+              type="text" 
+              class="form-control" placeholder="Ex: 961234567"/>
+            <span ng-show="$ctrl.validateInput('mobile', 'required')" class="text-danger">
+              Por favor indique-nos o seu contacto telefónico
+            </span>
+            <span ng-show="$ctrl.serverValidationErrors['Mobile']" class="text-danger">
+              {{$ctrl.serverValidationErrors['Mobile']}}
+            </span> 
+            <br>
+
+            <!--mesage-->
+            <label class="control-label pad-top10">
+              Mensagem
+            </label>  
+            <textarea id="txt-message" name="message" ng-model="$ctrl.message" ng-maxlength="500" rows="4" class="form-control no-resize">
+            </textarea>
+            <span ng-show="form.validateInput('message', 'maxlength')" class="text-danger">
+              Máximo de 500 caracteres
+            </span>
+
+          </div>
+
+        </div>  
+
+        <i class="text-danger fa fa-asterisk"/> - Campos Obrigatórios
+
+        <button type="submit" class="btn btn-labeled btn-success pull-right">
+          <span class="btn-label">
+            <i class="fa fa-check"></i>
+          </span>
+          Enviar
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+  </div>
+</div>
+
+<!--contact-->
+<div class="">
+  <div class="col-md-3">
+  </div>
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-3 text-center"  title="e-Mail">
+        <span><i class="fa fa-envelope"/>&nbsp info@smartgar.com</span>
+      </div>
+      <div class="col-md-6 text-center"  title="Skype">
+        <span><i class="fa fa-skype"/>&nbsp Info Smartgar | info@smartgar.com</span>
+      </div>
+      <div class="col-md-3 text-center" title="Telefone">
+        <span><i class="fa fa-phone"/>&nbsp (+351) 961792794</span>
+      </div>
+    </div>  
+  </div>
+  <div class="col-md-3">
+  </div>
+</div>
+
+</form>

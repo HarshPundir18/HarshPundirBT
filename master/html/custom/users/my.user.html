@@ -1,0 +1,264 @@
+<h3>Área de Utilizador</h3>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="text-right">
+            <button type="button" class="btn btn-labeled btn-default" ng-click="$state.go('app.dashboard')">
+                <span class="btn-label">
+                    <i class="fa fa-arrow-left"></i>
+                </span>
+                Voltar
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<div id="userData" class="row mar-top15">
+    <div class="col-md-6">
+        <form role="form" name="$ctrl.formUserData" ng-submit="$ctrl.submitFormUserData()" novalidate="" class="form-validate form-horizontal">
+            <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>Dados Pessoais</h4>
+                    </div>
+                    <div class="panel-body">
+                        <!--My user-->
+                        <fieldset>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div id="" class="row pad-top15">
+                                        <label class="col-sm-3 control-label">
+                                            E-Mail:
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <div class="form-control">
+                                                {{$ctrl.Email}}
+                                            </div>           
+                                        </div>
+                                    </div>
+
+                                    <div id="" class="row pad-top15">
+                                        <label class="col-sm-3 control-label">
+                                            Nome:
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input name="name" class="form-control" ng-model="$ctrl.name" ng-maxlength="100"/>
+                                            <span ng-show="$ctrl.validateInput('formUserData', 'name', 'maxlength')" class="text-danger">Máximo de 100 caracteres</span>
+                                            <span ng-show="$ctrl.serverValidationErrors['Name']" class="text-danger">
+                                                {{$ctrl.serverValidationErrors['Name']}}
+                                            </span>
+                                        </div>
+                                    </div>
+            
+                                    <div id="" class="row pad-top15">
+                                        <label class="col-sm-3 control-label">
+                                            Tlm.:
+                                        </label>
+                                        <div class="col-sm-4">
+                                            <input name="phone" class="form-control" ng-model="$ctrl.phone" ng-maxlength="20"/>
+                                            <span ng-show="$ctrl.validateInput('formUserData', 'phone', 'maxlength')" class="text-danger">Máximo de 20 caracteres</span>
+                                            <span ng-show="$ctrl.serverValidationErrors['Phone']" class="text-danger">
+                                                {{$ctrl.serverValidationErrors['Phone']}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-md-12 text-right">
+                                <div class="text-right">
+                                    <button type="submit" class="btn btn-labeled btn-success">
+                                        <span class="btn-label">
+                                            <i class="fa fa-check"></i>
+                                        </span>
+                                        Gravar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="changePassword" class="col-md-6">
+        <form role="form" name="$ctrl.formChangePassword" ng-submit="$ctrl.submitFormChangePassword()" novalidate="" class="form-validate form-horizontal">
+            <div class="panel panel-default">
+        
+                <div class="panel-heading">
+                    <h4>Alterar Password</h4>
+                </div>
+        
+                <div class="panel-body">
+                    <!--My user-->
+                    <fieldset>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div id="" class="row pad-top15">
+                                    <label class="col-sm-3 control-label">
+                                        Password actual:
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk"></i>
+                                        </span>
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input id="inp-password" name="currentPassword" required="" type="password" class="form-control" ng-model="$ctrl.currentPassword"
+                                        />
+                                        <span ng-show="$ctrl.validateInput('formChangePassword', 'currentPassword', 'required')" class="text-danger">Obrigatório</span>
+                                        <span ng-show="$ctrl.serverValidationErrors['CurrentPassword']" class="text-danger">
+                                            {{$ctrl.serverValidationErrors['CurrentPassword']}}
+                                        </span>
+                                        <span ng-show="$ctrl.serverApplicationErrors['CurrentPassword']" class="text-danger">
+                                            {{$ctrl.serverApplicationErrors['CurrentPassword']}}
+                                        </span>
+        
+                                    </div>
+                                </div>
+        
+                                <div id="" class="row pad-top15">
+                                    <label class="col-sm-3 control-label">
+                                        Nova Password:
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk"></i>
+                                        </span>
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input id="inp-new-password" name="newPassword" required="" type="password" class="form-control" ng-model="$ctrl.newPassword"
+                                        />
+                                        <span ng-show="$ctrl.validateInput('formChangePassword', 'newPassword', 'required')" class="text-danger">Obrigatório</span>
+                                        <span ng-show="$ctrl.serverValidationErrors['NewPassword']" class="text-danger">
+                                            {{$ctrl.serverValidationErrors['NewPassword']}}
+                                        </span>
+                                    </div>
+                                </div>
+        
+                                <div id="" class="row pad-top15">
+                                    <label class="col-sm-3 control-label">
+                                        Confimar Password:
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk"></i>
+                                        </span>
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input id="inp-confirm-password" name="confirmPassword" required="" type="password" class="form-control" ng-model="$ctrl.confirmPassword"
+                                        />
+                                        <span ng-show="$ctrl.validateInput('formChangePassword', 'confirmPassword', 'required')" class="text-danger">Obrigatório</span>
+                                        <span ng-show="$ctrl.serverValidationErrors['ConfirmPassword']" class="text-danger">
+                                            {{$ctrl.serverValidationErrors['ConfirmPassword']}}
+                                        </span>
+                                    </div>
+                                </div>
+        
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+        
+                <!--Action Buttons-->
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>
+                                <span class="pad-left5 text-danger">
+                                    <i class="fa fa-asterisk"></i>
+                                </span>
+                                Campos obrigatórios
+                            </label>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-labeled btn-success">
+                                    <span class="btn-label">
+                                        <i class="fa fa-check"></i>
+                                    </span>
+                                    Gravar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="row mar-top15">
+    <div id="usageConditions" class="col-md-6">
+        <form role="form" name="$ctrl.formUserPermits" ng-submit="$ctrl.submitFormUserPermits()" novalidate="" class="form-validate form-horizontal">
+            <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>Condições de utilização</h4>
+                    </div>
+                    <div class="panel-body">
+                        <!--My user-->
+                        <fieldset>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="checkbox c-checkbox">
+                                        <label>
+                                            <input name="ckb-termsAndConditions"
+                                                type="checkbox" 
+                                                disabled = "disabled"
+                                                ng-checked="true">
+                                            <span class="fa fa-check"></span> 
+                                            Concordo com os 
+                                            <a target="_blank"  href="https://drive.google.com/open?id=15vKOJQ8RTbjyea0kpDzTZNUi7F2G8FE4">
+                                                Termos e Condições de Utilização
+                                            </a>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="checkbox c-checkbox">
+                                        <label>
+                                            <input name="ckb-privacyPolicy" type="checkbox" 
+                                                disabled = "disabled"
+                                                ng-checked="true">
+                                            <span class="fa fa-check"></span> 
+                                            Concordo com a 
+                                            <a target="_blank"  href="https://drive.google.com/open?id=15u_JFHzvQPZoEI2l4kRZ1ctWnkzHman9">Política de Privacidade</a>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 mar-top15">
+                                    <div class="checkbox c-checkbox">
+                                        <label>
+                                            <input name="ckb-termsAndConditions"
+                                                type="checkbox" 
+                                                ng-model="$ctrl.removeFromSystem"
+                                                ng-checked="ctrl.removeFromSystem"
+                                                ng-click="$ctrl.removeFromSystemClick()">
+                                            <span class="fa fa-check"></span> 
+                                            Não concordo, pretendo sair do SmartGAR e remover todos os meus dados pessoais.
+                                        </label>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="panel-footer">
+
+                    </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="text-right">
+            <button type="button" class="btn btn-labeled btn-default" ng-click="$state.go('app.dashboard')">
+                <span class="btn-label">
+                    <i class="fa fa-arrow-left"></i>
+                </span>
+                Voltar
+            </button>
+        </div>
+    </div>
+</div>

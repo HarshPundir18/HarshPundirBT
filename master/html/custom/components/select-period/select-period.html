@@ -1,0 +1,9 @@
+<label class="control-label">
+    {{::$ctrl.labelText}}
+</label>
+<select name="selectedPeriod" 
+    class="form-control ng-pristine ng-valid ng-not-empty ng-touched" 
+    ng-options="option.value for option in $ctrl.periods track by option.key"
+    ng-model="$ctrl.selectedPeriod"
+    ng-change="$ctrl.onSelectionChange()">
+</select>

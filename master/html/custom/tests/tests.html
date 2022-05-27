@@ -1,0 +1,104 @@
+<p>
+    {{vm.msg}}
+</p>
+<!-- 
+<div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div>  -->
+
+<br>
+<!-- 
+<div class="row">
+    <div class="col-lg-4">
+       <dl class="dl-horizontal">
+          <dt>Selected locale id:</dt>
+          <dd>{{model.selectedLocale}}</dd>
+          <dt>Current locale id:</dt>
+          <dd>{{$locale.id}}</dd>
+          <dt>A big number:</dt>
+          <dd>{{1234567890 | number}}</dd>
+          <dt>A decimal number:</dt>
+          <dd>{{1234567.890 | number}}</dd>
+          <dt>The Epoch was on:</dt>
+          <dd>{{0 | date}}</dd>
+          <dt>One million:</dt>
+          <dd>{{1000000 | currency}}</dd>
+       </dl>
+    </div>
+ </div> -->
+
+
+<!-- <h1>calendar</h1>
+<div class="row">
+    <div class="col-sm-2">
+        <div ng-controller="datepickerControllerV2 as dp" class="ng-scope pad-top30">
+            <p class="input-group">
+                <input name="vm.dateDp1Name" 
+                    placeholder="Ex: 2016-01-01"
+                    type="text" 
+                    uib-datepicker-popup="yyyy-MM-dd" 
+                    ng-change="dp.changed(vm.dateDp1Name)" 
+                    ng-model="dp.initDate"
+                    is-open="dp.opened" 
+                    max-date="'31-12-2100'" 
+                    datepicker-options="dp.dateOptions" 
+                    ng-required="true"
+                    close-text="Fechar",
+                    current-text="Hoje",
+                    clear-text="Limpar",
+                    class="form-control ng-isolate-scope ng-touched" 
+                    required="" 
+                    autocomplete="off"
+                    ng-click="dp.open($event)">
+
+                <span class="input-group-btn">
+                    <button type="button" ng-click="dp.open($event)" class="btn btn-default">
+                        <em class="fa fa-calendar"></em>
+                    </button>
+                </span>
+            </p>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div ng-controller="datepickerControllerV2 as dp" class="ng-scope pad-top30">
+            <p class="input-group">
+                <input name="vm.dateDp2Name" 
+                    placeholder="Ex: 2016-01-01"
+                    type="text" 
+                    uib-datepicker-popup="yyyy-MM-dd" 
+                    ng-change="dp.changed(vm.dateDp2Name)" 
+                    ng-model="dp.initDate"
+                    is-open="dp.opened" 
+                    max-date="'31-12-2100'" 
+                    datepicker-options="dp.dateOptions" 
+                    ng-required="true"
+                    close-text="Fechar",
+                    current-text="Hoje",
+                    clear-text="Limpar",
+                    class="form-control ng-isolate-scope ng-touched" 
+                    required="" 
+                    autocomplete="off"
+                    ng-click="dp.open($event)">
+                
+                <span class="input-group-btn">
+                    <button type="button" ng-click="dp.open($event)" class="btn btn-default">
+                        <em class="fa fa-calendar"></em>
+                    </button>
+                </span>
+            </p>
+        </div>            
+    </div>
+</div> -->
+
+<h1>select {{$ctrl.items}} tests.html</h1>
+<div class="row">
+    <div class="col-xs-12">
+        <smg-select name="smgSelectProductsName"
+            label-text='' 
+            select-item='vm.selectItem' 
+            items ="vm.items"
+            selected-item='' 
+            can-load-more='true'
+            on-change-func='vm.onChange(obj)'
+            on-load-more-func='vm.onLoadMore()'>
+        </smg-select>
+    </div>
+</div>

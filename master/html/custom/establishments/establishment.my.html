@@ -1,0 +1,301 @@
+<!--
+<h3 class="ng-scope">
+      Estabelecimento
+    <small>Standard and custom elements for any form</small>
+</h3>
+-->
+
+<h3 class="ng-scope">
+	Configurar "O meu Estabelecimento"
+	<small>
+		Para começar a utilizar o SMARTGAR, necessita de configurar o seu estabelecimento de trabalho. 
+		Este é o estabelecimento utilizado para a comunicação com SILIAMB.		
+	</small>
+</h3>
+
+<div class="panel panel-default">
+	<div class="panel-body">
+		<form role="form" name="$ctrl.formValidate" ng-submit="$ctrl.submitForm()" novalidate="" class="form-validate form-horizontal">
+			<fieldset>
+				<legend>Dados Gerais</legend>
+				<div class="form-group">
+					<div class="col-md-12">
+						<div class="row">				
+							
+							<div class="col-md-6">
+								<label class="control-label">Estabelecimento:<span class="text-danger">*</span></label>
+								<br>
+								<input id="inp-establishmentName" name="establishmentName" ng-model="$ctrl.establishmentName" required="" type="text" class="form-control"
+								 placeholder="Ex: Nome do Estabelecimento" />
+								<span ng-show="$ctrl.validateInput('establishmentName', 'required')" class="text-danger">Obrigatório</span>
+								<span ng-show="$ctrl.serverValidationErrors['EstablishmentName']" class="text-danger">
+									{{$ctrl.serverValidationErrors['EstablishmentName']}}
+								</span>
+							</div>
+
+
+							<div class="col-md-2">
+								<label class="control-label">NIF:<span class="text-danger">*</span></label>
+								<br>
+								<input id="inp-vat" name="vat" type="text" class="form-control" 
+											ng-model="$ctrl.vat" 
+											required="" 
+											ng-pattern="/^[0-9]{9}$/" 
+											ng-change="$ctrl.vatChanged()"
+								 			placeholder="Ex: 123456789" />
+								<span ng-show="$ctrl.validateInput('vat', 'required')" class="text-danger">Obrigatório</span>
+								<span ng-show="$ctrl.validateInput('vat', 'pattern')" class="text-danger">Formato inválido</span>
+								<span ng-show="$ctrl.serverValidationErrors['Vat']" class="text-danger">
+												{{$ctrl.serverValidationErrors['Vat']}}
+											</span>
+							</div>
+
+							
+							<div class="col-md-2">
+								<label class="control-label">CAE Primário:</label>
+								<input id="inp-primaryCae" name="primaryCae" ng-model="$ctrl.primaryCae" class="form-control" placeholder="Ex: 123456" />
+								<span ng-show="$ctrl.serverValidationErrors['PrimaryCae']" class="text-danger">
+												{{$ctrl.serverValidationErrors['PrimaryCae']}}
+											</span>
+							</div>
+
+							
+							<div class="col-md-2">
+								<label class="control-label">CAE Secundário:</label>
+								<br>
+								<input id="inp-secondaryCae" name="secondaryCae" ng-model="$ctrl.secondaryCae" class="form-control" placeholder="Ex: 123456"/>
+								<span ng-show="$ctrl.serverValidationErrors['SecondaryCae']" class="text-danger">
+									{{$ctrl.serverValidationErrors['SecondaryCae']}}
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<div class="form-group">
+					<div class="col-md-12">
+						<div class="row">
+								<div class="col-md-6">
+								<label class="control-label">Morada:</label>
+								<br>
+								<input id="inp-address" name="address" 
+												ng-model="$ctrl.address" 
+												type="text" 
+												class="form-control" placeholder="Ex: Rua Abcd, nº 123"/>
+								<span ng-show="$ctrl.serverValidationErrors['Address']" class="text-danger">
+									{{$ctrl.serverValidationErrors['Street']}}
+								</span>
+							</div>
+
+							
+							<div class="col-md-2">
+								<label class="control-label">Código Postal:</label>
+								<br>
+								<input id="inp-postalCode" name="postalCode" ng-model="$ctrl.postalCode" type="text" class="form-control" placeholder="Ex: 4400-000"/>
+								<span ng-show="$ctrl.serverValidationErrors['PostalCode']" class="text-danger">
+									{{$ctrl.serverValidationErrors['PostalCode']}}
+								</span>
+							</div>
+
+							
+							<div class="col-md-2">
+								<label class="control-label">Localidade:</label>
+								<br>
+								<input id="inp-locale" name="locale" ng-model="$ctrl.locale" 
+										type="text" class="form-control" placeholder="Ex: Paranhos" />
+								<span ng-show="$ctrl.serverValidationErrors['Locale']" class="text-danger">
+									{{$ctrl.serverValidationErrors['Locale']}}
+								</span>
+							</div>
+
+							
+							<div class="col-md-2">
+								<label class="control-label">Cidade:</label>
+								<br>
+								<input id="inp-city" name="city" ng-model="$ctrl.city" 
+										type="text" class="form-control" placeholder="Ex: Porto" />
+								<span ng-show="$ctrl.serverValidationErrors['City']" class="text-danger">
+									{{$ctrl.serverValidationErrors['City']}}
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<div class="form-group">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-2">
+								<label class="control-label">Tlf:</label>
+								<br>
+								<input id="inp-phone" name="phone" 
+											ng-model="$ctrl.phone" 
+											type="text" class="form-control" 
+											placeholder="Ex: +351 229786856"/>
+								<span ng-show="$ctrl.serverValidationErrors['Phone']" class="text-danger">
+									{{$ctrl.serverValidationErrors['Phone']}}
+								</span>
+							</div>
+
+						
+							<div class="col-md-2">
+								<label class="control-label">Tlm:</label>
+								<br>
+								<input id="inp-mobile" name="mobile" ng-model="$ctrl.mobile" type="text" class="form-control" placeholder="Ex: 9615235658"/>
+								<span ng-show="$ctrl.serverValidationErrors['Mobile']" class="text-danger">
+									{{$ctrl.serverValidationErrors['Mobile']}}
+								</span>
+							</div>
+
+							
+							<div class="col-md-2">
+								<label class="control-label">Email:</label>
+								<br>
+								<input id="inp-email" name="email" ng-model="$ctrl.email" type="email" class="form-control" placeholder="Ex: empresaABCD@email.com"/>
+								<span ng-show="$ctrl.validateInput('email', 'email')" class="text-danger">Formato inválido</span>
+								<span ng-show="$ctrl.serverValidationErrors['Email']" class="text-danger">
+									{{$ctrl.serverValidationErrors['Email']}}
+								</span>
+							</div>
+
+							
+							<div class="col-md-2">
+								<label class="control-label">Fax:</label>
+								<br>
+								<input id="inp-fax" name="fax" ng-model="$ctrl.fax" type="text" class="form-control" placeholder="Ex: 22123456789"/>
+								<span ng-show="$ctrl.serverValidationErrors['Fax']" class="text-danger">
+									{{$ctrl.serverValidationErrors['Fax']}}
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<legend>Configurar Acesso SILIAMB</legend>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<div class="row">
+							<label class="col-sm-1 control-label">NIF:</label>
+							<div class="col-sm-2">
+								<input id="inp-accessUsername" 
+												name="access"
+												readonly
+									 			type="text" class="form-control"  
+												ng-model="$ctrl.vat" />
+							</div>
+						</div>
+						<div id="div-access" class="row pad-top15">
+							<label class="col-sm-1 control-label">Senha de acesso:</label>
+							<div class="col-sm-2">
+								<input id="inp-access" name="access"
+												required=""
+												type="password" 
+												class="form-control"  
+												ng-model="$ctrl.access" />
+								<span ng-show="$ctrl.accessInvalidMsg" ng-class="{'text-danger': $ctrl.accessInvalid}">{{$ctrl.accessInvalidMsg}}</span>
+								<span ng-show="$ctrl.validateInput('access', 'required')" class="text-danger">Obrigatório</span>
+								<span ng-show="$ctrl.serverValidationErrors['ApaAccess']" class="text-danger">
+									{{$ctrl.serverValidationErrors['ApaAccess']}}
+								</span>
+							</div>
+
+							<div class="col-sm-2">
+								<button type="button" 
+													title="{{$ctrl.accessValidatedMsg}}" 
+													ng-click="$ctrl.validateAccess()" 
+													ng-class="{'pull-right btn btn-labeled btn-success': !$ctrl.accessInvalid, 'pull-right btn btn-labeled btn-warning': $ctrl.accessInvalid}">
+
+									<span title="{{$ctrl.accessValidatedMsg}}" class="btn-label">
+										<i ng-class="{'fa fa-check': !$ctrl.accessInvalid , 'fa fa-times': $ctrl.accessInvalid}"></i>
+									</span>
+									Validar Senha
+								</button>
+							</div>	
+
+						</div>
+						
+						<div class="row pad-top15">
+							<label class="col-sm-1 control-label">Código APA:<span class="text-danger">*</span></label>
+							<div class="col-sm-2">
+								<select id="inp-apa" name="apa"
+										placeholder-text-single ="'Selecione opção'"
+										no-results-text = "'Não foram encontrados resultados'"
+										chosen="" 
+										required="" 
+										ng-options="address as address.ApaCode for address in $ctrl.establishments" 
+										class="chosen-select input-md"
+										ng-model="$ctrl.apa">
+									<option><option>
+								</select>
+
+								<span ng-show="$ctrl.validateInput('apa', 'required')" class="text-danger">Obrigatório</span>
+								<span ng-show="$ctrl.serverValidationErrors['Apa']" class="text-danger">
+									{{$ctrl.serverValidationErrors['Apa']}}
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<div class="form-group">
+					<label class="col-md-12"><span class="text-danger">*</span> Campos obrigatórios</label>
+				</div>
+			</fieldset>
+
+
+			<div class="panel-footer text-right">
+				<button type="submit" class="btn btn-labeled btn-success">
+					<span class="btn-label">
+						<i class="fa fa-check"></i>
+					</span>
+					Gravar
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
+<!-- END panel-->
+
+<!-- Modal Template -->
+<script type="text/ng-template" id="modalDialogId">
+	<div class="ngdialog-message">
+		<div class="panel">
+			<h3>Configurar Acesso SILIAMB</h3>
+			<div class="row">
+				<fieldset>
+					<div class="form-group">
+						<div class="col-md-12">
+							<div class="row">
+								<label class="col-md-12 control-label">NIF</label>
+								<br>
+								<div class="col-md-12">
+									<input type="text" class="form-control" name="person1Name" ng-model="siliambUsername" />
+								</div>
+							</div>
+							<div class="row">
+								<label class="col-md-12 control-label">Password</label>
+								<div class="col-md-12">
+									<input type="password" class="form-control" name="person1Mobile" ng-model="siliambPassword" />
+									<input type="password" class="form-control" name="person1Mobile" ng-model="apaCode" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+
+
+		<button type="button" ng-show="!isValid" ng-click="validateAccess()" class="btn btn-primary mr">Validar</button>
+		<button type="button" ng-show="isValid" ng-click="saveAccess()" class="btn btn-primary mr">Guardar</button>
+		<button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">Cancel</button>
+	</div>
+</script>

@@ -1,0 +1,60 @@
+
+<h1>User plan visit (Data: {{vm.planVisitDate}})</h1>
+
+<div ng-repeat="group in vm.groups track by $index"  class="pad-top30" style="border-bottom: 1px solid black;">
+    <div class="">
+        <label>
+            Nome: 
+            <span>{{group.EstablishmentName}}</span>
+        </label>
+    </div>  
+
+    <div class="">
+        <label>
+            Address:
+            <span>{{group.EstablishmentAddress}}</span>
+        </label>
+    </div>
+
+    <div class="">
+        <label>
+            ID Estab.:
+            <span>{{group.EstablishmentExternalId}}</span>
+        </label>
+    </div>
+
+    <div class="">
+        <label>
+            Date:
+            <span>{{group.Datetime}}</span>
+        </label>
+    </div>
+
+    <div class="pad-top10" style="border-top: 1px dashed grey;">
+    <div class="row" >
+        <div class="col-sm-2 text-bold">ID</div>
+        <div class="col-sm-2 text-bold">Prod Code</div>
+        <div class="col-sm-2 text-bold">Prod Desc</div>
+        <div class="col-sm-2 text-bold">Embalagem Kg</div>
+        <div class="col-sm-2 text-bold">Num. embalagens</div>
+        <div class="col-sm-1 text-bold">Egar Nº</div>
+        <div class="col-sm-1 text-bold">Egar Code</div>
+        <div class="col-sm-2 text-bold">
+            &nbsp;
+        </div>
+    </div>
+
+    <div class="row" ng-repeat="visit in group.PlanVisits track by $index">
+        <div class="col-sm-2">{{visit.VisitId}}</div>
+        <div class="col-sm-2">{{visit.ProducCode}}</div>
+        <div class="col-sm-2">{{visit.ProducDescription}}</div>
+        <div class="col-sm-2">{{visit.WeightConversion}}</div>
+        <div class="col-sm-2">{{visit.ExpectedQuantity}}</div>
+        <div class="col-sm-2">{{visit.EgarNumber}}</div>
+        <div class="col-sm-2">{{visit.EgarCode}}</div>
+        <div class="col-sm-2">
+            &nbsp;
+        </div>
+    </div>
+    </div>    
+</div>

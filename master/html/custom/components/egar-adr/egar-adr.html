@@ -1,0 +1,102 @@
+<form role="form" name="vm.egarAdr" novalidate="">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="checkbox c-checkbox">
+                <label class="control-label">
+                    <input id="ckb-adr" 
+                        type="checkbox" 
+                        ng-click="vm.onIsAdrClick()"
+                        ng-model="vm.adr.isAdr"
+                        ng-checked="vm.adr.isAdr">
+                    <span class="fa fa-check"></span>
+                    Abrangido por ADR
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="vm.adr.isAdr" class="row pad-top10">
+        <div class="col-sm-6">
+            <label class="control-label">
+                Nº ONU
+            </label>
+            <smg-select-onu-number id="selectOnuNumber"
+                    name="selectOnuNumber"
+                    ng-required="vm.adr.isAdr"
+                    selection-model="vm.adr.onuNumber" 
+                    selected-key="vm.adr.selectedOnuNumber"
+                    on-change="vm.onSelectedOnuNumberChange(obj)">    
+            </smg-select-onu-number>
+            <!-- <span ng-show="vm.validateInput('selectOnuNumber', 'required')" class="text-danger">Obrigatório</span> -->
+            <span ng-if="vm.errors.onuNumber" class="text-danger">
+                {{vm.errors.onuNumber}}
+            </span>
+        </div>
+
+        <div class="col-sm-3">
+            <label class="control-label">
+                Grupo de embalagem
+            </label>
+            <smg-select-onu-number-package id="selectOnuNumberPackage"
+                    name="selectOnuNumberPackage"
+                    for-onu-number="vm.adr.onuNumber"
+                    selection-model="vm.adr.onuNumberPackage" 
+                    on-change="vm.onSelectedOnuNumberPackageChange(obj)">    
+            </smg-select-onu-number-package>
+            <span ng-if="vm.errors.onuNumberPackage" class="text-danger">
+                {{vm.errors.onuNumberPackage}}
+            </span>
+        </div>
+        
+        <div class="col-sm-3">
+            <label class="control-label">
+                Volumes/embalagens
+            </label>
+            <input id="adrVolume" 
+                name="inp-adrVolume" 
+                ng-model="vm.adr.volume" 
+                ng-pattern="/^[0-9]+$/"
+                type="text"
+                class="form-control" 
+                placeholder="Ex: 123" />
+            <span ng-show="vm.errors.volume" class="text-danger">
+                {{vm.errors.volume}}
+            </span>
+        </div>
+    </div>
+
+    <div ng-if="vm.adr.isAdr" class="row pad-top10">
+        <div class="col-sm-6">
+            <label class="control-label">
+                Observações I
+            </label>
+            <textarea id="txt-adrObsI" 
+                name="adrObsI" 
+                class="form-control no-resize"
+                ng-model="vm.adr.obsI"
+                ng-maxlength="100" 
+                rows="3">
+            </textarea>
+            <!-- <span ng-show="vm.validateInput('adrObsI', 'required')" class="text-danger">Obrigatório</span> -->
+            <span ng-show="vm.errors.obsI" class="text-danger">
+                {{vm.errors.obsI}}
+            </span>
+        </div>
+        
+        <div class="col-sm-6">
+            <label class="control-label">
+                Observações II
+            </label>
+            <textarea id="txt-adrObsII" 
+                name="adrObsII" 
+                class="form-control no-resize" 
+                ng-model="vm.adr.obsII"
+                ng-maxlength="100" 
+                rows="3">
+            </textarea>
+            <span ng-show="vm.errors.obsII" class="text-danger">
+                {{vm.errors.obsII}}
+            </span>
+        </div>
+    </div>
+</form>

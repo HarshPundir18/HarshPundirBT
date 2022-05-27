@@ -1,0 +1,79 @@
+<div class="block-center mt-xl wd-xl">
+  <!-- START panel-->
+  <div class="panel panel-dark panel-flat">
+     <div class="panel-heading text-center">
+        <a href="#">
+           <img src="app/img/logo.png" alt="Image" class="block-center img-rounded" />
+        </a>
+     </div>
+     <div class="panel-body">
+        <p class="text-center pv">RECUPERAÇÃO DE PASSWORD</p>
+        <form role="form" name="$ctrl.recoverForm" novalidate="" ng-submit="$ctrl.recover()" class="form-validate mb-lg">
+           <p class="text-center">
+                 Por favor preencha os campos para receber instruções de como recuperar a sua password.
+            </p>
+           
+           <div class="form-group has-feedback">
+            <input name="name" 
+                  ng-model="$ctrl.name" 
+                  placeholder="Nome" 
+                  required="" 
+                  autocomplete="on" 
+                  class="form-control ng-pristine ng-empty ng-invalid ng-invalid-required ng-touched" />
+            <span class="fa fa-bank form-control-feedback text-muted"></span>
+            <span ng-show="$ctrl.recoverForm.name.$dirty && $$ctrl.recoverForm.name.$error.required" 
+                  class="text-danger ng-hide">
+               Obrigatório
+            </span>
+          </div>
+           
+           <div class="form-group has-feedback">
+              <input type="email" 
+                  name="email" 
+                  placeholder="Email" autocomplete="off" 
+                  ng-model="$ctrl.email" 
+                  required="" 
+                  class="form-control" />
+              <span class="fa fa-envelope form-control-feedback text-muted"></span>
+              <span ng-show="$ctrl.email.$dirty && $ctrl.email.$error.required"
+                    class="text-danger">
+                    Obrigatório
+              </span>
+              <span ng-show="$ctrl.recoverForm.email.$dirty && $ctrl.recoverForm.email.$error.email" 
+                    class="text-danger">
+                Email inválido
+              </span>
+           </div>
+
+          <div class="form-group has-feedback">
+            <input name="clientCode" 
+                  ng-model="$ctrl.clientCode" placeholder="Código Cliente" 
+                  required="" 
+                  autocomplete="on" 
+                  class="form-control ng-pristine ng-empty ng-invalid ng-invalid-required ng-touched" />
+            <span class="fa fa-bank form-control-feedback text-muted"></span>
+            <span ng-show="$ctrl.recoverForm.clientCode.$dirty && $$ctrl.recoverForm.clientCode.$error.required" 
+                  class="text-danger ng-hide">
+               Obrigatório
+            </span>
+          </div>
+
+           <div vc-recaptcha key="$ctrl.recaptchaPublicKey"></div>
+           <span ng-show="$ctrl.serverValidationErrors['gRecaptchaResponse']" class="text-danger">
+             {{$ctrl.serverValidationErrors['gRecaptchaResponse']}}
+           </span>
+
+           <button type="submit" class="btn btn-danger btn-block mar-top10">Reset</button>
+        </form>
+     </div>
+  </div>
+  <!-- END panel-->
+  <div class="p-lg text-center">
+     <span>&copy;</span>
+     <span ng-bind="app.year"></span>
+     <span>-</span>
+     <span ng-bind="app.name"></span>
+     <br/>
+     <span ng-bind="app.description"></span>
+  </div>
+</div>

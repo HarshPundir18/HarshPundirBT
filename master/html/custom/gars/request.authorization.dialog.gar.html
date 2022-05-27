@@ -1,0 +1,88 @@
+<div class="ngdialog-message">
+
+<form role="form" name="$ctrl.formValidate" ng-submit="$ctrl.submitForm()" novalidate="" class="form-validate form-horizontal">
+
+		<div class="panel">
+			<h3 class="mar-top0">
+				Pedido de autorização de emissão
+				<!--<span class="consult-egar-number">
+					{{$ctrl.gar.Number}}
+				</span>-->
+			</h3>
+			
+
+			<div class="row pad-top10" ng-show="$ctrl.contactArray">
+				<div class="col-md-12">
+					<p>
+						Por favor selecione o contacto para ser enviado um email requerendo 
+						a autorização da emissão da e-Gar nº {{$ctrl.gar.Number}}.
+					</p>
+					<div class="pad-top0">
+						<select id="inp-selectedContact" name="selectedContact" 
+								ng-model="$ctrl.selectedContact" 
+								ng-change="$ctrl.selectedContactChange()"
+								class="form-control ng-pristine ng-valid ng-not-empty ng-touched">
+							<option ng-repeat="option in $ctrl.contactArray" value="{{option.key}}">{{option.value}}</option>
+						</select>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input name="" type="checkbox" value="" ng-model="$ctrl.selectedContactAll">
+							Selecionar todos
+						</label>
+					</div>
+				</div>
+			</div>
+		
+			<div class="row pad-top10">
+				<div class="col-md-12" ng-show="$ctrl.contactArray">
+					<p>
+						Ou Introduza o contacto para onde será enviado email.
+					</p>
+				</div>
+				<div class="col-md-12" ng-show="!$ctrl.contactArray">
+					<p>
+						Introduza o contacto para onde será enviado email requerendo a autorização da emissão da e-Gar.
+					</p>
+				</div>
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Nome</label>
+					<input name="name"  
+							required
+							ng-change="$ctrl.nameEmailChange()"
+							ng-model="$ctrl.name" 
+							type="text" 
+							class="form-control" />
+					<span ng-show="$ctrl.validateInput('name', 'required')" class="text-danger">Obrigatório</span>
+					<span ng-show="$ctrl.serverValidationErrors['Name']" class="text-danger">
+						{{$ctrl.serverValidationErrors['Name']}}
+						{{$ctrl.serverApplicationErrors['Name']}}
+					</span>
+				</div>
+				<div class="col-md-6">
+					<label class="control-label mar-bottom0">Email</label>
+					<input name="email"  
+							required
+							ng-change="$ctrl.nameEmailChange()"
+							ng-model="$ctrl.email" 
+							type="text" 
+							class="form-control" />
+					<span ng-show="$ctrl.validateInput('email', 'required')" class="text-danger">Obrigatório</span>
+					<span ng-show="$ctrl.serverValidationErrors['Email']" class="text-danger">
+						{{$ctrl.serverValidationErrors['Email']}}
+						{{$ctrl.serverApplicationErrors['Email']}}
+					</span>
+				</div>
+			</div>
+
+		</div> <!--END PANEL-->
+
+		<div class="row pad-top10 text-right">
+			<div class="col-sm-12">
+				<button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">Cancelar</button>
+				<button type="submit" class="btn btn-success">Enviar</button>
+			</div>
+		</div>
+
+	</form>
+</div>

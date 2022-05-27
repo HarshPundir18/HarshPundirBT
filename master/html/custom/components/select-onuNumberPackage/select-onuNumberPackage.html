@@ -1,0 +1,7 @@
+<select id="inp-selectedOnuNumberPackage" name="selectedOnuNumberPackage" ng-disabled="vm.forOnuNumber == null"
+        required="false" 
+        ng-model="vm.selectionModel" 
+        class="form-control ng-pristine ng-valid ng-not-empty ng-touched"
+        ng-change="vm.onOnuNumberPackageChange()">
+    <option ng-repeat="option in vm.onuNumberPackageGroups track by option.id" value="{{option.id}}">{{option.name}}</option>
+</select>

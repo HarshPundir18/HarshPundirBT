@@ -1,0 +1,231 @@
+<h3>
+    Declaração de Quantidades - Resíduos gerais
+    <!-- <small>tetetwetew sfadaddasd</small> -->
+</h3>
+
+
+<div id="quantitiesDeclaration">
+<form  role="form" name="vm.formValidate" ng-submit="vm.submitForm()" novalidate="" class="form-validate form-horizontal">
+
+    <!-- start main -->
+    <div id="panelSelection" class="panel panel-default mar-top20">
+        <div class="panel-body pad-bottom0">
+            <!--dates-->
+            <fieldset class="">
+                <!-- <legend>Ano considerado</legend> -->
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label class="control-label">
+                            Periodo
+                            <span class="pad-left5 text-danger">
+                                <i class="fa fa-asterisk" />
+                            </span>
+                        </label>
+                        <smg-date-picker-v2 
+                            dp-name="startDate"
+                            dp-placeholder="Início"
+                            label-text=""
+                            dp-date="vm.startDate">
+                        </smg-date-picker-v2>
+                    </div>
+                    <div class="col-sm-2">
+                        <smg-date-picker-v2 
+                            dp-name="endDate"
+                            dp-placeholder="Fim"
+                            dp-date="vm.endDate">
+                        </smg-date-picker-v2>                          
+                    </div>
+                </div>
+                <div class="row pad-top5">
+                    <div class="col-sm-4">
+                        <span ng-show="!vm.isValidDate() || vm.serverValidationErrors['MustBeValidPeriod']" class="text-danger error-message">
+                            {{vm.invalidDateErrorMessage}}
+                        </span>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!--emission type-->
+            <fieldset>
+                <!-- <legend>Tipo de emissão</legend> -->
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label class="control-label">
+                            Tipo de Emissão
+                            <span class="pad-left5 text-danger">
+                                <i class="fa fa-asterisk" />
+                            </span>
+                        </label>
+                        <div class="radio c-radio c-radio-nofont">
+                            <label>
+                                <input type="radio" 
+                                    name="a" 
+                                    value="{{ vm.SMG_QUANTITIES_DECLARATIONS_EMISSION_TYPES.AllEstablishmentsWithVat }}"
+                                    ng-checked="vm.selectedType === vm.SMG_QUANTITIES_DECLARATIONS_EMISSION_TYPES.AllEstablishmentsWithVat"
+                                    ng-model="vm.selectedType"
+                                    ng-change="vm.onEmissionTypeChange(vm.SMG_QUANTITIES_DECLARATIONS_EMISSION_TYPES.AllEstablishmentsWithVat)">
+                                <span></span>
+                                Todos os estabelecimentos de um NIF
+                            </label>
+                        </div>
+                    </div> 
+                    <div class="col-sm-3">
+                        <label class="control-label">
+                            &nbsp;
+                        </label>
+                        <div class="radio c-radio c-radio-nofont">
+                            <label>
+                                <input type="radio" 
+                                    name="a" 
+                                    value="{{ vm.SMG_QUANTITIES_DECLARATIONS_EMISSION_TYPES.SingleEstablishment }}"
+                                    ng-checked="vm.selectedType === vm.SMG_QUANTITIES_DECLARATIONS_EMISSION_TYPES.SingleEstablishment"
+                                    ng-model="vm.selectedType"
+                                    ng-change="vm.onEmissionTypeChange(vm.SMG_QUANTITIES_DECLARATIONS_EMISSION_TYPES.SingleEstablishment)">
+                                <span></span>
+                                Apenas para um estabelecimento (APA)
+                            </label>
+                        </div>
+                    </div>  
+                    <!-- <div class="col-sm-2">
+                        <label class="control-label">
+                            &nbsp;
+                        </label>
+                        <div class="radio c-radio c-radio-nofont">
+                            <label>
+                                <input type="radio" 
+                                    name="a" 
+                                    value="{{ vm.SMG_QUANTITIES_DECLARATIONS_EMISSION_TYPES.AllEstablishments }}"
+                                    ng-checked="vm.selectedType === vm.SMG_QUANTITIES_DECLARATIONS_EMISSION_TYPES.AllEstablishments"
+                                    ng-model="vm.selectedType"
+                                    ng-change="vm.onEmissionTypeChange(vm.SMG_QUANTITIES_DECLARATIONS_EMISSION_TYPES.AllEstablishments)">
+                                <span></span>
+                                Todos os estabelecimentos
+                            </label>
+                        </div>
+                    </div>  -->
+                    <div class="col-sm-3" ng-if="vm.selectedType == vm.SMG_QUANTITIES_DECLARATIONS_EMISSION_TYPES.AllEstablishmentsWithVat 
+                                        || vm.selectedType == vm.SMG_QUANTITIES_DECLARATIONS_EMISSION_TYPES.SingleEstablishment">
+                        <label class="control-label">
+                            <span ng-if="vm.selectedType == vm.SMG_QUANTITIES_DECLARATIONS_EMISSION_TYPES.AllEstablishmentsWithVat">Selecione NIF</span>
+                            <span ng-if="vm.selectedType == vm.SMG_QUANTITIES_DECLARATIONS_EMISSION_TYPES.SingleEstablishment">Selecione Estabelecimento</span>
+                        </label>
+ 
+                        <input name="inp-selectedOrigin"
+                            ng-model="vm.selectedOrigin"
+                            autocomplete="off"
+                            class="form-control"/>
+                        <smg-text-search
+                            search-type="vm.SMG_TEXT_SEARCH_TYPES.Establishments"
+                            class="new-gar-v2"
+                            model="vm.selectedOriginObj"
+                            dialog-header="Selecione transportador"
+                            inp-name=""
+                            on-selection="vm.onSelectedOriginChange(obj)">
+                        </smg-text-search>
+                    </div>
+                </div>
+                <div class="row validation-errors">
+                    <div class="col-sm-6 pad-top5">
+                        <span ng-show="vm.submitted && vm.selectedType == undefined" class="text-danger error-message">
+                            Por favor selecione uma das opções "Tipo de Emissão"
+                        </span>
+                    </div>
+                    <div class="col-sm-6">
+                        <span ng-show="vm.shouldShowEstablishmentSelecterError()" class="text-danger error-message">
+                            Por favor selecione um estabelecimento
+                        </span>
+                        <span ng-show="vm.submitted && vm.selectedOriginErrorMesssage" class="text-danger error-message">
+                            {{vm.selectedOriginErrorMesssage}}
+                        </span>
+                        <span ng-show="vm.serverApplicationErrors['no_establishment_selected_for_vat']" class="text-danger error-message">
+                            Não existem estabelecimentos configurados com o NIF selecionado
+                        </span>
+                        <span ng-show="vm.serverApplicationErrors['no_establishment_selected_for_apa']" class="text-danger error-message">
+                            O estabelecimento selecionado não tem o APA configurado
+                        </span>           
+                    </div>
+                </div>
+            </fieldset>
+
+            <!--pdf options-->
+            <fieldset>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="checkbox c-checkbox pad-top0">
+                            <label class="control-label pad-left0 pad-top0">
+                                Gerar PDF consolidado
+                                <smg-help-icon class="pad-left10"  
+                                    help-text='Esta opção agrega todos os documentos gerados num único ficheiro PDF.'>
+                                </smg-help-icon>
+                            </label>
+                            
+                            <label class="control-label pad-top5">
+                                <input id=""
+                                    name="ckb-consolidatedPdf"
+                                    type="checkbox" 
+                                    ng-click="vm.onConsolidatedPdfClick()"
+                                    ng-model="vm.consolidatedPdf"
+                                    ng-checked="vm.consolidatedPdf">
+                                <span class="fa fa-check mar-left0"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pad-top10">
+                    <div class="col-sm-12">
+                        <div class="checkbox c-checkbox pad-top0">
+                            <label class="control-label pad-left0 pad-top0">
+                                Enviar PDFs por e-mail
+                                <smg-help-icon class="pad-left10"  
+                                    help-text='Envia cada declaração gerada para o e-mail associado ao estabelecimento, caso este esteja definido.'>
+                                </smg-help-icon>
+                            </label>
+                            
+                            <label class="control-label pad-top5">
+                                <input id=""
+                                    name="ckb-sendByEmail"
+                                    type="checkbox" 
+                                    ng-click="vm.onSendByEmailClick()"
+                                    ng-model="vm.sendByEmail"
+                                    ng-checked="vm.sendByEmail">
+                                <span class="fa fa-check mar-left0"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!--description-->
+            <fieldset>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label class="control-label">
+                            Descrição
+                        </label>
+                        <textarea id="txt-description" 
+                            name="description" 
+                            class="form-control no-resize" 
+                            ng-model="vm.description"
+                            ng-maxlength="200" rows="3">
+                        </textarea>
+                    </div>
+                </div>
+            </fieldset>
+
+        </div>
+
+    </div>
+    <!-- end main -->
+
+    <div class="row">
+        <div class="col-sm-6">
+            <i class="text-danger fa fa-asterisk" /> - Campos Obrigatórios
+        </div>
+        <div class="col-sm-6">
+            <smg-form-actions save-button-text="Gerar" on-save-click="vm.submitForm()">
+            </smg-form-actions>
+        </div>
+    </div>
+
+</form>
+</div>

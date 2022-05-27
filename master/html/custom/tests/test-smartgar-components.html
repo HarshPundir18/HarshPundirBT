@@ -1,0 +1,45 @@
+<h1>test smartgar components</h1>
+
+<div class="row">
+    <div class="col-sm-2">
+        <label>smg-select</label>
+        <smg-select name="smgSelectProductsName"
+            label-text='' 
+            select-item='vm.selectItem' 
+            items ="vm.items"
+            selected-item='' 
+            on-change-func='vm.onChange(obj)'
+            on-load-more-func='vm.onLoadMore()'>
+        </smg-select>
+    </div>
+</div>
+
+<div class="row pad-top10">
+    <div class="col-sm-2">
+        <smg-input-text name="clientEstablishmentApaCodeV2"
+            placeholder="myplaceholder"
+            label-text="test smg-input-text with clear"
+            model="vm.inpuText" 
+            is-required="true"
+            show-clear-input="true">
+        </smg-input-text>
+    </div>
+</div>
+
+
+<!---->
+<div class="row pad-top10">
+    <div class="col-sm-2">
+        <smg-input-text-search-establishments inp-name="smg-input-text-search-establishments"
+            placeholder="NIF"
+            label-text="test smg-input-text-search-establ"
+            model="vm.establishment"
+            on-search-text-change="vm.onSearchEstablishmentsChange(obj)"
+            is-required="true">
+        </smg-input-text-search-establishments>
+        <pre>
+            {{vm.establishment}}
+        </pre>
+    </div>
+</div>
+

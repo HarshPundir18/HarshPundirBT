@@ -1,0 +1,17 @@
+{
+	"aaData": [
+		{
+			"Number": "PT20170125128983",
+			"Code": "qwe",
+			"Status": "Emitida",
+			"File": "https://qualsiliamb.apambiente.pt/external/egar?pdfGuia=true&numeroGuia=PT20170125128983&codigo=367bad47c574efd6",
+			"Comments": {
+				"OriginComment": "OriginComment OriginComment",
+				"DestinComment": "DestinComment DestinComment"
+			}
+			"Authorized": true
+		}
+	],
+	"iTotalRecords": 4,
+	"iTotalDisplayRecords": 4
+}

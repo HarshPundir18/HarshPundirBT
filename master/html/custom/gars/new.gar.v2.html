@@ -1,0 +1,975 @@
+<h3>Emitir E-GAR</h3>
+
+<form id="newEgar" role="form" name="vm.formValidate" ng-submit="vm.submitForm()" novalidate="" class="form-validate form-horizontal">
+
+    <div class="row">
+        <div class="col-sm-6">
+            <i class="text-danger fa fa-asterisk" /> - Campos Obrigatórios
+        </div>
+        <div class="col-sm-6">
+            <div class="text-right">
+                <button type="button" class="btn btn-labeled btn-default" ng-click="vm.cancel()">
+                    <span class="btn-label">
+                        <i class="fa fa-arrow-left"></i>
+                    </span>
+                    Voltar
+                </button>
+
+                <button type="submit" class="btn btn-labeled btn-success mar-right10">
+                    <span class="btn-label">
+                        <i class="fa fa-check"></i>
+                    </span>
+                    Emitir
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!--panelOrigin-->
+    <div id="panelOrigin" class="panel panel-default mar-top15">
+        <div ng-class="{'panel-heading-collapsed':panelOrigin}" class="panel-heading">
+            <h4>
+                <em class="fa fa-industry pad-right10"></em>1 - Produtor / Detentor
+            </h4>
+            <paneltool tool-collapse="tool-collapse" class="pull-right">
+                <a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="panelOrigin = !panelOrigin" class="ng-scope">
+                    <em ng-show="panelOrigin" class="fa fa-plus ng-no-animation ng-hide"></em>
+                    <em ng-show="!panelOrigin" class="fa fa-minus ng-no-animation"></em>
+                </a>
+            </paneltool>
+        </div>
+
+        <div uib-collapse="panelOrigin" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+            <div class="panel-body">
+                <!--remetente-->
+                <fieldset id="origin" class="pad-bottom30 mar-bottom30">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <!-- egar creation type -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <div class="radio c-radio c-radio-nofont">
+                                                <label>
+                                                    <input type="radio"
+                                                        name="a"
+                                                        value="PRODUTOR_ESTABELECIMENTO"
+                                                        ng-checked="vm.selectedEgarCreateType === 'PRODUTOR_ESTABELECIMENTO'"
+                                                        ng-change="vm.egarCreateTypeChanged(1)"
+                                                        ng-model="vm.selectedEgarCreateType">
+                                                    <span></span>Produtor/Detentor
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="radio c-radio c-radio-nofont">
+                                                <label>
+                                                    <input type="radio"
+                                                        name="a"
+                                                        value="OLEOS_ALIMENTARES"
+                                                        ng-checked="vm.selectedEgarCreateType === 'OLEOS_ALIMENTARES'"
+                                                        ng-change="vm.egarCreateTypeChanged(2)"
+                                                        ng-model="vm.selectedEgarCreateType">
+                                                    <span></span>Recolhedor OAU
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="radio c-radio c-radio-nofont">
+                                                <label>
+                                                    <input type="radio"
+                                                        name="a"
+                                                        value="OBRAS_RCD"
+                                                        ng-checked="vm.selectedEgarCreateType === 'OBRAS_RCD'"
+                                                        ng-change="vm.egarCreateTypeChanged(3)"
+                                                        ng-model="vm.selectedEgarCreateType">
+                                                    <span></span>Obras RCD
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="radio c-radio c-radio-nofont">
+                                                <label>
+                                                    <input type="radio"
+                                                        name="a"
+                                                        value="VEICULOS_FIM_VIDA"
+                                                        ng-checked="vm.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'"
+                                                        ng-change="vm.egarCreateTypeChanged(4)"
+                                                        ng-model="vm.selectedEgarCreateType">
+                                                    <span></span>Veículos em fim de vida
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="radio c-radio c-radio-nofont">
+                                                <label>
+                                                    <input type="radio"
+                                                        name="a"
+                                                        value="EX_SITU"
+                                                        ng-checked="vm.selectedEgarCreateType === 'EX_SITU'"
+                                                        ng-change="vm.egarCreateTypeChanged(6)"
+                                                        ng-model="vm.selectedEgarCreateType">
+                                                    <span></span>Ex Situ
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="radio c-radio c-radio-nofont">
+                                                <label>
+                                                    <input type="radio"
+                                                        name="a"
+                                                        value="PRESTADOR_SERVICOS"
+                                                        ng-checked="vm.selectedEgarCreateType === 'PRESTADOR_SERVICOS'"
+                                                        ng-change="vm.egarCreateTypeChanged(5)"
+                                                        ng-model="vm.selectedEgarCreateType">
+                                                    <span></span>Prestador de Serviços
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--row search-->
+                            <div class="row mar-top20">
+                                <div class="col-sm-6">
+                                    <smg-select-establishment name="smgSelectEstablishmentOrigin"
+                                        label-text="some label"
+                                        selection-model="vm.selectedOrigin",
+                                        on-change="vm.originSearchChangeV3(obj)">
+                                    </smg-select-establishment>
+                                </div>
+                            </div>
+
+                            <!-- row info 1-->
+                            <div class="row pad-top10">
+                                <!--Vat-->
+                                <div class="col-sm-2" ng-if="vm.selectedEgarCreateType === 'PRODUTOR_ESTABELECIMENTO'">
+                                    <label class="control-label">
+                                        NIF
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <br>
+                                    <input id="inp-vatOrigin" name="vatOrigin"
+                                        ng-change="vm.originDataChange()"
+                                        ng-model="vm.vatOrigin"
+                                        ng-required="vm.selectedEgarCreateType === 'PRODUTOR_ESTABELECIMENTO'"
+                                        ng-pattern="/^[0-9]+$/"
+                                        type="text" class="form-control" placeholder="Ex: 123456789" />
+                                    <span ng-show="vm.validateInput('vatOrigin', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="vm.validateInput('vatOrigin', 'pattern')" class="text-danger">Formato inválido</span>
+                                    <span ng-show="vm.serverValidationErrors['vatOrigin']" class="text-danger">
+                                        {{vm.serverValidationErrors['vatOrigin']}} {{vm.serverApplicationErrors['vatOrigin']}}
+                                    </span>
+                                </div>
+
+                                <!--cod apa-->
+                                <div class="col-sm-2" ng-if="vm.selectedEgarCreateType === 'PRODUTOR_ESTABELECIMENTO'">
+                                    <label class="control-label">
+                                        Código APA
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <input id="inp-codApaOrigin"
+                                        name="codApaOrigin"
+                                        ng-change="vm.originDataChange()"
+                                        ng-model="vm.codApaOrigin"
+                                        ng-required="vm.selectedEgarCreateType === 'PRODUTOR_ESTABELECIMENTO'"
+                                        class="form-control" placeholder="Ex: 123456" />
+                                    <span ng-show="vm.validateInput('codApaOrigin', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="vm.serverValidationErrors['codApaOrigin']" class="text-danger">
+                                        {{vm.serverValidationErrors['codApaOrigin']}} {{vm.serverApplicationErrors['codApaOrigin']}}
+                                    </span>
+                                </div>
+
+                                <div class="col-sm-4" ng-if="vm.selectedEgarCreateType === 'OLEOS_ALIMENTARES'">
+                                    <label class="control-label">&nbsp;</label>
+                                    <smg-select-pickup-point name="{{vm.selectPickupPointOua}}"
+                                        label-text="some label"
+                                        pickup-point-type="vm.pickupPointTypeOua"
+                                        selected-key="vm.selectedPickupPointOuaUniqueId"
+                                        selection-model="vm.selectedPickupPointOua" ,
+                                        on-change="vm.onSelectedPickupPointChange(obj)">
+                                    </smg-select-pickup-point>
+                                </div>
+
+                                <div class="col-sm-4" ng-if="vm.selectedEgarCreateType === 'EX_SITU'">
+                                    <label class="control-label">&nbsp;</label>
+                                    <smg-select-pickup-point
+                                        name="selectedLocalOAU"
+                                        label-text="some label"
+                                        pickup-point-type="vm.pickupPointTypeExSitu"
+                                        selected-key="vm.selectedPickupPointExSituUniqueId"
+                                        selection-model="vm.selectedLocalOAU"
+                                        on-change="vm.onSelectedPickupPointChange(obj)">
+                                    </smg-select-pickup-point>
+                                </div>
+
+                                <div class="col-sm-2" ng-if="vm.selectedEgarCreateType === 'OLEOS_ALIMENTARES' || vm.selectedEgarCreateType === 'EX_SITU'">
+                                    <label class="control-label">
+                                        Código local de recolha
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <br>
+                                    <input id="inp-localOAU" name="localOAU"
+                                        ng-model="vm.localOAU"
+                                        ng-required="vm.selectedEgarCreateType === 'OLEOS_ALIMENTARES' || vm.selectedEgarCreateType === 'EX_SITU'"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Ex: Abc123" />
+                                    <span ng-show="vm.validateInput('localOAU', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="vm.serverValidationErrors['localOAU']" class="text-danger">
+                                        {{vm.serverValidationErrors['localOAU']}} {{vm.serverApplicationErrors['localOAU']}}
+                                    </span>
+                                </div>
+
+                                <div class="col-sm-2" ng-if="vm.selectedEgarCreateType === 'OBRAS_RCD' || vm.selectedEgarCreateType === 'PRESTADOR_SERVICOS' || vm.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'">
+                                    <label class="control-label">
+                                        Nif
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <br>
+                                    <input id="inp-vatRCD" name="vatRCD"
+                                        ng-model="vm.vatRCD"
+                                        ng-required="vm.selectedEgarCreateType === 'OBRAS_RCD' || vm.selectedEgarCreateType === 'PRESTADOR_SERVICOS' || vm.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'"
+                                        ng-pattern="/^[0-9]+$/"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Ex: 123456789" />
+                                    <span ng-show="vm.validateInput('vatRCD', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="vm.validateInput('vatRCD', 'pattern')" class="text-danger">Formato inválido</span>
+                                    <span ng-show="vm.serverValidationErrors['vatRCD']" class="text-danger">
+                                        {{vm.serverValidationErrors['vatRCD']}} {{vm.serverApplicationErrors['vatRCD']}}
+                                    </span>
+                                </div>
+
+                                <div class="col-sm-4" ng-if="vm.selectedEgarCreateType === 'OBRAS_RCD' || vm.selectedEgarCreateType === 'PRESTADOR_SERVICOS' || vm.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'">
+                                    <label class="control-label">
+                                        Morada {{ vm.selectedEgarCreateType === 'OBRAS_RCD' ? 'da Obra' : '' }}
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <br>
+                                    <input id="inp-addressRCD" name="addressRCD"
+                                        ng-model="vm.addressRCD"
+                                        ng-required="vm.selectedEgarCreateType === 'OBRAS_RCD' || vm.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Ex: Rua do Ouro" />
+                                    <span ng-show="vm.validateInput('addressRCD', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="vm.serverValidationErrors['addressRCD']" class="text-danger">
+                                        {{vm.serverValidationErrors['addressRCD']}} {{vm.serverApplicationErrors['addressRCD']}}
+                                    </span>
+                                </div>
+
+                                <div class="col-sm-2" ng-if="vm.selectedEgarCreateType === 'OBRAS_RCD' || vm.selectedEgarCreateType === 'PRESTADOR_SERVICOS' || vm.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'">
+                                    <label class="control-label">
+                                        Localidade
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <br>
+                                    <input id="inp-localRCD" name="localRCD"
+                                        ng-model="vm.localRCD"
+                                        ng-required="vm.selectedEgarCreateType === 'OBRAS_RCD' || vm.selectedEgarCreateType === 'PRESTADOR_SERVICOS' || vm.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Ex: Lisboa" />
+                                    <span ng-show="vm.validateInput('localRCD', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="vm.serverValidationErrors['localRCD']" class="text-danger">
+                                        {{vm.serverValidationErrors['localRCD']}} {{vm.serverApplicationErrors['localRCD']}}
+                                    </span>
+                                </div>
+
+                                <div class="col-sm-2" ng-if="vm.selectedEgarCreateType === 'OBRAS_RCD' || vm.selectedEgarCreateType === 'PRESTADOR_SERVICOS' || vm.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'">
+                                    <label class="control-label">
+                                        Código Postal
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <br>
+                                    <input id="inp-postalCodeRCD" name="postalCodeRCD"
+                                        ng-model="vm.postalCodeRCD"
+                                        ng-required="vm.selectedEgarCreateType === 'OBRAS_RCD' || vm.selectedEgarCreateType === 'PRESTADOR_SERVICOS' || vm.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Ex: 1100-100" />
+                                    <span ng-show="vm.validateInput('postalCodeRCD', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="vm.serverValidationErrors['postalCodeRCD']" class="text-danger">
+                                        {{vm.serverValidationErrors['postalCodeRCD']}} {{vm.serverApplicationErrors['postalCodeRCD']}}
+                                    </span>
+                                </div>
+
+                                <!--tipo produtor PI/OGR-->
+                                <div class="col-sm-2" ng-if="vm.selectedEgarCreateType === 'PRODUTOR_ESTABELECIMENTO'">
+                                    <label class="control-label">
+                                        Tipo Produtor
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <select id="inp-selectedProducerType" name="selectedProducerType"
+                                            required=""
+                                            ng-model="vm.selectedProducerType"
+                                            class="form-control ng-pristine ng-valid ng-not-empty ng-touched">
+                                        <option ng-repeat="option in vm.allProducerType" value="{{option.id}}">{{option.name}}</option>
+                                    </select>
+                                    <span ng-show="vm.validateInput('selectedProducerType', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="vm.validateInput('selectedProducerType', 'pattern')" class="text-danger">Formato inválido</span>
+                                    <span ng-show="vm.serverValidationErrors['selectedProducerType']" class="text-danger">
+                                        {{vm.serverValidationErrors['selectedProducerType']}} {{vm.serverApplicationErrors['selectedProducerType']}}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- row info 2 -->
+                            <div class="row pad-top10" ng-if="vm.selectedEgarCreateType === 'PRODUTOR_ESTABELECIMENTO'">
+                                <!--Establishment Name-->
+                                <div class="col-sm-4">
+                                    <label class="control-label">
+                                        Estabelecimento
+                                    </label>
+                                    <input name="nameOrigin" ng-model="vm.nameOrigin" type="text" class="form-control" />
+                                </div>
+
+                                <!--Establishment Addres-->
+                                <div class="col-sm-8">
+                                    <label class="control-label">Morada</label>
+                                    <input name="addressOrigin" ng-model="vm.addressOrigin" type="text" class="form-control" />
+                                    <span ng-show="vm.serverValidationErrors['addressOrigin']" class="text-danger">
+                                        {{vm.serverValidationErrors['addressOrigin']}} {{vm.serverApplicationErrors['addressOrigin']}}
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <!--END remetente-->
+
+                <!--residuo Transportado-->
+                <fieldset id="residue" class="pad-bottom0 mar-bottom0">
+                    <div class="form-group">
+                        <!--residuo-->
+                        <div class="col-sm-9">
+                            <fieldset>
+                                <legend>Resíduo</legend>
+                                <!--Quantity-->
+                                <div class="row">
+                                    <!--Quantity-->
+                                    <div class="col-sm-4">
+                                        <label class="control-label">
+                                            Quantidade (Kg)
+                                            <span class="pad-left5 text-danger">
+                                                <i class="fa fa-asterisk" />
+                                            </span>
+                                        </label>
+                                        <input id="inp-quantity"
+                                            name="quantity"
+                                            ng-model="vm.quantity"
+                                            required=""
+                                            type="text"
+                                            ng-pattern="/^[0-9]+(\.[0-9]{1,4})?$/"
+                                            class="form-control"
+                                            placeholder="Ex: 100.25"/>
+                                        <span ng-show="vm.validateInput('quantity', 'required')" class="text-danger">Obrigatório</span>
+                                        <span ng-show="vm.validateInput('quantity', 'pattern')" class="text-danger">Apenas números inteiros ou decimais separado por "." com o máximo de 4 casas decimais</span>
+                                        <span ng-show="vm.serverValidationErrors['quantity']" class="text-danger">
+                                            {{vm.serverValidationErrors['quantity']}} {{vm.serverApplicationErrors['quantity']}}
+                                        </span>
+                                    </div>
+
+                                    <!-- Plate VFV -->
+                                    <div class="col-sm-4" ng-if="vm.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'">
+                                        <label class="control-label">
+                                            Matricula VFV
+                                            <span class="pad-left5 text-danger">
+                                                <i class="fa fa-asterisk" />
+                                            </span>
+                                        </label>
+                                        <input id="inp-plateVFV"
+                                                name="plateVFV"
+                                                ng-model="vm.plateVFV"
+                                                ng-required="vm.selectedEgarCreateType === 'VEICULOS_FIM_VIDA'"
+                                                class="form-control"
+                                                placeholder="Ex: AA-12-34" />
+                                        <span ng-show="vm.validateInput('plateVFV', 'required')" class="text-danger">Obrigatório</span>
+                                        <span ng-show="vm.serverValidationErrors['plateVFV']" class="text-danger">
+                                            {{vm.serverValidationErrors['plateVFV']}} {{vm.serverApplicationErrors['plateVFV']}}
+                                        </span>
+                                    </div>
+
+                                    <!--Group Code-->
+                                    <div class="col-sm-4">
+                                        <label class="control-label">
+                                            Código Grupo
+                                            <span class="pad-left5 text-danger">
+                                                <i ng-hide="!vm.showGroupCode"  class="fa fa-asterisk" />
+                                            </span>
+                                        </label>
+                                        <select id="inp-groupCode"
+                                            name="groupCode"
+                                            ng-model="vm.groupCode"
+                                            ng-disabled="!vm.showGroupCode"
+                                            class="form-control ng-pristine ng-valid ng-not-empty ng-touched">
+                                            <option ng-repeat="option in vm.allGroupCodes"
+                                                value="{{option.key}}">
+                                                {{option.value}}
+                                            </option>
+                                        </select>
+                                        <span ng-show="vm.validateInput('groupCode', 'required')" class="text-danger">Obrigatório</span>
+                                        <span ng-show="vm.serverValidationErrors['groupCode']" class="text-danger">
+                                            {{vm.serverValidationErrors['groupCode']}} {{vm.serverApplicationErrors['groupCode']}}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!--Ler Code-->
+                                <div class="row pad-top10">
+                                    <div class="col-sm-12">
+                                        <label class="control-label">
+                                            Código LER
+                                            <span class="pad-left5 text-danger">
+                                                <i class="fa fa-asterisk" />
+                                            </span>
+                                        </label>
+
+                                        <select id="inp-selectedLerCode" name="selectedLerCode"
+                                            ng-change="vm.lerCodeChange()"
+                                            required=""
+                                            placeholder-text-single="'Pesquisar por código descrição LER'"
+                                            no-results-text="'Não foram encontrados resultados'"
+                                            chosen=""
+                                            ng-options="address as address.value for address in vm.lerCodes"
+                                            class="chosen-select input-md" ng-model="vm.selectedLerCode">
+                                            <option></option>
+                                        </select>
+
+                                        <span ng-show="vm.validateInput('selectedLerCode', 'required')" class="text-danger">Obrigatório</span>
+                                        <span ng-show="vm.validateInput('selectedLerCode', 'pattern')" class="text-danger">Formato inválido</span>
+                                        <span ng-show="vm.serverValidationErrors['selectedLerCode']" class="text-danger">
+                                            {{vm.serverValidationErrors['selectedLerCode']}} {{vm.serverApplicationErrors['selectedLerCode']}}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!--Operation Code-->
+                                <div class="row pad-top10">
+                                    <div class="col-sm-12">
+                                        <label class="control-label">
+                                            Código Operação
+                                            <span class="pad-left5 text-danger">
+                                                <i class="fa fa-asterisk" />
+                                            </span>
+                                        </label>
+                                        <select id="inp-selectedOperationCode" name="selectedOperationCode"
+                                                required="" ng-change="vm.operationCodeChange()"
+                                                placeholder-text-single="'Pesquisar por código ou descrição da operação'"
+                                                no-results-text="'Não foram encontrados resultados'"
+                                                chosen=""
+                                                class="chosen-select input-md"
+                                                ng-options="address as address.value for address in vm.operationCodes"
+                                                ng-model="vm.selectedOperationCode">
+                                            <option></option>
+                                        </select>
+                                        <span ng-show="vm.validateInput('selectedOperationCode', 'required')" class="text-danger">Obrigatório</span>
+                                        <span ng-show="vm.serverValidationErrors['selectedOperationCode']" class="text-danger">
+                                            {{vm.serverValidationErrors['selectedOperationCode']}} {{vm.serverApplicationErrors['selectedOperationCode']}}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!--Description-->
+                                <div class="row pad-top10">
+                                    <div class="col-sm-12">
+                                        <label class="control-label">
+                                            Descrição
+                                            <span class="pad-left5 text-danger">
+                                                <i class="fa fa-asterisk" />
+                                            </span>
+                                        </label>
+                                        <textarea id="txt-lerDescription" name="lerDescription" class="form-control no-resize" required ng-model="vm.lerDescription"
+                                            ng-maxlength="200" rows="3">
+                                        </textarea>
+                                        <span ng-show="vm.validateInput('lerDescription', 'required')" class="text-danger">Obrigatório</span>
+                                        <span ng-show="vm.validateInput('lerDescription', 'maxlength')" class="text-danger">Máximo de 200 caracteres</span>
+                                        <span ng-show="vm.serverValidationErrors['lerDescription']" class="text-danger">
+                                            {{vm.serverValidationErrors['lerDescription']}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <!--product codes-->
+                        <div class="col-sm-3">
+                            <fieldset class="mar-left0 egar-tag-fieldset">
+                                <legend>
+                                    <div>
+                                        Etiquetas
+                                        <smg-text-search
+                                            class="egar-tag-fieldset-search"
+                                            search-type="vm.SMG_TEXT_SEARCH_TYPES.Tags"
+                                            dialog-header="Selecione etiqueta"
+                                            inp-name="searchTag"
+                                            model="vm.selectedTag"
+                                            on-selection="vm.onTagSeletion(obj)">
+                                        </smg-text-search>
+                                    </div>
+                                    
+                                </legend>
+                                <div class="row">
+                                    <!-- Product Codes -->
+                                   <div class="egar-tag col-sm-6 mar-top3 mar-left0 form-group has-feedback">
+                                            <!-- <input type="text" class="form-control">
+                                            <span class="input-group-addon">.00</span> -->
+                                        <!-- <span class="fa fa-search"></span>  -->
+                                        <!-- <span class="input-group-addon"><i class="fa fa-tag"></i></span> -->
+
+                                        <!-- <input name="inp-searchTag" class="form-control" />
+                                            <smg-text-search
+                                                search-type="vm.SMG_TEXT_SEARCH_TYPES.Tags"
+                                                dialog-header="Selecione etiqueta"
+                                                inp-name="searchTag"
+                                                model="vm.selectedTag"
+                                                on-selection="vm.onTagSeletion(obj)">
+                                            </smg-text-search> -->
+                                    </div>
+                                </div>
+
+                                <div ng-repeat="tag in vm.tagsArray">
+                                    <div class="row pad-top10">
+                                        <div class="col-sm-10">
+                                            <span class="fa fa-tag fa-1point5 pad-right10"></span>
+                                            <span>{{tag.internalCode}}</span>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <span class="fa fa-times clickable" title="Remover etiqueta" ng-click="vm.removeTag(tag)"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                    </div>
+                </fieldset>
+                <!--END residuo Transportado-->
+
+                <fieldset id="residue-adr" ng-show="vm.showAdr">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="checkbox c-checkbox">
+                                        <label class="control-label">
+                                            <input id="ckb-adr"
+                                                type="checkbox"
+                                                ng-click="vm.clickAdr()"
+                                                ng-model="vm.checkAdr"
+                                                ng-checked="vm.checkAdr">
+                                            <span class="fa fa-check"></span>
+                                            Abrangido por ADR
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row pad-top10" ng-if="vm.checkAdr">
+                                <div class="col-sm-6">
+                                    <label class="control-label">
+                                        Nº ONU
+                                    </label>
+                                    <smg-select-onu-number id="dd-selectOnuNumber"
+                                            selection-model="vm.selectedOnuNumber"
+                                            selected-key="vm.setOnuNumber"
+                                            on-change="vm.onSelectedOnuNumberChange(obj)">
+                                    </smg-select-onu-number>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label class="control-label">
+                                        Grupo de embalagem
+                                    </label>
+                                    <smg-select-onu-number-package id="dd-selectOnuNumberPackage"
+                                            for-onu-number="vm.selectedOnuNumber"
+                                            selection-model="vm.selectedOnuNumberPackage"
+                                            on-change="vm.onSelectedOnuNumberPackageChange(obj)">
+                                    </smg-select-onu-number-package>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label class="control-label">
+                                        Volumes/embalagens
+                                    </label>
+                                    <input id="inp-adrVolume"
+                                        name="adrVolume"
+                                        ng-model="vm.adrVolume"
+                                        ng-required="vm.checkAdr"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Ex: 123" />
+                                    <span ng-show="vm.serverValidationErrors['adrVolume']" class="text-danger">
+                                        {{vm.serverValidationErrors['adrVolume']}}
+                                        {{vm.serverApplicationErrors['adrVolume']}}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="row pad-top10" ng-show="vm.checkAdr">
+                                <div class="col-sm-6">
+                                    <label class="control-label">
+                                        Observações I
+                                    </label>
+                                    <textarea id="txt-adrObsI" name="adrObsI" class="form-control no-resize"
+                                        ng-model="vm.adrObsI"
+                                        ng-maxlength="100"
+                                        rows="3">
+                                    </textarea>
+                                    <span ng-show="vm.validateInput('adrObsI', 'maxlength')" class="text-danger">Máximo de 100 caracteres</span>
+                                    <span ng-show="vm.serverValidationErrors['adrObsI']" class="text-danger">
+                                        {{vm.serverValidationErrors['adrObsI']}}
+                                        {{vm.serverApplicationErrors['adrObsI']}}
+                                    </span>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label class="control-label">
+                                        Observações II
+                                    </label>
+                                    <textarea id="txt-adrObsII" name="adrObsII" class="form-control no-resize"
+                                        ng-model="vm.adrObsII"
+                                        ng-maxlength="100"
+                                        rows="3">
+                                    </textarea>
+                                    <span ng-show="vm.validateInput('adrObsII', 'maxlength')" class="text-danger">Máximo de 100 caracteres</span>
+                                    <span ng-show="vm.serverValidationErrors['adrObsII']" class="text-danger">
+                                        {{vm.serverValidationErrors['adrObsII']}}
+                                        {{vm.serverApplicationErrors['adrObsII']}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+
+            </div>
+        </div>
+    </div>
+    <!--END panelOrigin-->
+
+
+    <!--panelTransporters-->
+    <div id="panelTransporters" class="panel panel-default">
+        <div ng-class="{'panel-heading-collapsed':panelTransporters}" class="panel-heading">
+            <h4>
+                <em class="fa fa-truck pad-right10"></em>2 - Transportadores</h4>
+            <paneltool tool-collapse="tool-collapse" class="pull-right">
+                <a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="panelTransporters = !panelTransporters" class="ng-scope">
+                    <em ng-show="panelTransporters" class="fa fa-plus ng-no-animation ng-hide"></em>
+                    <em ng-show="!panelTransporters" class="fa fa-minus ng-no-animation"></em>
+                </a>
+            </paneltool>
+        </div>
+
+        <div uib-collapse="panelTransporters" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+            <div class="panel-body">
+                <!--transportador-->
+                <fieldset id="transporters">
+                    <div ng-repeat="transporter in vm.transportersArray">
+                        <div class="row">
+                            <div class="col-sm-offset-1 col-sm-10">
+                                <div class="checkbox c-checkbox">
+                                    <label>
+                                        <input id="ckb-transporter-origin{{transporter.index}}"
+                                            name="transporterCheckbox{{transporter.index}}"
+                                            type="checkbox"
+                                            ng-disabled="!vm.vatOrigin && !vm.vatRCD"
+                                            ng-click="vm.clickTransporterOrigin(transporter)"
+                                            ng-checked="transporter.isOriginChecked">
+                                        <span class="fa fa-check"></span>
+                                        Produtor
+                                    </label>
+                                    <label>
+                                        <input id="ckb-transporter-destin{{transporter.index}}"
+                                            name="transporterCheckbox{{transporter.index}}"
+                                            type="checkbox"
+                                            ng-disabled="!vm.vatDestin"
+                                            ng-click="vm.clickTransporterDestin(transporter)"
+                                            ng-checked="transporter.isDestinChecked">
+                                        <span class="fa fa-check"></span>
+                                        Destinatário
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-offset-1 col-sm-6">
+                                <!--transporter nif-->
+                                <div class="col-sm-4 mar-top3 form-group has-feedback">
+                                    <label class="control-label">
+                                        NIF
+                                        <smg-required/>
+                                    </label>
+
+                                    <input name="vatTransporter{{transporter.index}}"
+                                        ng-model="transporter.vat"
+                                        class="form-control"
+                                        placeholder="505123456"
+                                        ng-required="true" />
+                                    <smg-text-search
+                                        search-type="vm.SMG_TEXT_SEARCH_TYPES.Establishments"
+                                        class="new-gar-v2"
+                                        dialog-header="Selecione transportador"
+                                        inp-name="searchTransporter{{transporter.index}}"
+                                        model="transporter.selected"
+                                        index="transporter.index"
+                                        on-selection="vm.onEstablishmentSelection(obj)">
+                                    </smg-text-search>
+
+                                    <span ng-show="vm.validateInput('vatTransporter{{transporter.index}}', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="vm.serverValidationErrors['vatTransporter{{transporter.index}}']" class="text-danger">
+                                        {{vm.serverValidationErrors['vatTransporter'+transporter.index]}}
+                                    </span>
+                                    <span ng-show="vm.serverApplicationErrors['vatTransporter{{transporter.index}}']" class="text-danger">
+                                        {{vm.serverApplicationErrors['vatTransporter'+transporter.index]}}
+                                    </span>
+                                </div>
+
+                                <!--transporter apa-->
+                                <div class="col-sm-4 mar-top3">
+                                    <label class="control-label">
+                                        APA
+                                    </label>
+                                    <input id="inp-apaTransporter{{transporter.index}}"
+                                        name="apaTransporter{{transporter.index}}"
+                                        ng-model="transporter.apa"
+                                        class="form-control"
+                                        placeholder="APA1234567" />
+
+                                    <span ng-show="transporter.vat && !transporter.apa" class="text-danger">
+                                        <em class="fa fa-warning" title="" />
+                                        O transportador selecionado não tem APA definido!
+                                        Este campo embora não obrigatório é relevante para o MIRR.
+                                    </span>
+                                </div>
+
+                                <!--plate-->
+                                <div class="col-sm-4 mar-top3">
+                                    <label class="control-label">
+                                        Matricula
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <input
+                                        name="plateTransporter{{transporter.index}}"
+                                        ng-model="transporter.plate"
+                                        class="form-control"
+                                        placeholder="Ex: AA-11-22"
+                                        required="" />
+                                    <span ng-show="vm.validateInput('plateTransporter{{transporter.index}}', 'required')" class="text-danger">Obrigatório</span>
+                                </div>
+                            </div>
+
+
+                            <!--transport date & time-->
+                            <div class="col-sm-3 pad-left0 pad-right0">
+                                <div class="row">
+                                    <div class="col-sm-6 mar-top3">
+                                        <label class="control-label">
+                                            Data & Hora
+                                            <smg-required/>
+                                        </label>
+                                        <smg-date-picker-v2 dp-name="transporterDate{{transporter.index}}"
+                                            dp-placeholder="Data"
+                                            dp-date="transporter.date"
+                                            ng-required="true">
+                                        </smg-date-picker-v2>
+                                        <span ng-show="vm.submitted && !vm.transportersArray[transporter.index].date" class="text-danger">Obrigatório</span>
+                                        <span ng-show="vm.serverValidationErrors['dateTransporter{{transporter.index}}']" class="text-danger">
+                                            {{vm.serverValidationErrors['dateTransporter'+transporter.index]}}
+                                            {{vm.serverApplicationErrors['dateTransporter'+transporter.index]}}
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <smg-time-picker-v2 tp-name="transporterDate{{transporter.index}}"
+                                            tp-placeholder="Hora"
+                                            model="transporter.hour"
+                                            hide-label-space='true'>
+                                        </smg-time-picker-v2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-1 text-right mar-top37">
+                                <button type="button" class="btn btn-labeled btn-danger"
+                                    ng-show="transporter.index > 0"
+                                    ng-click="vm.removeTransporter(transporter)">
+                                    -
+                                </button>
+
+                                <button type="button"
+                                    ng-show="(transporter.index + 1) == vm.transportersArray.length"
+                                    class="btn btn-labeled btn-info"
+                                    ng-click="vm.addTransporter(transporter)">
+                                    +
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <!--transportador-->
+
+
+            </div>
+        </div>
+    </div>
+    <!--END panelTransporters-->
+
+
+    <!--panelDestin-->
+    <div id="panelDestin" class="panel panel-default">
+        <div ng-class="{'panel-heading-collapsed':panelDestin}" class="panel-heading">
+            <h4>
+                <em class="fa fa-recycle pad-right10"></em>3 - Destinatário</h4>
+            <paneltool tool-collapse="tool-collapse" class="pull-right">
+                <a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="panelDestin = !panelDestin" class="ng-scope">
+                    <em ng-show="panelDestin" class="fa fa-plus ng-no-animation ng-hide"></em>
+                    <em ng-show="!panelDestin" class="fa fa-minus ng-no-animation"></em>
+                </a>
+            </paneltool>
+        </div>
+
+        <div uib-collapse="panelDestin" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+            <div class="panel-body">
+                <fieldset id="destin">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <!--row search-->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <smg-select-establishment name="smgSelectEstablishmentDestin"
+                                        label-text="some label"
+                                        selection-model="vm.selectedDestin",
+                                        on-change="vm.destinSearchChangeV3(obj)">
+                                    </smg-select-establishment>
+                                </div>
+                            </div>
+
+                            <div class="row pad-top10">
+                                <!--nif-->
+                                <div class="col-sm-2">
+                                    <label class="control-label">
+                                        NIF
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <input id="inp-vatDestin" name="vatDestin" ng-change="vm.destinDataChange()" ng-model="vm.vatDestin" required="" ng-pattern="/^[0-9]+$/"
+                                        type="text" class="form-control" placeholder="Ex: 123456789" />
+                                    <span ng-show="vm.validateInput('vatDestin', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="vm.validateInput('vatDestin', 'pattern')" class="text-danger">Formato inválido</span>
+                                    <span ng-show="vm.serverValidationErrors['vatDestin']" class="text-danger">
+                                        {{vm.serverValidationErrors['vatDestin']}} {{vm.serverApplicationErrors['vatDestin']}}
+                                    </span>
+                                </div>
+
+                                <!--cod apa-->
+                                <div class="col-sm-2">
+                                    <label class="control-label">
+                                        Código APA
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <input id="inp-codApaDestin" name="codApaDestin"
+                                        ng-change="vm.destinDataChange()"
+                                        ng-model="vm.codApaDestin"
+                                        required=""
+                                        class="form-control" placeholder="Ex: 123456" />
+                                    <span ng-show="vm.validateInput('codApaDestin', 'required')" class="text-danger">Obrigatório</span>
+                                    <span ng-show="vm.serverValidationErrors['codApaDestin']" class="text-danger">
+                                        {{vm.serverValidationErrors['codApaDestin']}} {{vm.serverApplicationErrors['codApaDestin']}}
+                                    </span>
+                                </div>
+
+                                <!--num pgl-->
+                                <div class="col-sm-2">
+                                    <label class="control-label">
+                                        Número PGL
+                                        <span class="pad-left5 text-danger">
+                                            <i class="fa fa-asterisk" />
+                                        </span>
+                                    </label>
+                                    <input id="inp-numPgl" ng-disabled="!vm.showPglNumber" name="numPgl" ng-model="vm.numPgl" type="text" class="form-control"
+                                    />
+                                    <span ng-show="vm.serverValidationErrors['numPgl']" class="text-danger">
+                                        {{vm.serverValidationErrors['numPgl']}} {{vm.serverApplicationErrors['numPgl']}}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="row pad-top10">
+                                <div class="col-sm-4">
+                                    <label class="control-label">
+                                        Estabelecimento
+                                    </label>
+                                    <input name="nameDestin" ng-model="vm.nameDestin" type="text" class="form-control" />
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label class="control-label">
+                                        Morada
+                                    </label>
+                                    <input name="addressDestin" ng-model="vm.addressDestin" type="text" class="form-control" />
+                                    <span ng-show="vm.serverValidationErrors['addressDestin']" class="text-danger">
+                                        {{vm.serverValidationErrors['addressDestin']}} {{vm.serverApplicationErrors['addressDestin']}}
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <!--END panelDestin-->
+
+    <div class="row">
+        <div class="col-sm-6">
+            <i class="text-danger fa fa-asterisk" /> - Campos Obrigatórios
+        </div>
+
+        <div class="col-sm-6">
+            <div class="text-right">
+                <button type="button" class="btn btn-labeled btn-default" ng-click="vm.cancel()">
+                    <span class="btn-label">
+                        <i class="fa fa-arrow-left"></i>
+                    </span>
+                    Voltar
+                </button>
+                <button type="submit" class="btn btn-labeled btn-success mar-right10">
+                    <span class="btn-label">
+                        <i class="fa fa-check"></i>
+                    </span>
+                    Emitir
+                </button>
+            </div>
+        </div>
+    </div>
+
+</form>

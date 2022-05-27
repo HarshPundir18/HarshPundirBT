@@ -1,0 +1,18 @@
+
+<label ng-if="$ctrl.labelText" class="">
+    {{$ctrl.labelText}}
+</label>
+<ui-select theme="bootstrap"  
+        ng-model="$ctrl.selectedOption" 
+        ng-change="$ctrl.onSelectionChange()">
+    <ui-select-match placeholder="Pesquisar">
+        <span ng-bind-html="$select.selected.DisplayName"></span>
+    </ui-select-match>
+    <ui-select-choices repeat="option in $ctrl.options | propsFilter: {DisplayName: $select.search}">
+        <span ng-bind-html="option.DisplayName"></span>
+    </ui-select-choices>
+    <ui-select-no-choice>
+        Não foram encontrados resultados
+    </ui-select-no-choice>
+    <option></option>
+</ui-select>

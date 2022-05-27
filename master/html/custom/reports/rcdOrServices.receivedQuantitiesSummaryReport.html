@@ -1,0 +1,238 @@
+<h3 class="ng-scope" ng-if="vm.mode == vm.SMG_EGAR_TYPES.OBRAS_RCD">
+    {{vm.translate('lbl-report-rcd-received-quantities-summary')}}
+</h3>
+<h3 class="ng-scope" ng-if="vm.mode == vm.SMG_EGAR_TYPES.PRESTADOR_SERVICOS">
+    {{vm.translate('lbl-report-services-received-quantities-summary')}}
+</h3>
+
+<div id="main" >
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form name="vm.reportForm" ng-submit="vm.createReport()" novalidate="" class="form-validate form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <!--filters-->
+                        <div class="row">  
+                            <div class="col-sm-offset-2 col-sm-4">
+                                <label class="control-label">
+                                    Cliente/Fornecedor
+                                    <smg-required/>
+                                </label>
+                                <smg-select-establishment name="selectedClientEstablishment" 
+                                    class="tabfilter"
+                                    label-text="some label"
+                                    selection-model="vm.selectedClientEstablishment",
+                                    type="vm.SMG_ESTABLISHMENT_TYPES.ALL"
+                                    on-change="vm.selectedClientEstablishmentOnChange(obj)">
+                                </smg-select-establishment> 
+                            </div>  
+                            <div class="col-sm-2">
+                                <label class="control-label">
+                                    Periodo
+                                    <smg-required/>
+                                </label>
+                                <smg-date-picker-v2 
+                                    dp-name="startDate"
+                                    dp-placeholder="Início"
+                                    label-text=""
+                                    dp-date="vm.startDate">
+                                </smg-date-picker-v2>
+                            </div>
+                            <div class="col-sm-2">
+                                <smg-date-picker-v2 
+                                    dp-name="endDate"
+                                    dp-placeholder="Fim"
+                                    dp-date="vm.endDate">
+                                </smg-date-picker-v2>                          
+                            </div>
+                        </div>
+        
+
+                        <div class="row pad-top5">
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div  class="text-danger error-message">
+                                            {{vm.invalidSelectedClientErrorMessage}}
+                                        </div>    
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="text-danger error-message">
+                                            {{vm.invalidDateErrorMessage}}
+                                        </div>
+                                        <div class="text-danger error-message">
+                                            {{vm.serverValidationErrors['MustHaveIntervalPeriodDefined']}}
+                                            {{vm.serverValidationErrors['MustBeValidPeriod']}}
+                                            {{vm.serverValidationErrors['MustDateIntervalSameCivilYear']}}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+
+                        </div> 
+                        
+                        <!--Action Buttons-->
+                        <div class="row  mar-top20">
+                            <div class="col-sm-offset-4 col-xs-12 col-sm-1">
+                                <button title="Limpar filtros" 
+                                        ng-click="vm.onClearClick()" 
+                                        class="btn btn-default form-control">
+                                    Limpar
+                                </button>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-1">
+                                <div uib-dropdown="" is-open="vm.listIsOpen" class="btn-group dropdown dropdown-list">
+                                    <button type="button" uib-dropdown-toggle="" class="btn btn-info text-bold">
+                                        Relatório
+                                        <span ng-if="!vm.listIsOpen" class="fa fa-caret-down mar-left5"></span>
+                                        <span ng-if="vm.listIsOpen" class="fa fa-caret-up mar-left5"></span>
+                                    </button> 
+                                    <!-- START Dropdown menu-->
+                                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                                        <div class="list-group">
+                                            <a class="list-group-item" ng-click="vm.onSearchClick()">
+                                                <div class="media-box">
+                                                    <div class="pull-left">
+                                                        <em class="fa fa-table fa-2x"></em>
+                                                    </div>
+                                                    <div class="media-box-body clearfix pad-top5">
+                                                        <p class="m0">Gerar</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+
+                                            <a class="list-group-item"  ng-click="vm.onExportReportClick('xlsx')">
+                                                <div class="media-box">
+                                                    <div class="pull-left">
+                                                        <em class="fa fa-file-excel-o fa-2x text-success"></em>
+                                                    </div>
+                                                    <div class="media-box-body clearfix pad-top5">
+                                                        <p class="m0">Exportar (.xlsx)</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+
+                                            <a class="list-group-item"  ng-click="vm.onExportReportClick('csv')">
+                                                <div class="media-box">
+                                                    <div class="pull-left">
+                                                        <em class="fa fa-file-excel-o fa-2x text-success"></em>
+                                                    </div>
+                                                    <div class="media-box-body clearfix pad-top5">
+                                                        <p class="m0">Exportar (.csv)</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    
+    <div id="panelNoResults" class="panel panel-default mar-top15" ng-if="vm.showResults && vm.reportResults.length == 0">
+        <div class="panel-body report-received-quantities-summary pad-top0" >
+            <div class="row text-center">
+                <div class="col-sm-12 pad-top10">
+                    Não foram encontrados resultados
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div id="panelResults" class="panel panel-default mar-top15" ng-if="vm.showResults && vm.reportResults.length >= 0" ng-repeat="aggregate in vm.residuesAggregate">
+        <div ng-class="{'panel-heading-collapsed':panelResults}" class="panel-heading pad-bottom10">
+            <h4>
+                <span ng-if="aggregate.establishmentInfo.Name">
+                    {{aggregate.establishmentInfo.Name}}
+                </span>
+                <span if="aggregate.establishmentInfo.Name && aggregate.establishmentInfo.Vat">
+                    -
+                </span>
+                <span class="apaCode" ng-if="aggregate.establishmentInfo.Vat">
+                    {{aggregate.establishmentInfo.Vat}}
+                </span>
+            </h4>
+        </div>
+
+        <div class="panel-body report-received-quantities-summary pad-top0" >
+            <div class="row report-header">
+                <div class="col-sm-offset-1 col-sm-2 ">LER</div>
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-sm-2 ">OPERAÇÃO</div>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-sm-2 ">APA DESTINO</div>
+                                <div class="col-sm-2 ">Toneladas</div>
+                                <div class="col-sm-8 ">NIFs Transportadores</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-repeat="ler in aggregate.lers" ng-if="vm.residuesAggregate.length > 0" class="row pad-top10 report-section">   
+                    <!-- col-sm-offset-1 -->
+                    <div class="col-sm-offset-1 col-sm-2 report-section-ler"> 
+                        {{ler.code}}
+                    </div>
+                    <div class="col-sm-9">
+                        <div ng-repeat="operation in ler.operations" class="row">        
+                            <div class="col-sm-2">
+                                {{operation.code}}
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="row" ng-repeat="destin in operation.destinApaCodes">
+                                    <div class="col-sm-2">
+                                        {{destin.apaCode}}
+                                    </div>
+                                    <div class="col-sm-2">
+                                        {{vm.toTons(destin.total)}}
+                                    </div>
+                                    <div class="col-sm-8">
+                                        {{vm.concatenateTransporters(destin.transporters)}}
+                                    </div>                                        
+                                </div>  
+                            </div> 
+                        </div>
+            
+                    </div>
+     
+            </div>
+
+            <!-- <div ng-if="vm.exSituResiduesAggregate.length > 0" class="col-md-12 exsitu-residues-results">
+                exSituResiduesAggregate
+            </div>
+
+            <div ng-if="vm.ouaResiduesAggregate.length > 0" class="col-md-12 oua-residues-results">
+                ouaResiduesAggregate
+            </div>
+
+            <div ng-if="vm.rcdResiduesAggregate.length > 0" class="col-md-12 rcd-residues-results">
+                rcdResiduesAggregate
+            </div> -->
+        </div>
+    </div>
+
+</div>
+
+<!--bottom actions-->
+<div class="row">
+    <div class="col-xs-6">
+    </div>
+    <div class="col-xs-6">
+        <smg-form-actions on-back-click="$state.go('app.reportsHub')">
+        </smg-form-actions>
+    </div>
+</div>

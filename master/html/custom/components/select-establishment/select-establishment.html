@@ -1,0 +1,42 @@
+<div class="select-establishment">
+
+    <ui-select ng-model="vm.selectionModel" 
+        theme="bootstrap"
+        spinner-enabled="true"
+        ng-change="vm.onSelectChange($select)">
+
+        <ui-select-match allow-clear="true" placeholder="Pesquisar..." class="select-establishment-selection">
+            <i ng-if="$select.selected.type === 1" class="select-establishment-type fa fa-home"></i>
+            <i ng-if="$select.selected.type === 2 && item.HasApaAccess" class="select-establishment-type fa fa-star gold"></i>
+            <i ng-if="$select.selected.type === 2 && !item.HasApaAccess" class="select-establishment-type fa fa-star silver"></i>
+            {{$select.selected.name}}
+        </ui-select-match>
+
+        <ui-select-choices 
+            refresh="fetch($select)" 
+            refresh-delay="300" 
+            repeat="item in vm.items">
+
+            <span title="{{item.name}}">
+                <i ng-if="item.type === 1" class="fa fa-home"></i>
+                <i ng-if="item.type === 2 && item.HasApaAccess" class="fa fa-star gold"></i>
+                <!-- <i ng-if="item.type === 2 && !item.HasApaAccess" class="fa fa-star silver"></i> -->
+                {{item.name}}
+            </span>
+            <div ng-if="$index == $select.items.length-1">
+                <button 
+                    class="btn btn-xs btn-info select-establishment-load-more" 
+                    style="width: 100%; margin-top: 5px;" 
+                    ng-click="fetch($select, $event);"
+                    ng-if="vm.canLoadMore">
+                    Carregar mais...
+                </button>                 
+            </div>
+        </ui-select-choices>
+
+        <ui-select-no-choice>
+            Não foram encontrados resultados
+        </ui-select-no-choice>
+    </ui-select>
+
+</div>

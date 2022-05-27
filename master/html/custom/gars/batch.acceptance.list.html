@@ -1,0 +1,27 @@
+<div id="main">
+    <div id="panelDemo11" ng-hide="vm.hideWarning"  class="panel smg-message-warning animated fadeInUpShort">
+        <div class="panel-body">
+            <em class="fa fa-times pull-right" ng-click="vm.hideWarning = !vm.hideWarning"></em>
+            <p>
+                A execução de lotes é feita indeferidamente e pode demorar até 20 minutos. Por favor atualize a página para atualizar o estado do lote.
+            </p>
+        </div>
+     </div>
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <button type="button" class="pull-right btn btn-success" ng-click="$state.go('app.batchAcceptanceCreate')">
+                Criar lote
+            </button>
+        </div>
+
+        <div class="panel-body mar-top20">
+            <div>
+                <table id="tbl-batchItems" class="row-border hover" datatable="" dt-columns="vm.dtColumns"
+                    dt-options="vm.dtOptions" dt-instance="vm.dtInstance">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

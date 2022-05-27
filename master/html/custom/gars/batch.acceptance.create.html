@@ -1,0 +1,208 @@
+<h3>
+    Criar lote de aceitação de e-GARs
+</h3>
+
+<div id="main">
+    <div class="row">
+        <div class="col-sm-12">
+            <smg-form-actions on-back-click="$state.go('app.batchAcceptanceList')"
+                on-save-click="vm.onCreateBatchClick()">
+            </smg-form-actions>
+        </div>
+    </div>
+
+    <!--Filters-->
+    <div class="panel panel-default mar-top20">
+        <div class="panel-body mar-top10">
+            <div class="row">
+                <div class="col-sm-offset-2 col-sm-2">
+                    <smg-select-service-area name="{{vm.smgSelectServiceArea}}" 
+                        class="tabfilter"
+                        required=""
+                        selection-model="vm.selectedServiceArea" 
+                        selected-key="vm.selectedServiceAreaKey"
+                        on-change="vm.onSelectedServiceAreaChange(obj)"
+                        key-internal-code="true">
+                    </smg-select-service-area>
+                </div>
+                <div class="col-sm-2">
+                    <smg-select-user
+                        name="{{vm.smgSelectUser}}"
+                        class="tabfilter"
+                        required=""
+                        selection-model="vm.selectedUser"
+                        on-change="vm.onSelectedUserChange(obj)">    
+                    </smg-select-user>
+                </div> 
+                <div class="col-sm-2">
+                    <smg-select-product-code 
+                            name="smgSelectProductsName"
+                            class="tabfilter"
+                            selection-model="vm.selectedProductCode" 
+                            on-change="vm.onSelectedProductCodeChange(obj)">    
+                    </smg-select-product-code>  
+                </div>
+                <div class="col-sm-2">
+                    <smg-date-picker-v2 dp-name="date" 
+                        dp-placeholder="Data" 
+                        dp-date="vm.egarCreationDate"
+                        hide-label-space="true">
+                    </smg-date-picker-v2>
+                </div>
+            </div>
+
+            <div class="row pad-top20">
+                <div class="col-xs-12 col-sm-offset-5 col-sm-1">
+                    <button title="Limpar filtros" ng-click="vm.onClearFiltersClick()"
+                        class="btn btn-default form-control">
+                        Limpar Filtros
+                    </button>
+                </div>
+
+                <div class="col-xs-12 col-sm-1">
+                    <button id="btn-seach" ng-focus="true" type="button" title="Pesquisar"
+                        class="btn btn-labeled btn-info form-control text-bold" ng-click="vm.onSearchClick()">
+                        <span class="white pad-right10">
+                            <i class="icon-magnifier"></i>
+                        </span>
+                        Pesquisar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="panel panel-default mar-top10">
+        <!-- <div class="panel-heading">
+
+        </div> -->
+
+        <div class="panel-body">
+            <div class="col-sm-12">
+                <table class="row-border hover ng-isolate-scope dataTable no-footer" ng-show="vm.loading">
+                    <thead>
+                        <tr>
+                            <th class="dt-center">
+                                <div class="checkbox c-checkbox checkbox-number" title="Selecionar/Remover todos">
+                                    <label class="control-label">
+                                        <input id="ckb-adr" type="checkbox" ng-click="vm.onCheckAllClick()"
+                                            ng-model="vm.allChecked" ng-checked="vm.allChecked">
+                                        <span class="fa fa-check"></span>
+                                    </label>
+                                </div>
+                            </th>
+                            <th class="dt-center">
+                                Número
+                            </th>
+                            <th class="dt-center">
+                                Remetente
+                            </th>
+                            <th class="dt-center">
+                                Etiqueta
+                            </th>
+                            <th class="dt-center">
+                                Tipo de <br> e-GAR
+                            </th>
+                            <th class="dt-center">
+                                LER
+                            </th>
+                            <th class="dt-center">
+                                Operação
+                            </th>
+                            <th class="dt-center">
+                                Peso
+                            </th>
+                            <th class="dt-center">
+                                Área de Serviço
+                            </th>
+                            <th class="dt-center">
+                                Data
+                            </th>
+                            <th class="dt-center">
+                                Destinatário
+                            </th>
+                            <!-- <th>
+                            PDF
+                        </th> -->
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr ng-if="vm.items.length == 0">
+                            <td class="dt-center" colspan="10">
+                                Não existem resultados
+                            </td>
+                        </tr>
+
+                        <tr ng-if="vm.items.length > 0" ng-repeat="item in vm.items">
+                            <td class="dt-center">
+                                <div class="checkbox c-checkbox checkbox-number">
+                                    <label class="control-label">
+                                        <input id="ckb-adr" type="checkbox" ng-click="vm.onCheckClick(item)"
+                                            ng-model="item.isChecked" ng-checked="item.isChecked">
+                                        <span class="fa fa-check"></span>
+                                    </label>
+                                </div>
+                            </td>
+                            <td class="dt-center">
+                                <div class="number clickable underline" ng-click="vm.getFile(item.url)" title="Ver e-GAR">
+                                    {{item.number}}
+                                </div>
+                            </td>
+                            <td class="dt-center">
+                                {{item.originName}}
+                            </td>
+                            <td class="dt-center">
+                                <ul class="no-bullets">
+                                    <li ng-repeat="tag in item.productTags">
+                                        <span>{{tag.InternalCode}} - {{tag.Description}}</span>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td class="dt-center">
+                                {{item.type}}
+                            </td>
+                            <td class="dt-center">
+                                {{item.lerCode}}
+                            </td>
+                            <td class="dt-center">
+                                {{item.operationCode}}
+                            </td>
+                            <td class="dt-center">
+                                {{item.weight}}
+                            </td>
+                            <td class="dt-center">
+                                {{item.serviceAreaCode}}
+                            </td>
+                            <td class="dt-center">
+                                {{item.date}}
+                            </td>
+                            <td class="dt-center">
+                                {{item.destinName}}
+                            </td>
+                            <!-- <td class="col-sm-1 dt-center">
+                            <span title="Ver PDF" ng-click="vm.getFile(item.url)"><em class="fa fa-file-pdf-o fa-2x open-file"></em></span>
+                        </td> -->
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div ng-if="vm.items.length > 0" class="col-sm-offset-2 col-sm-8 btn btn-info mar-top15" ng-show="vm.loading" ng-disabled="vm.disableLoadMore"
+                    ng-click="vm.onLoadMoreClick()">
+                    Carregar mais
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <smg-form-actions on-back-click="$state.go('app.batchAcceptanceList')"
+                on-save-click="vm.onCreateBatchClick()">
+            </smg-form-actions>
+        </div>
+    </div>
+
+</div>

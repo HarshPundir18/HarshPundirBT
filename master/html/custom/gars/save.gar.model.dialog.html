@@ -1,0 +1,41 @@
+<div class="ngdialog-message">
+
+<form role="form" name="$ctrl.formValidate" ng-submit="$ctrl.submitForm()" novalidate="" class="form-validate form-horizontal">
+
+		<div class="panel">
+			<h3 class="mar-top0">
+				Gravar como modelo
+			</h3>
+		
+			<div class="row pad-top10">
+				<div class="col-md-12">
+					<p>
+							Por favor introduza o nome identificador do novo modelo. O nome deverá ser único.
+					</p>
+				</div>
+				<div class="col-md-12">
+					<label class="control-label mar-bottom0">Nome</label>
+					<input name="modelName"  
+							required
+							ng-model="$ctrl.modelName" 
+							type="text" 
+							class="form-control" />
+					<span ng-show="$ctrl.validateInput('modelName', 'required')" class="text-danger">Obrigatório</span>
+					<span ng-show="$ctrl.serverValidationErrors['modelName']" class="text-danger">
+						{{$ctrl.serverValidationErrors['modelName']}}
+						{{$ctrl.serverApplicationErrors['modelName']}}
+					</span>
+				</div>
+			</div>
+
+		</div> <!--END PANEL-->
+
+		<div class="row pad-top10 text-right">
+			<div class="col-sm-12">
+				<button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">Cancelar</button>
+				<button type="submit" class="btn btn-success">Gravar</button>
+			</div>
+		</div>
+
+	</form>
+</div>

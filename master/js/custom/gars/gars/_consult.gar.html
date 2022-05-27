@@ -1,0 +1,368 @@
+
+<h3 class="ng-scope">Consultar E-GAR</h3>
+
+<form role="form" name="$ctrl.formValidate" ng-submit="$ctrl.submitForm()" novalidate="" class="form-validate form-horizontal">
+
+  <div class="row">
+    <div class="col-sm-6">
+    </div>
+
+    <div class="col-sm-6">
+      <div class="text-right">
+        <button type="button" class="btn btn-labeled btn-default" ng-click="$ctrl.cancel()">
+            <span class="btn-label">
+              <i class="fa fa-caret-left"></i>
+            </span>
+            Voltar
+        </button>
+    </div>
+    </div> 
+  </div>
+
+  <!--panelApa-->
+  <div id="panelApa" class="panel panel-default mar-top15">
+    <div ng-class="{'panel-heading-collapsed':panelApa}" class="panel-heading">
+      <h4>
+        <em class="fa fa-file-text pad-right10"></em>
+        Dados APA <small>({{$ctrl.originName}} Intervêm como {{$ctrl.intervinientType}})</small>
+      </h4>
+      <paneltool tool-collapse="tool-collapse" class="pull-right">
+        <a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="panelApa = !panelApa" class="ng-scope">
+          <em ng-show="panelApa" class="fa fa-plus ng-no-animation ng-hide"></em>                         
+          <em ng-show="!panelApa" class="fa fa-minus ng-no-animation"></em>                       
+        </a>
+      </paneltool>
+    </div>
+
+    <div uib-collapse="panelApa" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+      <div class="panel-body">
+          <!--EGar-->
+          <fieldset id="origin">
+            <div class="form-group">
+              <div class="col-sm-12">
+                <div class="row">
+                  <!--Number-->
+                  <div class="col-sm-2">
+                    <label class="control-label">Número</label>
+                    <div class="control-label-text">{{$ctrl.number}}</div>
+                  </div>
+
+                  <div class="col-sm-2">
+                    <label class="control-label">Código Verificação</label>
+                    <div class="control-label-text">{{$ctrl.verificationCode}}</div>
+                  </div>
+
+                  <!--Status-->
+                  <div class="col-sm-2">
+                    <label class="control-label">Estado</label>
+                    <br>
+                    <div class="control-label-text">{{$ctrl.status}} (<small>Em: {{$ctrl.statusDate}}</small>)</div>
+                  </div>
+
+                  <!--Authorized-->
+                  <div class="col-sm-2">
+                    <label class="control-label">Autorizada</label>
+                    <div class="control-label-text">{{$ctrl.waitingAuthorization}}</div>
+                  </div>
+
+                  <div class="col-sm-2">
+                    <label class="control-label">
+                      Data Fecho
+                    </label>
+                    <div class="control-label-text">
+                      {{$ctrl.endDate}}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row pad-top10">
+                  <!--Destin Comment-->
+                  <div class="col-sm-6">
+                    <label class="control-label">
+                      Comentário Destinatário -
+                      <span class="pad-left10 text-normal">{{$ctrl.nameDestin}}</span>
+                    </label>
+                    <div class="control-label-text">
+                      {{$ctrl.commentDestin}}
+                    </div>
+                  </div>
+
+                  <!--Origin Comment-->
+                  <div class="col-sm-6">
+                    <label class="control-label">
+                      Comentário Produtor / Detentor - 
+                      <span class="pad-left10 text-normal">{{$ctrl.nameOrigin}}</span>
+                    </label>
+                    <div class="control-label-text">
+                      {{$ctrl.commentOrigin}}
+                    </div>
+                  </div>
+                </div> 
+
+              </div>
+            </div>
+          </fieldset>  
+      </div>  
+    </div>  
+  </div>
+  <!--END panelApa-->
+
+  <!--panelOrigin-->
+  <div id="panelOrigin" class="panel panel-default mar-top15">
+    <div ng-class="{'panel-heading-collapsed':panelOrigin}" class="panel-heading">
+      <h4>
+        <em class="fa fa-bank pad-right10"></em>1 - Produtor / Detentor 
+      </h4>
+      <paneltool tool-collapse="tool-collapse" class="pull-right">
+        <a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="panelOrigin = !panelOrigin" class="ng-scope">
+          <em ng-show="panelOrigin" class="fa fa-plus ng-no-animation ng-hide"></em>                         
+          <em ng-show="!panelOrigin" class="fa fa-minus ng-no-animation"></em>                       
+        </a>
+      </paneltool>
+    </div>
+
+    <div uib-collapse="panelOrigin" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+      <div class="panel-body">
+        <!--remetente-->      
+        <fieldset id="origin">
+          <div class="form-group">
+            <div class="col-sm-12">
+              <div class="row pad-top10">
+                <!--Vat-->
+                <div class="col-sm-2">
+                  <label class="control-label">
+                    NIF
+                  </label>
+                  <div class="control-label-text">{{$ctrl.vatOrigin}}</div>
+                </div>
+
+                <!--cod apa-->
+                <div class="col-sm-2">
+                  <label class="control-label">
+                    Código APA
+                  </label>
+                  <div class="control-label-text">{{$ctrl.codApaOrigin}}</div>
+                </div>
+
+                <!--tipo produtor PI/OGR-->
+                <div class="col-sm-2">
+                  <label class="control-label">
+                    Tipo Produtor
+                  </label>
+                  <div class="control-label-text">{{$ctrl.selectedProducerType}}</div>
+                </div>
+              </div>
+
+              <div class="row pad-top10">
+                <!--Establishment Name-->
+                <div class="col-sm-4">
+                  <label class="control-label">
+                    Estabelecimento
+                  </label>
+                  <div class="control-label-text">{{$ctrl.nameOrigin}}</div>
+                </div>
+
+                <!--Establishment Addres-->
+                <div class="col-sm-8">
+                  <label class="control-label">Morada</label>
+                  <div class="control-label-text">{{$ctrl.addressOrigin}}</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <!--END remetente-->
+      
+        <!--residuo Transportado-->
+        <fieldset id="residue">
+          <legend>Residuo</legend>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <div class="row">
+                <!--Quantity-->
+                <div class="col-sm-2">
+                  <label class="control-label">
+                    Quantidade (Kg)
+                  </label>
+                  <div class="control-label-text">{{$ctrl.quantity}}</div>
+                </div>
+
+                <!--Ler Code-->
+                <div class="col-sm-4">
+                  <label class="control-label">
+                    Código LER
+                  </label>
+                  <div class="control-label-text">{{$ctrl.selectedLerCode.value}}</div> 
+                </div>
+
+                <!--Operation Code-->
+                <div class="col-sm-4">
+                  <label class="control-label">
+                    Código Operação
+                  </label>
+                  <div class="control-label-text">{{$ctrl.selectedOperationCode.value}}</div> 
+                </div>
+
+                <!--Group Code-->
+                <div class="col-sm-2">
+                  <label class="control-label">
+                    Código Grupo
+                  </label>
+                  <div class="control-label-text">{{$ctrl.groupCode}}</div> 
+                </div>
+              </div>
+
+              <!--Description-->
+              <div class="row pad-top10">
+                <div class="col-sm-12">
+                  <label class="control-label">
+                    Descrição
+                  </label>
+                  <div class="control-label-text">{{$ctrl.lerDescription}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>   
+        <!--END residuo Transportado-->
+      </div>
+    </div>
+  </div>
+  <!--END panelOrigin-->
+
+  <!--panelTransporters-->
+  <div id="panelTransporters" class="panel panel-default">
+    <div ng-class="{'panel-heading-collapsed':panelTransporters}" class="panel-heading">
+      <h4><em class="fa fa-truck pad-right10"></em>2 - Transportadores</h4>
+      <paneltool tool-collapse="tool-collapse" class="pull-right">
+        <a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="panelTransporters = !panelTransporters" class="ng-scope">
+          <em ng-show="panelTransporters" class="fa fa-plus ng-no-animation ng-hide"></em>                         
+          <em ng-show="!panelTransporters" class="fa fa-minus ng-no-animation"></em>                       
+        </a></paneltool>
+    </div>
+
+    <div uib-collapse="panelTransporters" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+      <div class="panel-body">
+        <!--transportador-->
+        <div ng-repeat="transporter in $ctrl.transportersArray">
+          <fieldset class="mar-bottom0">
+            <div class="row">
+              <!--nif-->
+              <label class="col-sm-1 control-label">NIF:</label>
+              <div class="col-sm-1 pad-top7">
+                <span class="control-label-text">{{transporter.Nif}}</span>
+              </div>
+
+              <!--plate-->
+              <label class="col-sm-1 control-label">Matricula:</label>
+              <div class="col-sm-1 pad-top7">
+                <span class="control-label-text">{{transporter.Matricula}}</span>
+              </div>
+
+              <!--transport date-->
+              <label class="col-sm-2 control-label">Data de Transporte:</label>
+              <div class="col-sm-2 pad-top7">
+                <span class="control-label-text">{{transporter.FormatedDataHoraInicio}}</span>
+              </div>
+
+              <!--transport hour-->
+              <label class="col-sm-1 control-label">Válido até:</label>
+              <div class="col-sm-2 pad-top7">
+                <span class="control-label-text">{{transporter.FormatedDataValidade}}</span>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <!--transportador-->
+      </div>
+    </div>
+
+  </div>
+  <!--END panelTransporters-->
+
+
+  <!--panelDestin-->
+  <div id="panelDestin" class="panel panel-default">
+    <div ng-class="{'panel-heading-collapsed':panelDestin}" class="panel-heading">
+      <h4><em class="fa fa-industry pad-right10"></em>3 - Destinatário</h4>
+      <paneltool tool-collapse="tool-collapse" class="pull-right">
+        <a href="#" panel-collapse="" uib-tooltip="Encolher Painel" ng-click="panelDestin = !panelDestin" class="ng-scope">
+          <em ng-show="panelDestin" class="fa fa-plus ng-no-animation ng-hide"></em>                         
+          <em ng-show="!panelDestin" class="fa fa-minus ng-no-animation"></em>                       
+        </a>
+      </paneltool>
+    </div>
+
+    <div uib-collapse="panelDestin" class="panel-wrapper in collapse" aria-expanded="true" aria-hidden="false">
+      <div class="panel-body">
+        <fieldset id="destin">
+          <div class="form-group">
+            <div class="col-sm-12">
+              <div class="row pad-top10">
+                <!--nif-->         
+                <div class="col-sm-2">
+                  <label class="control-label">
+                    NIF
+                  </label>
+                  <div class="control-label-text">{{$ctrl.vatDestin}}</div>
+                </div>
+
+                <!--cod apa-->
+                <div class="col-sm-2">
+                  <label class="control-label">
+                    Código APA
+                  </label>
+                  <div class="control-label-text">{{$ctrl.codApaDestin}}</div>
+                </div>
+
+                <!--num pgl-->
+                <div class="col-sm-2">
+                  <label class="control-label">
+                    Número PGL
+                  </label>
+                  <div class="control-label-text">{{$ctrl.numPgl}}</div>
+                </div>
+              </div>
+
+              <div class="row pad-top10">
+                <div class="col-sm-4">
+                  <label class="control-label">
+                    Estabelecimento
+                  </label>
+                  <div class="control-label-text">{{$ctrl.nameDestin}}</div>
+                </div>
+
+                <div class="col-sm-8">
+                  <label class="control-label">
+                    Morada
+                  </label>
+                  <div class="control-label-text">{{$ctrl.addressDestin}}</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+  <!--END panelDestin-->
+
+  <div class="row">
+    <div class="col-sm-6">
+    </div>
+
+    <div class="col-sm-6">
+      <div class="text-right">
+        <button type="button" class="btn btn-labeled btn-default" ng-click="$ctrl.cancel()">
+            <span class="btn-label">
+              <i class="fa fa-caret-left"></i>
+            </span>
+            Voltar
+        </button>
+    </div>
+    </div> 
+  </div>
+
+</form>

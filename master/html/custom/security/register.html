@@ -1,0 +1,138 @@
+<!--<script src='https://www.google.com/recaptcha/api.js'></script>-->
+
+<div class="block-center mt-xl wd-xl">
+   <!-- START panel-->
+   <div class="panel panel-dark panel-flat">
+      <div class="panel-heading text-center">
+            <div class="logo">
+                  SMART<span class="gar">GAR</span>
+            </div>
+      </div>
+      <div class="panel-body">
+         <p class="text-center pv">Registe-se para obter acesso imediato!</p>
+         <form role="form" name="$ctrl.registerForm" novalidate="" ng-submit="$ctrl.register()" class="form-validate mb-lg">
+
+						<div class="form-group has-feedback">
+							<label class="text-muted">Nome de Utilizador</label>
+							<input name="account_username"
+										placeholder="Ex: utilizador" 
+										autocomplete="off"
+										ng-model="$ctrl.account.username" 
+										required="" class="form-control" />
+							<span class="fa fa-user form-control-feedback text-muted"></span>
+							<span ng-show="$ctrl.registerForm.account_username.$dirty && $ctrl.registerForm.account_username.$error.required" 
+                     class="text-danger">Obrigatório</span>
+							<span ng-show="$ctrl.serverValidationErrors['Username']" class="text-danger">
+								{{$ctrl.serverValidationErrors['Username']}}
+							</span>
+            </div>
+
+            <div class="form-group has-feedback">
+							<label class="text-muted">Email</label>
+							<input type="email" name="account_email"
+										placeholder="Ex: omeuemail@email.com" 
+										autocomplete="off"
+										ng-model="$ctrl.account.email" required="" class="form-control" />
+							<span class="fa fa-envelope form-control-feedback text-muted"></span>
+							<span ng-show="$ctrl.registerForm.account_email.$dirty && $ctrl.registerForm.account_email.$error.required" 
+                     class="text-danger">Obrigatório</span>
+							<span ng-show="$ctrl.registerForm.account_email.$dirty && $ctrl.registerForm.account_email.$error.email" 
+                     class="text-danger">Formato inválido</span>
+							<span ng-show="$ctrl.serverValidationErrors['Email']" class="text-danger">
+								{{$ctrl.serverValidationErrors['Email']}}
+							</span>
+            </div>
+
+						<div class="form-group has-feedback">
+							<label class="text-muted">Código cliente</label>
+							<input id="inp-clientCode" name="client_code" 
+										placeholder="Ex: MeuCodigoClt"
+										type="text"
+										ng-model="$ctrl.account.clientCode" 
+										ng-pattern="/^[a-zA-Z0-9]{6,12}$/" 
+										required="" 
+										class="form-control" />
+							<span class="fa fa-bank form-control-feedback text-muted"></span>
+							<span ng-show="$ctrl.registerForm.client_code.$dirty && $ctrl.registerForm.client_code.$error.required" 
+										class="text-danger">Obrigatório</span>
+							<span ng-show="$ctrl.registerForm.client_code.$dirty && $ctrl.registerForm.client_code.$error.pattern" 
+                  class="text-danger">O código de cliente deve conter letras e numeros e comprimento 6 a 12</span>
+							<span ng-show="$ctrl.serverValidationErrors['ClientCode']" class="text-danger">
+								{{$ctrl.serverValidationErrors['ClientCode']}}
+							</span>
+						</div>
+
+
+						<div class="form-group has-feedback">
+							<label class="text-muted">Password</label>
+							<input id="id-password" type="password" 
+										name="account_password" 
+										ng-model="$ctrl.register.password" 
+										ng-pattern="/^[a-zA-Z0-9]{6,12}$/" 
+										required="" 
+										class="form-control" />
+							<span class="fa fa-lock form-control-feedback text-muted"></span>
+							<span ng-show="$ctrl.registerForm.account_password.$dirty && $ctrl.registerForm.account_password.$error.required" 
+										class="text-danger">Obrigatório</span>
+							<span ng-show="$ctrl.registerForm.account_password.$dirty && $ctrl.registerForm.account_password.$error.pattern" 
+                  class="text-danger">A password deve conter letras e numeros e comprimento 6 a 12</span>
+							<span ng-show="$ctrl.serverValidationErrors['Password']" class="text-danger">
+								{{$ctrl.serverValidationErrors['Password']}}
+							</span>
+						</div>
+            
+
+            <div class="form-group has-feedback">
+							<label class="text-muted">Confirmar Password</label>
+							<input name="account_password_confirm"
+										type="password"
+							 			ng-model="$ctrl.register.password_confirm" 
+										ui-validate="$value==$ctrl.register.password" 
+										ui-validate-watch="'password'" 
+										class="form-control" />
+							<span class="fa fa-lock form-control-feedback text-muted"></span>
+							<span ng-show="$ctrl.registerForm.account_password_confirm.$error.validator" 
+										class="text-danger">Password diferente</span>
+							<span ng-show="$ctrl.serverValidationErrors['ConfirmPassword']" class="text-danger">
+								{{$ctrl.serverValidationErrors['ConfirmPassword']}}
+							</span>
+            </div>
+
+
+            <div class="clearfix">
+               <div class="checkbox c-checkbox pull-left mt0">
+                  <label>
+                     <input type="checkbox" required="" name="account_agreed" ng-model="$ctrl.account.agreed" />
+                     <span class="fa fa-check"></span>Concordo com os <a href="#">termos e condições de utilização</a>
+                  </label>
+               </div>
+            </div>
+            <div ng-show="$ctrl.registerForm.account_agreed.$dirty &amp;&amp; $ctrl.registerForm.account_agreed.$error.required" class="text-danger">
+							Deverá aceitar os termos e condiçoes de utilização
+						</div>
+						<span ng-show="$ctrl.serverValidationErrors['AgreedTerms']" class="text-danger">
+							{{$ctrl.serverValidationErrors['AgreedTerms']}}
+						</span>
+
+						<div vc-recaptcha key="$ctrl.recaptchaPublicKey"></div>
+						<span ng-show="$ctrl.serverValidationErrors['gRecaptchaResponse']" class="text-danger">
+							{{$ctrl.serverValidationErrors['gRecaptchaResponse']}}
+						</span>
+
+
+            <button type="submit" class="btn btn-block btn-primary mt-lg">Criar conta</button>
+         </form>
+         <div ng-show="$ctrl.authMsg" class="alert alert-danger text-center">{{$ctrl.authMsg}}</div>
+         <p class="pt-lg text-center">Já está registado?</p><a ui-sref="page.login" class="btn btn-block btn-default">Entre Agora</a>
+      </div>
+   </div>
+   <!-- END panel-->
+   <div class="p-lg text-center">
+      <span>&copy;</span>
+      <span ng-bind="app.year"></span>
+      <span>-</span>
+      <span ng-bind="app.name"></span>
+      <br/>
+      <span ng-bind="app.description"></span>
+   </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="ngdialog-message">
+  <div class="panel">
+    <h3>
+      Selecione o Emissor da e-GAR
+    </h3>
+    
+    <div class="row pad-top10">
+      <div class="col-md-6">
+        <div ng-repeat="entity in $ctrl.entities"  class="radio c-radio c-radio-nofont">
+          <label>
+            <input type="radio" name="issuer" class="issuer" value="{{entity.UniqueId}}" ng-checked="$index == 0">
+            <span></span>{{entity.Name}}
+          </label>
+        </div>
+        <br>
+        <span class="text-danger" ng-show="$ctrl.showErrorMessage">{{$ctrl.showErrorMessage}}</span>
+      </div>
+    </div>
+  </div> <!--END PANEL-->
+
+  <div class="row pad-top10 text-right">
+    <div class="col-sm-12">
+      <button type="button" ng-click="closeThisDialog('cancel')" class="btn btn-default">Cancelar</button>
+      <button type="button" ng-click="$ctrl.selectButtonClick()" class="btn btn-success">Selecionar</button>
+    </div>
+  </div>
+</div>

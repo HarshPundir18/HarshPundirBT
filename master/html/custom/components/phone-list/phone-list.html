@@ -1,0 +1,15 @@
+
+<div>{{$ctrl.msg}}</div>
+
+<div>{{$ctrl.oneWayMessage}}</div>
+
+<div>{{$ctrl.twoWayMessage}}</div>
+
+
+
+<ul>
+    <li ng-repeat="phone in $ctrl.phones">
+        <span>{{phone.name}}</span>
+        <p>{{phone.snippet}}</p>
+    </li>
+</ul>

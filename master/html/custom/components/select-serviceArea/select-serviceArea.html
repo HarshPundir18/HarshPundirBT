@@ -1,0 +1,24 @@
+<div class="select-service-area">
+        <ui-select ng-model="vm.selectionModel" 
+            theme="bootstrap"
+            spinner-enabled="true"
+            ng-change="vm.onSelectChange($select)">
+    
+            <ui-select-match allow-clear="true" placeholder="Pesquisar Área Serviço..." class="select-selection">
+                {{$select.selected.value}}
+            </ui-select-match>
+    
+            <ui-select-choices 
+                refresh="vm.fetch($select)" 
+                refresh-delay="300" 
+                repeat="item in vm.items">
+    
+                {{item.value}}
+            </ui-select-choices>
+    
+            <ui-select-no-choice>
+                Não foram encontrados resultados
+            </ui-select-no-choice>
+        </ui-select>
+    </div>
+    

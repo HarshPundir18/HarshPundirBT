@@ -1,0 +1,9 @@
+<label class="control-label">
+    {{::vm.labelText}}
+</label>
+<select name="selectedYear" 
+    class="form-control ng-pristine ng-valid ng-not-empty ng-touched" 
+    ng-options="option.value for option in vm.items track by option.key"
+    ng-model="vm.selectedItem"
+    ng-change="vm.onSelectionChange()">
+</select>

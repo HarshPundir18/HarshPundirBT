@@ -1,0 +1,199 @@
+<h3>
+    Criar lote de aceitação de correções de e-GARs
+</h3>
+
+<div id="batch-accept-rectification-create">
+    <div class="row">
+        <div class="col-sm-12">
+            <smg-form-actions on-back-click="$state.go('app.batchAcceptanceList')"
+                on-save-click="vm.onCreateBatchClick()">
+            </smg-form-actions>
+        </div>
+    </div>
+
+    <!--Filters-->
+    <div class="panel panel-default mar-top20">
+        <div class="panel-body mar-top10">
+            <div class="row">
+                <div class="col-sm-offset-2 col-sm-4">
+                    <!-- <input name="selectDestin"
+                        ng-model="vm.destinText"
+                        class="form-control"
+                        placeholder="{{vm.translate('lbl-destin')}}"
+                        ng-required="true" />
+                    <smg-text-search
+                        search-type="vm.SMG_TEXT_SEARCH_TYPES.Establishments"
+                        class="new-gar-v2"
+                        dialog-header="{{vm.translate('lbl-select-destin')}}",
+                        inp-name="selectDestinSearch"
+                        model="vm.selectedDestin"
+                        index=""
+                        on-selection="vm.onSelectedDestin(obj)">
+                    </smg-text-search> -->
+                    <smg-select-establishment name="smgSelectedEstablishment" 
+                        class="tabfilter"
+                        selection-model="vm.selectedEstablishment"
+                        type="vm.SMG_ESTABLISHMENT_TYPES.CLIENT">
+                    </smg-select-establishment>
+                </div>
+                <div class="col-sm-2">
+                    <!-- <input name="selectTag"
+                        ng-model="vm.tag"
+                        class="form-control"
+                        placeholder="{{vm.translate('lbl-tag')}}"
+                        ng-required="true" />
+                    <smg-text-search
+                        class=""
+                        search-type="vm.SMG_TEXT_SEARCH_TYPES.Tags"
+                        dialog-header="{{vm.translate('lbl-select-tag')}}"
+                        inp-name="searchTag"
+                        model="vm.selectedTag"
+                        on-selection="vm.onSelectedTag(obj)">
+                    </smg-text-search> -->
+                    <smg-select-product-code 
+                            name = 'productFilter'
+                            class="tabfilter"
+                            selection-model="vm.selectedProductCode">    
+                    </smg-select-product-code>
+                </div> 
+                <div class="col-sm-2">
+                    <smg-date-picker-v2 dp-name="date" 
+                        dp-placeholder="Data" 
+                        dp-date="vm.egarDate"
+                        hide-label-space="true">
+                    </smg-date-picker-v2>
+                </div>
+            </div>
+
+            <div class="row pad-top20">
+                <div class="col-xs-12 col-sm-offset-5 col-sm-1">
+                    <button title="Limpar filtros" ng-click="vm.onClearFiltersClick()"
+                        class="btn btn-default form-control">
+                        Limpar
+                    </button>
+                </div>
+
+                <div class="col-xs-12 col-sm-1">
+                    <button id="btn-seach" ng-focus="true" type="button" title="Pesquisar"
+                        class="btn btn-labeled btn-info form-control text-bold" ng-click="vm.onSearchClick()">
+                        Pesquisar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="panel panel-default mar-top10">
+    <!-- 
+        <div class="panel-heading">
+        </div> 
+    -->
+
+        <div class="panel-body">
+            <div class="col-sm-12">
+                <table class="row-border hover ng-isolate-scope dataTable no-footer" ng-show="vm.loading">
+                    <thead>
+                        <tr>
+                            <th class="dt-center">
+                                <div class="checkbox c-checkbox checkbox-number" title="Selecionar/Remover todos">
+                                    <label class="control-label">
+                                        <input id="ckb-adr" type="checkbox" ng-click="vm.onCheckAllClick()"
+                                            ng-model="vm.allChecked" ng-checked="vm.allChecked">
+                                        <span class="fa fa-check"></span>
+                                    </label>
+                                </div>
+                            </th>
+                            <th class="dt-center col-sm-1">
+                                Número
+                            </th>
+                            <th class="dt-center col-sm-1">
+                                Data Legal
+                            </th>
+                            <th class="dt-center col-sm-2">
+                                Remetente
+                            </th>
+                            <th class="dt-center col-sm-2">
+                                Destinatário
+                            </th>
+                            <th class="col-sm-3 text-center">
+                                <div class="row">
+                                    <div class="col-sm-12">Dados do Resíduo</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4" >LER</div>
+                                    <div class="col-sm-4" >Operação</div>
+                                    <div class="col-sm-4" >Peso</div>
+                                </div>
+                            </th>
+                            <th class="dt-center col-sm-3">
+                                Comentário<br>Destinatário
+                            </th>
+  
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr ng-if="vm.items.length == 0">
+                            <td class="dt-center" colspan="10">
+                                Não existem resultados
+                            </td>
+                        </tr>
+
+                        <tr ng-if="vm.items.length > 0" ng-repeat="item in vm.items">
+                            <td class="dt-center">
+                                <div class="checkbox c-checkbox checkbox-number">
+                                    <label class="control-label">
+                                        <input id="ckb-adr" type="checkbox" ng-click="vm.onCheckClick(item)"
+                                            ng-model="item.isChecked" ng-checked="item.isChecked">
+                                        <span class="fa fa-check"></span>
+                                    </label>
+                                </div>
+                            </td>
+                            <td class="dt-center">
+                                <div class="number clickable underline" ng-click="vm.getFile(item.url)" title="Ver e-GAR">
+                                    {{item.number}}
+                                </div>
+                            </td>
+                            <td class="dt-center">
+                                {{item.date}}
+                            </td>
+                            <td class="dt-center">
+                                {{item.originName}}
+                            </td>
+                            <td class="dt-center">
+                                {{item.destinName}}
+                            </td>
+                            <td class="text-center smg-residue">
+                                <div class="row">
+                                    <div class="col-sm-4" ng-bind-html="vm.formatRectification(item.lerCode, item.rectifiedLerCode)"/>
+                                    <div class="col-sm-4" ng-bind-html="vm.formatRectification(item.operationCode, item.rectifiedOperationCode)" />
+                                    <div class="col-sm-4" ng-bind-html="vm.formatRectification(item.weight, item.rectifiedWeight)" />                                                               </div>
+                            </td>
+
+                            <td class="dt-center">
+                                <!-- <i class="fa fa-comment" aria-hidden="true"></i> -->
+                                {{item.rectificationComment}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div ng-if="vm.items.length > 0" class="col-sm-offset-2 col-sm-8 btn btn-info mar-top15" ng-show="vm.loading" ng-disabled="vm.disableLoadMore"
+                    ng-click="vm.onLoadMoreClick()">
+                    Carregar mais
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <smg-form-actions on-back-click="$state.go('app.batchAcceptanceList')"
+                on-save-click="vm.onCreateBatchClick()">
+            </smg-form-actions>
+        </div>
+    </div>
+
+</div>

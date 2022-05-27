@@ -1,0 +1,22 @@
+.reports-hub-fieldset{
+    padding-bottom: 0;
+}
+
+.reports-hub-list li{
+    list-style-type: none;
+}
+
+.reports-hub-list li.reports-hub-list-item:not(:first-child) {
+    padding-top: 15px;
+}
+
+
+.reports-hub-list-name{   
+    font-size: 15px;
+    line-height: inherit;   
+}
+
+.reports-hub-list-name:hover, .reports-hub-list-item-subitem:hover{   
+    text-decoration: underline;
+}
+

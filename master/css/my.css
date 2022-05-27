@@ -1,0 +1,72 @@
+.pad-top30{
+    padding-top: 30px !important;
+}
+
+.pad-top37 {
+    padding-top: 37px !important;
+}
+
+/*OVERRIDES*/
+table.dataTable thead .sorting_asc {
+	background-image: none !important;
+}
+
+.panel .dataTables_wrapper{
+	overflow: visible;
+}
+/**/
+
+
+/*POPOVER*/
+.popover-trigger {
+    position: relative;
+	cursor: pointer;
+}
+
+.popover {
+    text-decoration: none;
+    color: black;
+    position: absolute;
+    left: 120%;
+    top: 0;
+    display: block;
+    padding: 0 20px;
+	width:600% !important; 
+}
+
+.popover span {
+    display: block;
+    font-weight: 700;
+}
+
+
+.popover:after, .popover:before {
+	right: 100%;
+	top: 10px;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.popover:after {
+	/* border-color: rgba(136, 183, 213, 0); */
+	border-right-color: #eee;
+	border-width: 10px;
+	margin-top: -10px;
+}
+.popover:before {
+	/* border-color: rgba(194, 225, 245, 0); */
+	/* border-right-color: #c2e1f5; */
+	border-width: 16px;
+	margin-top: -16px;
+}
+/*END POPOVER*/
+
+
+
+.w-12pc {
+	width: 12% !important;
+}

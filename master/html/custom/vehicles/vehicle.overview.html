@@ -1,0 +1,92 @@
+<h3>Lista de Veículos</h3>
+
+<div id="vehicles">
+
+    <div class="panel panel-default">
+        <div class="panel-body mar-top10">
+            <div class="row">
+                <div class="col-sm-offset-3 col-sm-2">
+                    <input name="registration" 
+                        ng-model="vm.filters.registration" 
+                        type="text" 
+                        class="form-control tableFilter" 
+                        placeholder="Matrícula" />
+                </div>
+                <div class="col-sm-2">
+                    <smg-select-user
+                        name="assignedTo"
+                        class="tabfilter"
+                        display-text="Assignado a"
+                        selection-model="vm.filters.assignedTo" />    
+                </div>
+            </div>
+    
+            <div class="row pad-top20">
+                <!-- <div class="col-sm-offset-5 col-sm-1 col-xs-12 clearFilter"> -->
+                <div class="col-xs-12 col-sm-offset-4 col-sm-1">
+                    <button title="Limpar filtros" 
+                            ng-click="vm.onClearSearchClick()" 
+                            class="btn btn-default form-control">
+                        Limpar Filtros
+                    </button>
+                </div>
+    
+                <div class="col-xs-12 col-sm-1">
+                    <button id="btn-seach" 
+                            ng-focus="true"
+                            type="button" 
+                            title="Pesquisar"
+                            class="btn btn-labeled btn-info form-control text-bold" 
+                            ng-click="vm.onSearchClick()">
+                        <span class="white pad-right10">
+                            <i class="icon-magnifier"></i>
+                        </span>
+                        Pesquisar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
+    <!-- TODO: create smg componente for adding new items-->
+    <!-- <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="pull-right">
+                <button id="btn-seach" 
+                        ng-focus="true"
+                        type="button" 
+                        title="Pesquisar"
+                        class="btn btn-labeled btn-success form-control text-bold" 
+                        ng-click="$state.go('app.vehicleCreate')">
+                    <span class="white pad-right10">
+                        <i class="fa fa-plus"></i>
+                    </span>
+                    Pesquisar
+                </button>
+            </div>
+        </div>
+        
+        <div class="panel-body mar-top20">     
+        </div>
+    </div> -->
+     
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a ng-click="$state.go('app.vehicleCreate')" class="pull-right btn btn-success">
+                Criar Veículo
+            </a>
+        </div>
+        
+        <div class="panel-body mar-top20">
+            <div>
+                <table id="tbl-vehicles" class="row-border hover" 
+                    datatable="" 
+                    dt-columns="vm.dtColumns" 
+                    dt-options="vm.dtOptions"
+                    dt-instance="vm.dtInstance">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

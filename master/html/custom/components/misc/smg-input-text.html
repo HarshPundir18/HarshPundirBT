@@ -1,0 +1,14 @@
+<div class="form-group has-feedback">
+    <label class="control-label" ng-if="!vm.hideLabelText">
+        {{vm.labelText}}
+    </label>
+    <!-- <span ng-if="vm.isRequired" class="text-danger">Asterisco</span> -->
+    <input type="text" 
+        name="{{vm.name}}" 
+        placeholder="{{vm.placeholder}}" 
+        autocomplete="off" 
+        ng-model="vm.model" 
+        ng-required="vm.isRequired" 
+        class="form-control" />
+    <span ng-if="vm.showClearInput" ng-click="vm.onClearTextClick()" class="smg-text-search-icon fa fa-times form-control-feedback"></span>
+ </div>

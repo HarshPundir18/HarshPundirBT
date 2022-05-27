@@ -1,0 +1,28 @@
+.number{
+    display: inline-block;
+}
+
+.checkbox-number{
+    display: inline-block;
+}
+
+.open-file{
+    cursor: pointer;
+    padding-top: 5px;
+    font-size: 20px;
+}
+
+
+#batch-accept-rectification-create .smg-text-search-icon{
+    top: -30px;
+}
+
+
+#batch-accept-rectification-create .smg-residue{
+    border-left: 1px solid gray;  
+    border-right: 1px solid gray;  
+}
+
+#batch-accept-rectification-create .smg-rectification-old-value{
+    text-decoration: line-through;
+}
